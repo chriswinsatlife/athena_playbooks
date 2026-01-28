@@ -1,7 +1,9 @@
 import { defineConfig } from 'astro/config';
 import path from 'path';
+import mdx from '@astrojs/mdx';
 
 export default defineConfig({
+  integrations: [mdx()],
   vite: {
     resolve: {
       alias: {

@@ -1,0 +1,153 @@
+---
+import Base from '../../layouts/Base.astro'
+
+// ALL 10 Catalyst Components - Static Imports
+import AuthLayout from '../../../components/catalyst/auth-layout.astro'
+import DescriptionDetails from '../../../components/catalyst/description-details.astro'
+import DescriptionList from '../../../components/catalyst/description-list.astro'
+import DescriptionTerm from '../../../components/catalyst/description-term.astro'
+import Divider from '../../../components/catalyst/divider.astro'
+import CatalystHeading from '../../../components/catalyst/heading.astro'
+import CatalystLink from '../../../components/catalyst/link.astro'
+import Pagination from '../../../components/catalyst/pagination.astro'
+import CatalystSubheading from '../../../components/catalyst/subheading.astro'
+import CatalystText from '../../../components/catalyst/text.astro'
+---
+
+<Base title="Showcase - All 10 Catalyst Components">
+  <div class="min-h-screen bg-base-200 p-8">
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-4xl font-bold mb-2">Catalyst Components</h1>
+      <p class="text-base-content/60 mb-8">All 10 Catalyst UI Kit components</p>
+      
+      <div class="grid gap-8">
+        
+        <!-- 1. CatalystHeading -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">1. Heading (Catalyst)</h2>
+            <div class="py-4">
+              <CatalystHeading>Catalyst Heading Component</CatalystHeading>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. CatalystSubheading -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">2. Subheading (Catalyst)</h2>
+            <div class="py-4">
+              <CatalystSubheading>Catalyst Subheading Component</CatalystSubheading>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. CatalystText -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">3. Text (Catalyst)</h2>
+            <div class="py-4">
+              <CatalystText>This is the Catalyst Text component for body content.</CatalystText>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. CatalystLink -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">4. Link (Catalyst)</h2>
+            <div class="py-4">
+              <CatalystLink href="#">Catalyst Link Component</CatalystLink>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Divider -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">5. Divider</h2>
+            <div class="py-4">
+              <p class="mb-4">Content above divider</p>
+              <Divider />
+              <p class="mt-4">Content below divider</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. DescriptionList -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">6. DescriptionList</h2>
+            <div class="py-4">
+              <DescriptionList>
+                <DescriptionTerm>Term 1</DescriptionTerm>
+                <DescriptionDetails>Details for term 1</DescriptionDetails>
+                <DescriptionTerm>Term 2</DescriptionTerm>
+                <DescriptionDetails>Details for term 2</DescriptionDetails>
+              </DescriptionList>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. DescriptionTerm -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">7. DescriptionTerm</h2>
+            <div class="py-4">
+              <DescriptionTerm>Standalone Description Term</DescriptionTerm>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. DescriptionDetails -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">8. DescriptionDetails</h2>
+            <div class="py-4">
+              <DescriptionDetails>Standalone Description Details content</DescriptionDetails>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Pagination -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">9. Pagination</h2>
+            <div class="py-4">
+              <Pagination 
+                currentPage={3}
+                totalPages={10}
+                baseUrl="/showcase/catalyst"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. AuthLayout -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">10. AuthLayout</h2>
+            <div class="py-4 bg-base-200 rounded-lg overflow-hidden max-h-96">
+              <AuthLayout>
+                <div class="p-8 text-center">
+                  <h3 class="text-xl font-bold mb-4">Auth Form Area</h3>
+                  <p>Login/Register form would go here</p>
+                </div>
+              </AuthLayout>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="mt-12 text-center">
+        <p class="text-base-content/60 mb-4">10/10 Catalyst Components Rendered</p>
+        <div class="flex gap-4 justify-center">
+          <a href="/showcase/sections" class="btn btn-outline">View Sections</a>
+          <a href="/showcase/" class="btn btn-outline">Back to Index</a>
+          <a href="/showcase/icons" class="btn btn-primary">View Icons</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>

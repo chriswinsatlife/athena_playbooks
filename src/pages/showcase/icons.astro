@@ -1,0 +1,277 @@
+---
+import Base from '../../layouts/Base.astro'
+
+// ALL 107 Main Icons
+import AlertTriangleIcon from '../../../components/icons/alert-triangle-icon.astro'
+import ArchiveBoxIcon from '../../../components/icons/archive-box-icon.astro'
+import ArchiveBoxXIcon from '../../../components/icons/archive-box-x-icon.astro'
+import ArrowDownArrowUpIcon from '../../../components/icons/arrow-down-arrow-up-icon.astro'
+import ArrowLeftArrowRightIcon from '../../../components/icons/arrow-left-arrow-right-icon.astro'
+import ArrowNarrowDownIcon from '../../../components/icons/arrow-narrow-down-icon.astro'
+import ArrowNarrowLeftIcon from '../../../components/icons/arrow-narrow-left-icon.astro'
+import ArrowNarrowRightIcon from '../../../components/icons/arrow-narrow-right-icon.astro'
+import ArrowNarrowUpIcon from '../../../components/icons/arrow-narrow-up-icon.astro'
+import AtSymbolIcon from '../../../components/icons/at-symbol-icon.astro'
+import BanknotesIcon from '../../../components/icons/banknotes-icon.astro'
+import BeakerIcon from '../../../components/icons/beaker-icon.astro'
+import BellIcon from '../../../components/icons/bell-icon.astro'
+import BookOpenIcon from '../../../components/icons/book-open-icon.astro'
+import BriefcaseIcon from '../../../components/icons/briefcase-icon.astro'
+import Building2Icon from '../../../components/icons/building-2-icon.astro'
+import BuildingIcon from '../../../components/icons/building-icon.astro'
+import BuildingLibraryIcon from '../../../components/icons/building-library-icon.astro'
+import BuildingStorefrontIcon from '../../../components/icons/building-storefront-icon.astro'
+import CalendarIcon from '../../../components/icons/calendar-icon.astro'
+import CameraIcon from '../../../components/icons/camera-icon.astro'
+import CameraVideoIcon from '../../../components/icons/camera-video-icon.astro'
+import ChartBarIcon from '../../../components/icons/chart-bar-icon.astro'
+import ChartLineIcon from '../../../components/icons/chart-line-icon.astro'
+import ChartPieCircleIcon from '../../../components/icons/chart-pie-circle-icon.astro'
+import ChatBubbleCircleEllipsisIcon from '../../../components/icons/chat-bubble-circle-ellipsis-icon.astro'
+import ChatBubbleCircleIcon from '../../../components/icons/chat-bubble-circle-icon.astro'
+import ChatBubbleCircleStackedIcon from '../../../components/icons/chat-bubble-circle-stacked-icon.astro'
+import ChatBubbleRectangleEllipsisIcon from '../../../components/icons/chat-bubble-rectangle-ellipsis-icon.astro'
+import ChatBubbleRectangleIcon from '../../../components/icons/chat-bubble-rectangle-icon.astro'
+import CheckmarkIcon from '../../../components/icons/checkmark-icon.astro'
+import ChevronIcon from '../../../components/icons/chevron-icon.astro'
+import ClipboardIcon from '../../../components/icons/clipboard-icon.astro'
+import ClockIcon from '../../../components/icons/clock-icon.astro'
+import CloudArrowDownIcon from '../../../components/icons/cloud-arrow-down-icon.astro'
+import CloudArrowUpIcon from '../../../components/icons/cloud-arrow-up-icon.astro'
+import CloudIcon from '../../../components/icons/cloud-icon.astro'
+import CodeSquareIcon from '../../../components/icons/code-square-icon.astro'
+import CogIcon from '../../../components/icons/cog-icon.astro'
+import CompassIcon from '../../../components/icons/compass-icon.astro'
+import CpuIcon from '../../../components/icons/cpu-icon.astro'
+import Document2StackedIcon from '../../../components/icons/document-2-stacked-icon.astro'
+import DocumentIcon from '../../../components/icons/document-icon.astro'
+import EducationCapIcon from '../../../components/icons/education-cap-icon.astro'
+import FilterIcon from '../../../components/icons/filter-icon.astro'
+import FingerprintIcon from '../../../components/icons/fingerprint-icon.astro'
+import FlagIcon from '../../../components/icons/flag-icon.astro'
+import FolderArrowLeftIcon from '../../../components/icons/folder-arrow-left-icon.astro'
+import FolderArrowRightIcon from '../../../components/icons/folder-arrow-right-icon.astro'
+import FolderIcon from '../../../components/icons/folder-icon.astro'
+import FolderMinusIcon from '../../../components/icons/folder-minus-icon.astro'
+import FolderPlusIcon from '../../../components/icons/folder-plus-icon.astro'
+import GitBranchIcon from '../../../components/icons/git-branch-icon.astro'
+import GitDiffIcon from '../../../components/icons/git-diff-icon.astro'
+import GitMergeIcon from '../../../components/icons/git-merge-icon.astro'
+import GitPullIcon from '../../../components/icons/git-pull-icon.astro'
+import HardDriveIcon from '../../../components/icons/hard-drive-icon.astro'
+import HeartIcon from '../../../components/icons/heart-icon.astro'
+import HeartPulseIcon from '../../../components/icons/heart-pulse-icon.astro'
+import HomeIcon from '../../../components/icons/home-icon.astro'
+import InboxIcon from '../../../components/icons/inbox-icon.astro'
+import InformationCircleIcon from '../../../components/icons/information-circle-icon.astro'
+import KeyIcon from '../../../components/icons/key-icon.astro'
+import LanguageIcon from '../../../components/icons/language-icon.astro'
+import LifebuoyIcon from '../../../components/icons/lifebuoy-icon.astro'
+import LightBulbIcon from '../../../components/icons/light-bulb-icon.astro'
+import LightingBoltIcon from '../../../components/icons/lighting-bolt-icon.astro'
+import LockIcon from '../../../components/icons/lock-icon.astro'
+import LockOpenIcon from '../../../components/icons/lock-open-icon.astro'
+import MagnifyingGlassIcon from '../../../components/icons/magnifying-glass-icon.astro'
+import MailIcon from '../../../components/icons/mail-icon.astro'
+import MapIcon from '../../../components/icons/map-icon.astro'
+import MapPinIcon from '../../../components/icons/map-pin-icon.astro'
+import MicrophoneIcon from '../../../components/icons/microphone-icon.astro'
+import MinusCircleIcon from '../../../components/icons/minus-circle-icon.astro'
+import MinusIcon from '../../../components/icons/minus-icon.astro'
+import MoonIcon from '../../../components/icons/moon-icon.astro'
+import NewspaperIcon from '../../../components/icons/newspaper-icon.astro'
+import PaperclipIcon from '../../../components/icons/paperclip-icon.astro'
+import PencilOnSquareIcon from '../../../components/icons/pencil-on-square-icon.astro'
+import PhotoIcon from '../../../components/icons/photo-icon.astro'
+import PlusCircleIcon from '../../../components/icons/plus-circle-icon.astro'
+import PlusIcon from '../../../components/icons/plus-icon.astro'
+import QuestionCircleIcon from '../../../components/icons/question-circle-icon.astro'
+import RepeatIcon from '../../../components/icons/repeat-icon.astro'
+import RocketIcon from '../../../components/icons/rocket-icon.astro'
+import ShieldExclamationIcon from '../../../components/icons/shield-exclamation-icon.astro'
+import ShoppingBagIcon from '../../../components/icons/shopping-bag-icon.astro'
+import ShoppingCartIcon from '../../../components/icons/shopping-cart-icon.astro'
+import SlidersIcon from '../../../components/icons/sliders-icon.astro'
+import SparklesIcon from '../../../components/icons/sparkles-icon.astro'
+import Square3Stack3dIcon from '../../../components/icons/square-3-stack-3d-icon.astro'
+import Squares2StackedIcon from '../../../components/icons/squares-2-stacked-icon.astro'
+import StarIcon from '../../../components/icons/star-icon.astro'
+import SunIcon from '../../../components/icons/sun-icon.astro'
+import TagIcon from '../../../components/icons/tag-icon.astro'
+import TargetIcon from '../../../components/icons/target-icon.astro'
+import TerminalIcon from '../../../components/icons/terminal-icon.astro'
+import TicketIcon from '../../../components/icons/ticket-icon.astro'
+import TrashIcon from '../../../components/icons/trash-icon.astro'
+import UiLayoutIcon from '../../../components/icons/ui-layout-icon.astro'
+import UnorderedListIcon from '../../../components/icons/unordered-list-icon.astro'
+import User2Icon from '../../../components/icons/user-2-icon.astro'
+import UserArrowLeftIcon from '../../../components/icons/user-arrow-left-icon.astro'
+import UserArrowRightIcon from '../../../components/icons/user-arrow-right-icon.astro'
+import UserCircleDottedIcon from '../../../components/icons/user-circle-dotted-icon.astro'
+import UserCircleIcon from '../../../components/icons/user-circle-icon.astro'
+
+// 5 Social Icons
+import FacebookIcon from '../../../components/icons/social/facebook-icon.astro'
+import GithubIcon from '../../../components/icons/social/github-icon.astro'
+import InstagramIcon from '../../../components/icons/social/instagram-icon.astro'
+import XIcon from '../../../components/icons/social/x-icon.astro'
+import YoutubeIcon from '../../../components/icons/social/youtube-icon.astro'
+---
+
+<Base title="Showcase - All 112 Icons">
+  <div class="min-h-screen bg-base-200 p-8">
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-4xl font-bold mb-2">Icon Components</h1>
+      <p class="text-base-content/60 mb-8">All 112 icon components (107 main + 5 social)</p>
+      
+      <!-- Social Icons -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-4">Social Icons (5)</h2>
+        <div class="grid grid-cols-5 gap-4">
+          <div class="card bg-base-100 shadow p-4 flex flex-col items-center gap-2">
+            <div class="w-8 h-8 flex items-center justify-center"><FacebookIcon class="w-6 h-6" /></div>
+            <span class="text-xs opacity-60">Facebook</span>
+          </div>
+          <div class="card bg-base-100 shadow p-4 flex flex-col items-center gap-2">
+            <div class="w-8 h-8 flex items-center justify-center"><GithubIcon class="w-6 h-6" /></div>
+            <span class="text-xs opacity-60">Github</span>
+          </div>
+          <div class="card bg-base-100 shadow p-4 flex flex-col items-center gap-2">
+            <div class="w-8 h-8 flex items-center justify-center"><InstagramIcon class="w-6 h-6" /></div>
+            <span class="text-xs opacity-60">Instagram</span>
+          </div>
+          <div class="card bg-base-100 shadow p-4 flex flex-col items-center gap-2">
+            <div class="w-8 h-8 flex items-center justify-center"><XIcon class="w-6 h-6" /></div>
+            <span class="text-xs opacity-60">X</span>
+          </div>
+          <div class="card bg-base-100 shadow p-4 flex flex-col items-center gap-2">
+            <div class="w-8 h-8 flex items-center justify-center"><YoutubeIcon class="w-6 h-6" /></div>
+            <span class="text-xs opacity-60">Youtube</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Main Icons Grid -->
+      <div>
+        <h2 class="text-2xl font-bold mb-4">Main Icons (107)</h2>
+        <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-3">
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><AlertTriangleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Alert</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArchiveBoxIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Archive</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArchiveBoxXIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ArchiveX</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArrowDownArrowUpIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ArrowUD</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArrowLeftArrowRightIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ArrowLR</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArrowNarrowDownIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ArrDown</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArrowNarrowLeftIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ArrLeft</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArrowNarrowRightIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ArrRight</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArrowNarrowUpIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ArrUp</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><AtSymbolIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">At</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BanknotesIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Bank</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BeakerIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Beaker</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BellIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Bell</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BookOpenIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Book</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BriefcaseIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Brief</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><Building2Icon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Build2</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BuildingIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Build</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BuildingLibraryIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Library</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BuildingStorefrontIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Store</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CalendarIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Calendar</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CameraIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Camera</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CameraVideoIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Video</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChartBarIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ChartBar</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChartLineIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ChartLine</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChartPieCircleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Pie</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChatBubbleCircleEllipsisIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Chat...</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChatBubbleCircleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Chat</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChatBubbleCircleStackedIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Chats</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChatBubbleRectangleEllipsisIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Msg...</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChatBubbleRectangleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Msg</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CheckmarkIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Check</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChevronIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Chevron</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ClipboardIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Clip</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ClockIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Clock</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CloudArrowDownIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">CloudDn</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CloudArrowUpIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">CloudUp</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CloudIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Cloud</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CodeSquareIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Code</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CogIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Cog</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CompassIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Compass</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CpuIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">CPU</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><Document2StackedIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Docs</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><DocumentIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Doc</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><EducationCapIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Edu</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FilterIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Filter</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FingerprintIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Finger</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FlagIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Flag</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FolderArrowLeftIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">FoldL</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FolderArrowRightIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">FoldR</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FolderIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Folder</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FolderMinusIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Fold-</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FolderPlusIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Fold+</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><GitBranchIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Branch</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><GitDiffIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Diff</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><GitMergeIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Merge</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><GitPullIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Pull</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><HardDriveIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">HDD</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><HeartIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Heart</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><HeartPulseIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Pulse</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><HomeIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Home</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><InboxIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Inbox</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><InformationCircleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Info</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><KeyIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Key</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><LanguageIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Lang</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><LifebuoyIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Lifebuoy</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><LightBulbIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Bulb</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><LightingBoltIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Bolt</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><LockIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Lock</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><LockOpenIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Unlock</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MagnifyingGlassIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Search</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MailIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Mail</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MapIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Map</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MapPinIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Pin</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MicrophoneIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Mic</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MinusCircleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Minus</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MinusIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">-</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MoonIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Moon</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><NewspaperIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">News</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><PaperclipIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Clip</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><PencilOnSquareIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Edit</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><PhotoIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Photo</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><PlusCircleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Plus</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><PlusIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">+</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><QuestionCircleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Help</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><RepeatIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Repeat</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><RocketIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Rocket</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ShieldExclamationIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Shield</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ShoppingBagIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Bag</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ShoppingCartIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Cart</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><SlidersIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Sliders</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><SparklesIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Sparkle</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><Square3Stack3dIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Stack3D</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><Squares2StackedIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Squares</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><StarIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Star</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><SunIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Sun</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><TagIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Tag</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><TargetIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Target</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><TerminalIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Term</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><TicketIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Ticket</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><TrashIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Trash</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><UiLayoutIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Layout</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><UnorderedListIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">List</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><User2Icon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">User2</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><UserArrowLeftIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">UserL</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><UserArrowRightIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">UserR</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><UserCircleDottedIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">UserDot</span></div>
+          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><UserCircleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">User</span></div>
+        </div>
+      </div>
+      
+      <div class="mt-12 text-center">
+        <p class="text-base-content/60 mb-4">112/112 Icon Components Rendered</p>
+        <div class="flex gap-4 justify-center">
+          <a href="/showcase/catalyst" class="btn btn-outline">View Catalyst</a>
+          <a href="/showcase/" class="btn btn-primary">Back to Index</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>

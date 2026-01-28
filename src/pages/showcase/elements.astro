@@ -1,0 +1,266 @@
+---
+import Base from '../../layouts/Base.astro'
+
+// ALL 20 Element Components - Static Imports
+import AnnouncementBadge from '../../../components/elements/announcement-badge.astro'
+import Button from '../../../components/elements/button.astro'
+import ButtonLink from '../../../components/elements/button-link.astro'
+import Container from '../../../components/elements/container.astro'
+import EmailSignupForm from '../../../components/elements/email-signup-form.astro'
+import Eyebrow from '../../../components/elements/eyebrow.astro'
+import Heading from '../../../components/elements/heading.astro'
+import InstallCommand from '../../../components/elements/install-command.astro'
+import Link from '../../../components/elements/link.astro'
+import LogoGrid from '../../../components/elements/logo-grid.astro'
+import Main from '../../../components/elements/main.astro'
+import PlainButton from '../../../components/elements/plain-button.astro'
+import PlainButtonLink from '../../../components/elements/plain-button-link.astro'
+import Screenshot from '../../../components/elements/screenshot.astro'
+import Section from '../../../components/elements/section.astro'
+import SoftButton from '../../../components/elements/soft-button.astro'
+import SoftButtonLink from '../../../components/elements/soft-button-link.astro'
+import Subheading from '../../../components/elements/subheading.astro'
+import Text from '../../../components/elements/text.astro'
+import Wallpaper from '../../../components/elements/wallpaper.astro'
+---
+
+<Base title="Showcase - All 20 Elements">
+  <div class="min-h-screen bg-base-200 p-8">
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-4xl font-bold mb-2">Element Components</h1>
+      <p class="text-base-content/60 mb-8">All 20 element components from the design system</p>
+      
+      <div class="grid gap-8">
+        
+        <!-- 1. AnnouncementBadge -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">1. AnnouncementBadge</h2>
+            <div class="py-4">
+              <AnnouncementBadge text="New feature available!" href="#" cta="Learn more" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Button -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">2. Button</h2>
+            <div class="py-4 flex flex-wrap gap-4">
+              <Button>Default Button</Button>
+              <Button size="lg">Large Button</Button>
+              <Button color="light">Light Button</Button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. ButtonLink -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">3. ButtonLink</h2>
+            <div class="py-4 flex flex-wrap gap-4">
+              <ButtonLink href="#">Button Link</ButtonLink>
+              <ButtonLink href="#" size="lg">Large Link</ButtonLink>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. PlainButton -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">4. PlainButton</h2>
+            <div class="py-4 flex flex-wrap gap-4">
+              <PlainButton>Plain Button</PlainButton>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. PlainButtonLink -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">5. PlainButtonLink</h2>
+            <div class="py-4 flex flex-wrap gap-4">
+              <PlainButtonLink href="#">Plain Button Link</PlainButtonLink>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. SoftButton -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">6. SoftButton</h2>
+            <div class="py-4 flex flex-wrap gap-4">
+              <SoftButton>Soft Button</SoftButton>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. SoftButtonLink -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">7. SoftButtonLink</h2>
+            <div class="py-4 flex flex-wrap gap-4">
+              <SoftButtonLink href="#">Soft Button Link</SoftButtonLink>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Heading -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">8. Heading</h2>
+            <div class="py-4">
+              <Heading>Main Page Heading</Heading>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Subheading -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">9. Subheading</h2>
+            <div class="py-4">
+              <Subheading>Section Subheading</Subheading>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Eyebrow -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">10. Eyebrow</h2>
+            <div class="py-4">
+              <Eyebrow>CATEGORY LABEL</Eyebrow>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Text -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">11. Text</h2>
+            <div class="py-4">
+              <Text>This is body text content that demonstrates the Text component styling.</Text>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. Link -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">12. Link</h2>
+            <div class="py-4">
+              <Link href="#">Regular Link Component</Link>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13. Container -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">13. Container</h2>
+            <div class="py-4 bg-base-200 rounded">
+              <Container>
+                <Text>Content inside a Container component</Text>
+              </Container>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14. Main -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">14. Main</h2>
+            <div class="py-4 bg-base-200 rounded">
+              <Main>
+                <Text>Content inside a Main component wrapper</Text>
+              </Main>
+            </div>
+          </div>
+        </div>
+
+        <!-- 15. Section -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">15. Section</h2>
+            <div class="py-4 bg-base-200 rounded">
+              <Section>
+                <Text>Content inside a Section component</Text>
+              </Section>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16. EmailSignupForm -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">16. EmailSignupForm</h2>
+            <div class="py-4">
+              <EmailSignupForm cta="Subscribe" placeholder="Enter your email" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 17. InstallCommand -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">17. InstallCommand</h2>
+            <div class="py-4">
+              <InstallCommand command="npm install @example/package" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 18. LogoGrid -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">18. LogoGrid</h2>
+            <div class="py-4">
+              <LogoGrid>
+                <div class="bg-base-300 rounded p-4 text-center">Logo 1</div>
+                <div class="bg-base-300 rounded p-4 text-center">Logo 2</div>
+                <div class="bg-base-300 rounded p-4 text-center">Logo 3</div>
+              </LogoGrid>
+            </div>
+          </div>
+        </div>
+
+        <!-- 19. Screenshot -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">19. Screenshot</h2>
+            <div class="py-4">
+              <Screenshot>
+                <div class="bg-gradient-to-br from-primary to-secondary h-48 rounded flex items-center justify-center text-white">
+                  Screenshot Content Area
+                </div>
+              </Screenshot>
+            </div>
+          </div>
+        </div>
+
+        <!-- 20. Wallpaper -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-sm opacity-60">20. Wallpaper</h2>
+            <div class="py-4 h-48 relative overflow-hidden rounded">
+              <Wallpaper />
+              <div class="absolute inset-0 flex items-center justify-center">
+                <Text>Content over Wallpaper</Text>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="mt-12 text-center">
+        <p class="text-base-content/60 mb-4">20/20 Element Components Rendered</p>
+        <div class="flex gap-4 justify-center">
+          <a href="/showcase/" class="btn btn-outline">Back to Index</a>
+          <a href="/showcase/sections" class="btn btn-primary">View Sections</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>

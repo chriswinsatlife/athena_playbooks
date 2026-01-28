@@ -1,0 +1,18 @@
+:root{
+  --athena-ink: #05240C;
+  --athena-ink-2: #062812;
+  --diagram-font-family: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+  --diagram-node-fill: #f6fbf7;
+  --diagram-node-stroke: var(--athena-ink);
+  --diagram-node-stroke-width: 2;
+  --diagram-node-radius: 12;
+
+  --diagram-edge-stroke: rgba(0,0,0,0.55);
+  --diagram-edge-stroke-width: 1.6;
+
+  --diagram-label-fill: rgba(0,0,0,0.86);
+  --diagram-label-font-weight: 650;
+}
+
+/* Intentionally tokens-only. Consumers (Astro components, renderers) apply these. */

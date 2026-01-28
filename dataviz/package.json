@@ -8,6 +8,7 @@
     "start": "node elicit_automation.js",
     "install-playwright": "npx playwright install chromium",
     "flowrender": "node mermaid_js/src/cli/flowrender.js",
+    "flowrender:athena": "node mermaid_js/src/cli/flowrender_athena.js",
     "flowrender:all": "node mermaid_js/src/cli/render_all.js --inDir mermaid_js --outDir mermaid_js/generated",
     "render:any": "node mermaid_js/src/cli/render_all_any.js --inDir mermaid_js --outDir mermaid_js/generated"
   },

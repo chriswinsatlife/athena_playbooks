@@ -1,0 +1,43 @@
+---
+type Props = {
+  src: string;
+  alt: string;
+  title?: string;
+  caption?: string;
+  credit?: string;
+  creditUrl?: string;
+};
+
+const { src, alt, title, caption, credit, creditUrl } = Astro.props;
+---
+
+<figure class="playbook-image">
+  {title && <figcaption class="playbook-image__title">{title}</figcaption>}
+  <div class="playbook-image__frame">
+    <img src={src} alt={alt} loading="lazy" />
+  </div>
+  {(caption || credit) && (
+    <figcaption class="playbook-image__caption">
+      {caption && <span>{caption}</span>}
+      {credit && (
+        <span>
+          Credit:{' '}
+          {creditUrl ? (
+            <a href={creditUrl} target="_blank" rel="noreferrer">{credit}</a>
+          ) : (
+            credit
+          )}
+        </span>
+      )}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .playbook-image{ margin: 1.25rem 0; }
+  .playbook-image__title{ font-weight: 650; margin: 0 0 0.5rem 0; }
+  .playbook-image__frame{ border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; overflow: hidden; background: #fff; }
+  .playbook-image__frame img{ width: 100%; height: auto; display: block; }
+  .playbook-image__caption{ margin: 0.5rem 0 0 0; color: rgba(0,0,0,0.72); font-size: 0.95rem; display: flex; gap: 0.75rem; justify-content: space-between; }
+  .playbook-image__caption a{ color: inherit; text-decoration: underline; text-decoration-color: rgba(0,0,0,0.3); text-underline-offset: 3px; }
+</style>

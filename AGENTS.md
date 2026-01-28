@@ -9,6 +9,7 @@
 - Verify all pages are error free yourself, without being asked by the user; keep checking the page with `agent-browser` and fixing issues until it is immaculate.
 - Do not use emojis in code, output, or documentation. Unicode symbols (✓, ✗, →, ⚠) are acceptable.
 - Refer to `docs/css_tricks_com_crafting_strong_dx_with_astro_components_and_typescript.md` for details on Astro and Typescript best practices.
-- Refer to `.opencode/skill/daisyui/` for DaisyUI-specific best practices.
+- Refer to `.opencode/skill/daisyui/` for DaisyUI-specific best practices when writing any front-end file.
 - Never use all caps for filenames or directory names or variables, unless strictly necessary (e.g. screaming snake case variable required in `.env` by a third-party library).
 - Original/older playbook format: `athena/coda_playbooks_doc/CqI5pastxC.txt`
+- Use `lower_snake_case` for every filename, directory name, etc.

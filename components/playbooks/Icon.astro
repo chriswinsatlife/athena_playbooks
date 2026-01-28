@@ -1,0 +1,66 @@
+---
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+
+type Props = {
+  name: string;
+  title?: string;
+  size?: number;
+  class?: string;
+};
+
+const { name, title, size = 20 } = Astro.props;
+
+if (!name || /\.\.|\//.test(name)) {
+  throw new Error(`Icon: invalid name: ${name}`);
+}
+
+const iconPath = join(
+  process.cwd(),
+  'athena',
+  'brand',
+  'icons',
+  'vendor',
+  'heroicons',
+  '24',
+  'outline',
+  `${name}.svg`
+);
+
+let svg = await readFile(iconPath, 'utf8');
+
+// Normalize to use currentColor so the parent can style the icon.
+svg = svg
+  .replace(/\s(width|height)="[^"]*"/g, '')
+  .replace(/\s(fill|stroke)="(?!none)[^"]*"/g, '');
+---
+
+<span
+  class={['playbook-icon', Astro.props.class].filter(Boolean).join(' ')}
+  style={`--playbook-icon-size:${size}px`}
+  aria-hidden={title ? undefined : 'true'}
+  role={title ? 'img' : undefined}
+  aria-label={title}
+  set:html={svg}
+/>
+
+<style>
+  .playbook-icon{
+    display: inline-flex;
+    width: var(--playbook-icon-size);
+    height: var(--playbook-icon-size);
+    color: currentColor;
+  }
+  .playbook-icon :global(svg){
+    width: 100%;
+    height: 100%;
+  }
+  .playbook-icon :global(path),
+  .playbook-icon :global(circle),
+  .playbook-icon :global(rect),
+  .playbook-icon :global(polyline),
+  .playbook-icon :global(polygon),
+  .playbook-icon :global(line){
+    stroke: currentColor;
+  }
+</style>

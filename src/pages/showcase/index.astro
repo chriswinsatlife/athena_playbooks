@@ -1,0 +1,122 @@
+---
+import Base from '../../layouts/Base.astro'
+---
+
+<Base title="Component Showcase - 182 Components">
+  <div class="min-h-screen bg-base-200 p-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <h1 class="text-5xl font-bold mb-4">Component Showcase</h1>
+        <p class="text-xl text-base-content/60">
+          Complete catalog of all <span class="font-bold text-primary">182 components</span> in this design system
+        </p>
+      </div>
+      
+      <div class="grid gap-6">
+        
+        <!-- Elements -->
+        <a href="/showcase/elements" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+          <div class="card-body">
+            <div class="flex justify-between items-center">
+              <div>
+                <h2 class="card-title text-2xl">Element Components</h2>
+                <p class="text-base-content/60">Core building blocks: buttons, headings, forms, containers</p>
+              </div>
+              <div class="badge badge-primary badge-lg">20</div>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="badge badge-outline">Button</span>
+              <span class="badge badge-outline">Heading</span>
+              <span class="badge badge-outline">Container</span>
+              <span class="badge badge-outline">EmailSignupForm</span>
+              <span class="badge badge-outline">+16 more</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Sections -->
+        <a href="/showcase/sections" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+          <div class="card-body">
+            <div class="flex justify-between items-center">
+              <div>
+                <h2 class="card-title text-2xl">Section Components</h2>
+                <p class="text-base-content/60">Full page sections: heroes, features, pricing, testimonials</p>
+              </div>
+              <div class="badge badge-secondary badge-lg">40</div>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="badge badge-outline">HeroSimpleCentered</span>
+              <span class="badge badge-outline">PricingMultiTier</span>
+              <span class="badge badge-outline">TestimonialGrid</span>
+              <span class="badge badge-outline">Footer</span>
+              <span class="badge badge-outline">+36 more</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Catalyst -->
+        <a href="/showcase/catalyst" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+          <div class="card-body">
+            <div class="flex justify-between items-center">
+              <div>
+                <h2 class="card-title text-2xl">Catalyst Components</h2>
+                <p class="text-base-content/60">Tailwind UI Kit components: layouts, lists, navigation</p>
+              </div>
+              <div class="badge badge-accent badge-lg">10</div>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="badge badge-outline">AuthLayout</span>
+              <span class="badge badge-outline">DescriptionList</span>
+              <span class="badge badge-outline">Pagination</span>
+              <span class="badge badge-outline">Divider</span>
+              <span class="badge badge-outline">+6 more</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Icons -->
+        <a href="/showcase/icons" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+          <div class="card-body">
+            <div class="flex justify-between items-center">
+              <div>
+                <h2 class="card-title text-2xl">Icon Components</h2>
+                <p class="text-base-content/60">SVG icons: UI, navigation, social media</p>
+              </div>
+              <div class="badge badge-info badge-lg">112</div>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="badge badge-outline">107 Main Icons</span>
+              <span class="badge badge-outline">5 Social Icons</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+      
+      <div class="mt-12 text-center">
+        <div class="stats shadow">
+          <div class="stat">
+            <div class="stat-title">Elements</div>
+            <div class="stat-value text-primary">20</div>
+          </div>
+          <div class="stat">
+            <div class="stat-title">Sections</div>
+            <div class="stat-value text-secondary">40</div>
+          </div>
+          <div class="stat">
+            <div class="stat-title">Catalyst</div>
+            <div class="stat-value text-accent">10</div>
+          </div>
+          <div class="stat">
+            <div class="stat-title">Icons</div>
+            <div class="stat-value text-info">112</div>
+          </div>
+          <div class="stat">
+            <div class="stat-title">Total</div>
+            <div class="stat-value">182</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>

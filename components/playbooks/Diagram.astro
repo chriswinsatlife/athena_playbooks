@@ -1,0 +1,118 @@
+---
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+
+type Props = {
+  src: string;
+  alt: string;
+  title?: string;
+  caption?: string;
+  download?: boolean;
+  downloadSrc?: string;
+};
+
+const {
+  src,
+  alt,
+  title,
+  caption,
+  download = true,
+  downloadSrc,
+} = Astro.props;
+
+if (!src || !src.startsWith('/')) {
+  throw new Error(`Diagram: src must be a site-root path like /playbooks/... (got: ${src})`);
+}
+
+const svgPath = join(process.cwd(), 'public', src.replace(/^\/+/, ''));
+const svg = await readFile(svgPath, 'utf8');
+const resolvedDownload = downloadSrc ?? src.replace(/\.svg$/i, '.png');
+---
+
+<figure class="playbook-diagram">
+  {title && <figcaption class="playbook-diagram__title">{title}</figcaption>}
+  <div class="playbook-diagram__frame" role="img" aria-label={alt} set:html={svg} />
+  {(caption || download) && (
+    <figcaption class="playbook-diagram__caption">
+      {caption && <span>{caption}</span>}
+      {download && (
+        <a class="playbook-diagram__download" href={resolvedDownload} download>
+          Download
+        </a>
+      )}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  @font-face{
+    font-family: 'Figtree';
+    src: url('/fonts/Figtree[wght].ttf') format('truetype');
+    font-weight: 300 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face{
+    font-family: 'Figtree';
+    src: url('/fonts/Figtree-Italic[wght].ttf') format('truetype');
+    font-weight: 300 900;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  .playbook-diagram{
+    margin: 1.25rem 0;
+  }
+  .playbook-diagram__title{
+    font-weight: 650;
+    margin: 0 0 0.5rem 0;
+  }
+  .playbook-diagram__frame{
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+    --diagram-font-family: 'Figtree', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+    --diagram-node-fill: #f6fbf7;
+    --diagram-node-stroke: #05240C;
+    --diagram-node-stroke-width: 2;
+    --diagram-edge-stroke: rgba(0,0,0,0.55);
+    --diagram-edge-stroke-width: 1.6;
+    --diagram-label-fill: rgba(0,0,0,0.86);
+  }
+  .playbook-diagram__frame :global(svg){
+    display: block;
+    width: 100%;
+    height: auto;
+    font-family: var(--diagram-font-family);
+  }
+  .playbook-diagram__frame :global(.node-shape){
+    fill: var(--diagram-node-fill);
+    stroke: var(--diagram-node-stroke);
+    stroke-width: var(--diagram-node-stroke-width);
+  }
+  .playbook-diagram__frame :global(.edge-path){
+    stroke: var(--diagram-edge-stroke);
+    stroke-width: var(--diagram-edge-stroke-width);
+  }
+  .playbook-diagram__frame :global(.node-label),
+  .playbook-diagram__frame :global(.edge-label){
+    fill: var(--diagram-label-fill);
+  }
+  .playbook-diagram__caption{
+    display: flex;
+    gap: 0.75rem;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 0.5rem 0 0 0;
+    color: rgba(0,0,0,0.72);
+    font-size: 0.95rem;
+  }
+  .playbook-diagram__download{
+    white-space: nowrap;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: rgba(0,0,0,0.3);
+    text-underline-offset: 3px;
+  }
+</style>

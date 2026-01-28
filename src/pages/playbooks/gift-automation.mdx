@@ -1,0 +1,42 @@
+---
+title: Gift Automation
+---
+
+import Diagram from "@components/playbooks/Diagram.astro";
+import Icon from "@components/playbooks/Icon.astro";
+
+# Gift automation
+
+This playbook turns gifting into a system: capture context, pick from a small set of rules, execute reliably, and keep a light feedback loop.
+
+## What this covers
+
+- Occasions and triggers
+- Constraints (budget, taste, shipping windows)
+- Execution workflow
+
+## Workflow
+
+<Diagram
+  src="/playbooks/gift-automation/assets/diagrams/workflow.svg"
+  alt="Gift automation workflow"
+  caption="From trigger to delivery confirmation, including an escalation path for ambiguity."
+/>
+
+## Core constraints
+
+- Default budget bands are set per relationship tier.
+- No gifts that create recipient burden (set up, subscriptions, returns) unless explicitly requested.
+- Escalate if the gift could be read as high-signal (romance, religion, politics).
+
+## Quick toolkit
+
+<p style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+  <Icon name="calendar-days" title="Calendar" />
+  <span>Maintain a lightweight gifting calendar with lead times.</span>
+</p>
+
+<p style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+  <Icon name="gift" title="Gift" />
+  <span>Maintain a short list of recipient-safe defaults (by relationship tier).</span>
+</p>

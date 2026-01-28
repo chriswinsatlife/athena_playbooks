@@ -1,0 +1,64 @@
+---
+import Base from '../../layouts/Base.astro'
+
+const sectionsList = [
+  'BrandsCardsMultiColumn',
+  'CallToActionSimple',
+  'CallToActionSimpleCentered',
+  'FeaturesStackedAlternatingWithDemos',
+  'FeaturesThreeColumn',
+  'FeaturesThreeColumnWithDemos',
+  'FeaturesTwoColumnWithDemos',
+  'FeaturesWithLargeDemo',
+  'FooterCategory',
+  'FooterLink',
+  'FooterWithLinkCategories',
+  'FooterWithLinksAndSocialIcons',
+  'FooterWithNewsletterFormCategoriesAndSocialIcons',
+  'HeroCenteredWithDemo',
+  'HeroCenteredWithPhoto',
+  'HeroLeftAlignedWithDemo',
+  'HeroLeftAlignedWithPhoto',
+  'HeroSimpleCentered',
+  'HeroSimpleLeftAligned',
+  'HeroTwoColumnWithPhoto',
+  'HeroWithDemoOnBackground',
+  'NewsletterForm',
+  'PlanComparisonTable',
+  'PricingHeroMultiTier',
+  'PricingMultiTier',
+  'PricingMultiTierAlt',
+  'PricingSingleTierTwoColumn',
+  'SocialLink',
+  'Stat',
+  'StatsFourColumns',
+  'StatsThreeColumnWithDescription',
+  'StatsWithGraph',
+  'StatsWithGraphStat',
+  'TeamFourColumnGrid',
+  'TeamMember',
+  'TeamThreeColumnGrid',
+  'TestimonialTwoColumnWithLargePhoto',
+  'TestimonialWithLargeQuote',
+  'TestimonialsThreeColumnGrid',
+  'TestimonialsThreeColumnGridLayout'
+]
+---
+
+<Base title="Showcase - All Sections">
+  <div class="min-h-screen bg-base-200">
+    <div class="p-8 max-w-7xl mx-auto">
+      <h1 class="text-4xl font-bold mb-2">Section Components</h1>
+      <p class="text-base-content/60 mb-8">List of section components available in this repo.</p>
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {sectionsList.map((name) => (
+              <li class="rounded-lg border border-base-300 bg-base-100 px-4 py-3 font-mono text-sm">{name}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>
