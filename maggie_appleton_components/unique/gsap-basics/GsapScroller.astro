@@ -1,0 +1,200 @@
+---
+
+---
+
+<div class="container">
+	<div class="sticky-container">
+		<div class="image-container">
+			<img
+				class="base-image"
+				alt="DOM nodes visualization - step 1"
+				src="https://res.cloudinary.com/dg3gyk0gu/image/upload/c_scale,f_auto,q_auto:good,w_1200/v1599594005/maggieappleton.com/notes/gsap/GSAP-DOM.jpg"
+			/>
+			<img
+				class="fade-image"
+				data-index="1"
+				alt="DOM nodes visualization - step 2"
+				src="https://res.cloudinary.com/dg3gyk0gu/image/upload/c_scale,f_auto,q_auto:good,w_1200/v1599594005/maggieappleton.com/notes/gsap/GSAP-DOM-2.jpg"
+			/>
+			<img
+				class="fade-image"
+				data-index="2"
+				alt="DOM nodes visualization - step 3"
+				src="https://res.cloudinary.com/dg3gyk0gu/image/upload/c_scale,f_auto,q_auto:good,w_1200/v1599594005/maggieappleton.com/notes/gsap/GSAP-DOM-3.jpg"
+			/>
+			<img
+				class="fade-image"
+				data-index="3"
+				alt="DOM nodes visualization - step 4"
+				src="https://res.cloudinary.com/dg3gyk0gu/image/upload/c_scale,f_auto,q_auto:good,w_1200/v1599595798/maggieappleton.com/notes/gsap/GSAP-DOM-4.jpg"
+			/>
+		</div>
+	</div>
+	<div class="scroll-trigger"></div>
+</div>
+
+<script>
+	import scrollama from "scrollama";
+
+	let scroller: any;
+	let fadeImages: NodeListOf<Element>;
+	let currentStep = -1;
+
+	function initScrollama() {
+		scroller = scrollama();
+		fadeImages = document.querySelectorAll(".fade-image");
+
+		scroller
+			.setup({
+				step: ".scroll-trigger",
+				offset: 0.3,
+				progress: true,
+			})
+			.onStepProgress((response: any) => {
+				const { progress } = response;
+				const totalImages = fadeImages.length;
+				const currentImage = Math.floor(progress * totalImages);
+
+				if (currentImage !== currentStep && currentImage >= 0) {
+					currentStep = currentImage;
+					fadeImages.forEach((img, index) => {
+						if (index <= currentImage && currentImage < totalImages) {
+							img.classList.add("visible");
+						} else {
+							img.classList.remove("visible");
+						}
+					});
+				}
+			});
+	}
+
+	// Initial setup
+	initScrollama();
+
+	// Handle resize
+	const handleResize = () => scroller?.resize();
+	window.addEventListener("resize", handleResize);
+
+	// Reinit on view transitions
+	document.addEventListener("astro:page-load", initScrollama);
+
+	// Cleanup
+	const cleanup = () => {
+		scroller?.destroy();
+		window.removeEventListener("resize", handleResize);
+	};
+
+	document.addEventListener("astro:before-swap", cleanup);
+	document.addEventListener("astro:unmount", cleanup);
+</script>
+
+<style>
+	.container {
+		height: 160vh;
+		margin: 0;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.sticky-container {
+		position: sticky;
+		top: 5vh;
+		height: 70vh;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		padding-top: 2rem;
+	}
+
+	.image-container {
+		position: relative;
+		width: 100%;
+		max-width: 580px;
+		margin: 0 auto;
+		aspect-ratio: 16/9;
+	}
+
+	img {
+		width: 100%;
+		height: auto;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+
+	.base-image {
+		position: relative;
+	}
+
+	.fade-image {
+		opacity: 0;
+		transition: opacity 0.8s ease-out;
+		z-index: var(--z-index);
+	}
+
+	.fade-image.visible {
+		opacity: 1;
+	}
+
+	.fade-image[data-index="1"] {
+		--z-index: 2;
+	}
+
+	.fade-image[data-index="2"] {
+		--z-index: 3;
+	}
+
+	.fade-image[data-index="3"] {
+		--z-index: 4;
+	}
+
+	.scroll-trigger {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			height: auto;
+			padding: 2rem 0;
+		}
+
+		.sticky-container {
+			position: static;
+			height: auto;
+			padding: 2rem 1rem;
+		}
+
+		.image-container {
+			aspect-ratio: auto;
+			height: auto;
+			display: flex;
+			flex-direction: column;
+			gap: 2rem;
+		}
+
+		img {
+			position: relative;
+			margin-bottom: 1rem;
+			opacity: 1 !important;
+		}
+
+		.fade-image {
+			position: relative;
+			display: block;
+			opacity: 1;
+		}
+
+		.base-image {
+			margin-bottom: 2rem;
+		}
+	}
+</style>

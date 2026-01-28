@@ -1,0 +1,892 @@
+---
+import { Icon } from "astro-icon/components";
+
+const data = [
+	{ date: "2024-05-21", restingHR: 48, sleepScore: 90, stressScore: 27 },
+	{ date: "2024-05-28", restingHR: 49, sleepScore: 83, stressScore: 29 },
+	{ date: "2024-06-04", restingHR: 47, sleepScore: 88, stressScore: 30 },
+	{ date: "2024-06-11", restingHR: 50, sleepScore: 85, stressScore: 35 },
+	{ date: "2024-06-18", restingHR: 48, sleepScore: 86, stressScore: 35 },
+	{ date: "2024-06-25", restingHR: 49, sleepScore: 87, stressScore: 31 },
+	{ date: "2024-07-02", restingHR: 52, sleepScore: 83, stressScore: 40 },
+	{ date: "2024-07-09", restingHR: 55, sleepScore: 68, stressScore: 47 },
+	{ date: "2024-07-16", restingHR: 60, sleepScore: 45, stressScore: 62 },
+	{ date: "2024-07-23", restingHR: 63, sleepScore: 44, stressScore: 59 },
+	{ date: "2024-07-30", restingHR: 62, sleepScore: 43, stressScore: 57 },
+	{ date: "2024-08-06", restingHR: 57, sleepScore: 52, stressScore: 54 },
+	{ date: "2024-08-13", restingHR: 59, sleepScore: 50, stressScore: 57 },
+	{ date: "2024-08-20", restingHR: 59, sleepScore: 52, stressScore: 55 },
+	{ date: "2024-08-27", restingHR: 58, sleepScore: 50, stressScore: 58 },
+	{ date: "2024-09-03", restingHR: 63, sleepScore: 47, stressScore: 62 },
+	{ date: "2024-09-10", restingHR: 63, sleepScore: 45, stressScore: 57 },
+	{ date: "2024-09-17", restingHR: 66, sleepScore: 46, stressScore: 56 },
+	{ date: "2024-09-24", restingHR: 64, sleepScore: 41, stressScore: 59 },
+	{ date: "2024-10-01", restingHR: 69, sleepScore: 40, stressScore: 64 },
+	{ date: "2024-10-08", restingHR: 64, sleepScore: 54, stressScore: 56 },
+	{ date: "2024-10-15", restingHR: 62, sleepScore: 55, stressScore: 52 },
+	{ date: "2024-10-22", restingHR: 65, sleepScore: 49, stressScore: 56 },
+	{ date: "2024-10-29", restingHR: 68, sleepScore: 48, stressScore: 61 },
+	{ date: "2024-11-05", restingHR: 68, sleepScore: 46, stressScore: 60 },
+	{ date: "2024-11-12", restingHR: 65, sleepScore: 56, stressScore: 53 },
+	{ date: "2024-11-19", restingHR: 67, sleepScore: 55, stressScore: 50 },
+	{ date: "2024-11-26", restingHR: 65, sleepScore: 54, stressScore: 53 },
+	{ date: "2024-12-03", restingHR: 67, sleepScore: 52, stressScore: 55 },
+];
+---
+
+<div class="chart-container">
+	<div class="labels">
+		<div class="labels-left">
+			<div class="label-container label-stress">
+				<Icon name="heroicons:bolt-solid" size={20} />
+				<div class="label-text">Stress Score</div>
+			</div>
+			<div class="label-container label-hr">
+				<Icon name="heroicons:heart-solid" size={20} />
+				<div class="label-text">Resting Heart Rate</div>
+			</div>
+		</div>
+		<div class="label-container label-sleep">
+			<Icon name="heroicons:moon-solid" size={20} />
+			<div class="label-text">Sleep Score</div>
+		</div>
+	</div>
+	<div id="garmin-chart" data-values={JSON.stringify(data)}></div>
+</div>
+<div id="garmin-tooltip" class="tooltip"></div>
+
+<div class="summary-title">
+	Average scores before and after getting pregnant
+</div>
+<div class="summary-section">
+	<div class="summary-metrics">
+		<div class="summary-item hr">
+			<div class="metric-name">
+				<Icon name="heroicons:heart-solid" size={16} />
+				<span>Resting Heart Rate</span>
+			</div>
+			<div class="change-indicator">
+				<span class="before">48</span>
+				<svg class="arrow" width="28" height="20" viewBox="0 0 28 20">
+					<path
+						d="M0,10 L26,10 M20,4 L26,10 L20,16"
+						stroke="currentColor"
+						fill="none"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"></path>
+				</svg>
+				<span class="after">65</span>
+				<span class="unit">bpm</span>
+			</div>
+		</div>
+		<div class="summary-item stress">
+			<div class="metric-name">
+				<Icon name="heroicons:bolt-solid" size={16} />
+				<span>Stress Score</span>
+			</div>
+			<div class="change-indicator">
+				<span class="before">31</span>
+				<svg class="arrow" width="28" height="20" viewBox="0 0 28 20">
+					<path
+						d="M0,10 L26,10 M20,16 L26,10 L20,4"
+						stroke="currentColor"
+						fill="none"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"></path>
+				</svg>
+				<span class="after">56</span>
+			</div>
+		</div>
+		<div class="summary-item sleep">
+			<div class="metric-name">
+				<Icon name="heroicons:moon-solid" size={16} />
+				<span>Sleep Score</span>
+			</div>
+			<div class="change-indicator">
+				<span class="before">88</span>
+				<svg class="arrow" width="28" height="20" viewBox="0 0 28 20">
+					<path
+						d="M0,10 L26,10 M20,16 L26,10 L20,4"
+						stroke="currentColor"
+						fill="none"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"></path>
+				</svg>
+				<span class="after">48</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	:root {
+		--color-hr: #ce3b65;
+		--color-sleep: #4290af;
+		--color-stress: #ee7c3f;
+		--gray-100: #f3f4f6;
+	}
+
+	.chart-container {
+		width: 100%;
+		height: 1800px;
+		margin: 2rem 0;
+		position: relative;
+		padding-top: 3rem;
+		font-family: var(--font-sans);
+	}
+
+	#garmin-chart {
+		width: 100%;
+		height: 100%;
+		position: relative;
+	}
+
+	.labels {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: space-between;
+		padding: 0 1rem;
+	}
+
+	.labels-left {
+		display: flex;
+		gap: 1.5rem;
+		margin-left: 4rem;
+	}
+
+	@media (max-width: 768px) {
+		.labels {
+			flex-direction: column;
+			gap: 0.5rem;
+			top: -1.5rem;
+		}
+		.labels-left {
+			margin-left: 0;
+		}
+	}
+
+	.label-container {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.label-text {
+		font-size: 1rem;
+		font-weight: 500;
+		white-space: nowrap;
+		font-family: var(--font-sans);
+	}
+
+	.label-hr {
+		color: var(--color-hr);
+	}
+
+	.label-sleep {
+		color: var(--color-sleep);
+	}
+
+	.label-stress {
+		color: var(--color-stress);
+	}
+
+	:global(.line) {
+		fill: none;
+		stroke-width: 2;
+	}
+
+	:global(.line-hr) {
+		stroke: var(--color-hr);
+	}
+
+	:global(.line-sleep) {
+		stroke: var(--color-sleep);
+	}
+
+	:global(.line-stress) {
+		stroke: var(--color-stress);
+	}
+
+	:global(.grid-line) {
+		stroke: #e5e7eb;
+		stroke-width: 1;
+		stroke-dasharray: 4, 4;
+	}
+
+	:global(.hover-line) {
+		stroke: #9ca3af;
+		stroke-width: 1;
+		pointer-events: none;
+		opacity: 0;
+	}
+
+	:global(.hover-circle) {
+		fill: white;
+		stroke-width: 2;
+		pointer-events: none;
+		opacity: 0;
+	}
+
+	:global(.hover-circle.hr) {
+		stroke: var(--color-hr);
+	}
+
+	:global(.hover-circle.sleep) {
+		stroke: var(--color-sleep);
+	}
+
+	:global(.hover-circle.stress) {
+		stroke: var(--color-stress);
+	}
+
+	:global(.tooltip) {
+		position: fixed;
+		padding: 12px;
+		background-color: white;
+		border: 1px solid var(--gray-100);
+		border-radius: 0.25rem;
+		box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+		pointer-events: none;
+		font-size: 0.875rem;
+		font-family: var(--font-sans);
+		z-index: 9999;
+		opacity: 0;
+		transition: opacity 0.15s ease;
+		min-width: 160px;
+	}
+
+	:global(.tooltip-value) {
+		font-weight: 500;
+		margin-left: 0.5rem;
+	}
+
+	:global(.tooltip-date) {
+		color: #6b7280;
+		font-size: 0.875rem;
+		margin-bottom: 0.75rem;
+		font-weight: 500;
+	}
+
+	:global(.tooltip-row) {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1.5rem;
+		margin-bottom: 0.25rem;
+	}
+
+	:global(.tooltip-label) {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	:global(.tooltip-icon) {
+		width: 16px;
+		height: 16px;
+	}
+
+	:global(.tooltip-row:last-child) {
+		margin-bottom: 0;
+	}
+
+	:global(.tooltip-row.hr) {
+		color: var(--color-hr);
+	}
+
+	:global(.tooltip-row.sleep) {
+		color: var(--color-sleep);
+	}
+
+	:global(.tooltip-row.stress) {
+		color: var(--color-stress);
+	}
+
+	:global(.marker-line) {
+		stroke: #6b7280;
+		stroke-width: 1;
+		stroke-dasharray: 2, 2;
+	}
+
+	:global(.marker-text) {
+		font-size: 1rem;
+		fill: #374151;
+		font-family: var(--font-sans);
+		font-weight: 500;
+	}
+
+	:global(.marker-bg) {
+		fill: white;
+		stroke: #e5e7eb;
+		stroke-width: 1;
+		filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05));
+	}
+
+	:global(.marker-group) {
+		pointer-events: none;
+	}
+
+	:global(.month-label) {
+		font-size: 0.875rem;
+		fill: #6b7280;
+		font-family: var(--font-sans);
+		font-weight: 500;
+	}
+
+	:global(.spot-circle) {
+		fill: white;
+		stroke-width: 2;
+	}
+
+	:global(.spot-circle.hr) {
+		stroke: var(--color-hr);
+	}
+
+	:global(.spot-circle.sleep) {
+		stroke: var(--color-sleep);
+	}
+
+	:global(.spot-circle.stress) {
+		stroke: var(--color-stress);
+	}
+
+	:global(.spot-number) {
+		font-size: 0.75rem;
+		font-family: var(--font-sans);
+		font-weight: 500;
+		text-anchor: middle;
+		dominant-baseline: middle;
+	}
+
+	:global(.spot-number.hr) {
+		fill: var(--color-hr);
+	}
+
+	:global(.spot-number.sleep) {
+		fill: var(--color-sleep);
+	}
+
+	:global(.spot-number.stress) {
+		fill: var(--color-stress);
+	}
+
+	.summary-section {
+		margin: 0 0 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		font-family: var(--font-sans);
+		padding: 2rem;
+		border: 1px solid var(--gray-100);
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+	}
+
+	.summary-title {
+		margin: 2rem 0 0.5rem;
+		text-align: center;
+		font-size: 1.25rem;
+		font-weight: 500;
+		color: var(--black);
+		font-family: var(--font-sans);
+	}
+
+	.summary-metrics {
+		display: flex;
+		gap: 3rem;
+		justify-content: center;
+	}
+
+	@media (max-width: 768px) {
+		.summary-section {
+			padding: 1.5rem;
+		}
+
+		.summary-metrics {
+			flex-direction: column;
+			gap: 2rem;
+			align-items: flex-start;
+		}
+
+		.summary-item {
+			width: 100%;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+	}
+
+	.summary-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.metric-name {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-weight: 500;
+		font-size: 1rem;
+	}
+
+	.change-indicator {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 1.25rem;
+		font-weight: 600;
+	}
+
+	.before,
+	.after {
+		min-width: 2ch;
+		text-align: center;
+	}
+
+	.unit {
+		font-size: 0.875rem;
+		color: var(--color-hr);
+		position: relative;
+		top: 2px;
+		left: -3px;
+	}
+
+	.summary-item.hr {
+		color: var(--color-hr);
+	}
+
+	.summary-item.sleep {
+		color: var(--color-sleep);
+	}
+
+	.summary-item.stress {
+		color: var(--color-stress);
+	}
+</style>
+
+<script>
+	interface GarminDataPoint {
+		date: string;
+		restingHR: number;
+		sleepScore: number;
+		stressScore: number;
+	}
+
+	async function initChart() {
+		const { select } = await import("d3-selection");
+		const { scaleLinear } = await import("d3-scale");
+		const { line, curveNatural } = await import("d3-shape");
+		const { extent } = await import("d3-array");
+
+		function formatDate(dateStr: string) {
+			const endDate = new Date(dateStr);
+			const startDate = new Date(endDate);
+			startDate.setDate(endDate.getDate() - 6); // Go back 6 days for the start of the week
+
+			const startMonth = startDate.toLocaleString("default", { month: "long" });
+			const endMonth = endDate.toLocaleString("default", { month: "long" });
+			const startDay = startDate.getDate();
+			const endDay = endDate.getDate();
+
+			// If the dates span different months
+			if (startMonth !== endMonth) {
+				return `${startMonth} ${startDay} - ${endMonth} ${endDay}`;
+			}
+
+			// If the dates are in the same month
+			return `${startMonth} ${startDay}-${endDay}`;
+		}
+
+		const container = document.getElementById("garmin-chart");
+		const tooltipElement = document.getElementById("garmin-tooltip");
+		const tooltip = select("#garmin-tooltip");
+
+		if (!container) throw new Error("Chart container not found");
+		if (!tooltipElement) {
+			console.error("Tooltip element not found");
+			return;
+		}
+
+		const data = JSON.parse(
+			container.dataset.values || "[]",
+		) as GarminDataPoint[];
+
+		function createChart() {
+			// Clear only the SVG
+			select("#garmin-chart svg").remove();
+
+			if (!container) return;
+			const width = container.clientWidth;
+			const height = container.clientHeight;
+			const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+			const innerWidth = width - margin.left - margin.right - 40;
+			const innerHeight = height - margin.top - margin.bottom;
+
+			// Create SVG
+			const svg = select("#garmin-chart")
+				.append("svg")
+				.attr("width", width)
+				.attr("height", height)
+				.append("g")
+				.attr("transform", `translate(${margin.left + 40},${margin.top})`);
+
+			// Create scales first
+			const yScale = scaleLinear()
+				.domain([0, data.length - 1])
+				.range([0, innerHeight]);
+
+			const hrScale = scaleLinear()
+				.domain(
+					extent(data, (d: GarminDataPoint) => d.restingHR) as [number, number],
+				)
+				.range([innerWidth * 0.1, innerWidth * 0.9]);
+
+			const sleepScale = scaleLinear()
+				.domain(
+					extent(data, (d: GarminDataPoint) => d.sleepScore) as [
+						number,
+						number,
+					],
+				)
+				.range([innerWidth * 0.1, innerWidth * 0.9]);
+
+			const stressScale = scaleLinear()
+				.domain(
+					extent(data, (d: GarminDataPoint) => d.stressScore) as [
+						number,
+						number,
+					],
+				)
+				.range([innerWidth * 0.1, innerWidth * 0.9]);
+
+			// Add evenly spaced grid lines
+			const gridCount = 7;
+			const gridPositions = Array.from(
+				{ length: gridCount },
+				(_, i) => innerWidth * 0 + (innerWidth * 1 * i) / (gridCount - 1),
+			);
+
+			gridPositions.forEach((x) => {
+				svg
+					.append("line")
+					.attr("class", "grid-line")
+					.attr("x1", x)
+					.attr("y1", 0)
+					.attr("x2", x)
+					.attr("y2", innerHeight);
+			});
+
+			// Add the hover elements
+			const hoverLine = svg
+				.append("line")
+				.attr("class", "hover-line")
+				.attr("y1", 0)
+				.attr("y2", innerHeight);
+
+			const hoverCircleHR = svg
+				.append("circle")
+				.attr("class", "hover-circle hr")
+				.attr("r", 4);
+
+			const hoverCircleSleep = svg
+				.append("circle")
+				.attr("class", "hover-circle sleep")
+				.attr("r", 4);
+
+			const hoverCircleStress = svg
+				.append("circle")
+				.attr("class", "hover-circle stress")
+				.attr("r", 4);
+
+			// Add hover interaction
+			const hoverArea = svg
+				.append("rect")
+				.attr("width", innerWidth)
+				.attr("height", innerHeight)
+				.attr("fill", "none")
+				.style("pointer-events", "all")
+				.on("mousemove", function (event) {
+					const mouseY = (event as MouseEvent).offsetY - margin.top;
+					const index = Math.round(yScale.invert(mouseY));
+
+					if (index >= 0 && index < data.length) {
+						const d = data[index];
+
+						// Update line position
+						hoverLine
+							.attr("x1", innerWidth * 0.1)
+							.attr("x2", innerWidth * 0.9)
+							.attr("y1", yScale(index))
+							.attr("y2", yScale(index))
+							.style("opacity", 1);
+
+						// Update circles
+						hoverCircleHR
+							.attr("cx", hrScale(d.restingHR))
+							.attr("cy", yScale(index))
+							.style("opacity", 1);
+
+						hoverCircleSleep
+							.attr("cx", sleepScale(d.sleepScore))
+							.attr("cy", yScale(index))
+							.style("opacity", 1);
+
+						hoverCircleStress
+							.attr("cx", stressScale(d.stressScore))
+							.attr("cy", yScale(index))
+							.style("opacity", 1);
+
+						// Update tooltip
+						const tooltipContent = `
+							<div class="tooltip-date">${formatDate(d.date)}</div>
+							<div class="tooltip-row hr">
+								<div class="tooltip-label">
+									<svg class="tooltip-icon" viewBox="0 0 24 24" fill="currentColor">
+										<path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+									</svg>
+									<span>Resting heart rate</span>
+								</div>
+								<span class="tooltip-value">${d.restingHR}</span>
+							</div>
+							<div class="tooltip-row sleep">
+								<div class="tooltip-label">
+									<svg class="tooltip-icon" viewBox="0 0 24 24" fill="currentColor">
+										<path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+									</svg>
+									<span>Sleep score</span>
+								</div>
+								<span class="tooltip-value">${d.sleepScore}</span>
+							</div>
+							<div class="tooltip-row stress">
+								<div class="tooltip-label">
+									<svg class="tooltip-icon" viewBox="0 0 24 24" fill="currentColor">
+										<path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+									</svg>
+									<span>Stress score</span>
+								</div>
+								<span class="tooltip-value">${d.stressScore}</span>
+							</div>
+						`;
+
+						// Position tooltip relative to mouse cursor
+						const mouseEvent = event as MouseEvent;
+						const tooltipX = mouseEvent.clientX + 20;
+						const tooltipY = mouseEvent.clientY;
+
+						tooltip
+							.style("opacity", 1)
+							.style("left", `${tooltipX}px`)
+							.style("top", `${tooltipY}px`)
+							.html(tooltipContent);
+					}
+				})
+				.on("mouseleave", function () {
+					hoverLine.style("opacity", 0);
+					hoverCircleHR.style("opacity", 0);
+					hoverCircleSleep.style("opacity", 0);
+					hoverCircleStress.style("opacity", 0);
+					tooltip.style("opacity", 0);
+				});
+
+			// Create line generators
+			const hrLine = line<GarminDataPoint>()
+				.curve(curveNatural)
+				.x((d) => hrScale(d.restingHR))
+				.y((d, i) => yScale(i));
+
+			const sleepLine = line<GarminDataPoint>()
+				.curve(curveNatural)
+				.x((d) => sleepScale(d.sleepScore))
+				.y((d, i) => yScale(i));
+
+			const stressLine = line<GarminDataPoint>()
+				.curve(curveNatural)
+				.x((d) => stressScale(d.stressScore))
+				.y((d, i) => yScale(i));
+
+			// Add the lines
+			svg
+				.append("path")
+				.datum(data)
+				.attr("class", "line line-hr")
+				.attr("d", hrLine);
+
+			svg
+				.append("path")
+				.datum(data)
+				.attr("class", "line line-sleep")
+				.attr("d", sleepLine);
+
+			svg
+				.append("path")
+				.datum(data)
+				.attr("class", "line line-stress")
+				.attr("d", stressLine);
+
+			// Add spot numbers every 4 weeks
+			const spotIndices = Array.from(
+				{ length: Math.ceil(data.length / 4) },
+				(_, i) => i * 4,
+			).filter((index) => index < data.length);
+
+			spotIndices.forEach((index) => {
+				const d = data[index];
+				const y = yScale(index);
+
+				// Heart rate number
+				svg
+					.append("circle")
+					.attr("class", "spot-circle hr")
+					.attr("cx", hrScale(d.restingHR))
+					.attr("cy", y)
+					.attr("r", 12);
+
+				svg
+					.append("text")
+					.attr("class", "spot-number hr")
+					.attr("x", hrScale(d.restingHR))
+					.attr("y", y)
+					.attr("dy", "0.1em")
+					.text(d.restingHR);
+
+				// Sleep score number
+				svg
+					.append("circle")
+					.attr("class", "spot-circle sleep")
+					.attr("cx", sleepScale(d.sleepScore))
+					.attr("cy", y)
+					.attr("r", 12);
+
+				svg
+					.append("text")
+					.attr("class", "spot-number sleep")
+					.attr("x", sleepScale(d.sleepScore))
+					.attr("y", y)
+					.attr("dy", "0.1em")
+					.text(d.sleepScore);
+
+				// Stress score number
+				svg
+					.append("circle")
+					.attr("class", "spot-circle stress")
+					.attr("cx", stressScale(d.stressScore))
+					.attr("cy", y)
+					.attr("r", 12);
+
+				svg
+					.append("text")
+					.attr("class", "spot-number stress")
+					.attr("x", stressScale(d.stressScore))
+					.attr("y", y)
+					.attr("dy", "0.1em")
+					.text(d.stressScore);
+			});
+
+			// Add month labels
+			const months = [
+				"Jan",
+				"Feb",
+				"Mar",
+				"Apr",
+				"May",
+				"Jun",
+				"Jul",
+				"Aug",
+				"Sep",
+				"Oct",
+				"Nov",
+				"Dec",
+			];
+			let currentMonth = "";
+
+			data.forEach((d, i) => {
+				const month = months[parseInt(d.date.split("-")[1]) - 1];
+				if (month !== currentMonth) {
+					svg
+						.append("text")
+						.attr("class", "month-label")
+						.attr("x", -10)
+						.attr("y", yScale(i))
+						.attr("text-anchor", "end")
+						.attr("dominant-baseline", "middle")
+						.text(month);
+					currentMonth = month;
+				}
+			});
+
+			// Add marker last to ensure it's on top
+			const markerDate = "2024-07-09";
+			const markerIndex = data.findIndex((d) => d.date === markerDate);
+
+			if (markerIndex !== -1) {
+				// Add marker line first (it should be under the text)
+				svg
+					.append("line")
+					.attr("class", "marker-line")
+					.attr("x1", 0)
+					.attr("x2", innerWidth)
+					.attr("y1", yScale(markerIndex))
+					.attr("y2", yScale(markerIndex));
+
+				// Create a group for the marker text and its background
+				const markerGroup = svg
+					.append("g")
+					.attr("class", "marker-group")
+					.raise() // Force it to the top of the SVG
+					.attr(
+						"transform",
+						`translate(${innerWidth * 0.02 + 80}, ${yScale(markerIndex) - 4})`,
+					);
+
+				// Add text first to measure its width
+				const markerText = markerGroup
+					.append("text")
+					.attr("class", "marker-text")
+					.attr("text-anchor", "middle")
+					.attr("dominant-baseline", "middle")
+					.attr("x", 0)
+					.attr("y", 0)
+					.attr("dy", "0.2em")
+					.text("Positive pregnancy test");
+
+				// Get text dimensions
+				const textBox = markerText.node()?.getBBox();
+				if (textBox) {
+					// Add background rectangle with more padding
+					markerGroup
+						.insert("rect", "text")
+						.attr("class", "marker-bg")
+						.attr("x", -textBox.width / 2 - 13)
+						.attr("y", -textBox.height / 2 - 6)
+						.attr("width", textBox.width + 26)
+						.attr("height", textBox.height + 18)
+						.attr("rx", 4);
+				}
+			}
+		}
+
+		// Create chart on load
+		createChart();
+
+		// Resize handler
+		let resizeTimer: ReturnType<typeof setTimeout>;
+		window.addEventListener("resize", () => {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(createChart, 250);
+		});
+	}
+
+	// Initialize the chart when the DOM is ready
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initChart);
+	} else {
+		initChart();
+	}
+</script>

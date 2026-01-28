@@ -1,0 +1,63 @@
+<div class="box" id="color-box"></div>
+
+<script>
+	let currentObserver: IntersectionObserver | null = null;
+
+	function initializeObserver() {
+		// Clean up existing observer
+		if (currentObserver) {
+			currentObserver.disconnect();
+			currentObserver = null;
+		}
+
+		const box = document.getElementById("color-box");
+		if (!box) return;
+
+		currentObserver = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					box.classList.add("animate");
+				} else {
+					box.classList.remove("animate");
+				}
+			},
+			{
+				threshold: 0.5,
+				rootMargin: "-30% 0px",
+			},
+		);
+
+		currentObserver.observe(box);
+	}
+
+	function cleanup() {
+		if (currentObserver) {
+			currentObserver.disconnect();
+			currentObserver = null;
+		}
+	}
+
+	// Initialize on first load
+	initializeObserver();
+
+	// Reinitialize after view transitions
+	document.addEventListener("astro:page-load", initializeObserver);
+
+	// Cleanup on page leave
+	document.addEventListener("astro:before-swap", cleanup);
+</script>
+
+<style>
+	.box {
+		width: 100px;
+		height: 100px;
+		margin: 2rem auto 0;
+		border-radius: 4px;
+		background: #d93654;
+		transition: background-color 0.5s ease-out;
+	}
+
+	.box.animate {
+		background: #93d0d9;
+	}
+</style>

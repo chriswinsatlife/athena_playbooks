@@ -1,0 +1,469 @@
+---
+import { Icon } from "astro-icon/components";
+import ProbabilityChart from "./ProbabilityChart.astro";
+
+// Import CSV data
+import multiBirthProbsCSV from "./birthprobs-multiparous.csv?raw";
+import firstTimeProbsCSV from "./birthprobs-firsttime.csv?raw";
+
+// Normalize CSV text by ensuring consistent line endings and trimming
+function normalizeCSV(csvText: string): string {
+	// Replace all \r\n with \n, then replace any remaining \r with \n
+	return csvText.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim();
+}
+
+// Parse CSV function with robust handling of different formats
+function parseCSV(csvText: string): Record<string, string>[] {
+	// Normalize the CSV content first
+	const normalizedCSV = normalizeCSV(csvText);
+
+	// Split by lines, ensuring consistent line breaks
+	const lines = normalizedCSV.split("\n");
+
+	// Parse headers, trim each one to remove any whitespace
+	const headerLine = lines[0];
+	const headers = headerLine.split(",").map((h: string) => h.trim());
+
+	// Process each data line
+	const result: Record<string, string>[] = [];
+	for (let i = 1; i < lines.length; i++) {
+		const line = lines[i].trim();
+		if (!line) continue; // Skip empty lines
+
+		const values = line.split(",").map((v: string) => v.trim());
+		const entry: Record<string, string> = {};
+
+		// Map each value to its header
+		headers.forEach((header: string, index: number) => {
+			// Use "Gestation Age" for the first column
+			const key = header || "Gestation Age";
+			entry[key] = values[index] || "";
+		});
+
+		result.push(entry);
+	}
+
+	return result;
+}
+
+const multiBirthData = parseCSV(multiBirthProbsCSV);
+const firstTimeData = parseCSV(firstTimeProbsCSV);
+---
+
+<div class="main-container">
+	<!-- Single sentence with both inputs on one line -->
+	<div class="input-container">
+		<span class="input-text">My due date is</span>
+		<div class="date-input-wrapper" id="date-input-wrapper">
+			<input type="date" id="due-date" class="due-date-input" min="" max="" required />
+			<span class="date-display" id="date-display"></span>
+			<button class="calendar-icon">
+				<Icon name="heroicons:calendar" size={20} />
+			</button>
+		</div>
+		<span class="input-text connector">and this</span>
+		<div class="select-wrapper">
+			<select id="first-baby-select" class="first-baby-select">
+				<option value="yes">is my first child</option>
+				<option value="no">is not my first child</option>
+			</select>
+			<Icon name="heroicons:chevron-down" size={20} class="select-icon" />
+		</div>
+	</div>
+	<!-- Data summary -->
+	<div class="data-summary">
+		<p id="pregnancy-summary" class="summary-text">
+			You are <span id="current-weeks">--</span> weeks and <span id="current-days">--</span> days pregnant,
+			and <span id="due-date-status">--</span>. You have a <span
+				id="birth-chance-tomorrow"
+				class="highlight">--</span
+			> chance of giving birth by tomorrow.
+		</p>
+	</div>
+
+	<!-- Chart Container -->
+	<div class="chart-container">
+		<ProbabilityChart
+			multiBirthCsv={JSON.stringify(multiBirthData)}
+			firstTimeCsv={JSON.stringify(firstTimeData)}
+		/>
+	</div>
+
+	<p class="additional-data">
+		The daily birth probability is the chance of giving birth <i>on</i> that specific day. The cumulative
+		birth probability is the chance of having given birth <i>by</i> that day.
+	</p>
+</div>
+
+<style>
+	.main-container {
+		font-family: var(--font-body);
+		max-width: 900px;
+		min-width: 100%;
+		padding: 2rem 0 3rem;
+	}
+
+	.input-container {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem;
+		margin-bottom: 1.5rem;
+		font-size: var(--font-size-base);
+	}
+
+	.input-text {
+		font-weight: 500;
+	}
+
+	.connector {
+		margin: 0 0.25rem;
+	}
+
+	.date-input-wrapper {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		border: 1px solid var(--color-gray-200);
+		border-radius: 6px;
+		padding: 0.5rem 1rem;
+		background: white;
+		box-shadow: 0 1px 3px rgba(59, 4, 4, 0.08);
+		transition: all 0.3s ease-out;
+		cursor: pointer;
+	}
+
+	.date-input-wrapper:hover {
+		border: 1px solid var(--color-gray-300);
+		box-shadow: 0 4px 8px rgba(59, 4, 4, 0.12);
+	}
+
+	.date-input-wrapper:focus-within {
+		outline: 2px solid var(--color-sea-blue);
+		outline-offset: -2px;
+	}
+
+	.calendar-icon {
+		background: none;
+		border: none;
+		padding: 0;
+		margin-left: 0.5rem;
+		color: var(--color-gray-400);
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		transition: all 0.3s ease-out;
+	}
+
+	.date-input-wrapper:hover .calendar-icon {
+		color: var(--color-crimson);
+	}
+
+	.due-date-input {
+		position: absolute;
+		opacity: 0;
+		width: 1px;
+		height: 1px;
+		left: 0;
+		top: calc(100% + 4px);
+		cursor: pointer;
+		z-index: 99;
+	}
+
+	.date-display {
+		display: inline-flex;
+		align-items: center;
+		font-weight: 500;
+		min-width: 150px;
+	}
+
+	.select-icon {
+		position: absolute;
+		right: 1rem;
+		top: 50%;
+		transform: translateY(-50%);
+		pointer-events: none;
+		color: var(--color-gray-400);
+		transition: all 0.3s ease-out;
+	}
+
+	.select-wrapper {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		border: 1px solid var(--color-gray-200);
+		border-radius: 6px;
+		padding: 0.5rem 1rem;
+		background: white;
+		box-shadow: 0 1px 3px rgba(59, 4, 4, 0.08);
+		transition: all 0.3s ease-out;
+	}
+
+	.select-wrapper:hover {
+		border: 1px solid var(--color-gray-300);
+		box-shadow: 0 4px 8px rgba(59, 4, 4, 0.12);
+	}
+
+	.select-wrapper:focus-within {
+		outline: 2px solid var(--color-sea-blue);
+		outline-offset: -2px;
+	}
+
+	.select-wrapper:hover .select-icon {
+		color: var(--color-crimson);
+	}
+
+	.first-baby-select {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		background: none;
+		border: none;
+		padding-right: 1.5rem;
+		font-weight: 500;
+		color: inherit;
+		cursor: pointer;
+		font-family: inherit;
+		width: 100%;
+		position: relative;
+		margin-top: 4px;
+	}
+
+	.first-baby-select:focus {
+		outline: none;
+	}
+
+	.data-summary {
+		text-align: left;
+	}
+
+	#pregnancy-summary {
+		font-size: var(--font-size-lg);
+	}
+
+	.summary-text {
+		line-height: 1.5;
+		margin: 1rem 0;
+	}
+
+	.highlight {
+		display: inline-block;
+		background-color: #f3e8f3;
+		color: #9a3d76;
+		padding: 0 0.65rem;
+		border-radius: 6px;
+		font-weight: 600;
+	}
+
+	.chart-container {
+		margin: 2.5rem 0 1rem;
+		min-height: 400px;
+		font-family: var(--font-sans);
+	}
+
+	.additional-data {
+		color: var(--color-gray-600);
+		font-family: var(--font-sans);
+		font-size: var(--font-size-xs);
+	}
+
+	/* Responsive adjustments for smaller screens */
+	@media (max-width: 640px) {
+		.input-container {
+			gap: 0.35rem;
+		}
+
+		.connector {
+			margin: 0.5rem 0;
+		}
+	}
+</style>
+
+<script>
+	function initializeBirthProbability() {
+		const dueDateInput = document.getElementById("due-date") as HTMLInputElement;
+		const dateDisplay = document.getElementById("date-display") as HTMLElement;
+		const firstBabySelect = document.getElementById("first-baby-select") as HTMLSelectElement;
+		const wrapper = document.querySelector(".date-input-wrapper") as HTMLElement;
+		const calendarIcon = document.querySelector(".calendar-icon") as HTMLElement;
+
+		if (!dueDateInput || !dateDisplay || !firstBabySelect || !wrapper || !calendarIcon) return;
+
+		// Clean up existing listeners
+		const existingHandlers = (wrapper as any)._birthProbHandlers;
+		if (existingHandlers) {
+			wrapper.removeEventListener("click", existingHandlers.wrapperClick);
+			dueDateInput.removeEventListener("change", existingHandlers.dateChange);
+			firstBabySelect.removeEventListener("change", existingHandlers.selectChange);
+		}
+
+		// Calculate min and max dates (3 weeks before and 3 weeks after today)
+		const today = new Date();
+		const minDate = new Date(today);
+		minDate.setDate(today.getDate() - 21); // 3 weeks before
+		const maxDate = new Date(today);
+		maxDate.setDate(today.getDate() + 21); // 3 weeks after
+
+		// Set min and max attributes
+		dueDateInput.min = minDate.toISOString().split("T")[0];
+		dueDateInput.max = maxDate.toISOString().split("T")[0];
+
+		// Format date
+		function formatDate(date: Date): string {
+			const day = date.getDate();
+			const suffix = getDaySuffix(day);
+			return date
+				.toLocaleDateString("en-US", {
+					month: "long",
+					day: "numeric",
+					year: "numeric",
+				})
+				.replace(/\d+/, day + suffix);
+		}
+
+		// Get day suffix (th, st, nd, rd)
+		function getDaySuffix(day: number): string {
+			if (day > 3 && day < 21) return "th";
+			switch (day % 10) {
+				case 1:
+					return "st";
+				case 2:
+					return "nd";
+				case 3:
+					return "rd";
+				default:
+					return "th";
+			}
+		}
+
+		// Set default due date only if not already set
+		if (!dueDateInput.value) {
+			const defaultDueDate = new Date(today);
+			defaultDueDate.setDate(today.getDate() + 14);
+			dueDateInput.valueAsDate = defaultDueDate;
+			dateDisplay.textContent = formatDate(defaultDueDate);
+		} else {
+			// Update display for existing value
+			const existingDate = dueDateInput.valueAsDate;
+			if (existingDate) {
+				dateDisplay.textContent = formatDate(existingDate);
+			}
+		}
+
+		// Create handlers
+		const wrapperClickHandler = function () {
+			dueDateInput.focus();
+			dueDateInput.showPicker();
+		};
+
+		const dateChangeHandler = function () {
+			const selectedDate = dueDateInput.valueAsDate;
+			if (selectedDate) {
+				dateDisplay.textContent = formatDate(selectedDate);
+			}
+			(window as any).calculateAndDispatchEvent();
+		};
+
+		const selectChangeHandler = function () {
+			(window as any).calculateAndDispatchEvent();
+		};
+
+		// Store handlers for cleanup
+		(wrapper as any)._birthProbHandlers = {
+			wrapperClick: wrapperClickHandler,
+			dateChange: dateChangeHandler,
+			selectChange: selectChangeHandler
+		};
+
+		// Add event listeners
+		wrapper.addEventListener("click", wrapperClickHandler);
+		dueDateInput.addEventListener("change", dateChangeHandler);
+		firstBabySelect.addEventListener("change", selectChangeHandler);
+
+		// Initial calculation
+		(window as any).calculateAndDispatchEvent();
+	}
+
+	// Initialize on page load
+	initializeBirthProbability();
+
+	// Re-initialize after view transitions
+	document.addEventListener("astro:page-load", initializeBirthProbability);
+</script>
+
+<script is:inline define:vars={{ multiBirthData, firstTimeData }}>
+	window.calculateAndDispatchEvent = function () {
+		const dueDateInput = document.getElementById("due-date");
+		const firstBabySelect = document.getElementById("first-baby-select");
+		const currentWeeksSpan = document.getElementById("current-weeks");
+		const currentDaysSpan = document.getElementById("current-days");
+		const dueDateStatusSpan = document.getElementById("due-date-status");
+		const birthChanceTomorrowSpan = document.getElementById("birth-chance-tomorrow");
+
+		if (
+			!dueDateInput ||
+			!firstBabySelect ||
+			!currentWeeksSpan ||
+			!currentDaysSpan ||
+			!dueDateStatusSpan ||
+			!birthChanceTomorrowSpan
+		) {
+			console.error("Required elements not found");
+			return;
+		}
+
+		const dueDate = dueDateInput.valueAsDate;
+		const isFirstBaby = firstBabySelect.value === "yes";
+
+		if (!dueDate) {
+			console.error("Due date not set");
+			return;
+		}
+
+		// Calculate current pregnancy week and day
+		const today = new Date();
+		const gestationStart = new Date(dueDate);
+		gestationStart.setDate(gestationStart.getDate() - 280); // 40 weeks = 280 days
+		const daysDifference = Math.floor((today - gestationStart) / (1000 * 60 * 60 * 24));
+		const currentWeek = Math.floor(daysDifference / 7);
+		const currentDay = daysDifference % 7;
+
+		// Update display
+		currentWeeksSpan.textContent = currentWeek;
+		currentDaysSpan.textContent = currentDay;
+
+		// Calculate days past due date based on pregnancy weeks
+		const daysFromDueDate = (currentWeek - 40) * 7 + currentDay;
+
+		// Set due date status text
+		if (daysFromDueDate < 0) {
+			dueDateStatusSpan.textContent = `${Math.abs(daysFromDueDate)} days from your due date`;
+		} else if (daysFromDueDate > 0) {
+			dueDateStatusSpan.textContent = `${daysFromDueDate} days past your due date`;
+		} else {
+			dueDateStatusSpan.textContent = "today is your due date";
+		}
+
+		// Find tomorrow's birth probability
+		const data = isFirstBaby ? firstTimeData : multiBirthData;
+		const weekLabel = `${currentWeek}w${currentDay}d`;
+		const tomorrowData = data.find((item) => item["Gestation Age"] === weekLabel);
+
+		if (tomorrowData) {
+			const probability = parseFloat(tomorrowData["Before This Point"].replace("%", ""));
+			birthChanceTomorrowSpan.textContent = `${probability.toFixed(1)}%`;
+		} else {
+			birthChanceTomorrowSpan.textContent = "unknown";
+		}
+
+		// Dispatch event for chart update
+		const event = new CustomEvent("pregnancy-data-update", {
+			detail: {
+				currentWeek,
+				currentDay,
+				isFirstTimeMother: isFirstBaby,
+			},
+		});
+		document.dispatchEvent(event);
+	};
+</script>

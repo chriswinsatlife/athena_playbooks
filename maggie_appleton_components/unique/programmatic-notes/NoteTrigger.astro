@@ -1,0 +1,21 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<span class="note-trigger">
+	<slot />
+	<Icon name="heroicons:arrow-right-20-solid" size={24} />
+</span>
+
+<style>
+	.note-trigger {
+		color: var(--color-medium-sea-blue);
+	}
+
+	.note-trigger svg {
+		color: var(--color-gray-800);
+		margin: 0 0.25rem;
+		position: relative;
+		top: 0.3rem;
+	}
+</style>

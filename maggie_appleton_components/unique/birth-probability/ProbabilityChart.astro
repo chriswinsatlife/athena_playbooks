@@ -1,0 +1,700 @@
+---
+export interface Props {
+	multiBirthCsv: string;
+	firstTimeCsv: string;
+}
+
+const { multiBirthCsv, firstTimeCsv } = Astro.props;
+---
+
+<div class="probability-chart-container">
+	<div id="chart-area" class="chart-area">
+		<div id="tooltip" class="tooltip"></div>
+	</div>
+	<div class="chart-legend">
+		<div class="legend-item">
+			<div class="legend-color daily-color"></div>
+			<div class="legend-label">Daily Birth Probability</div>
+		</div>
+		<div class="legend-item">
+			<div class="legend-color cumulative-color"></div>
+			<div class="legend-label">Cumulative Birth Probability</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.probability-chart-container {
+		width: 100%;
+	}
+
+	.chart-area {
+		width: 100%;
+		height: 400px;
+		position: relative;
+		margin-bottom: 0.5rem;
+	}
+
+	.chart-legend {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		justify-content: space-between;
+		gap: 2rem;
+		width: 100%;
+		font-size: 0.875rem;
+	}
+
+	.legend-item {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.legend-color {
+		width: 24px;
+		height: 12px;
+		border-radius: 2px;
+	}
+
+	.daily-color {
+		background-color: var(--color-sea-blue);
+	}
+
+	.cumulative-color {
+		background-color: var(--color-bright-crimson);
+	}
+
+	.legend-label {
+		color: var(--color-gray-600);
+		font-weight: 500;
+	}
+
+	.tooltip {
+		position: fixed;
+		padding: 0.75rem 1rem;
+		background-color: white;
+		border: 1px solid #e5e7eb;
+		border-radius: 0.375rem;
+		box-shadow:
+			0 4px 6px -1px rgba(0, 0, 0, 0.1),
+			0 2px 4px -1px rgba(0, 0, 0, 0.06);
+		pointer-events: none;
+		font-size: 0.875rem;
+		opacity: 0;
+		transition: opacity 0.15s ease;
+		z-index: 1000;
+		max-width: 250px;
+	}
+
+	.tooltip-title {
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+		color: #111827;
+		white-space: nowrap;
+	}
+
+	.tooltip-item {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 0.25rem;
+	}
+
+	.tooltip-label {
+		color: #6b7280;
+	}
+
+	.tooltip-value {
+		font-weight: 500;
+		color: #111827;
+	}
+
+	.tooltip-past-note {
+		font-style: italic;
+		color: #94a3b8;
+		font-size: 0.8rem;
+		justify-content: center;
+		margin-top: 0.5rem;
+	}
+
+	.current-day-line {
+		stroke: var(--color-bright-crimson);
+		stroke-width: 2;
+		stroke-dasharray: 5, 3;
+	}
+</style>
+
+<script define:vars={{ multiBirthCsv, firstTimeCsv }} type="module">
+	let multiBirthCsvData = [];
+	let firstTimeCsvData = [];
+
+	try {
+		multiBirthCsvData = JSON.parse(multiBirthCsv || "[]");
+	} catch (error) {
+		console.error("Error parsing multiBirthCsv:", error);
+	}
+
+	try {
+		firstTimeCsvData = JSON.parse(firstTimeCsv || "[]");
+	} catch (error) {
+		console.error("Error parsing firstTimeCsv:", error);
+	}
+
+	// Import D3 modules directly
+	import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+	// Define interfaces for data types
+	// WeekObj, DataPoint, PregnancyData interfaces are used for organization
+	// but don't affect runtime behavior
+
+	// Create tooltip variable in the global scope
+	let tooltipDiv;
+
+	// Global tooltip functions that can be used across the chart
+	function showTooltip(event, d, pregnancyData = false) {
+		if (!tooltipDiv) {
+			tooltipDiv = d3.select("#tooltip");
+		}
+
+		const weekObj = parseWeek(d.week);
+		const readableLabel = formatReadableLabel(weekObj);
+
+		// Calculate the date based on the current day's data point
+		const date = new Date();
+		if (d.isCurrentDay) {
+			// If this is the current day, use today's date
+			date;
+		} else if (d.dayIndex !== undefined && pregnancyData) {
+			// Calculate the difference between this point and today
+			const currentDayIndex = weeksToDays(pregnancyData.currentWeek, pregnancyData.currentDay);
+			const daysDifference = d.dayIndex - currentDayIndex;
+			date.setDate(date.getDate() + daysDifference);
+		}
+
+		// Format the date
+		const formattedDate = date
+			.toLocaleDateString("en-US", {
+				month: "long",
+				day: "numeric",
+			})
+			.replace(/(\d+)$/, function (_, day) {
+				const suffix =
+					["th", "st", "nd", "rd"][day % 10 > 3 ? 0 : (day % 100) - 10 != 0 ? day % 10 : 0] || "th";
+				return day + suffix;
+			});
+
+		let statusLabel = "";
+
+		let html = `
+		<div class="tooltip-date" style="color: var(--color-gray-500); margin-bottom: 4px;">${formattedDate}</div>
+		<div class="tooltip-title">${readableLabel}${statusLabel}</div>
+		<div class="tooltip-item">
+			<span class="tooltip-label">Daily probability:</span>
+			<span class="tooltip-value" style="color: ${d.isPastDay ? "var(--color-gray-500)" : "var(--color-sea-blue)"}">
+				${(d.isPastDay ? d.onThisDay : d.adjustedOnThisDay !== undefined ? d.adjustedOnThisDay : d.onThisDay).toFixed(1)}%
+			</span>
+		</div>
+	`;
+
+		if (d.adjustedCumulative !== undefined) {
+			html += `
+			<div class="tooltip-item">
+				<span class="tooltip-label">Chance of birth by this day:</span>
+				<span class="tooltip-value" style="color: ${d.isPastDay ? "var(--color-gray-500)" : "var(--color-bright-crimson)"}">${d.beforeThisPoint.toFixed(1)}%</span>
+			</div>
+		`;
+		}
+
+		tooltipDiv
+			.html(html)
+			.style("opacity", 1)
+			.style("left", `${event.clientX + 15}px`)
+			.style("top", `${event.clientY + 15}px`);
+	}
+
+	function moveTooltip(event) {
+		if (!tooltipDiv) {
+			tooltipDiv = d3.select("#tooltip");
+		}
+		tooltipDiv.style("left", `${event.clientX + 15}px`).style("top", `${event.clientY + 15}px`);
+	}
+
+	function hideTooltip() {
+		if (!tooltipDiv) {
+			tooltipDiv = d3.select("#tooltip");
+		}
+		tooltipDiv.style("opacity", 0);
+	}
+
+	// Parse the string to week and day
+	function parseWeek(weekString) {
+		const newFormatMatch = weekString.match(/(\d+)w(\d+)d/);
+		if (newFormatMatch) {
+			return {
+				week: parseInt(newFormatMatch[1], 10),
+				day: parseInt(newFormatMatch[2], 10),
+			};
+		}
+
+		// Fallback to the old format
+		const oldFormatMatch = weekString.match(/(\d+) weeks?,? (\d+) days?/i);
+		if (oldFormatMatch) {
+			return {
+				week: parseInt(oldFormatMatch[1], 10),
+				day: parseInt(oldFormatMatch[2], 10),
+			};
+		}
+
+		return { week: 0, day: 0 };
+	}
+
+	// Convert weeks to days
+	function weeksToDays(weeks, days) {
+		return weeks * 7 + days;
+	}
+
+	// Format display label
+	function formatDisplayLabel(weekObj) {
+		return `${weekObj.week}w${weekObj.day}d`;
+	}
+
+	// Format readable label for tooltip
+	function formatReadableLabel(weekObj) {
+		return `${weekObj.week} weeks, ${weekObj.day} day${weekObj.day !== 1 ? "s" : ""}`;
+	}
+
+	// Process the data
+	function processData(csvData, pregnancyData) {
+		try {
+			// Parse the CSV data
+			const parsedData = csvData;
+
+			// Process each data point
+			const processedData = parsedData.map((item) => {
+				// Get the week string from the Gestation Age column
+				const weekString = item["Gestation Age"] || "";
+				const weekObj = parseWeek(weekString);
+
+				// Get values directly from the parsed data
+				const beforeThisPoint = parseFloat((item["Before This Point"] || "0").replace("%", ""));
+				const onThisDay = parseFloat((item["On This Day"] || "0").replace("%", ""));
+
+				return {
+					week: weekString,
+					displayLabel: formatDisplayLabel(weekObj),
+					beforeThisPoint: beforeThisPoint,
+					onThisDay: onThisDay,
+					dayIndex: weeksToDays(weekObj.week, weekObj.day),
+					isDueDate: weekObj.week === 40 && weekObj.day === 0, // Mark the 40w0d as due date
+				};
+			});
+
+			// Sort by day index to ensure proper order
+			processedData.sort((a, b) => a.dayIndex - b.dayIndex);
+
+			// If pregnancy data exists, calculate adjusted probabilities
+			if (pregnancyData) {
+				const currentDayIndex = weeksToDays(pregnancyData.currentWeek, pregnancyData.currentDay);
+
+				// Mark current date in the data
+				processedData.forEach((d) => {
+					d.isCurrentDay = d.dayIndex === currentDayIndex;
+					d.isPastDay = d.dayIndex < currentDayIndex;
+				});
+
+				// Find the current day in the data (or the closest future day)
+				const currentDayPoint = processedData.find((d) => d.dayIndex >= currentDayIndex);
+
+				if (currentDayPoint) {
+					// Calculate adjusted probabilities for all days
+					processedData.forEach((d) => {
+						if (d.dayIndex >= currentDayIndex) {
+							d.adjustedOnThisDay = d.onThisDay;
+							d.adjustedCumulative = d.beforeThisPoint;
+						} else {
+							d.adjustedOnThisDay = 0;
+							d.adjustedCumulative = 0;
+						}
+					});
+				}
+			}
+			return processedData;
+		} catch (error) {
+			console.error("Error processing data:", error);
+			return [];
+		}
+	}
+
+	// Render the chart
+	function renderChart(data, pregnancyData) {
+		// Ensure we have data to render
+		if (!data || data.length === 0) {
+			console.error("No data available to render chart");
+			return;
+		}
+
+		try {
+			const chartArea = d3.select("#chart-area");
+			chartArea.selectAll("*:not(#tooltip)").remove(); // Clear previous chart but keep tooltip
+
+			// Ensure tooltip is correctly initialized if not already done
+			if (!tooltipDiv) {
+				tooltipDiv = d3.select("#tooltip");
+			}
+
+			// Set up dimensions
+			const margin = { top: 30, right: 36, bottom: 50, left: 36 }; // Increased margins for axes
+			const width = chartArea.node()?.getBoundingClientRect().width || 600;
+			const height = 400 - margin.top - margin.bottom;
+
+			// Create SVG
+			const svg = chartArea
+				.append("svg")
+				.attr("width", width)
+				.attr("height", height + margin.top + margin.bottom)
+				.append("g")
+				.attr("transform", `translate(${margin.left},${margin.top})`);
+
+			// Ensure we have a valid width for the chart
+			const chartWidth = width - margin.left - margin.right;
+			if (chartWidth <= 0) {
+				console.error("Invalid chart width:", chartWidth);
+				return;
+			}
+
+			// Calculate the maximum daily probability value for dynamic y-axis scaling
+			const maxDailyProbability = d3.max(data, (d) => {
+				const value = d.isPastDay
+					? d.onThisDay
+					: d.adjustedOnThisDay !== undefined
+						? d.adjustedOnThisDay
+						: d.onThisDay;
+				return value;
+			});
+
+			// Add one percentage point to the max value for better visualization
+			const yLeftMax = Math.max(Math.ceil(maxDailyProbability + 1), 6);
+
+			// Set up scales
+			const x = d3
+				.scaleBand()
+				.domain(data.map((d) => d.displayLabel))
+				.range([0, chartWidth])
+				.padding(0.1);
+
+			// Left y-axis scale for daily probability (0 to dynamic max)
+			const yLeft = d3.scaleLinear().domain([0, yLeftMax]).range([height, 0]);
+
+			// Right y-axis scale for cumulative probability (0-100%)
+			const yRight = d3
+				.scaleLinear()
+				.domain([0, 100]) // Fixed scale 0-100%
+				.range([height, 0]);
+
+			// Create axes
+			const xAxis = svg
+				.append("g")
+				.attr("transform", `translate(0,${height})`)
+				.call(
+					d3.axisBottom(x).tickValues(
+						data
+							.filter((d) => {
+								const weekObj = parseWeek(d.week);
+								return weekObj.day === 0; // Show only full weeks
+							})
+							.map((d) => d.displayLabel),
+					),
+				);
+
+			// Style x-axis
+			xAxis
+				.selectAll("text")
+				.style("text-anchor", "end")
+				.attr("dx", "-.8em")
+				.attr("dy", ".15em")
+				.attr("transform", "rotate(-45)")
+				.attr("fill", "var(--color-gray-600)");
+
+			xAxis.selectAll("line").attr("stroke", "var(--color-gray-400)");
+			xAxis.select("path").attr("stroke", "var(--color-gray-400)");
+
+			// Add left y-axis (daily probability)
+			const leftAxis = svg.append("g").call(
+				d3
+					.axisLeft(yLeft)
+					.ticks(5)
+					.tickFormat((d) => `${d}%`),
+			);
+
+			leftAxis.selectAll("text").attr("fill", "var(--color-gray-500)");
+			leftAxis.selectAll("line").attr("stroke", "var(--color-gray-400)");
+			leftAxis.select("path").attr("stroke", "var(--color-gray-400)");
+
+			// Add right y-axis (cumulative probability)
+			const rightAxis = svg
+				.append("g")
+				.attr("transform", `translate(${chartWidth}, 0)`)
+				.call(
+					d3
+						.axisRight(yRight)
+						.ticks(5)
+						.tickFormat((d) => `${d}%`),
+				);
+
+			rightAxis.selectAll("text").attr("fill", "var(--color-gray-500)");
+			rightAxis.selectAll("line").attr("stroke", "var(--color-gray-400)");
+			rightAxis.select("path").attr("stroke", "var(--color-gray-400)");
+
+			// Find today's date index for reference line
+			const todayData = data.find((d) => d.isCurrentDay);
+			// Find due date (40w0d)
+			const dueDateData = data.find((d) => d.isDueDate);
+
+			// Create a group for reference lines that will render before the bars
+			const referenceLinesGroup = svg.append("g").attr("class", "reference-lines");
+
+			// If we have today's date, add a vertical reference line
+			if (todayData) {
+				referenceLinesGroup
+					.append("line")
+					.attr("x1", x(todayData.displayLabel) + x.bandwidth() / 2)
+					.attr("x2", x(todayData.displayLabel) + x.bandwidth() / 2)
+					.attr("y1", 0)
+					.attr("y2", height)
+					.attr("stroke", "var(--color-salmon)")
+					.attr("stroke-width", 2)
+					.attr("stroke-dasharray", "4,6")
+					.attr("stroke-linecap", "round");
+			}
+
+			// If we have due date, add a vertical reference line
+			if (dueDateData && (!todayData || dueDateData.displayLabel !== todayData.displayLabel)) {
+				referenceLinesGroup
+					.append("line")
+					.attr("x1", x(dueDateData.displayLabel) + x.bandwidth() / 2)
+					.attr("x2", x(dueDateData.displayLabel) + x.bandwidth() / 2)
+					.attr("y1", 0)
+					.attr("y2", height)
+					.attr("stroke", "var(--color-gray-400)")
+					.attr("stroke-width", 2)
+					.attr("stroke-dasharray", "4,6")
+					.attr("stroke-linecap", "round");
+			}
+
+			// Create a group for all the chart elements
+			const chartGroup = svg.append("g").attr("class", "chart-elements");
+
+			// Add grid lines
+			chartGroup
+				.append("g")
+				.attr("class", "grid")
+				.selectAll("line")
+				.data(
+					data.filter((d) => {
+						const weekObj = parseWeek(d.week);
+						return weekObj.day === 0; // Add grid line for each full week
+					}),
+				)
+				.enter()
+				.append("line")
+				.attr("x1", (d) => x(d.displayLabel) + x.bandwidth() / 2)
+				.attr("x2", (d) => x(d.displayLabel) + x.bandwidth() / 2)
+				.attr("y1", 0)
+				.attr("y2", height)
+				.attr("stroke", "#d3d3d1")
+				.attr("stroke-dasharray", "4,6")
+				.attr("stroke-linecap", "round");
+
+			// Add bars for daily probability - using left y-axis
+			chartGroup
+				.selectAll(".bar")
+				.data(data)
+				.enter()
+				.append("rect")
+				.attr("class", "bar")
+				.attr("x", (d) => x(d.displayLabel))
+				.attr("y", (d) => {
+					const value = d.isPastDay
+						? d.onThisDay
+						: d.adjustedOnThisDay !== undefined
+							? d.adjustedOnThisDay
+							: d.onThisDay;
+					return yLeft(Math.min(value, yLeftMax));
+				})
+				.attr("width", x.bandwidth())
+				.attr("height", (d) => {
+					const value = d.isPastDay
+						? d.onThisDay
+						: d.adjustedOnThisDay !== undefined
+							? d.adjustedOnThisDay
+							: d.onThisDay;
+					return height - yLeft(Math.min(value, yLeftMax));
+				})
+				.attr("fill", (d) => {
+					if (d.isCurrentDay) return "var(--color-salmon)";
+					if (d.isPastDay) return "var(--color-gray-300)";
+					return "var(--color-sea-blue)";
+				})
+				.on("mouseover", function (event, d) {
+					showTooltip(event, d, pregnancyData);
+				})
+				.on("mousemove", function (event) {
+					moveTooltip(event);
+				})
+				.on("mouseout", hideTooltip);
+
+			// Add line for cumulative probability - using right y-axis
+			const relevantData = data.filter((d) => !d.isPastDay);
+
+			if (relevantData.length > 0) {
+				const linePath = d3
+					.line()
+					.curve(d3.curveMonotoneX)
+					.x((d) => x(d.displayLabel) + x.bandwidth() / 2)
+					.y((d) => yRight(d.beforeThisPoint));
+
+				chartGroup
+					.append("path")
+					.datum(relevantData)
+					.attr("fill", "none")
+					.attr("stroke", "var(--color-bright-crimson)")
+					.attr("stroke-width", 3)
+					.attr("d", linePath);
+
+				// Add dots for each point on the line
+				chartGroup
+					.selectAll(".dot")
+					.data(relevantData)
+					.enter()
+					.append("circle")
+					.attr("class", "dot")
+					.attr("cx", (d) => x(d.displayLabel) + x.bandwidth() / 2)
+					.attr("cy", (d) => yRight(d.beforeThisPoint))
+					.attr("r", 4)
+					.attr("fill", "var(--color-bright-crimson)")
+					.on("mouseover", function (event, d) {
+						showTooltip(event, d, pregnancyData, true);
+					})
+					.on("mousemove", function (event) {
+						moveTooltip(event);
+					})
+					.on("mouseout", hideTooltip);
+			}
+
+			// Create a separate group for labels that will render on top
+			const labelsGroup = svg.append("g").attr("class", "labels");
+
+			// If we have today's date, add the "Today" label
+			if (todayData) {
+				labelsGroup
+					.append("text")
+					.attr("x", x(todayData.displayLabel) + x.bandwidth() / 2)
+					.attr("y", -15)
+					.attr("text-anchor", "middle")
+					.attr("fill", "var(--color-dark-salmon)")
+					.style("font-size", "14px")
+					.text("Today");
+			}
+
+			// If we have due date, add the "Due Date" label
+			if (dueDateData && (!todayData || dueDateData.displayLabel !== todayData.displayLabel)) {
+				// Calculate if dates are within 2 days of each other
+				const daysApart = todayData
+					? Math.abs(dueDateData.dayIndex - todayData.dayIndex)
+					: Infinity;
+				const isClose = daysApart <= 2;
+
+				// Add "Due Date" label with conditional y-position
+				const dueDateLabel = labelsGroup
+					.append("text")
+					.attr("x", x(dueDateData.displayLabel) + x.bandwidth() / 2)
+					.attr("y", isClose ? 8 : -15) // Move label down if dates are close
+					.attr("text-anchor", "middle")
+					.attr("fill", "var(--color-gray-600)")
+					.style("font-size", "14px")
+					.text("Due Date");
+
+				// Add background rectangle for the text
+				const bbox = dueDateLabel.node().getBBox();
+				labelsGroup
+					.insert("rect", "text:last-of-type") // Insert before the text
+					.attr("x", bbox.x - 4)
+					.attr("y", bbox.y - 2)
+					.attr("width", bbox.width + 8)
+					.attr("height", bbox.height + 4)
+					.attr("fill", "white")
+					.attr("rx", 4); // Rounded corners
+			}
+		} catch (error) {
+			console.error("Error rendering chart:", error);
+		}
+	}
+
+	// Handle pregnancy data updates
+	let lastPregnancyData = null;
+	let pregnancyDataHandler = null;
+	let resizeHandler = null;
+
+	function initializeProbabilityChart() {
+		// Initialize tooltip
+		tooltipDiv = d3.select("#tooltip");
+
+		// Clean up existing event listeners
+		if (pregnancyDataHandler) {
+			document.removeEventListener("pregnancy-data-update", pregnancyDataHandler);
+		}
+		if (resizeHandler) {
+			window.removeEventListener("resize", resizeHandler);
+		}
+
+		// Create pregnancy data update handler
+		pregnancyDataHandler = function (e) {
+			const pregnancyData = e.detail;
+			lastPregnancyData = pregnancyData;
+
+			// Use the appropriate dataset based on first-time mother status
+			const csvDataToUse = pregnancyData.isFirstTimeMother ? firstTimeCsvData : multiBirthCsvData;
+
+			// Process and render the data
+			const processedData = processData(csvDataToUse, pregnancyData);
+			renderChart(processedData, pregnancyData);
+		};
+
+		// Create resize handler
+		let resizeTimer;
+		resizeHandler = function () {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(function () {
+				if (lastPregnancyData) {
+					const csvDataToUse = lastPregnancyData.isFirstTimeMother
+						? firstTimeCsvData
+						: multiBirthCsvData;
+					const processedData = processData(csvDataToUse, lastPregnancyData);
+					renderChart(processedData, lastPregnancyData);
+				} else {
+					// If no pregnancy data has been set yet, still redraw with default data
+					const initialData = processData(multiBirthCsvData, null);
+					renderChart(initialData, null);
+				}
+			}, 250);
+		};
+
+		// Add event listeners
+		document.addEventListener("pregnancy-data-update", pregnancyDataHandler);
+		window.addEventListener("resize", resizeHandler);
+
+		// Initial render with default data if needed
+		if (!lastPregnancyData) {
+			const initialData = processData(multiBirthCsvData, null);
+			renderChart(initialData, null);
+		}
+	}
+
+	// Initialize on page load
+	initializeProbabilityChart();
+
+	// Re-initialize after view transitions
+	document.addEventListener("astro:page-load", initializeProbabilityChart);
+</script>

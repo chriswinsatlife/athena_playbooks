@@ -1,0 +1,27 @@
+---
+const { sectionTitle } = Astro.props;
+---
+
+<div class="main-layout">
+	<div class="inner-layout">
+		<h1>{sectionTitle}</h1>
+		<slot />
+	</div>
+</div>
+
+<style>
+	.main-layout {
+		display: flex;
+	}
+
+	.inner-layout {
+		margin: 0 auto;
+		justify-content: center;
+		align-content: center;
+		display: inline-block;
+	}
+
+	.inner-layout h1 {
+		text-align: center;
+	}
+</style>

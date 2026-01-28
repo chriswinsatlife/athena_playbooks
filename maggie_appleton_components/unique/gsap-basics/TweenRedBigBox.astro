@@ -1,0 +1,72 @@
+---
+
+---
+
+<div class="box" id="scaling-box"></div>
+
+<script>
+	let currentObserver: IntersectionObserver | null = null;
+
+	function initializeObserver() {
+		// Clean up existing observer
+		if (currentObserver) {
+			currentObserver.disconnect();
+			currentObserver = null;
+		}
+
+		const box = document.getElementById("scaling-box");
+		if (!box) return;
+
+		currentObserver = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					box.classList.add("animate");
+				} else {
+					box.classList.remove("animate");
+				}
+			},
+			{
+				threshold: 0.2,
+				rootMargin: "-30% 0px",
+			},
+		);
+
+		currentObserver.observe(box);
+	}
+
+	function cleanup() {
+		if (currentObserver) {
+			currentObserver.disconnect();
+			currentObserver = null;
+		}
+	}
+
+	// Initialize on first load
+	initializeObserver();
+
+	// Reinitialize after view transitions
+	document.addEventListener("astro:page-load", initializeObserver);
+
+	// Cleanup on page leave
+	document.addEventListener("astro:before-swap", cleanup);
+</script>
+
+<style>
+	.box {
+		width: 100px;
+		height: 100px;
+		margin: 2em;
+		border-radius: 4px;
+		background: #2d2a55;
+		transform: translateX(0) scale(1);
+		transition:
+			transform 0.8s ease-out,
+			background-color 0.8s ease-out;
+		will-change: transform, background-color;
+	}
+
+	.box.animate {
+		transform: translateX(20vw) scale(1.4);
+		background: #e73c67;
+	}
+</style>
