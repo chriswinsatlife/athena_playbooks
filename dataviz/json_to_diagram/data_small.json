@@ -1,0 +1,33 @@
+{
+  "name": "Improving Your Product Sense Course",
+  "children": [
+    {
+      "name": "Motivation Theory",
+      "children": [
+        { "name": "Motivation" },
+        { "name": "Friction" },
+        { "name": "Satisfaction" }
+      ]
+    },
+    {
+      "name": "Creativity",
+      "children": [
+        {
+          "name": "Strategic Thinking",
+          "children": [
+            { "name": "Positioning" },
+            { "name": "Segmentation" },
+            { "name": "Differentiation" }
+          ]
+        },
+        {
+          "name": "Creative Execution",
+          "children": [
+            { "name": "Creative Mindset" },
+            { "name": "Team Rituals" }
+          ]
+        }
+      ]
+    }
+  ]
+} 

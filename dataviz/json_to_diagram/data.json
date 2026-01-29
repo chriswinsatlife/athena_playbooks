@@ -1,0 +1,50 @@
+{
+  "name": "Improving Your Product Sense Course",
+  "children": [
+    {
+      "name": "Motivation Theory",
+      "children": [
+        { "name": "Motivation" },
+        { "name": "Friction" },
+        { "name": "Satisfaction" },
+        { "name": "Nudge" }
+      ]
+    },
+    {
+      "name": "Cognitive Empathy",
+      "children": [
+        { "name": "Metacognition" },
+        { "name": "Intellectual Flexibility" },
+        { "name": "Simulation" }
+      ]
+    },
+    {
+      "name": "Creativity",
+      "children": [
+        {
+          "name": "Strategic Thinking",
+          "children": [
+            { "name": "Positioning" },
+            { "name": "Segmentation" },
+            { "name": "Differentiation" },
+            { "name": "Core of Product Strategy" }
+          ]
+        },
+        {
+          "name": "Creative Execution",
+          "children": [
+            { "name": "Creative Mindset" },
+            { "name": "Team Rituals" },
+            { "name": "Product Creativity Techniques" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Domain Expertise",
+      "children": [
+        { "name": "Very specific - [Tackle Qs in AMAs]" }
+      ]
+    }
+  ]
+}

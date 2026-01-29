@@ -1,0 +1,35 @@
+{
+  "name": "Gift automation",
+  "children": [
+    {
+      "name": "Setup",
+      "children": [
+        { "name": "Duplicate the Airtable template" },
+        { "name": "Add key people and dates" },
+        { "name": "Optional: addresses, sizes, notes" },
+        { "name": "Configure holidays and lead time" },
+        { "name": "Share the base with your EA" }
+      ]
+    },
+    {
+      "name": "Ongoing workflow",
+      "children": [
+        { "name": "Weekly: check upcoming gift events" },
+        { "name": "When lead time hits: generate 5 ideas" },
+        { "name": "Send options for quick pick" },
+        { "name": "Buy + ship with correct timing" },
+        { "name": "Confirm delivery + draft message" },
+        { "name": "Record gift and outcome" }
+      ]
+    },
+    {
+      "name": "Maintenance",
+      "children": [
+        { "name": "Backfill gift history (3-5 years)" },
+        { "name": "Add new people + new event types" },
+        { "name": "Refresh sources and favorite brands" },
+        { "name": "Reuse proven gifts for similar people" }
+      ]
+    }
+  ]
+}

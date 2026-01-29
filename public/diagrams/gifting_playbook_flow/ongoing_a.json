@@ -1,0 +1,25 @@
+{
+  "title": "Ongoing - Decide",
+  "rankdir": "LR",
+  "nodes": [
+    { "id": "start", "label": "Trigger: start looking date" },
+    { "id": "ctx", "label": "Review gift history + constraints" },
+    { "id": "ideas", "label": "Find 5 ideas + record in Airtable" },
+    { "id": "send", "label": "Send options to client" },
+    { "id": "resp", "label": "Client responds?", "type": "decision" },
+    { "id": "follow", "label": "Follow up (1 week)" },
+    { "id": "more", "label": "Need more options?", "type": "decision" },
+    { "id": "buy", "label": "Buy + ship" }
+  ],
+  "edges": [
+    { "source": "start", "target": "ctx" },
+    { "source": "ctx", "target": "ideas" },
+    { "source": "ideas", "target": "send" },
+    { "source": "send", "target": "resp" },
+    { "source": "resp", "target": "buy", "label": "yes" },
+    { "source": "resp", "target": "follow", "label": "no" },
+    { "source": "follow", "target": "more" },
+    { "source": "more", "target": "ideas", "label": "yes" },
+    { "source": "more", "target": "buy", "label": "no" }
+  ]
+}

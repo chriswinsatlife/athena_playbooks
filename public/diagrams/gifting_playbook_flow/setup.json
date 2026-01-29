@@ -1,0 +1,21 @@
+{
+  "title": "Setup",
+  "rankdir": "LR",
+  "nodes": [
+    { "id": "start", "label": "Start" },
+    { "id": "dup", "label": "Duplicate Airtable template" },
+    { "id": "people", "label": "Add people + key dates" },
+    { "id": "opts", "label": "Optional: addresses, sizes, notes" },
+    { "id": "cfg", "label": "Configure holidays + lead time" },
+    { "id": "share", "label": "Share base with EA" },
+    { "id": "done", "label": "Done" }
+  ],
+  "edges": [
+    { "source": "start", "target": "dup" },
+    { "source": "dup", "target": "people" },
+    { "source": "people", "target": "opts", "label": "optional" },
+    { "source": "people", "target": "cfg" },
+    { "source": "cfg", "target": "share" },
+    { "source": "share", "target": "done" }
+  ]
+}

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta title="d3.js Mind Map Diagram - Course Content - v4 - Both left and right side" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    /* Basic full-window setup */
+    html, body {
+      margin: 0; 
+      padding: 0;
+      width: 100%; 
+      height: 100%;
+      overflow: hidden;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      display: block;
+    }
+
+    /* Master node rectangle styles (applies to all levels if not overridden) */
+    .node rect {
+      fill: #f0f0f0;
+      stroke: #bbb;
+      stroke-width: 0px;
+      rx: 8;
+      ry: 8;
+    }
+
+    /* Master text/foreignObject styles */
+    .node text,
+    .node-fo > div {
+      font-family: sans-serif;
+      font-size: 14px;
+      color: #333;
+      text-align: center;
+      line-height: 1.2em;
+    }
+    /* If you’re using <text> elements: center precisely */
+    .node text {
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+    /* For foreignObject: use flexbox to center text */
+    .node-fo > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 6px;
+    }
+
+    /* Master link styles */
+    .link {
+      fill: none;
+      stroke: #bbb;
+      stroke-width: 1px;
+    }
+
+    /* LEVEL-SPECIFIC OVERRIDES (levels 1..5) */
+
+    /* Level 1 */
+    .node-level1 rect {
+      fill: #000;
+      stroke: #000;
+    }
+    .node-level1 text,
+    .node-level1 .node-fo > div {
+      color: #fff;
+    }
+    .link-level1 {
+      stroke: #666;
+    }
+
+    /* Level 2 */
+    .node-level2 rect {
+      fill: #f2649c;
+      stroke: #e65088;
+    }
+    .node-level2 text,
+    .node-level2 .node-fo > div {
+      color: #fff;
+    }
+    .link-level2 {
+      stroke: #999;
+    }
+
+    /* Level 3 */
+    .node-level3 rect {
+      fill: #fafafa;
+      stroke: #ccc;
+    }
+    .node-level3 text,
+    .node-level3 .node-fo > div {
+      color: #333;
+    }
+    .link-level3 {
+      stroke: #999;
+    }
+
+    /* Level 4 */
+    .node-level4 rect {
+      fill: #f2f2ff;
+      stroke: #ccc;
+    }
+    .node-level4 text,
+    .node-level4 .node-fo > div {
+      color: #333;
+      text-align: left;
+    }
+    .link-level4 {
+      stroke: #aaa;
+    }
+
+    /* Level 5 */
+    .node-level5 rect {
+      fill: #fff0f5;
+      stroke: #ccc;
+    }
+    .node-level5 text,
+    .node-level5 .node-fo > div {
+      color: #333;
+      text-align: left;
+    }
+    .link-level5 {
+      stroke: #aaa;
+    }
+
+    /* Up to 10 items in Level 2 (example) */
+    .level2-item1 rect { fill: #6e87ff; stroke: #4660b8; }
+    .level2-item2 rect { fill: #ad6cff; stroke: #7a3dcc; }
+    .level2-item3 rect { fill: #ff8150; stroke: #cc501e; }
+    .level2-item4 rect { fill: #ffbd50; stroke: #cc8d1e; }
+    .level2-item5 rect { fill: #51e1a8; stroke: #38b080; }
+    .level2-item6 rect { fill: #ffdceb; stroke: #ffa2ca; }
+    .level2-item7 rect { fill: #ffee55; stroke: #ccbb11; }
+    .level2-item8 rect { fill: #cccccc; stroke: #999999; }
+    .level2-item9 rect { fill: #c2ffd6; stroke: #68cc8f; }
+    .level2-item10 rect { fill: #f2649c; stroke: #e65088; }
+  </style>
+</head>
+
+<body>
+<svg id="mindmap"></svg>
+<script>
+/*
+  We will alternate the root's children so that:
+   - child #1 goes to the RIGHT
+   - child #2 goes to the LEFT
+   - child #3 goes to the RIGHT
+   - child #4 goes to the LEFT
+   ... up to 5 children on each side.
+*/
+
+const data = {
+  name: "Improving Your Product Sense Course",
+  children: [
+    {
+      name: "Motivation Theory",
+      children: [
+        { name: "Motivation" },
+        { name: "Friction" },
+        { name: "Satisfaction" },
+        { name: "Nudge" }
+      ]
+    },
+    {
+      name: "Cognitive Empathy",
+      children: [
+        { name: "Metacognition" },
+        { name: "Intellectual Flexibility" },
+        { name: "Simulation" }
+      ]
+    },
+    {
+      name: "Creativity",
+      children: [
+        {
+          name: "Strategic Thinking",
+          children: [
+            { name: "Positioning" },
+            { name: "Segmentation" },
+            { name: "Differentiation" },
+            { name: "Core of Product Strategy" }
+          ]
+        },
+        {
+          name: "Creative Execution",
+          children: [
+            { name: "Creative Mindset" },
+            { name: "Team Rituals" },
+            { name: "Product Creativity Techniques" }
+          ]
+        }
+      ]
+    },
+    {
+      name: "Domain Expertise",
+      children: [
+        { name: "Very specific - [Tackle Qs in AMAs]" }
+      ]
+    },
+    {
+      name: "Communication",
+      children: [
+        {
+          name: "Product artifacts",
+          children: [
+            { name: "Vision" },
+            { name: "Strategy" },
+            { name: "Proposals" }
+          ]
+        },
+        {
+          name: "Influence"
+        },
+        {
+          name: "Interviewing & Getting interviewed"
+        },
+        {
+          name: "Product Taste"
+        }
+      ]
+    }
+  ]
+};
+
+const root = d3.hierarchy(data);
+
+/* Hidden measure div for multi-line text. */
+const hiddenMeasure = document.createElement("div");
+hiddenMeasure.style.position = "absolute";
+hiddenMeasure.style.visibility = "hidden";
+hiddenMeasure.style.width = "auto";
+hiddenMeasure.style.whiteSpace = "normal";
+hiddenMeasure.style.wordWrap = "break-word";
+hiddenMeasure.style.font = "14px sans-serif";
+hiddenMeasure.style.lineHeight = "1.3em";
+document.body.appendChild(hiddenMeasure);
+
+function measureWrapped(txt, widthPx) {
+  hiddenMeasure.style.width = widthPx + "px";
+  hiddenMeasure.innerText = txt;
+  return hiddenMeasure.scrollHeight;
+}
+
+/* Rect widths per level: tweak as you like. */
+function rectWidth(d){
+  switch(d.depth){
+    case 1: return 180;
+    case 2: return 160;
+    default: return 220; // root or deeper
+  }
+}
+
+/* Measure text => nodeHeight. */
+root.each(d => {
+  const w = rectWidth(d);
+  const sidePad = 12;
+  const tH = measureWrapped(d.data.name, w - sidePad);
+  d.data.nodeHeight = tH + 12;
+});
+
+/* Basic spacing constants. */
+const siblingSpacing = 20;
+const groupSpacing   = 60;
+const horizontalSpacing = 220;
+
+/* 
+  isGroup => returns true if a node has children. 
+*/
+function isGroup(n){ 
+  return n.children && n.children.length > 0; 
+}
+
+/*
+  computeSubtreeHeight => sum children's subtreeHeights + spacing
+*/
+function computeSubtreeHeight(node){
+  const h = node.data.nodeHeight;
+  if(!isGroup(node)){
+    node.data.subtreeHeight = h;
+    return h;
+  }
+  let sum = 0;
+  for(let i=0; i<node.children.length; i++){
+    const c = node.children[i];
+    const ch = computeSubtreeHeight(c);
+    sum += ch;
+    if(i < node.children.length -1){
+      const nxt = node.children[i+1];
+      sum += (isGroup(c) || isGroup(nxt)) ? groupSpacing : siblingSpacing;
+    }
+  }
+  node.data.subtreeHeight = Math.max(h, sum);
+  return node.data.subtreeHeight;
+}
+computeSubtreeHeight(root);
+
+/* We'll place the root at x=0, then for each child, if it's "odd" index => go right,
+   if "even" index => go left. We'll store a custom property side=1 or side=-1.
+   Then we layout each child's subtree accordingly (positive or negative x direction).
+*/
+
+/* 
+  layoutRoot => places the root in the vertical center of total subtrees on both sides,
+                then calls layoutSide for the "right side" children and "left side" children
+*/
+function layoutRoot(rootNode){
+  // root's x=0
+  // we'll figure out total subtree height for the root so we can place it at y= that/2
+  const totalH = rootNode.data.subtreeHeight;
+  rootNode.x = 0;
+  rootNode.y = totalH/2;
+
+  // separate children into arrays: rightSide and leftSide by index
+  const children = rootNode.children || [];
+  let rightSideChildren = [];
+  let leftSideChildren  = [];
+  for(let i=0; i<children.length; i++){
+    if(i % 2 === 0) rightSideChildren.push(children[i]);
+    else leftSideChildren.push(children[i]);
+  }
+
+  // Compute combined height for each side
+  const usedRight = placeStack(rightSideChildren, 1, 0, totalH);
+  const usedLeft  = placeStack(leftSideChildren, -1, 0, totalH);
+
+  // The parent's actual subtree might be bigger than either side, but we've computed that already.
+}
+
+/*
+  placeStack => a function to stack an array of children top->bottom in the given block height,
+                side=1 for right, side=-1 for left
+*/
+function placeStack(kids, side, topY, totalBlockHeight){
+  // sum up the kids + spacing
+  let sum = 0;
+  for(let i=0; i<kids.length; i++){
+    sum += kids[i].data.subtreeHeight;
+    if(i < kids.length -1){
+      let nxt = kids[i+1];
+      sum += (isGroup(kids[i])||isGroup(nxt)) ? groupSpacing : siblingSpacing;
+    }
+  }
+  let extra = totalBlockHeight - sum;
+  let childTop = topY + extra/2; // center them in the parent's block
+  // place each child
+  for(let i=0; i<kids.length; i++){
+    layoutSide(kids[i], 1, side, childTop);
+    childTop += kids[i].data.subtreeHeight;
+    if(i < kids.length -1){
+      let nxt = kids[i+1];
+      childTop += (isGroup(kids[i])||isGroup(nxt)) ? groupSpacing : siblingSpacing;
+    }
+  }
+  return sum;
+}
+
+/*
+  layoutSide => recursively place a node and its subtree either to the left or right
+  depth: how many steps from root (we can just pass 1 for immediate children, etc.)
+  side: +1 => right, -1 => left
+  topY: top coordinate in parent's block
+*/
+function layoutSide(node, depth, side, topY){
+  const blockH = node.data.subtreeHeight;
+  // x is side * depth * horizontalSpacing
+  node.x = side * depth * horizontalSpacing;
+  // y is topY + blockH/2
+  node.y = topY + blockH/2;
+
+  if(!isGroup(node)) return blockH;
+
+  // place children stacked
+  let sum = 0;
+  node.children.forEach((c,i)=>{
+    sum += c.data.subtreeHeight;
+    if(i<node.children.length -1){
+      const nxt = node.children[i+1];
+      sum += (isGroup(c)||isGroup(nxt)) ? groupSpacing : siblingSpacing;
+    }
+  });
+  let extra = blockH - sum;
+  let childTop = topY + extra/2;
+  for(let i=0; i<node.children.length; i++){
+    layoutSide(node.children[i], depth+1, side, childTop);
+    childTop += node.children[i].data.subtreeHeight;
+    if(i<node.children.length -1){
+      const nxt = node.children[i+1];
+      childTop += (isGroup(node.children[i])||isGroup(nxt)) ? groupSpacing : siblingSpacing;
+    }
+  }
+  return blockH;
+}
+
+// Perform layout
+layoutRoot(root);
+
+/*
+  Now we have node.x, node.y for each node. Let's draw them.
+*/
+
+const svg = d3.select("#mindmap");
+const gAll = svg.append("g").attr("class","everything");
+const nodes = root.descendants();
+const links = root.links();
+
+/*
+  We use curlyBrace from (px,py) to (cx,cy).
+  But if the child is to the LEFT, we want to go from parent's left edge to child's right edge.
+  If the child is to the RIGHT, we do parent's right edge to child's left edge.
+
+  We'll check node.x vs parent.x to decide which edges to use.
+*/
+
+function curlyBrace(px, py, cx, cy){
+  const mid = (px + cx)/2;
+  return `M${px},${py}C${mid},${py} ${mid},${cy} ${cx},${cy}`;
+}
+function leftEdge(d){ return d.x - rectWidth(d)/2; }
+function rightEdge(d){ return d.x + rectWidth(d)/2; }
+
+gAll.selectAll("path.link")
+  .data(links)
+  .join("path")
+  .attr("class", d => `link level${d.target.depth}-link`)
+  .attr("d", d => {
+    const px = d.source.x;
+    const cx = d.target.x;
+    const py = d.source.y;
+    const cy = d.target.y;
+    if(cx > px){
+      // child is to the right => go from parent's right edge to child's left edge
+      return curlyBrace(rightEdge(d.source), py, leftEdge(d.target), cy);
+    } else {
+      // child is to the left => go from parent's left edge to child's right edge
+      return curlyBrace(leftEdge(d.source), py, rightEdge(d.target), cy);
+    }
+  });
+
+/* Draw each node (rectangle + foreignObject text). */
+const nodeG = gAll.selectAll("g.node")
+  .data(nodes)
+  .join("g")
+  .attr("class", d => `node node-level${d.depth}-node`)
+  .attr("transform", d => `translate(${d.x},${d.y})`);
+
+nodeG.append("rect")
+  .each(function(d){
+    const w = rectWidth(d);
+    const h = d.data.nodeHeight;
+    d3.select(this)
+      .attr("x", -w/2)
+      .attr("y", -h/2)
+      .attr("width", w)
+      .attr("height", h);
+  });
+
+nodeG.append("foreignObject")
+  .attr("class", "node-fo")
+  .each(function(d){
+    const w = rectWidth(d);
+    const h = d.data.nodeHeight;
+    d3.select(this)
+      .attr("x", -w/2)
+      .attr("y", -h/2)
+      .attr("width", w)
+      .attr("height", h)
+      .append("xhtml:div")
+      .html(d.data.name);
+  });
+
+/* Fit the diagram in viewBox */
+const bbox = gAll.node().getBBox();
+const margin = 50;
+svg.attr("viewBox", [
+  bbox.x - margin,
+  bbox.y - margin,
+  bbox.width + margin*2,
+  bbox.height + margin*2
+]);
+</script>
+</body>
+</html>
+

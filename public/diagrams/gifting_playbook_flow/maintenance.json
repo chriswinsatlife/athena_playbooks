@@ -1,0 +1,21 @@
+{
+  "title": "Maintenance",
+  "rankdir": "LR",
+  "nodes": [
+    { "id": "start", "label": "Periodic review" },
+    { "id": "backfill", "label": "Backfill gift history (3-5 years)" },
+    { "id": "events", "label": "Create new gift events" },
+    { "id": "add", "label": "Add new people + new event types" },
+    { "id": "sources", "label": "Refresh sources + brands" },
+    { "id": "reuse", "label": "Reuse proven gifts for similar people" },
+    { "id": "done", "label": "Maintain system" }
+  ],
+  "edges": [
+    { "source": "start", "target": "backfill" },
+    { "source": "start", "target": "events" },
+    { "source": "events", "target": "add" },
+    { "source": "add", "target": "sources" },
+    { "source": "sources", "target": "reuse" },
+    { "source": "reuse", "target": "done" }
+  ]
+}

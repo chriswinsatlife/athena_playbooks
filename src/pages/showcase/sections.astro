@@ -1,64 +1,28 @@
 ---
 import Base from '../../layouts/Base.astro'
 
-const sectionsList = [
-  'BrandsCardsMultiColumn',
-  'CallToActionSimple',
-  'CallToActionSimpleCentered',
-  'FeaturesStackedAlternatingWithDemos',
-  'FeaturesThreeColumn',
-  'FeaturesThreeColumnWithDemos',
-  'FeaturesTwoColumnWithDemos',
-  'FeaturesWithLargeDemo',
-  'FooterCategory',
-  'FooterLink',
-  'FooterWithLinkCategories',
-  'FooterWithLinksAndSocialIcons',
-  'FooterWithNewsletterFormCategoriesAndSocialIcons',
-  'HeroCenteredWithDemo',
-  'HeroCenteredWithPhoto',
-  'HeroLeftAlignedWithDemo',
-  'HeroLeftAlignedWithPhoto',
-  'HeroSimpleCentered',
-  'HeroSimpleLeftAligned',
-  'HeroTwoColumnWithPhoto',
-  'HeroWithDemoOnBackground',
-  'NewsletterForm',
-  'PlanComparisonTable',
-  'PricingHeroMultiTier',
-  'PricingMultiTier',
-  'PricingMultiTierAlt',
-  'PricingSingleTierTwoColumn',
-  'SocialLink',
-  'Stat',
-  'StatsFourColumns',
-  'StatsThreeColumnWithDescription',
-  'StatsWithGraph',
-  'StatsWithGraphStat',
-  'TeamFourColumnGrid',
-  'TeamMember',
-  'TeamThreeColumnGrid',
-  'TestimonialTwoColumnWithLargePhoto',
-  'TestimonialWithLargeQuote',
-  'TestimonialsThreeColumnGrid',
-  'TestimonialsThreeColumnGridLayout'
-]
+// Section Components
+import HeroSimpleCentered from '../../../components/sections/hero-simple-centered.astro'
+import HeroSimpleLeftAligned from '../../../components/sections/hero-simple-left-aligned.astro'
+import CallToActionSimple from '../../../components/sections/call-to-action-simple.astro'
+import StatsFourColumns from '../../../components/sections/stats-four-columns.astro'
+import Stat from '../../../components/sections/Stat.astro'
+import FeaturesThreeColumn from '../../../components/sections/features-three-column.astro'
+import PricingMultiTier from '../../../components/sections/pricing-multi-tier.astro'
+import TestimonialWithLargeQuote from '../../../components/sections/testimonial-with-large-quote.astro'
 
-// Group sections by category
-const categories = {
-  'Hero Sections': sectionsList.filter(s => s.startsWith('Hero')),
-  'Features': sectionsList.filter(s => s.startsWith('Features')),
-  'Pricing': sectionsList.filter(s => s.startsWith('Pricing') || s.startsWith('Plan')),
-  'Testimonials': sectionsList.filter(s => s.startsWith('Testimonial')),
-  'Stats': sectionsList.filter(s => s.startsWith('Stats') || s === 'Stat'),
-  'Team': sectionsList.filter(s => s.startsWith('Team')),
-  'Footer': sectionsList.filter(s => s.startsWith('Footer') || s === 'SocialLink' || s === 'NewsletterForm'),
-  'Call to Action': sectionsList.filter(s => s.startsWith('CallToAction')),
-  'Brands': sectionsList.filter(s => s.startsWith('Brands'))
-}
+// Element Components for demos
+import ButtonLink from '../../../components/elements/button-link.astro'
+import PlainButtonLink from '../../../components/elements/plain-button-link.astro'
+import AnnouncementBadge from '../../../components/elements/announcement-badge.astro'
+import Heading from '../../../components/elements/heading.astro'
+import Subheading from '../../../components/elements/subheading.astro'
+import Text from '../../../components/elements/text.astro'
+import Container from '../../../components/elements/container.astro'
+import Section from '../../../components/elements/section.astro'
 ---
 
-<Base title="Showcase - All Sections">
+<Base title="Showcase - Section Components">
   <div class="min-h-screen bg-mist-100 dark:bg-mist-950">
     <!-- Header -->
     <header class="border-b border-mist-200 dark:border-mist-800 bg-white dark:bg-mist-900">
@@ -72,43 +36,237 @@ const categories = {
           Section Components
         </h1>
         <p class="mt-2 text-mist-600 dark:text-mist-400 font-sans">
-          All 40 section components organized by category
+          Live demos of section components with sample content
         </p>
       </div>
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-6 py-12">
-      <div class="grid gap-8">
-        {Object.entries(categories).map(([category, items]) => (
-          <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
-            <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50 flex justify-between items-center">
-              <h2 class="font-display text-lg text-athena-primary dark:text-white">{category}</h2>
-              <span class="px-3 py-1 text-sm rounded-full bg-athena-primary text-white">{items.length}</span>
+    <main>
+      
+      <!-- Section 1: Hero Simple Centered -->
+      <div class="border-b border-mist-200 dark:border-mist-800">
+        <div class="bg-white dark:bg-mist-900 px-6 py-4 border-b border-mist-200 dark:border-mist-800">
+          <div class="max-w-7xl mx-auto">
+            <span class="text-sm font-medium text-mist-600 dark:text-mist-400">1. HeroSimpleCentered</span>
+          </div>
+        </div>
+        <div class="bg-mist-50 dark:bg-mist-900">
+          <section class="py-16">
+            <Container class="flex flex-col items-center gap-6">
+              <AnnouncementBadge text="New: AI-Powered Delegation" href="#" cta="Learn more" />
+              <Heading class="max-w-5xl text-center">Delegate like a CEO with your Executive Assistant</Heading>
+              <Text size="lg" class="flex max-w-xl flex-col gap-4 text-center">
+                <p>Athena pairs busy professionals with world-class Executive Assistants to handle email, calendar, travel, research, and more.</p>
+              </Text>
+              <div class="flex items-center justify-center gap-4">
+                <ButtonLink href="#">Get Started</ButtonLink>
+                <PlainButtonLink href="#">Watch Demo</PlainButtonLink>
+              </div>
+            </Container>
+          </section>
+        </div>
+      </div>
+
+      <!-- Section 2: Hero Simple Left Aligned -->
+      <div class="border-b border-mist-200 dark:border-mist-800">
+        <div class="bg-white dark:bg-mist-900 px-6 py-4 border-b border-mist-200 dark:border-mist-800">
+          <div class="max-w-7xl mx-auto">
+            <span class="text-sm font-medium text-mist-600 dark:text-mist-400">2. HeroSimpleLeftAligned</span>
+          </div>
+        </div>
+        <div class="bg-mist-50 dark:bg-mist-900">
+          <section class="py-16">
+            <Container class="flex flex-col gap-6">
+              <Heading>Reclaim 20+ hours every week</Heading>
+              <Text size="lg" class="flex max-w-xl flex-col gap-4">
+                <p>Your EA handles the busywork while you focus on what matters most. From inbox zero to seamless travel planning.</p>
+              </Text>
+              <div class="flex items-center gap-4">
+                <ButtonLink href="#">Start Free Trial</ButtonLink>
+                <PlainButtonLink href="#">See Pricing</PlainButtonLink>
+              </div>
+            </Container>
+          </section>
+        </div>
+      </div>
+
+      <!-- Section 3: Stats Four Columns -->
+      <div class="border-b border-mist-200 dark:border-mist-800">
+        <div class="bg-white dark:bg-mist-900 px-6 py-4 border-b border-mist-200 dark:border-mist-800">
+          <div class="max-w-7xl mx-auto">
+            <span class="text-sm font-medium text-mist-600 dark:text-mist-400">3. StatsFourColumns + Stat</span>
+          </div>
+        </div>
+        <div class="bg-mist-50 dark:bg-mist-900">
+          <StatsFourColumns>
+            <Stat stat="10,000+" text="Executives served" />
+            <Stat stat="2M+" text="Hours delegated" />
+            <Stat stat="98%" text="Client satisfaction" />
+            <Stat stat="24/7" text="Global coverage" />
+          </StatsFourColumns>
+        </div>
+      </div>
+
+      <!-- Section 4: Features Three Column -->
+      <div class="border-b border-mist-200 dark:border-mist-800">
+        <div class="bg-white dark:bg-mist-900 px-6 py-4 border-b border-mist-200 dark:border-mist-800">
+          <div class="max-w-7xl mx-auto">
+            <span class="text-sm font-medium text-mist-600 dark:text-mist-400">4. FeaturesThreeColumn (manual layout)</span>
+          </div>
+        </div>
+        <div class="bg-mist-50 dark:bg-mist-900">
+          <Section>
+            <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+              <div class="flex flex-col gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-mist-950 dark:bg-white">
+                  <svg class="h-6 w-6 text-white dark:text-mist-950" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <h3 class="text-lg font-semibold text-mist-950 dark:text-white">Email Management</h3>
+                <p class="text-sm text-mist-600 dark:text-mist-400">Your EA triages your inbox, drafts responses, and ensures nothing falls through the cracks.</p>
+              </div>
+              <div class="flex flex-col gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-mist-950 dark:bg-white">
+                  <svg class="h-6 w-6 text-white dark:text-mist-950" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                </div>
+                <h3 class="text-lg font-semibold text-mist-950 dark:text-white">Calendar Optimization</h3>
+                <p class="text-sm text-mist-600 dark:text-mist-400">Smart scheduling that protects your focus time and handles all the back-and-forth.</p>
+              </div>
+              <div class="flex flex-col gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-mist-950 dark:bg-white">
+                  <svg class="h-6 w-6 text-white dark:text-mist-950" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
+                </div>
+                <h3 class="text-lg font-semibold text-mist-950 dark:text-white">Travel Planning</h3>
+                <p class="text-sm text-mist-600 dark:text-mist-400">Door-to-door itineraries, bookings, and real-time support when plans change.</p>
+              </div>
             </div>
-            <div class="p-6">
-              <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {items.map((name) => (
-                  <li class="rounded-lg border border-mist-200 dark:border-mist-700 bg-mist-50 dark:bg-mist-800/50 px-4 py-3 font-mono text-sm text-mist-700 dark:text-mist-300 hover:border-athena-primary dark:hover:border-mist-500 transition-colors">
-                    {name}
-                  </li>
-                ))}
-              </ul>
+          </Section>
+        </div>
+      </div>
+
+      <!-- Section 5: Pricing Multi Tier -->
+      <div class="border-b border-mist-200 dark:border-mist-800">
+        <div class="bg-white dark:bg-mist-900 px-6 py-4 border-b border-mist-200 dark:border-mist-800">
+          <div class="max-w-7xl mx-auto">
+            <span class="text-sm font-medium text-mist-600 dark:text-mist-400">5. PricingMultiTier</span>
+          </div>
+        </div>
+        <div class="bg-mist-50 dark:bg-mist-900 py-16">
+          <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+              <PricingMultiTier
+                name="Starter"
+                price="$1,500"
+                period="/month"
+                subheadline="Perfect for busy professionals getting started with delegation."
+                features={["20 hours/month", "Email management", "Calendar scheduling", "Basic research"]}
+              >
+                <ButtonLink href="#" class="w-full justify-center">Get Started</ButtonLink>
+              </PricingMultiTier>
+              <PricingMultiTier
+                name="Professional"
+                price="$3,000"
+                period="/month"
+                badge="Most Popular"
+                subheadline="For executives who need comprehensive support."
+                features={["40 hours/month", "Everything in Starter", "Travel planning", "Project coordination", "Priority support"]}
+              >
+                <ButtonLink href="#" class="w-full justify-center">Get Started</ButtonLink>
+              </PricingMultiTier>
+              <PricingMultiTier
+                name="Enterprise"
+                price="Custom"
+                subheadline="Dedicated support for high-volume needs."
+                features={["Unlimited hours", "Dedicated EA team", "Custom workflows", "API integrations", "White-glove onboarding"]}
+              >
+                <ButtonLink href="#" color="light" class="w-full justify-center">Contact Sales</ButtonLink>
+              </PricingMultiTier>
             </div>
           </div>
-        ))}
+        </div>
+      </div>
+
+      <!-- Section 6: Testimonial With Large Quote -->
+      <div class="border-b border-mist-200 dark:border-mist-800">
+        <div class="bg-white dark:bg-mist-900 px-6 py-4 border-b border-mist-200 dark:border-mist-800">
+          <div class="max-w-7xl mx-auto">
+            <span class="text-sm font-medium text-mist-600 dark:text-mist-400">6. TestimonialWithLargeQuote</span>
+          </div>
+        </div>
+        <div class="bg-mist-50 dark:bg-mist-900">
+          <TestimonialWithLargeQuote
+            quote="Athena gave me back 25 hours a week. My EA handles everything from travel to inbox management, and I can finally focus on growing the business."
+            author="Sarah Chen"
+            title="CEO, TechFlow"
+          />
+        </div>
+      </div>
+
+      <!-- Section 7: Call To Action Simple -->
+      <div class="border-b border-mist-200 dark:border-mist-800">
+        <div class="bg-white dark:bg-mist-900 px-6 py-4 border-b border-mist-200 dark:border-mist-800">
+          <div class="max-w-7xl mx-auto">
+            <span class="text-sm font-medium text-mist-600 dark:text-mist-400">7. CallToActionSimple</span>
+          </div>
+        </div>
+        <div class="bg-mist-50 dark:bg-mist-900">
+          <section class="py-16">
+            <Container class="flex flex-col gap-10">
+              <div class="flex flex-col gap-6">
+                <div class="flex max-w-4xl flex-col gap-2">
+                  <span class="text-sm font-medium uppercase tracking-wider text-mist-600 dark:text-mist-400">Ready to delegate?</span>
+                  <Subheading>Start your free trial today</Subheading>
+                </div>
+                <Text class="flex max-w-3xl flex-col gap-4 text-pretty">
+                  <p>Get matched with a world-class EA in 48 hours. No commitment required.</p>
+                </Text>
+              </div>
+              <div>
+                <ButtonLink href="#">Get Started Free</ButtonLink>
+              </div>
+            </Container>
+          </section>
+        </div>
+      </div>
+
+      <!-- Section 8: Dark CTA Section -->
+      <div class="border-b border-mist-200 dark:border-mist-800">
+        <div class="bg-white dark:bg-mist-900 px-6 py-4 border-b border-mist-200 dark:border-mist-800">
+          <div class="max-w-7xl mx-auto">
+            <span class="text-sm font-medium text-mist-600 dark:text-mist-400">8. Dark CTA Section</span>
+          </div>
+        </div>
+        <div class="bg-mist-950">
+          <section class="py-16">
+            <Container class="flex flex-col items-center gap-6">
+              <h2 class="text-3xl font-display text-white text-center max-w-3xl">Join 10,000+ executives who delegate smarter</h2>
+              <p class="text-mist-300 text-center max-w-xl">Stop drowning in busywork. Start focusing on what matters.</p>
+              <div class="flex items-center justify-center gap-4 mt-4">
+                <ButtonLink href="#" color="light">Start Free Trial</ButtonLink>
+                <PlainButtonLink href="#" class="text-white hover:text-mist-200">Talk to Sales</PlainButtonLink>
+              </div>
+            </Container>
+          </section>
+        </div>
       </div>
 
       <!-- Footer Navigation -->
-      <div class="mt-16 text-center">
-        <p class="text-mist-600 dark:text-mist-400 mb-6">{sectionsList.length} Section Components Available</p>
-        <div class="flex gap-4 justify-center">
-          <a href="/showcase/elements" class="px-6 py-3 rounded-lg border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300 hover:bg-mist-100 dark:hover:bg-mist-800 transition-colors">
-            ← View Elements
-          </a>
-          <a href="/showcase/catalyst" class="px-6 py-3 rounded-lg bg-athena-primary text-white hover:bg-athena-accent transition-colors">
-            View Catalyst →
-          </a>
+      <div class="bg-white dark:bg-mist-900 py-16">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+          <p class="text-mist-600 dark:text-mist-400 mb-6">8 Section Components Demonstrated</p>
+          <p class="text-sm text-mist-500 dark:text-mist-500 mb-8">
+            Additional sections available: HeroCenteredWithDemo, HeroCenteredWithPhoto, HeroLeftAlignedWithDemo, 
+            HeroLeftAlignedWithPhoto, HeroTwoColumnWithPhoto, HeroWithDemoOnBackground, FeaturesStackedAlternatingWithDemos, 
+            FeaturesThreeColumnWithDemos, FeaturesTwoColumnWithDemos, FeaturesWithLargeDemo, and more...
+          </p>
+          <div class="flex gap-4 justify-center">
+            <a href="/showcase/elements" class="px-6 py-3 rounded-lg border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300 hover:bg-mist-100 dark:hover:bg-mist-800 transition-colors">
+              ← View Elements
+            </a>
+            <a href="/showcase/catalyst" class="px-6 py-3 rounded-lg bg-athena-primary text-white hover:bg-athena-accent transition-colors">
+              View Catalyst →
+            </a>
+          </div>
         </div>
       </div>
     </main>

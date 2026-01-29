@@ -1,0 +1,13 @@
+{
+  "title": "Ongoing - Execute",
+  "rankdir": "LR",
+  "nodes": [
+    { "id": "buy", "label": "Buy + ship" },
+    { "id": "confirm", "label": "Confirm delivery + draft message" },
+    { "id": "record", "label": "Record outcome + learnings" }
+  ],
+  "edges": [
+    { "source": "buy", "target": "confirm" },
+    { "source": "confirm", "target": "record" }
+  ]
+}

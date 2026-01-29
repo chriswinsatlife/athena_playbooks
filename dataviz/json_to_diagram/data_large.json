@@ -1,0 +1,196 @@
+{
+  "name": "Improving Your Product Sense Course",
+  "children": [
+    {
+      "name": "Motivation Theory",
+      "children": [
+        { "name": "Motivation" },
+        { "name": "Friction" },
+        { "name": "Satisfaction" },
+        { "name": "Nudge" },
+        { "name": "Behavioral Triggers" },
+        { "name": "Habit Formation" },
+        { "name": "Reward Systems" },
+        { "name": "Loss Aversion" },
+        { "name": "Social Proof" },
+        { "name": "Scarcity Psychology" },
+        { "name": "Commitment Consistency" }
+      ]
+    },
+    {
+      "name": "Cognitive Empathy",
+      "children": [
+        { "name": "Metacognition" },
+        { "name": "Intellectual Flexibility" },
+        { "name": "Simulation" },
+        { "name": "Perspective Taking" },
+        { "name": "Mental Models" },
+        { "name": "Cognitive Biases" },
+        { "name": "Emotional Intelligence" },
+        { "name": "User Journey Mapping" },
+        { "name": "Empathy Interviews" },
+        { "name": "Persona Development" },
+        { "name": "Customer Pain Points" }
+      ]
+    },
+    {
+      "name": "Creativity",
+      "children": [
+        {
+          "name": "Strategic Thinking",
+          "children": [
+            { "name": "Positioning" },
+            { "name": "Segmentation" },
+            { "name": "Differentiation" },
+            { "name": "Core of Product Strategy" },
+            { "name": "Competitive Analysis" },
+            { "name": "Market Opportunity" },
+            { "name": "Value Proposition" },
+            { "name": "Product Vision" },
+            { "name": "Strategic Roadmapping" },
+            { "name": "Platform Strategy" },
+            { "name": "Ecosystem Thinking" }
+          ]
+        },
+        {
+          "name": "Creative Execution",
+          "children": [
+            { "name": "Creative Mindset" },
+            { "name": "Team Rituals" },
+            { "name": "Product Creativity Techniques" },
+            { "name": "Brainstorming Methods" },
+            { "name": "Design Thinking" },
+            { "name": "Ideation Workshops" },
+            { "name": "Prototype Development" },
+            { "name": "Rapid Experimentation" },
+            { "name": "Innovation Frameworks" },
+            { "name": "Creative Constraints" }
+          ]
+        },
+        {
+          "name": "Problem Solving",
+          "children": [
+            { "name": "Root Cause Analysis" },
+            { "name": "Systems Thinking" },
+            { "name": "First Principles" },
+            { "name": "Hypothesis Formation" },
+            { "name": "Solution Validation" },
+            { "name": "Trade-off Analysis" },
+            { "name": "Decision Frameworks" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Domain Expertise",
+      "children": [
+        { "name": "Very specific - [Tackle Qs in AMAs]" },
+        { "name": "Industry Knowledge" },
+        { "name": "Technical Understanding" },
+        { "name": "Business Model Expertise" },
+        { "name": "Regulatory Awareness" },
+        { "name": "Market Dynamics" },
+        { "name": "Customer Segmentation" },
+        { "name": "Vendor Ecosystem" },
+        { "name": "Technology Trends" }
+      ]
+    },
+    {
+      "name": "Data & Analytics",
+      "children": [
+        {
+          "name": "Measurement Strategy",
+          "children": [
+            { "name": "Key Performance Indicators" },
+            { "name": "Success Metrics" },
+            { "name": "Leading vs Lagging Indicators" },
+            { "name": "North Star Metrics" },
+            { "name": "Behavioral Analytics" },
+            { "name": "Cohort Analysis" },
+            { "name": "Funnel Optimization" }
+          ]
+        },
+        {
+          "name": "Research Methods",
+          "children": [
+            { "name": "User Research" },
+            { "name": "A/B Testing" },
+            { "name": "Surveys & Interviews" },
+            { "name": "Observational Studies" },
+            { "name": "Market Research" },
+            { "name": "Competitive Intelligence" },
+            { "name": "Data Interpretation" },
+            { "name": "Statistical Significance" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Communication & Influence",
+      "children": [
+        {
+          "name": "Stakeholder Management",
+          "children": [
+            { "name": "Executive Communication" },
+            { "name": "Cross-functional Alignment" },
+            { "name": "Conflict Resolution" },
+            { "name": "Influence Without Authority" },
+            { "name": "Negotiation Skills" },
+            { "name": "Building Consensus" }
+          ]
+        },
+        {
+          "name": "Product Storytelling",
+          "children": [
+            { "name": "Vision Articulation" },
+            { "name": "Feature Narratives" },
+            { "name": "Customer Success Stories" },
+            { "name": "Data Storytelling" },
+            { "name": "Presentation Skills" },
+            { "name": "Written Communication" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Execution Excellence",
+      "children": [
+        {
+          "name": "Product Development",
+          "children": [
+            { "name": "Agile Methodology" },
+            { "name": "Sprint Planning" },
+            { "name": "Backlog Management" },
+            { "name": "User Story Writing" },
+            { "name": "Acceptance Criteria" },
+            { "name": "Release Planning" },
+            { "name": "Quality Assurance" }
+          ]
+        },
+        {
+          "name": "Go-to-Market",
+          "children": [
+            { "name": "Launch Strategy" },
+            { "name": "Market Timing" },
+            { "name": "Pricing Strategy" },
+            { "name": "Distribution Channels" },
+            { "name": "Marketing Collaboration" },
+            { "name": "Sales Enablement" },
+            { "name": "Customer Onboarding" }
+          ]
+        },
+        {
+          "name": "Risk Management",
+          "children": [
+            { "name": "Risk Assessment" },
+            { "name": "Mitigation Strategies" },
+            { "name": "Contingency Planning" },
+            { "name": "Crisis Management" },
+            { "name": "Technical Debt" },
+            { "name": "Scalability Planning" }
+          ]
+        }
+      ]
+    }
+  ]
+}

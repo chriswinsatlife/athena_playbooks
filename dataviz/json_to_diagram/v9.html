@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta title="V9 - Using d3.tree() Layout" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<svg id="mindmap"></svg>
+
+<script>
+// Load data from external JSON file
+d3.json("data.json").then(data => {
+  const root = d3.hierarchy(data);
+  
+  // Hidden measure div - smarter AI's bulletproof approach
+  const hiddenMeasure = document.createElement("div");
+  hiddenMeasure.style.cssText = `
+    position:absolute;
+    visibility:hidden;
+    white-space:normal;
+    word-wrap:break-word;
+    padding:0;
+    margin:0;
+  `;
+  document.body.appendChild(hiddenMeasure);
+
+  // Sync font styles once using probe element
+  (function syncFontStyles() {
+    // Create a probe element that really gets all the CSS rules
+    const probe = document.createElement("div");
+    probe.className = "node-fo";          // so it picks up .node-fo > div rules
+    probe.style.cssText = "position:absolute;visibility:hidden";
+    probe.innerHTML = "<div>A</div>";     // inner div is where the font lives
+    document.body.appendChild(probe);
+
+    const probeInner = probe.firstElementChild;
+    const c = getComputedStyle(probeInner);
+
+    // Copy only font-related props
+    hiddenMeasure.style.font = c.font;           // shorthand: style, weight, size/line-height, family
+    hiddenMeasure.style.letterSpacing = c.letterSpacing;
+
+    document.body.removeChild(probe);
+  })();
+
+  function measureWrapped(txt, widthPx){
+    hiddenMeasure.style.width = widthPx + "px";
+    hiddenMeasure.textContent = txt;
+    return hiddenMeasure.scrollHeight;
+  }
+
+  function rectWidth(d){
+    switch(d.depth){
+      case 0: return 220;
+      case 1: return 180;
+      case 2: return 160;
+      default: return 140;
+    }
+  }
+
+  function isGroup(n){ return n.children && n.children.length > 0; }
+
+  // Calculate node heights first
+  root.each(d => {
+    const w = rectWidth(d);
+    const sidePad = 12;
+    const tH = measureWrapped(d.data.name, w - sidePad);
+    d.data.nodeHeight = tH + 12;
+  });
+
+  // Use our proven custom layout from v8 (d3.tree was too complex)
+  const siblingSpacing = 20;
+  const groupSpacing   = 60;
+  const horizontalSpacing = 320;
+
+  function computeSubtreeHeight(node){
+    const h = node.data.nodeHeight;
+    if(!isGroup(node)){
+      node.data.subtreeHeight = h;
+      return h;
+    }
+    let sum = 0;
+    for(let i=0; i<node.children.length; i++){
+      const c = node.children[i];
+      const ch = computeSubtreeHeight(c);
+      sum += ch;
+      if(i < node.children.length -1){
+        const nxt = node.children[i+1];
+        sum += (isGroup(c)||isGroup(nxt)) ? groupSpacing : siblingSpacing;
+      }
+    }
+    node.data.subtreeHeight = Math.max(h, sum);
+    return node.data.subtreeHeight;
+  }
+  computeSubtreeHeight(root);
+
+  function layoutTree(node, depth, topY){
+    if(!isGroup(node)){
+      node.x = depth * horizontalSpacing;
+      node.y = topY + node.data.nodeHeight/2;
+      return node.data.nodeHeight;
+    }
+    node.x = depth * horizontalSpacing;
+    let childHeights = [];
+    node.children.forEach(c => {
+      childHeights.push(computeSubtreeHeight(c));
+    });
+    let sumKids = 0;
+    node.children.forEach((c,i)=>{
+      sumKids += c.data.subtreeHeight;
+      if(i < node.children.length-1){
+        let nxt = node.children[i+1];
+        sumKids += (isGroup(c)||isGroup(nxt)) ? groupSpacing : siblingSpacing;
+      }
+    });
+    node.data.subtreeHeight = Math.max(node.data.nodeHeight, sumKids);
+    node.x = depth * horizontalSpacing;
+    node.y = topY + node.data.subtreeHeight/2;
+    let extra = node.data.subtreeHeight - sumKids;
+    let childTop = topY + extra/2;
+    node.children.forEach((c,i)=>{
+      layoutTree(c, depth+1, childTop);
+      childTop += c.data.subtreeHeight;
+      if(i<node.children.length-1){
+        let nxt = node.children[i+1];
+        childTop += (isGroup(c)||isGroup(nxt)) ? groupSpacing : siblingSpacing;
+      }
+    });
+    return node.data.subtreeHeight;
+  }
+  layoutTree(root, 0, 0);
+
+  const nodes = root.descendants();
+
+  const svg = d3.select("#mindmap");
+  const gAll = svg.append("g").attr("class","everything");
+  const links = root.links();
+
+  function roundedRectilinear(px, py, cx, cy){
+    const mid = (px + cx)/2;
+    const radius = 15;
+    
+    if (py === cy) {
+      // Same vertical level - straight line
+      return `M${px},${py}L${cx},${cy}`;
+    }
+    
+    // Sharp corner version - no rounding
+    return `M${px},${py}L${mid},${py}L${mid},${cy}L${cx},${cy}`;
+  }
+
+  function roundedRectilinearWithCurve(px, py, cx, cy){
+    const mid = (px + cx)/2;
+    const radius = 15;
+    
+    if (py === cy) {
+      // Same vertical level - straight line
+      return `M${px},${py}L${cx},${cy}`;
+    }
+    
+    if (py < cy) {
+      // Going down - sharp turn at midpoint, rounded at target level
+      return `M${px},${py}L${mid},${py}L${mid},${cy-radius}Q${mid},${cy} ${mid+radius},${cy}L${cx},${cy}`;
+    } else {
+      // Going up - sharp turn at midpoint, rounded at target level
+      return `M${px},${py}L${mid},${py}L${mid},${cy+radius}Q${mid},${cy} ${mid+radius},${cy}L${cx},${cy}`;
+    }
+  }
+
+  function leftEdge(d){ return d.x - rectWidth(d)/2; }
+  function rightEdge(d){ return d.x + rectWidth(d)/2; }
+
+  // Draw links with our rounded corners logic
+  gAll.selectAll("path.link")
+    .data(links)
+    .join("path")
+    .attr("class", d => `link level${d.target.depth}-link`)
+    .attr("d", d => {
+      const sx = rightEdge(d.source);
+      const sy = d.source.y;
+      const tx = leftEdge(d.target);
+      const ty = d.target.y;
+      
+      // Check if this child is at the top or bottom of its parent's children
+      const parent = d.source;
+      const children = parent.children || [];
+      const childIndex = children.indexOf(d.target);
+      const isTopChild = childIndex === 0;
+      const isBottomChild = childIndex === children.length - 1;
+      
+      // Apply rounding if AT top or bottom of branch (very top/bottom)
+      if (isTopChild || isBottomChild) {
+        return roundedRectilinearWithCurve(sx, sy, tx, ty); // Rounded corners
+      } else {
+        return roundedRectilinear(sx, sy, tx, ty); // Sharp corners
+      }
+    });
+
+  // Draw nodes
+  const nodeG = gAll.selectAll("g.node")
+    .data(nodes)
+    .join("g")
+    .attr("class", d => `node level${d.depth}-node`)
+    .attr("transform", d => `translate(${d.x},${d.y})`);
+
+  nodeG.append("rect")
+    .each(function(d){
+      const w = rectWidth(d);
+      const h = d.data.nodeHeight;
+      d3.select(this)
+        .attr("x", -w/2)
+        .attr("y", -h/2)
+        .attr("width", w)
+        .attr("height", h);
+    });
+
+  nodeG.append("foreignObject")
+    .attr("class","node-fo")
+    .each(function(d){
+      const w = rectWidth(d);
+      const h = d.data.nodeHeight;
+      d3.select(this)
+        .attr("x", -w/2)
+        .attr("y", -h/2)
+        .attr("width", w)
+        .attr("height", h)
+        .append("xhtml:div")
+        .html(d.data.name);
+    });
+
+  // Fit diagram in viewBox
+  const bbox = gAll.node().getBBox();
+  const margin = 50;
+  svg.attr("viewBox",[bbox.x - margin, bbox.y - margin, bbox.width + margin*2, bbox.height + margin*2]);
+});
+</script>
+
+</body>
+</html> 

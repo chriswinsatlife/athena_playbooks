@@ -1,0 +1,194 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta title = "d3.js Mind Map Diagram - Course Content - v1"></meta>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    svg {
+      width: 100%;
+      height: 100vh;
+      display: block;
+    }
+    .link {
+      fill: none;
+      stroke-width: 2px;
+    }
+    .node rect {
+      fill: #fff;
+      stroke: #ccc;
+      stroke-width: 1px;
+      rx: 4; /* rounded corners */
+      ry: 4;
+    }
+    .node text {
+      font: 14px sans-serif;
+      alignment-baseline: middle;
+      text-anchor: middle;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script>
+  // Sample data
+  const data = {
+    "name": "Improving Your Product Sense Course",
+    "children": [
+      {
+        "name": "Motivation Theory",
+        "children": [
+          { "name": "Motivation" },
+          { "name": "Friction" },
+          { "name": "Satisfaction" },
+          { "name": "Nudge" }
+        ]
+      },
+      {
+        "name": "Cognitive Empathy",
+        "children": [
+          { "name": "Metacognition" },
+          { "name": "Intellectual Flexibility" },
+          { "name": "Simulation" }
+        ]
+      },
+      {
+        "name": "Creativity",
+        "children": [
+          {
+            "name": "Strategic Thinking",
+            "children": [
+              { "name": "Positioning" },
+              { "name": "Segmentation" },
+              { "name": "Differentiation" },
+              { "name": "Core of Product Strategy" }
+            ]
+          },
+          {
+            "name": "Creative Execution",
+            "children": [
+              { "name": "Creative Mindset" },
+              { "name": "Team Rituals" },
+              { "name": "Product Creativity Techniques" }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Domain Expertise",
+        "children": [
+          { "name": "Very specific - [Tackle Qs in AMAs]" }
+        ]
+      }
+    ]
+  };
+
+  // Colors for top-level branches
+  const branchColors = {
+    "Motivation Theory": "#f2649c",
+    "Cognitive Empathy": "#6e87ff",
+    "Creativity": "#ad6cff",
+    "Domain Expertise": "#ff8150"
+  };
+
+  // Set up the SVG and group
+  const svg = d3.select("#mindmap");
+  const gAll = svg.append("g").attr("class", "everything");
+  
+  // Create a hierarchy and tree layout
+  const root = d3.hierarchy(data);
+  const treeLayout = d3.tree().nodeSize([60, 200]);
+  treeLayout(root);
+
+  // Manually position nodes left-to-right, but we’ll compute
+  // min/max for x to center things vertically
+  root.each(d => {
+    d.y = d.depth * 200;
+  });
+  const xValues = root.descendants().map(d => d.x);
+  const minX = Math.min(...xValues), maxX = Math.max(...xValues);
+  const midX = (minX + maxX) / 2;
+
+  // A simple left-to-right curved link generator
+  const diagonal = (s, d) => {
+    const x1 = s.y, y1 = s.x - midX;
+    const x2 = d.y, y2 = d.x - midX;
+    const curve = (x1 + x2)/2;
+    return `M${x1},${y1}C${curve},${y1} ${curve},${y2} ${x2},${y2}`;
+  };
+
+  // Draw links
+  gAll.selectAll("path.link")
+      .data(root.links())
+      .join("path")
+      .attr("class", "link")
+      .attr("stroke", d => {
+        // top-level color from ancestor
+        let p = d.source;
+        while(p.depth > 1) p = p.parent;
+        return branchColors[p.data.name] || "#999";
+      })
+      .attr("d", d => diagonal(d.source, d.target));
+
+  // Draw nodes
+  const node = gAll.selectAll("g.node")
+      .data(root.descendants())
+      .join("g")
+      .attr("class", "node")
+      .attr("transform", d => `translate(${d.y},${d.x - midX})`);
+
+  // Small circle
+  node.append("circle")
+      .attr("r", 5)
+      .attr("fill", d => {
+        if (d.depth === 0) return "#333";
+        let p = d;
+        while(p.depth > 1) p = p.parent;
+        return branchColors[p.data.name] || "#999";
+      });
+
+  // Label group for text & rectangle
+  const label = node.append("g").attr("class","label");
+  label.append("text")
+       .attr("x", 0)
+       .attr("y", 0)
+       .text(d => d.data.name);
+  label.append("rect")
+       .lower(); // put rect behind the text
+
+  // Measure text, adjust rect, center it
+  node.each(function(d) {
+    const l = d3.select(this).select("g.label");
+    const txt = l.select("text");
+    const rect = l.select("rect");
+
+    // get bounding box of the text
+    const bbox = txt.node().getBBox();
+    // pad
+    const pad = 6;
+    rect
+      .attr("x", bbox.x - pad)
+      .attr("y", bbox.y - pad)
+      .attr("width", bbox.width + pad*2)
+      .attr("height", bbox.height + pad*2);
+  });
+
+  // Once all is drawn, fit the svg via viewBox
+  const fullBBox = gAll.node().getBBox();
+  const margin = 40;
+  svg.attr("viewBox", [
+    fullBBox.x - margin,
+    fullBBox.y - margin,
+    fullBBox.width + margin*2,
+    fullBBox.height + margin*2
+  ]);
+</script>
+</body>
+</html>

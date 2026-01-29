@@ -1,0 +1,87 @@
+/* Full-window SVG canvas for iframe embed */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #f7fbf7;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/fonts/Figtree[wght].ttf") format("truetype");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: radial-gradient(1200px 900px at 70% 10%, rgba(5, 36, 12, 0.06), rgba(5, 36, 12, 0) 60%),
+    #f7fbf7;
+}
+
+/* Links */
+.link {
+  fill: none;
+  stroke: rgba(5, 36, 12, 0.22);
+  stroke-width: 1.25px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Nodes */
+.node rect {
+  fill: rgba(255, 255, 255, 0.95);
+  stroke: rgba(5, 36, 12, 0.18);
+  stroke-width: 1px;
+  rx: 14;
+  ry: 14;
+}
+
+/* Root node */
+.node.level0 rect {
+  fill: rgba(5, 36, 12, 0.94);
+  stroke: rgba(5, 36, 12, 0.94);
+}
+
+/* Level 1 groups */
+.node.level1 rect {
+  fill: rgba(239, 248, 240, 0.95);
+  stroke: rgba(5, 36, 12, 0.18);
+}
+
+/* Text inside foreignObject */
+.node-fo > div {
+  font-family: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: rgba(0, 0, 0, 0.86);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 10px 12px;
+}
+
+.node.level0 .node-fo > div {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 650;
+}
+
+.node.level1 .node-fo > div {
+  color: rgba(0, 0, 0, 0.84);
+  font-weight: 650;
+}
+
+/* Subtle depth */
+.node rect {
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.06));
+}

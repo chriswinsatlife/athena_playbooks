@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta title="v2" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    html, body {
+      margin: 0; 
+      padding: 0;
+      width: 100%; 
+      height: 100%;
+      overflow: hidden;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: #fff;
+    }
+    /* Example level‐based styling (up to 5 levels) */
+    .level0-node rect { fill: #000; }
+    .level0-node div  { color: #fff; } /* White text for root */
+    .level1-node rect { fill: #f2649c; }
+    .level2-node rect { fill: #fafafa; }
+    .level3-node rect { fill: #f2f2ff; }
+    .level4-node rect { fill: #fff0f5; }
+
+    .level1-link, .level2-link, .level3-link, .level4-link, .level5-link {
+      stroke: #bbb;
+      stroke-width: 2px;
+      fill: none;
+    }
+    rect {
+      rx: 8;
+      ry: 8;
+    }
+    .node-fo > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      word-wrap: break-word;
+      font: 14px sans-serif;
+      padding: 6px;
+      box-sizing: border-box;
+      line-height: 1.3em;
+    }
+  </style>
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script>
+/*
+  Demo data with 4 levels.
+*/
+const data = {
+  name: "Example Product Strategy Course",
+  children: [
+    {
+      name: "Motivation Theory",
+      children: [
+        { name: "Motivation" },
+        { name: "Friction" },
+        { name: "Satisfaction" },
+        { name: "Nudge" }
+      ]
+    },
+    {
+      name: "Cognitive Empathy",
+      children: [
+        { name: "Metacognition" },
+        { name: "Intellectual Flexibility" },
+        { name: "Simulation" }
+      ]
+    },
+    {
+      name: "Creativity",
+      children: [
+        {
+          name: "Strategic Thinking",
+          children: [
+            { name: "Positioning" },
+            { name: "Segmentation" },
+            { name: "Differentiation" },
+            { name: "Core of Product Strategy" }
+          ]
+        },
+        {
+          name: "Creative Execution",
+          children: [
+            { name: "Creative Mindset" },
+            { name: "Team Rituals" },
+            { name: "Product Creativity Techniques" }
+          ]
+        }
+      ]
+    },
+    {
+      name: "Domain Expertise",
+      children: [
+        { name: "Very specific - [Tackle Qs in AMAs]" }
+      ]
+    }
+  ]
+};
+
+/* 
+   1) We create a d3.hierarchy.
+   2) We measure the text-wrapping height for each node.
+   3) We compute subtree heights so we can lay everything out.
+   4) We define different vertical spacing for siblings in the same group (childSpacing)
+      and between different groups (groupSpacing).
+   5) We draw bracket-shaped lines like "[".
+*/
+
+/* ---------- 1) Build Hierarchy ---------- */
+const root = d3.hierarchy(data);
+
+/* ---------- 2) Measure Text Wrapping ---------- */
+
+/* A hidden measuring div */
+const hiddenMeasure = document.createElement("div");
+hiddenMeasure.style.position = "absolute";
+hiddenMeasure.style.visibility = "hidden";
+hiddenMeasure.style.width = "auto";
+hiddenMeasure.style.height = "auto";
+hiddenMeasure.style.whiteSpace = "normal";
+hiddenMeasure.style.wordWrap = "break-word";
+hiddenMeasure.style.font = "14px sans-serif";
+hiddenMeasure.style.lineHeight = "1.3em";
+document.body.appendChild(hiddenMeasure);
+
+/* Returns rendered height in px for a given text and a max width */
+function measureWrapped(text, widthPx) {
+  hiddenMeasure.style.width = widthPx + "px";
+  hiddenMeasure.innerText = text;
+  return hiddenMeasure.scrollHeight;
+}
+
+/* Define rectWidth by depth (edit here if you want different widths per level). */
+function rectWidth(node) {
+  switch(node.depth) {
+    case 0: return 220;
+    case 1: return 180;
+    case 2: return 160;
+    case 3: return 140;
+    default: return 130;
+  }
+}
+
+/* For each node, store node.data.nodeHeight (in px) */
+function computeNodeHeights(node) {
+  const w = rectWidth(node);
+  const sidePad = 12; // left+right total
+  const textH = measureWrapped(node.data.name, w - sidePad);
+  // some top/bottom padding
+  node.data.nodeHeight = textH + 12; 
+  if (node.children) {
+    node.children.forEach(computeNodeHeights);
+  }
+}
+computeNodeHeights(root);
+
+/* ---------- 3) Compute Subtree Heights ---------- */
+
+/*
+  We'll define a function isGroup(n) => n has multiple children 
+  (we can interpret "group" as a node that has children).
+*/
+function isGroup(n) {
+  return (n.children && n.children.length>0);
+}
+
+/*
+  We want small vertical spacing between siblings in the same group 
+  (childSpacing), but large spacing between different groups (groupSpacing). 
+  For example, "Motivation" vs "Friction" => childSpacing, but 
+  "Motivation Theory" vs "Cognitive Empathy" => groupSpacing.
+  
+  We’ll define these constants (edit them as you like):
+*/
+const childSpacing  = 20;  // smaller vertical gap for siblings in same group
+const groupSpacing  = 60;  // larger gap for separate groups
+
+/*
+  computeSubtreeHeight(node) => total vertical space needed for node’s entire subtree.
+  We'll sum child subtree heights and add the spacing in between them 
+  (which depends on whether consecutive children are in the same group).
+*/
+function computeSubtreeHeight(node) {
+  const ownH = node.data.nodeHeight;
+
+  if(!isGroup(node)) {
+    node.data.subtreeHeight = ownH;
+    return ownH;
+  }
+  // sum each child's subtree
+  let sum = 0;
+  for(let i=0; i<node.children.length; i++){
+    let c = node.children[i];
+    let childH = computeSubtreeHeight(c);
+    sum += childH;
+    if(i < node.children.length - 1) {
+      // if next child is also a group at the same parent level => bigger spacing
+      let nextC = node.children[i+1];
+      if(isGroup(c) || isGroup(nextC)) {
+        sum += groupSpacing;
+      } else {
+        sum += childSpacing;
+      }
+    }
+  }
+  // parent's subtree = max(ownH, sum)
+  node.data.subtreeHeight = Math.max(ownH, sum);
+  return node.data.subtreeHeight;
+}
+computeSubtreeHeight(root);
+
+/* ---------- 4) Layout (Assign x,y) ---------- */
+
+/* 
+   We'll define horizontalSpacing between levels. Edit here if you want more or less. 
+*/
+const horizontalSpacing = 280;
+
+/* Recursively place children top->bottom, 
+   with child or group spacing in between. 
+   node.x, node.y => center of that node’s rectangle.
+*/
+function layoutNode(node, depth, topY) {
+  node.x = depth * horizontalSpacing;
+
+  if(!isGroup(node)) {
+    // leaf => place in the center of its own box
+    node.y = topY + node.data.nodeHeight/2;
+    return node.data.nodeHeight;
+  }
+
+  // is a group => place children stacked
+  let startY = topY;
+  for(let i=0; i<node.children.length; i++){
+    let c = node.children[i];
+    let used = layoutNode(c, depth+1, startY);
+    startY += used;
+
+    // spacing if there is a next sibling
+    if(i < node.children.length-1) {
+      let nextChild = node.children[i+1];
+      if(isGroup(c) || isGroup(nextChild)) {
+        startY += groupSpacing;
+      } else {
+        startY += childSpacing;
+      }
+    }
+  }
+  // parent's center = midpoint of the block
+  let blockHeight = startY - topY;
+  node.y = topY + blockHeight/2;
+  // parent's used height = max(own box, blockHeight)
+  return Math.max(node.data.nodeHeight, blockHeight);
+}
+// Start at topY=0
+layoutNode(root, 0, 0);
+
+/* ---------- 5) Draw in SVG ---------- */
+const svg = d3.select("#mindmap");
+const gAll = svg.append("g").attr("class","everything");
+
+const nodes = root.descendants();
+const links = root.links();
+
+/* bracketPath: shape like "[" 
+   We'll do an L shape with a vertical corner in the middle. 
+   For example:
+     M (x1, y1)
+     H (x1 + corner)
+     V (y2)
+     H (x2)
+   corner = some fraction or a fixed value
+*/
+function bracketPath(x1, y1, x2, y2) {
+  let corner = Math.min(40, (x2 - x1)*0.4); // maximum corner length
+  // if (x2<x1), swap so it doesn't get weird
+  if (corner < 0) corner *= -1;
+  return `M${x1},${y1}H${x1+corner}V${y2}H${x2}`;
+}
+
+function leftEdge(d){
+  return d.x - rectWidth(d)/2;
+}
+function rightEdge(d){
+  return d.x + rectWidth(d)/2;
+}
+
+/* Draw links from parent's right edge to child's left edge */
+gAll.selectAll("path.link")
+  .data(links)
+  .join("path")
+  .attr("class", d => `link level${d.target.depth}-link`)
+  .attr("d", d => {
+    let sx = rightEdge(d.source);
+    let sy = d.source.y;
+    let tx = leftEdge(d.target);
+    let ty = d.target.y;
+    return bracketPath(sx, sy, tx, ty);
+  });
+
+/* Draw nodes: rectangle + foreignObject for wrapping text */
+const nodeG = gAll.selectAll("g.node")
+  .data(nodes)
+  .join("g")
+  .attr("class", d => `node level${d.depth}-node`)
+  .attr("transform", d => `translate(${d.x},${d.y})`);
+
+nodeG.append("rect")
+  .each(function(d){
+    const w = rectWidth(d);
+    const h = d.data.nodeHeight;
+    d3.select(this)
+      .attr("x", -w/2)
+      .attr("y", -h/2)
+      .attr("width", w)
+      .attr("height", h);
+  });
+
+nodeG.append("foreignObject")
+  .attr("class", "node-fo")
+  .each(function(d){
+    const w = rectWidth(d);
+    const h = d.data.nodeHeight;
+    d3.select(this)
+      .attr("x", -w/2)
+      .attr("y", -h/2)
+      .attr("width", w)
+      .attr("height", h)
+      .append("xhtml:div")
+      .html(d.data.name);
+  });
+
+/* Auto-fit via viewBox */
+const bbox = gAll.node().getBBox();
+const margin = 40;
+svg.attr("viewBox", [
+  bbox.x - margin,
+  bbox.y - margin,
+  bbox.width + margin*2,
+  bbox.height + margin*2
+]);
+</script>
+</body>
+</html>

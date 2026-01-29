@@ -1,0 +1,139 @@
+/* Basic full-window setup */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #fff;
+}
+
+/* Master node rectangle styles (applies to all levels if not overridden) */
+.node rect {
+  fill:  rgba(242, 242, 242, 1);
+  stroke: rgba(255, 255, 255, 0);
+  stroke-width: 0px;
+  rx: 8;
+  ry: 8;
+}
+
+/* Master text/foreignObject styles */
+.node text,
+.node-fo > div {
+  font-family: "Inter Tight", "SF Compact", sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.2em;
+  letter-spacing: -0.88px;
+  color: rgba(0, 0, 0, 0.88);
+  text-align: center;
+}
+
+/* If you're using <text> elements (not foreignObject) and want precise centering: */
+.node text {
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+/* If you're using foreignObject: center the div flexbox-style */
+.node-fo > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 6px;
+}
+
+/* Master link styles */
+.link {
+  fill: none;
+  stroke: rgba(228, 228, 228, 1);
+  stroke-width: 1px;
+}
+
+/* LEVEL-SPECIFIC OVERRIDES (levels 1..5) */
+
+/* Level 1 */
+.node-level1 rect {
+  fill: #000;
+  stroke: #000;
+}
+.node-level1 text,
+.node-level1 .node-fo > div {
+  color: #fff;
+}
+.link-level1 {
+  stroke: #666;
+}
+
+/* Level 2 */
+.node-level2 rect {
+  fill: #f2649c;
+  stroke: #e65088;
+}
+.node-level2 text,
+.node-level2 .node-fo > div {
+  color: #fff;
+}
+.link-level2 {
+  stroke: #999;
+}
+
+/* Level 3 */
+.node-level3 rect {
+  fill: #fafafa;
+  stroke: #ccc;
+}
+.node-level3 text,
+.node-level3 .node-fo > div {
+  color: #333;
+}
+.link-level3 {
+  stroke: #999;
+}
+
+/* Level 4 */
+.node-level4 rect {
+  fill: #f2f2ff;
+  stroke: #ccc;
+}
+.node-level4 text,
+.node-level4 .node-fo > div {
+  color: #333;
+  text-align: left; /* example override if needed */
+}
+.link-level4 {
+  stroke: #aaa;
+}
+
+/* Level 5 */
+.node-level5 rect {
+  fill: #fff0f5;
+  stroke: #ccc;
+}
+.node-level5 text,
+.node-level5 .node-fo > div {
+  color: #333;
+  text-align: left;
+}
+.link-level5 {
+  stroke: #aaa;
+}
+
+/* Up to 10 items in Level 2 - Individual color schemes */
+.level2-item1 rect { fill: #6e87ff; stroke: #4660b8; stroke-width: 0px; }
+.level2-item2 rect { fill: #ad6cff; stroke: #7a3dcc; stroke-width: 0px; }
+.level2-item3 rect { fill: #ff8150; stroke: #cc501e; stroke-width: 0px; }
+.level2-item4 rect { fill: #ffbd50; stroke: #cc8d1e; stroke-width: 0px; }
+.level2-item5 rect { fill: #51e1a8; stroke: #38b080; stroke-width: 0px; }
+.level2-item6 rect { fill: #ffdceb; stroke: #ffa2ca; stroke-width: 0px; }
+.level2-item7 rect { fill: #ffee55; stroke: #ccbb11; stroke-width: 0px; }
+.level2-item8 rect { fill: #cccccc; stroke: #999999; stroke-width: 0px; }
+.level2-item9 rect { fill: #c2ffd6; stroke: #68cc8f; stroke-width: 0px; }
+.level2-item10 rect { fill: #f2649c; stroke: #e65088; stroke-width: 0px; } 

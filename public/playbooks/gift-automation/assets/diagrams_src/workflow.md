@@ -1,11 +1,11 @@
 ---
-rankdir: TB
+rankdir: LR
 nodesep: 90
 ranksep: 90
 ---
 
 ```mermaid
-flowchart TB
+flowchart LR
   T["Trigger: upcoming occasion"] --> C{"Enough context?"}
   C -->|No| Q["Ask 1-3 questions"]
   Q --> C
