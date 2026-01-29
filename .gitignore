@@ -22,3 +22,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# big folders
+docs/fletch_pmm
+docs/lenny_diagrams_and_visuals
+docs/nano_banana_diagrams

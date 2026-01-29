@@ -16,6 +16,11 @@
  *   From file (JSON or YAML):
  *     <Messages style="imessage" src="/data/conversation.json" />
  * 
+ *   Mode control:
+ *     <Messages mode="light" ... />  <!-- Force light -->
+ *     <Messages mode="dark" ... />   <!-- Force dark -->
+ *     <Messages mode="auto" ... />   <!-- Use prefers-color-scheme (default) -->
+ * 
  * Message format:
  *   - user: number (1, 2, 3...) - required, determines alignment/color
  *   - text: string - required, the message content
@@ -23,7 +28,7 @@
  *   - avatar?: string - optional, URL to avatar image
  *   - timestamp?: string - optional, displayed below message
  * 
- * Styles: whatsapp | imessage | chatgpt
+ * Styles: whatsapp | imessage | chatgpt | claudecode | opencode | telegram
  */
 
 import { parse as parseYAML } from 'yaml';
@@ -37,14 +42,19 @@ export interface Message {
 }
 
 export interface Props {
-  style?: 'whatsapp' | 'imessage' | 'chatgpt' | 'claudecode' | 'opencode';
+  style?: 'whatsapp' | 'imessage' | 'chatgpt' | 'claudecode' | 'opencode' | 'telegram';
   messages?: Message[];
   src?: string;
   /** Footer label for OpenCode style, e.g. "Build · Claude Opus 4.5" */
   agent?: string;
+  /** Force light or dark mode; 'auto' uses prefers-color-scheme */
+  mode?: 'light' | 'dark' | 'auto';
 }
 
-const { style = 'imessage', messages: inlineMessages, src, agent } = Astro.props;
+const { style = 'imessage', messages: inlineMessages, src, agent, mode = 'auto' } = Astro.props;
+
+// Compute mode class
+const modeClass = mode === 'auto' ? '' : `mode-${mode}`;
 
 let messages: Message[] = inlineMessages || [];
 
@@ -71,7 +81,7 @@ function shouldShowName(index: number, platformStyle: string): boolean {
   const current = messages[index];
   
   // User 1 (self) never shows name on these platforms - position + style is enough
-  const noSelfNamePlatforms = ['imessage', 'whatsapp', 'chatgpt', 'claudecode', 'opencode'];
+  const noSelfNamePlatforms = ['imessage', 'whatsapp', 'chatgpt', 'claudecode', 'opencode', 'telegram'];
   if (current.user === 1 && noSelfNamePlatforms.includes(platformStyle)) {
     return false;
   }
@@ -100,7 +110,7 @@ function getUserClass(user: number): string {
 }
 ---
 
-<div class={`messages-container messages-${style}`}>
+<div class={`messages-container messages-${style}${modeClass ? ` ${modeClass}` : ''}`}>
   {messages.map((msg, i) => (
     <div class={`message-wrapper ${getUserClass(msg.user)}${isNewSpeaker(i) ? ' new-speaker' : ''}`}>
       {msg.avatar && (
@@ -500,20 +510,176 @@ function getUserClass(user: number): string {
     font-family: ui-monospace, 'SF Mono', Menlo, monospace;
   }
 
-  /* Dark mode support */
+  /* ========================================
+     Telegram Style
+     ======================================== */
+  .messages-telegram {
+    background: #fff;
+  }
+
+  .messages-telegram .message-wrapper {
+    max-width: 80%;
+  }
+
+  .messages-telegram .message-name {
+    color: #7b68ee;
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  .messages-telegram .message-timestamp {
+    color: #999;
+    font-size: 0.6875rem;
+  }
+
+  /* Sent messages: purple/lavender bubble */
+  .messages-telegram .user-self .message-bubble {
+    background: linear-gradient(135deg, #a98eff 0%, #8b7bef 100%);
+    color: #fff;
+    border-radius: 1rem 1rem 0.25rem 1rem;
+    padding: 0.5rem 0.75rem;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06);
+  }
+
+  .messages-telegram .user-self .message-timestamp {
+    color: rgba(255, 255, 255, 0.7);
+    text-align: right;
+  }
+
+  /* Received messages: white bubble with subtle shadow */
+  .messages-telegram .user-other .message-bubble {
+    background: #fff;
+    color: #000;
+    border-radius: 1rem 1rem 1rem 0.25rem;
+    padding: 0.5rem 0.75rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Group chat name colors */
+  .messages-telegram .user-2 .message-name { color: #7b68ee; }
+  .messages-telegram .user-3 .message-name { color: #e85f99; }
+  .messages-telegram .user-4 .message-name { color: #5fb3b3; }
+
+  /* ========================================
+     Dark Mode Support
+     ======================================== */
+  
+  /* Explicit dark mode class */
+  .messages-container.mode-dark.messages-imessage {
+    background: #1c1c1e;
+  }
+
+  .messages-container.mode-dark.messages-imessage .user-other .message-bubble {
+    background: #3a3a3c;
+    color: #fff;
+  }
+
+  .messages-container.mode-dark.messages-imessage .message-name,
+  .messages-container.mode-dark.messages-imessage .message-timestamp {
+    color: #98989d;
+  }
+
+  .messages-container.mode-dark.messages-whatsapp {
+    background: #0b141a;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%231f2c34' fill-opacity='0.5'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .messages-container.mode-dark.messages-whatsapp .user-self .message-bubble {
+    background: #005c4b;
+  }
+
+  .messages-container.mode-dark.messages-whatsapp .user-other .message-bubble {
+    background: #202c33;
+    color: #e9edef;
+  }
+
+  .messages-container.mode-dark.messages-whatsapp .message-name {
+    color: #00a884;
+  }
+
+  .messages-container.mode-dark.messages-whatsapp .message-timestamp {
+    color: #8696a0;
+  }
+
+  .messages-container.mode-dark.messages-telegram {
+    background: #17212b;
+  }
+
+  .messages-container.mode-dark.messages-telegram .user-other .message-bubble {
+    background: #182533;
+    color: #f5f5f5;
+    box-shadow: none;
+  }
+
+  .messages-container.mode-dark.messages-telegram .message-timestamp {
+    color: #6c7883;
+  }
+
+  /* Explicit light mode class (overrides system dark mode) */
+  .messages-container.mode-light.messages-imessage {
+    background: #fff;
+  }
+
+  .messages-container.mode-light.messages-imessage .user-other .message-bubble {
+    background: #e9e9eb;
+    color: #000;
+  }
+
+  .messages-container.mode-light.messages-imessage .message-name,
+  .messages-container.mode-light.messages-imessage .message-timestamp {
+    color: #8e8e93;
+  }
+
+  /* Auto mode: use prefers-color-scheme */
   @media (prefers-color-scheme: dark) {
-    .messages-imessage {
+    .messages-container:not(.mode-light).messages-imessage {
       background: #1c1c1e;
     }
 
-    .messages-imessage .user-other .message-bubble {
+    .messages-container:not(.mode-light).messages-imessage .user-other .message-bubble {
       background: #3a3a3c;
       color: #fff;
     }
 
-    .messages-imessage .message-name,
-    .messages-imessage .message-timestamp {
+    .messages-container:not(.mode-light).messages-imessage .message-name,
+    .messages-container:not(.mode-light).messages-imessage .message-timestamp {
       color: #98989d;
+    }
+
+    .messages-container:not(.mode-light).messages-whatsapp {
+      background: #0b141a;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%231f2c34' fill-opacity='0.5'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .messages-container:not(.mode-light).messages-whatsapp .user-self .message-bubble {
+      background: #005c4b;
+    }
+
+    .messages-container:not(.mode-light).messages-whatsapp .user-other .message-bubble {
+      background: #202c33;
+      color: #e9edef;
+    }
+
+    .messages-container:not(.mode-light).messages-whatsapp .message-name {
+      color: #00a884;
+    }
+
+    .messages-container:not(.mode-light).messages-whatsapp .message-timestamp {
+      color: #8696a0;
+    }
+
+    .messages-container:not(.mode-light).messages-telegram {
+      background: #17212b;
+    }
+
+    .messages-container:not(.mode-light).messages-telegram .user-other .message-bubble {
+      background: #182533;
+      color: #f5f5f5;
+      box-shadow: none;
+    }
+
+    .messages-container:not(.mode-light).messages-telegram .message-timestamp {
+      color: #6c7883;
     }
   }
 </style>

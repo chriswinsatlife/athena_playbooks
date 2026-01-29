@@ -1,0 +1,246 @@
+---
+import Base from '../layouts/Base.astro';
+import Notifications from '../components/Notifications.astro';
+---
+
+<Base title="Notifications Component Demo">
+  <main class="p-8 space-y-12 max-w-4xl mx-auto">
+    <h1 class="text-3xl font-heading font-bold">Notifications Component Demo</h1>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Liquid Glass (macOS 26 / iOS 26) - With Background Image</h2>
+      <Notifications
+        style="liquidglass"
+        background="https://images.unsplash.com/photo-1579380656108-f98e4df8ea62?q=80&w=800&auto=format&fit=crop"
+        notifications={[
+          { 
+            app: "Slack", 
+            title: "#engineering", 
+            body: "Alex: Can someone review my PR?", 
+            time: "now",
+            icon: "https://cdn.brandfetch.io/idAFahCUN9/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B"
+          },
+          { 
+            app: "Gmail", 
+            title: "New message from Lisa", 
+            body: "Re: Q4 Planning - sounds good!", 
+            time: "2m ago",
+            icon: "https://cdn.brandfetch.io/idnrCPuv87/w/400/h/400/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B"
+          }
+        ]}
+      />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Liquid Glass - Light Mode</h2>
+      <Notifications
+        style="liquidglass"
+        mode="light"
+        background="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop"
+        notifications={[
+          { 
+            app: "Google Calendar", 
+            title: "Meeting in 15 minutes", 
+            body: "Weekly Sync with Product Team", 
+            time: "now",
+            icon: "https://cdn.brandfetch.io/id6dQiJaLw/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B"
+          },
+          { 
+            app: "WhatsApp", 
+            title: "Sarah", 
+            body: "Are we still on for lunch tomorrow?", 
+            time: "3m ago",
+            icon: "https://cdn.brandfetch.io/idZdZ4yCBb/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B"
+          }
+        ]}
+      />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Liquid Glass - Gradient Background</h2>
+      <Notifications
+        style="liquidglass"
+        background="linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f64f59 100%)"
+        notifications={[
+          { 
+            app: "ChatGPT", 
+            title: "Response ready", 
+            body: "Your code review is complete", 
+            time: "now",
+            icon: "https://cdn.brandfetch.io/idR3duQxYl/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B"
+          },
+          { 
+            app: "Figma", 
+            title: "Design update", 
+            body: "Alex made changes to Homepage v2", 
+            time: "5m ago",
+            icon: "https://cdn.brandfetch.io/idZHcZ_i7F/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B"
+          }
+        ]}
+      />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-4">With Custom Icons</h2>
+      <Notifications
+        style="macos"
+        mode="dark"
+        notifications={[
+          { 
+            app: "Slack", 
+            title: "#engineering", 
+            body: "Alex: Can someone review my PR?", 
+            time: "now",
+            icon: "https://cdn.brandfetch.io/idAFahCUN9/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B"
+          },
+          { 
+            app: "WhatsApp", 
+            title: "Sarah", 
+            body: "Are we still on for lunch tomorrow?", 
+            time: "1m ago",
+            icon: "https://cdn.brandfetch.io/idZdZ4yCBb/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B"
+          },
+          { 
+            app: "Google Calendar", 
+            title: "Meeting in 15 minutes", 
+            body: "Weekly Sync with Product Team", 
+            time: "2m ago",
+            icon: "https://cdn.brandfetch.io/id6dQiJaLw/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B"
+          },
+          { 
+            app: "Google Docs", 
+            title: "New comment from Alex", 
+            body: "Can we revisit this section?", 
+            time: "3m ago",
+            icon: "https://cdn.brandfetch.io/idJz-FuJWL/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B"
+          },
+          { 
+            app: "Gmail", 
+            title: "New message from Lisa", 
+            body: "Re: Q4 Planning - sounds good!", 
+            time: "5m ago",
+            icon: "https://cdn.brandfetch.io/idnrCPuv87/w/400/h/400/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B"
+          },
+          { 
+            app: "ChatGPT", 
+            title: "Response ready", 
+            body: "Your code review is complete", 
+            time: "8m ago",
+            icon: "https://cdn.brandfetch.io/idR3duQxYl/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B"
+          },
+          { 
+            app: "Figma", 
+            title: "Design update", 
+            body: "Alex made changes to Homepage v2", 
+            time: "10m ago",
+            icon: "https://cdn.brandfetch.io/idZHcZ_i7F/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B"
+          },
+          { 
+            app: "GitHub", 
+            title: "CI passed", 
+            body: "All checks passed on main", 
+            time: "12m ago",
+            icon: "https://cdn.brandfetch.io/idZlbiNww4/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B"
+          }
+        ]}
+      />
+    </section>
+    
+    <section>
+      <h2 class="text-xl font-semibold mb-4">macOS Style (Tahoe/Sequoia) - Dark</h2>
+      <Notifications
+        style="macos"
+        mode="dark"
+        notifications={[
+          { app: "X", title: "Joey replied:", body: "Now I like it", time: "now" },
+          { app: "Accessibility", title: "What's new with Vehicle Motion...", body: "See what's new with Vehicle Motion Cues in iOS 26.", time: "1m ago" }
+        ]}
+      />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-4">macOS Style - Light</h2>
+      <Notifications
+        style="macos"
+        mode="light"
+        notifications={[
+          { app: "Messages", title: "Mom", body: "Don't forget dinner at 7!", time: "now" },
+          { app: "Calendar", title: "Team Standup", body: "Starting in 5 minutes", time: "2m ago" },
+          { app: "Slack", title: "#engineering", body: "Alex mentioned you in a thread", time: "5m ago" }
+        ]}
+      />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-4">iOS Style - Dark</h2>
+      <Notifications
+        style="ios"
+        mode="dark"
+        notifications={[
+          { app: "Mail", title: "New message from Sarah", body: "Re: Project timeline update", time: "just now" },
+          { app: "Reminders", title: "Pick up groceries", body: "Milk, eggs, bread", time: "10m ago" }
+        ]}
+      />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-4">iOS Style - Light</h2>
+      <Notifications
+        style="ios"
+        mode="light"
+        notifications={[
+          { app: "Photos", title: "Memory Ready", body: "Trip to the mountains - 2 years ago", time: "1h ago" },
+          { app: "News", title: "Breaking News", body: "Major announcement expected today", time: "15m ago" }
+        ]}
+      />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Android Style (Material You) - Dark</h2>
+      <Notifications
+        style="android"
+        mode="dark"
+        notifications={[
+          { app: "Gmail", title: "New email from Alex", body: "Hey, can we reschedule our meeting?", time: "3m ago" },
+          { app: "YouTube", title: "New video uploaded", body: "Your favorite channel posted a new video", time: "1h ago" }
+        ]}
+      />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Android Style - Light</h2>
+      <Notifications
+        style="android"
+        mode="light"
+        notifications={[
+          { app: "Maps", title: "Traffic update", body: "Accident on your usual route", time: "5m ago" },
+          { app: "Drive", title: "Shared document", body: "Alex shared 'Q4 Report' with you", time: "20m ago" }
+        ]}
+      />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Windows 11 Style - Dark</h2>
+      <Notifications
+        style="windows"
+        mode="dark"
+        notifications={[
+          { app: "Teams", title: "New message", body: "Sarah: Can you review my PR?", time: "now" },
+          { app: "Outlook", title: "Meeting reminder", body: "Design review in 15 minutes", time: "14m" }
+        ]}
+      />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Windows 11 Style - Light</h2>
+      <Notifications
+        style="windows"
+        mode="light"
+        notifications={[
+          { app: "Edge", title: "Download complete", body: "report.pdf finished downloading", time: "just now" },
+          { app: "Settings", title: "Update available", body: "Windows 11 24H2 is ready to install", time: "1h ago" }
+        ]}
+      />
+    </section>
+  </main>
+</Base>

@@ -69,6 +69,20 @@ import Messages from '../components/Messages.astro';
     </section>
 
     <section>
+      <h2 class="text-xl font-semibold mb-4">Telegram Style</h2>
+      <Messages
+        style="telegram"
+        messages={[
+          { user: 1, name: "Me", text: "Send a dice emoji to roll a die!", timestamp: "9:25 AM" },
+          { user: 2, name: "Alex", text: "Passed!", timestamp: "9:40 AM" },
+          { user: 1, text: "Advance to Illinois Ave. If you pass Go, collect coffee", timestamp: "9:25 AM" },
+          { user: 2, text: "Okay", timestamp: "9:41 AM" },
+          { user: 1, text: "Wait for me there.", timestamp: "9:41 AM" }
+        ]}
+      />
+    </section>
+
+    <section>
       <h2 class="text-xl font-semibold mb-4">WhatsApp Group Chat (3+ users)</h2>
       <Messages
         style="whatsapp"
