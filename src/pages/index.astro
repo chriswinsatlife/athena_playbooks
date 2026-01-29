@@ -1,29 +1,797 @@
 ---
-import Base from '../layouts/Base.astro';
+import AthenaComBase from '../layouts/AthenaComBase.astro';
 ---
 
-<Base title="Athena Playbooks">
-  <div class="min-h-screen bg-base-100">
-    <div class="navbar bg-base-200">
-      <div class="flex-1">
-        <a class="btn btn-ghost text-xl">Athena Playbooks</a>
-      </div>
-      <div class="flex-none">
-        <ul class="menu menu-horizontal px-1">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-        </ul>
-      </div>
-    </div>
+<style is:global>
+  @media screen and (max-width: 991px) {
+    .athena.nav[data-mobile-open='0'] .nav-links-container {
+      display: none;
+    }
+    .athena.nav[data-mobile-open='1'] .nav-links-container {
+      display: flex;
+    }
+    .athena.nav[data-mobile-open='0'] .trigger.hamburger {
+      display: block;
+    }
+    .athena.nav[data-mobile-open='0'] .trigger.close {
+      display: none;
+    }
+    .athena.nav[data-mobile-open='1'] .trigger.hamburger {
+      display: none;
+    }
+    .athena.nav[data-mobile-open='1'] .trigger.close {
+      display: block;
+    }
+  }
+</style>
 
-    <div class="hero bg-base-200 min-h-screen">
-      <div class="hero-content text-center">
-        <div class="max-w-md">
-          <h1 class="text-5xl font-bold">Welcome</h1>
-          <p class="py-6">DaisyUI and Maggie's components are ready to use!</p>
-          <button class="btn btn-primary">Get Started</button>
+<AthenaComBase>
+  <Fragment slot="head">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" is:inline></script>
+  </Fragment>
+
+  <div data-wf--navigation-bar-version-2--variant="base">
+    <div class="athena sticky-nav">
+      <nav data-mobile-open="0" class="athena nav">
+        <div class="athena nav_format_source mobile-links"></div>
+        <a href="/" aria-current="page" class="athena svg-logo-nav w-inline-block w--current">
+          <div class="athena svg-logo w-embed">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 123 20">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M7.75283 0L0 19.9715H2.61906L9.1665 2.7433L15.7139 19.9715H15.7625L15.6704 19.7292L15.767 19.9715H18.4674L10.7436 0H7.75283ZM12.1316 10.4173L12.8566 12.3252H12.8633L12.1316 10.4173Z"
+                fill="currentColor"
+                shape-rendering="geometricPrecision"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M112.285 0L104.533 19.9715H107.169L113.716 2.7433L120.264 19.9715H120.295L120.203 19.7291L120.3 19.9715H123L115.276 0H112.285ZM117.389 12.3252H117.396L116.664 10.4179L117.389 12.3252Z"
+                fill="currentColor"
+              />
+              <path
+                d="M18.8896 0H34.5985V2.28246H28.1916C28.0902 2.64418 28.0365 3.04932 28.0365 3.48835V16.4831C28.0365 18.1341 28.7969 19.3324 29.9883 19.4922V19.9715H23.5243V19.4922C24.7157 19.3058 25.4508 18.1341 25.4508 16.4831V3.48835C25.4508 3.04932 25.3989 2.64418 25.3001 2.28246H18.8896V0Z"
+                fill="currentColor"
+              />
+              <path
+                d="M76.0296 0V2.28246H65.7719C65.6706 2.64418 65.6168 3.04932 65.6168 3.48835V8.67333H74.2874V10.9558H65.6168V16.4831C65.6168 16.9205 65.6702 17.3261 65.7708 17.689H76.4071V19.9715H61.1047V19.4922C62.2961 19.3058 63.0312 18.1341 63.0312 16.4831V3.48835C63.0312 1.83738 62.2961 0.665719 61.1047 0.479318V2.7209e-06L76.0296 0Z"
+                fill="currentColor"
+              />
+              <path
+                d="M81.2071 19.9715V19.4922C82.3985 19.3058 83.1336 18.1341 83.1336 16.4831V3.48835C83.1336 1.83738 82.3985 0.665719 81.2071 0.479318V2.7209e-06H87.6711V0.479318C87.2137 0.55088 86.8198 0.767656 86.5081 1.10102L96.5352 15.2506V3.48835C96.5352 1.83738 95.8001 0.665719 94.6087 0.479318V2.7209e-06H101.073V0.479318C99.8813 0.665719 99.1208 1.83738 99.1208 3.48835V16.4831C99.1208 18.1341 99.8813 19.3324 101.073 19.4922V19.9715H94.6087V19.4922C95.1355 19.4097 95.5732 19.1346 95.8974 18.7106L85.8731 4.56491V17.6885C86.1522 18.6959 86.7952 19.3747 87.6711 19.4922V19.9715H81.2071Z"
+                fill="currentColor"
+              />
+              <path
+                d="M41.0357 0H38.5095V0.028533H36.535V0.507848C37.7264 0.694249 38.4616 1.86591 38.4616 3.51688V16.5117C38.4616 18.1626 37.7264 19.3343 36.535 19.5207V20H42.9991V19.5207C41.8077 19.3609 41.0472 18.1626 41.0472 16.5117V10.9843H51.5471V17.4743C51.3146 18.6071 50.6571 19.373 49.7133 19.5207V20H56.1773V19.5207C54.9859 19.3609 54.2254 18.1626 54.2254 16.5117V3.51688C54.2254 1.86591 54.9859 0.694249 56.1773 0.507848V0.028533H54.0733V0H51.5471V0.028533H49.7133V0.507848C50.6571 0.65551 51.3146 1.42146 51.5471 2.55418V8.70186H41.0472V3.51688C41.0472 1.86591 41.8077 0.694249 42.9991 0.507848V0.028533H41.0357V0Z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+        </a>
+
+        <div class="athena container nav-links-container">
+          <div class="athena nav-link-block has-dropdown">
+            <div class="athena nav-link-block">
+              <div class="athena nav-text">Pricing</div>
+              <div class="athena svg-icon _15-width w-embed">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 15 8" fill="none">
+                  <path
+                    d="M1 1L7.35085 6.5L13.7017 1"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="bevel"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="athena nav-dropdown-wrapper" style="display: none;">
+              <div class="athena nav-dropdown-link-container">
+                <a href="/pricing" class="athena nav-link-block w-inline-block">
+                  <div class="athena nav-text dropdown-link">Individuals</div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <a href="/how-it-works" class="athena nav-link-block w-inline-block"><div class="athena nav-text">How it works</div></a>
+          <a href="https://jobs.athena.com" target="_blank" rel="noreferrer" class="athena nav-link-block w-inline-block">
+            <div class="athena nav-text">Careers</div>
+          </a>
+          <div>
+            <a href="/signup" class="w-inline-block">
+              <div class="button"><div class="button-text">Join now</div></div>
+            </a>
+          </div>
+        </div>
+
+        <div class="athena nav-link-block hamburger">
+          <div data-openbutton class="athena trigger hamburger">
+            <div class="athena svg-icon _24-width w-embed">
+              <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 23 19" fill="none">
+                <path d="M1 1.55469H22" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" />
+                <path d="M1 9.42969H22" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" />
+                <path d="M1 17.3047H22" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+          <div data-closebutton class="athena trigger close">
+            <div class="athena svg-icon _24-width w-embed">
+              <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 19 19" fill="none">
+                <path d="M2.07568 2.00586L16.9249 16.8551" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" />
+                <path d="M16.9243 2.00586L2.07507 16.8551" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <main class="athena page-wrapper with-top-space">
+    <section>
+      <div class="athena section-background ivorymist">
+        <div class="athena section-padding large hero">
+          <div class="athena side-padding default">
+            <div class="athena max-width-center">
+              <div class="athena max-width small">
+                <div class="athena text-align center">
+                  <div class="athena container section-default">
+                    <div class="athena text-color legacy-green"><h1 class="athena h1">The best executive support is human + AI</h1></div>
+                    <div class="athena text-color comfortable-gray">
+                      <div class="athena body-20 reduce">
+                        Athena Executive Assistants combine human judgment with intelligent automation to deliver better support than either could alone.
+                      </div>
+                      <div class="athena max-width xsmall"></div>
+                    </div>
+                    <div class="athena fill-width-container">
+                      <div data-wf--web-component-library--button-version-2--variant="filled-deepforest">
+                        <a href="/signup" class="web-component-library--link-block w-inline-block">
+                          <div class="web-component-library--button w-variant-842e2abc-f07c-c465-530c-4f31e7bc58a8">
+                            <div class="web-component-library--button-text">Get started</div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="athena section-background ivorymist">
+      <div class="athena section-background graphics-hero">
+        <div class="hero-graphics-block">
+          <img
+            src="https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/694474aacc8f67e5fc7037cf_Hero-Graphics_Dec2025.png"
+            loading="lazy"
+            sizes="(max-width: 1260px) 100vw, 1260px"
+            srcset="https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/694474aacc8f67e5fc7037cf_Hero-Graphics_Dec2025-p-500.png 500w, https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/694474aacc8f67e5fc7037cf_Hero-Graphics_Dec2025-p-800.png 800w, https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/694474aacc8f67e5fc7037cf_Hero-Graphics_Dec2025-p-1080.png 1080w, https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/694474aacc8f67e5fc7037cf_Hero-Graphics_Dec2025.png 1260w"
+            alt=""
+          />
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="athena section-background eucalyptus">
+        <div class="athena section-padding large">
+          <div class="athena side-padding default">
+            <div class="athena max-width-center">
+              <div class="athena max-width small">
+                <div class="athena text-align center">
+                  <div class="athena container section-default">
+                    <div class="athena max-width-center">
+                      <div class="athena max-width xxxsmall"><h2 class="athena h2">An evolution in support</h2></div>
+                    </div>
+                    <div class="athena max-width xsmall">
+                      <div class="athena body-18 reduce">
+                        Traditional assistants focus on a limited administrative scope tied to the office. Athena Executive Assistants (EAs) offer daily strategic partnership across your personal and professional worlds.
+                      </div>
+                    </div>
+                    <div class="athena fill-width-container">
+                      <div data-wf--web-component-library--button-version-2--variant="filled-white-no-border">
+                        <a href="/signup" class="web-component-library--link-block w-inline-block">
+                          <div class="web-component-library--button w-variant-9275b217-de2f-5b0e-3c14-b9cccf1f07dd">
+                            <div class="web-component-library--button-text">Learn more</div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div class="athena grid main-evolution">
+                        <div class="athena element-roundcorner">
+                          <div class="athena section-background sage">
+                            <div class="athena padded-element _16"><div class="athena body-head-36 reduce">Athena services</div></div>
+                          </div>
+                        </div>
+
+                        <div class="athena grid solo-column-fill top-auto-body-fill">
+                          <div class="athena element-roundcorner no-bottom">
+                            <div class="athena section-background deepmoss">
+                              <div class="athena padded-element _16"><div class="athena body-20">Executive Assistant</div></div>
+                            </div>
+                          </div>
+                          <div class="athena card evolution-body">
+                            <div class="athena flexbox x-left gap16">
+                              <div class="athena flexbox text-icon-combo">
+                                <div class="athena svg-icon w-embed">
+                                  <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-top:2px">
+                                    <path
+                                      d="M8.81802 12.3107L10.9393 14.432L15.182 10.1893M21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12Z"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                  </svg>
+                                </div>
+                                <div class="athena flexbox x-left gap0">
+                                  <div class="athena body-default bold">A full-time Executive Assistant</div>
+                                  <div class="athena body-default">Solely committed to your success, in your time zone.</div>
+                                </div>
+                              </div>
+                              <div class="athena flexbox text-icon-combo">
+                                <div class="athena svg-icon w-embed">
+                                  <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-top:2px">
+                                    <path
+                                      d="M8.81802 12.3107L10.9393 14.432L15.182 10.1893M21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12Z"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                  </svg>
+                                </div>
+                                <div class="athena flexbox x-left gap0">
+                                  <div class="athena body-default bold">EA management and upskilling</div>
+                                  <div class="athena body-default">
+                                    Your EA has an Athena manager responsible for their training, performance management, and career development. You get a prepared partner, not another direct report.
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="athena grid solo-column-fill top-auto-body-fill">
+                          <div class="athena element-roundcorner no-bottom">
+                            <div class="athena section-background sage">
+                              <div class="athena padded-element _16">
+                                <div class="athena text-color deepforest"><div class="athena body-20 bold">AI Technology &amp; Systems</div></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="athena relative-container">
+                            <div class="athena card evolution-body sage">
+                              <div class="athena grid _2-col tablet-break">
+                                <div class="athena flexbox text-icon-combo">
+                                  <div class="athena svg-icon w-embed">
+                                    <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-top:2px">
+                                      <path
+                                        d="M8.81802 12.3107L10.9393 14.432L15.182 10.1893M21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12Z"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                      />
+                                    </svg>
+                                  </div>
+                                  <div class="athena flexbox x-left gap0">
+                                    <div class="athena body-default bold">AI meets EQ</div>
+                                    <div class="athena body-default">
+                                      Athena's integrated support combines the speed, memory, and efficiency of AI with the sound, strategic human judgment of your EA.
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="athena flexbox text-icon-combo">
+                                  <div class="athena svg-icon w-embed">
+                                    <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-top:2px">
+                                      <path
+                                        d="M8.81802 12.3107L10.9393 14.432L15.182 10.1893M21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12Z"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                      />
+                                    </svg>
+                                  </div>
+                                  <div class="athena flexbox x-left gap0">
+                                    <div class="athena body-default bold">Enterprise-grade security</div>
+                                    <div class="athena body-default">
+                                      Full-scale protections include global legal accountability, rigorous in-person vetting, cybersecurity, and advanced device monitoring.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="athena decor horizontal-line top eucalyptus"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="athena section-background ivorymist">
+        <div class="athena section-padding large">
+          <div class="athena side-padding default">
+            <div class="athena max-width default">
+              <div class="athena text-align center">
+                <div class="athena container section-default">
+                  <div class="athena max-width-center">
+                    <div class="athena max-width xsmall"><h2 class="athena h2">Expect more from an Executive Assistant</h2></div>
+                  </div>
+                  <div class="athena max-width-center">
+                    <div class="athena max-width xsmall">
+                      <div class="athena text-color comfortable-gray">
+                        <div class="athena body-18 reduce">
+                          Athena Executive Assistants (EAs) represent the top 0.5% from 300k+ global applicants each year. Our sophisticated matching protocol pairs you with an EA who feels like a natural fit.
+                          <br /><br />
+                          Athena's EAs anticipate and support needs you may have never considered across work, home, and everything in between.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div data-wf--web-component-library--button-version-2--variant="filled-sage">
+                      <a href="/signup" class="web-component-library--link-block w-inline-block">
+                        <div class="web-component-library--button"><div class="web-component-library--button-text">Get started</div></div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="athena top-margin _96">
+                <div class="athena text-align left">
+                  <div class="athena playbooks-home-container">
+                    <div class="athena card playbooks-home">
+                      <p class="athena body-26 reduce">Home &amp; Travel</p>
+                      <div>
+                        <div class="athena padded-element pillar"><p class="athena body-20 reduce">Curate gift ideas and book reservations</p></div>
+                        <div class="athena padded-element pillar"><p class="athena body-20 reduce">Arrange family vacations</p></div>
+                        <div class="athena padded-element pillar"><p class="athena body-20 reduce">Coordinate kids' activities</p></div>
+                        <div class="athena padded-element pillar last"><p class="athena body-20 reduce">Plan and run leadership offsites</p></div>
+                      </div>
+                    </div>
+
+                    <div class="athena card playbooks-home">
+                      <p class="athena body-26 reduce">Well-being &amp; Balance</p>
+                      <div>
+                        <div class="athena padded-element pillar"><p class="athena body-20 reduce">Schedule personal care and medical appointments</p></div>
+                        <div class="athena padded-element pillar"><p class="athena body-20 reduce">Support meal planning &amp; shopping</p></div>
+                        <div class="athena padded-element pillar"><p class="athena body-20 reduce">Manage inbox and priorities when OOO</p></div>
+                        <div class="athena padded-element pillar last"><p class="athena body-20 reduce">Protect deep work and productivity blocks</p></div>
+                      </div>
+                    </div>
+
+                    <div class="athena card playbooks-home">
+                      <p class="athena body-26 reduce">Execution &amp; Logistics</p>
+                      <div>
+                        <div class="athena padded-element pillar"><p class="athena body-20 reduce">Administer payroll</p></div>
+                        <div class="athena padded-element pillar"><p class="athena body-20 reduce">Manage content and social media accounts</p></div>
+                        <div class="athena padded-element pillar"><p class="athena body-20 reduce">Create prospecting funnels</p></div>
+                        <div class="athena padded-element pillar last"><p class="athena body-20 reduce">Run monthly vendor audits</p></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="athena section-background deepforest">
+        <div class="athena section-padding large">
+          <div class="athena side-padding default">
+            <div class="athena max-width large">
+              <div class="athena grid main-ai-grid">
+                <div class="athena container section-default desktop-left">
+                  <h2 class="athena body-head-48">AI-powered, human-led support</h2>
+                  <div>
+                    We're the only company currently building an AI tool designed specifically for executive support. Athena EAs are already proficient with today's AI and use it to knock out routine work in seconds. Our platform is being designed for the unique needs of executives, so your EA will soon be able to anticipate better and execute faster.
+                  </div>
+                  <div>
+                    <div data-wf--web-component-library--button-version-2--variant="filled-white-no-border">
+                      <a href="/signup" class="web-component-library--link-block w-inline-block">
+                        <div class="web-component-library--button w-variant-9275b217-de2f-5b0e-3c14-b9cccf1f07dd"><div class="web-component-library--button-text">Get started</div></div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <img
+                  src="https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/68bf85ad97a069c306935fcd_4132d29f57c3feaf8a6df20a95ce9da8_Table%20%2B%20Bar.webp"
+                  loading="lazy"
+                  sizes="(max-width: 1090px) 100vw, 1090px, 100vw"
+                  srcset="https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/68bf85ad97a069c306935fcd_4132d29f57c3feaf8a6df20a95ce9da8_Table%20%2B%20Bar-p-500.webp 500w, https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/68bf85ad97a069c306935fcd_4132d29f57c3feaf8a6df20a95ce9da8_Table%20%2B%20Bar-p-800.webp 800w, https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/68bf85ad97a069c306935fcd_4132d29f57c3feaf8a6df20a95ce9da8_Table%20%2B%20Bar-p-1080.webp 1080w, https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/68bf85ad97a069c306935fcd_4132d29f57c3feaf8a6df20a95ce9da8_Table%20%2B%20Bar.webp 1090w"
+                  alt=""
+                  class="athena image contain"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="athena section-background ivorymist">
+      <div class="athena relative-container">
+        <div class="athena section-padding large">
+          <div class="athena side-padding default">
+            <div class="athena max-width large">
+              <div class="athena container section-large">
+                <div class="athena fill-all-container">
+                  <div class="athena grid _2-col tablet-break">
+                    <div class="athena flexbox x-left">
+                      <p class="athena body-head-48">See the art of delegation in action</p>
+                      <div class="athena text-color"><p class="athena body-20">The world's best leaders delegate. Learn how they do it.</p></div>
+                    </div>
+                    <div>
+                      <a href="/art-of-delegation" class="cta-link w-inline-block">
+                        <p class="athena body-default">Visit Art of Delegation</p>
+                        <div class="athena svg-icon _15-width w-embed">
+                          <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_7_2)">
+                              <path
+                                d="M0.00012207 6.85742H15.0001M15.0001 6.85742L14.6981 6.76394C11.5827 5.79966 9.10196 3.42684 8.00012 0.357422M15.0001 6.85742L14.6981 6.9509C11.5827 7.91518 9.10196 10.288 8.00012 13.3574"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linejoin="bevel"
+                              />
+                            </g>
+                          </svg>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="w-dyn-list">
+                  <div role="list" class="collection-list w-dyn-items">
+                    <div role="listitem" class="collection-item-2 delegates-item w-dyn-item">
+                      <div class="content-01 delegates-card">
+                        <div class="leaderepisode-2">
+                          <a aria-label="video instructor name" href="/art-of-delegation/krupa-playforth" class="athena body-default">Dr. Krupa Playforth</a>
+                          <p class="d-dot">·</p>
+                          <a aria-label="video company name" href="/art-of-delegation/krupa-playforth" class="w-inline-block">
+                            <div class="athena text-color eucalyptus"><div class="athena body-default bold">The Pediatrician Mom</div></div>
+                          </a>
+                        </div>
+                        <a aria-label="video featured image" href="/art-of-delegation/krupa-playforth" class="link-block-3 w-inline-block">
+                          <img
+                            src="https://cdn.prod.website-files.com/651421937eea43597868872a/67fda2f3f07f02ad0fe1dec5_2dr-krupa-playforth_thumbnail.webp"
+                            loading="lazy"
+                            alt="Dr. Krupa Playforth"
+                            sizes="100vw"
+                            srcset="https://cdn.prod.website-files.com/651421937eea43597868872a/67fda2f3f07f02ad0fe1dec5_2dr-krupa-playforth_thumbnail-p-500.webp 500w, https://cdn.prod.website-files.com/651421937eea43597868872a/67fda2f3f07f02ad0fe1dec5_2dr-krupa-playforth_thumbnail-p-800.webp 800w, https://cdn.prod.website-files.com/651421937eea43597868872a/67fda2f3f07f02ad0fe1dec5_2dr-krupa-playforth_thumbnail-p-1080.webp 1080w, https://cdn.prod.website-files.com/651421937eea43597868872a/67fda2f3f07f02ad0fe1dec5_2dr-krupa-playforth_thumbnail.webp 1920w"
+                            class="thumbnail-01"
+                          />
+                        </a>
+                        <div class="more-info-copy">
+                          <div class="all-caps"><p class="athena body-default">Art of Delegation</p></div>
+                          <div class="all-caps"><p class="athena body-default">Healthcare</p></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div role="listitem" class="collection-item-2 delegates-item w-dyn-item">
+                      <div class="content-01 delegates-card">
+                        <div class="leaderepisode-2">
+                          <a aria-label="video instructor name" href="/art-of-delegation/jody-goehring" class="athena body-default">Jody Goehring</a>
+                          <p class="d-dot">·</p>
+                          <a aria-label="video company name" href="/art-of-delegation/jody-goehring" class="w-inline-block">
+                            <div class="athena text-color eucalyptus"><div class="athena body-default bold">HydePark Ventures</div></div>
+                          </a>
+                        </div>
+                        <a aria-label="video featured image" href="/art-of-delegation/jody-goehring" class="link-block-3 w-inline-block">
+                          <img
+                            src="https://cdn.prod.website-files.com/651421937eea43597868872a/680ef28b831c0829f06c8e36_jody-goehring_thumbnail.webp"
+                            loading="lazy"
+                            alt="Jody Goehring"
+                            sizes="100vw"
+                            srcset="https://cdn.prod.website-files.com/651421937eea43597868872a/680ef28b831c0829f06c8e36_jody-goehring_thumbnail-p-500.webp 500w, https://cdn.prod.website-files.com/651421937eea43597868872a/680ef28b831c0829f06c8e36_jody-goehring_thumbnail-p-800.webp 800w, https://cdn.prod.website-files.com/651421937eea43597868872a/680ef28b831c0829f06c8e36_jody-goehring_thumbnail.webp 1920w"
+                            class="thumbnail-01"
+                          />
+                        </a>
+                        <div class="more-info-copy">
+                          <div class="all-caps"><p class="athena body-default">Art of Delegation</p></div>
+                          <div class="all-caps"><p class="athena body-default">Franchise</p></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div role="listitem" class="collection-item-2 delegates-item w-dyn-item">
+                      <div class="content-01 delegates-card">
+                        <div class="leaderepisode-2">
+                          <a aria-label="video instructor name" href="/art-of-delegation/joel-nied" class="athena body-default">Joel Nied</a>
+                          <p class="d-dot">·</p>
+                          <a aria-label="video company name" href="/art-of-delegation/joel-nied" class="w-inline-block">
+                            <div class="athena text-color eucalyptus"><div class="athena body-default bold">Price Benowitz</div></div>
+                          </a>
+                        </div>
+                        <a aria-label="video featured image" href="/art-of-delegation/joel-nied" class="link-block-3 w-inline-block">
+                          <img
+                            src="https://cdn.prod.website-files.com/651421937eea43597868872a/67dcb4abde5b63b4d4d6fb55_joel-nied_homepage.webp"
+                            loading="lazy"
+                            alt="Joel Nied"
+                            sizes="100vw"
+                            srcset="https://cdn.prod.website-files.com/651421937eea43597868872a/67dcb4abde5b63b4d4d6fb55_joel-nied_homepage-p-500.webp 500w, https://cdn.prod.website-files.com/651421937eea43597868872a/67dcb4abde5b63b4d4d6fb55_joel-nied_homepage-p-800.webp 800w, https://cdn.prod.website-files.com/651421937eea43597868872a/67dcb4abde5b63b4d4d6fb55_joel-nied_homepage.webp 1920w"
+                            class="thumbnail-01"
+                          />
+                        </a>
+                        <div class="more-info-copy">
+                          <div class="all-caps"><p class="athena body-default">Art of Delegation</p></div>
+                          <div class="all-caps"><p class="athena body-default">Legal</p></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</Base>
+
+    <section class="athena prevent-overflow">
+      <div class="athena section-background eucalyptus">
+        <div class="athena section-padding large">
+          <div class="athena side-padding default">
+            <div class="athena max-width-center">
+              <div class="athena max-width medium">
+                <div class="athena text-align center">
+                  <h2 class="athena body-head-40 serif">We support the leaders that power <br />some of the world's top companies</h2>
+                </div>
+                <div class="athena top-margin _64">
+                  <div data-swiper="clients" class="custom-swiper">
+                    <div class="custom-swiper-wrapper">
+                      <div class="swiper-slide">
+                        <img
+                          src="https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/68c099a2dc4014b673f02eab_6813b5e844df225eb8b09c93_logo_sequoia.webp"
+                          loading="lazy"
+                          alt=""
+                          class="athena image main-clientlogo"
+                        />
+                      </div>
+                      <div class="swiper-slide">
+                        <img
+                          src="https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/68c099a2f2d5e0e03e6eb9a2_6813b5eb6706e6d08532b888_logo_shopify.webp"
+                          loading="lazy"
+                          alt=""
+                          class="athena image main-clientlogo"
+                        />
+                      </div>
+                      <div class="swiper-slide">
+                        <img
+                          src="https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/68c099a2815fc564f4c6844c_6813b5e8273e554af6b08a80_logo_AngelList.webp"
+                          loading="lazy"
+                          alt=""
+                          class="athena image main-clientlogo"
+                        />
+                      </div>
+                      <div class="swiper-slide">
+                        <img
+                          src="https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/68c099a22d9fd0c8a874beb8_6813b5ec685fd05119ae7798_logo_goldman.webp"
+                          loading="lazy"
+                          alt=""
+                          class="athena image main-clientlogo"
+                        />
+                      </div>
+                      <div class="swiper-slide">
+                        <img
+                          src="https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/68c099a24bb2c007db7b0314_6813b5eae8a6be9e53bb0746_logo_marriott.webp"
+                          loading="lazy"
+                          alt=""
+                          class="athena image main-clientlogo"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-wf--section---final-cta--variant="deep-forest">
+      <div class="athena section-background templated final-cta">
+        <div class="athena section-padding default">
+          <div class="athena side-padding default">
+            <div class="athena text-align center">
+              <div class="athena container section-default">
+                <div class="athena max-width xsmall"><h2 class="athena h2">Hire an elite <br />executive assistant</h2></div>
+                <div class="athena text-color templated final-cta">
+                  <div class="athena max-width xxsmall"><div class="athena body-20">Schedule a call to see how Athena can power your success.</div></div>
+                </div>
+                <div class="athena fill-width-container">
+                  <div data-wf--web-component-library--button-version-2--variant="filled-white-no-border">
+                    <a href="/signup" class="web-component-library--link-block w-inline-block">
+                      <div class="web-component-library--button w-variant-9275b217-de2f-5b0e-3c14-b9cccf1f07dd"><div class="web-component-library--button-text">Book a call</div></div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="athena section-background deepforest footer-special">
+      <div class="athena section-padding footer">
+        <div class="athena side-padding default">
+          <div class="athena grid footer-grid">
+            <div class="athena container default">
+              <a href="https://athena-82fb4f.webflow.io/athena-2025/homepage" class="w-inline-block">
+                <img
+                  src="https://cdn.prod.website-files.com/6513fda5217cc80d379e2473/67c54beacf7fd1150efb295b_Wordmark.svg"
+                  alt=""
+                  loading="lazy"
+                />
+              </a>
+
+              <div class="w-layout-hflex athena flexbox default-horizontal y-center">
+                <a href="https://www.facebook.com/athenacareersph/" class="w-inline-block"><div class="w-embed">
+                    <svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M9.396 22.5H13.396V14.49H17L17.396 10.51H13.396V8.5C13.396 8.23478 13.5014 7.98043 13.6889 7.79289C13.8764 7.60536 14.1308 7.5 14.396 7.5H17.396V3.5H14.396C13.0699 3.5 11.7981 4.02678 10.8605 4.96447C9.92278 5.90215 9.396 7.17392 9.396 8.5V10.51H7.396L7 14.49H9.396V22.5Z"
+                        fill="#E9E9E0"
+                      />
+                    </svg>
+                  </div></a
+                >
+                <a href="https://www.instagram.com/athenago/" class="w-inline-block"><div class="w-embed">
+                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M16.396 3C17.7221 3 18.9938 3.52678 19.9315 4.46447C20.8692 5.40215 21.396 6.67392 21.396 8V16C21.396 17.3261 20.8692 18.5979 19.9315 19.5355C18.9938 20.4732 17.7221 21 16.396 21H8.396C7.06991 21 5.79814 20.4732 4.86046 19.5355C3.92278 18.5979 3.396 17.3261 3.396 16V8C3.396 6.67392 3.92278 5.40215 4.86046 4.46447C5.79814 3.52678 7.06991 3 8.396 3H16.396ZM12.396 8C11.3351 8 10.3177 8.42143 9.56757 9.17157C8.81742 9.92172 8.396 10.9391 8.396 12C8.396 13.0609 8.81742 14.0783 9.56757 14.8284C10.3177 15.5786 11.3351 16 12.396 16C13.4569 16 14.4743 15.5786 15.2244 14.8284C15.9746 14.0783 16.396 13.0609 16.396 12C16.396 10.9391 15.9746 9.92172 15.2244 9.17157C14.4743 8.42143 13.4569 8 12.396 8ZM12.396 10C12.9264 10 13.4351 10.2107 13.8102 10.5858C14.1853 10.9609 14.396 11.4696 14.396 12C14.396 12.5304 14.1853 13.0391 13.8102 13.4142C13.4351 13.7893 12.9264 14 12.396 14C11.8656 14 11.3569 13.7893 10.9818 13.4142C10.6067 13.0391 10.396 12.5304 10.396 12C10.396 11.4696 10.6067 10.9609 10.9818 10.5858C11.3569 10.2107 11.8656 10 12.396 10ZM16.896 6.5C16.6308 6.5 16.3764 6.60536 16.1889 6.79289C16.0014 6.98043 15.896 7.23478 15.896 7.5C15.896 7.76522 16.0014 8.01957 16.1889 8.20711C16.3764 8.39464 16.6308 8.5 16.896 8.5C17.1612 8.5 17.4156 8.39464 17.6031 8.20711C17.7906 8.01957 17.896 7.76522 17.896 7.5C17.896 7.23478 17.7906 6.98043 17.6031 6.79289C17.4156 6.60536 17.1612 6.5 16.896 6.5Z"
+                        fill="#E9E9E0"
+                      />
+                    </svg>
+                  </div></a
+                >
+                <a href="https://www.youtube.com/@AthenaCareersPH/" class="w-inline-block"><div class="w-embed">
+                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M12.396 4C13.251 4 14.128 4.022 14.978 4.058L15.982 4.106L16.943 4.163L17.843 4.224L18.665 4.288C19.5572 4.35589 20.3968 4.73643 21.036 5.3626C21.6751 5.98877 22.0728 6.8204 22.159 7.711L22.199 8.136L22.274 9.046C22.344 9.989 22.396 11.017 22.396 12C22.396 12.983 22.344 14.011 22.274 14.954L22.199 15.864L22.159 16.289C22.0728 17.1798 21.6749 18.0115 21.0356 18.6377C20.3962 19.2639 19.5564 19.6443 18.664 19.712L17.844 19.775L16.944 19.837L15.982 19.894L14.978 19.942C14.1178 19.9793 13.257 19.9986 12.396 20C11.535 19.9986 10.6742 19.9793 9.814 19.942L8.81 19.894L7.849 19.837L6.949 19.775L6.127 19.712C5.23481 19.6441 4.3952 19.2636 3.75604 18.6374C3.11688 18.0112 2.71919 17.1796 2.633 16.289L2.593 15.864L2.518 14.954C2.44183 13.9711 2.40114 12.9858 2.396 12C2.396 11.017 2.448 9.989 2.518 9.046L2.593 8.136L2.633 7.711C2.71915 6.82055 3.11671 5.98905 3.75566 5.36291C4.39461 4.73676 5.23399 4.35612 6.126 4.288L6.947 4.224L7.847 4.163L8.809 4.106L9.813 4.058C10.6735 4.02073 11.5347 4.00139 12.396 4ZM10.396 9.575V14.425C10.396 14.887 10.896 15.175 11.296 14.945L15.496 12.52C15.5874 12.4674 15.6633 12.3916 15.7161 12.3003C15.7689 12.209 15.7967 12.1055 15.7967 12C15.7967 11.8945 15.7689 11.791 15.7161 11.6997C15.6633 11.6084 15.5874 11.5326 15.496 11.48L11.296 9.056C11.2048 9.00332 11.1013 8.9756 10.9959 8.97562C10.8905 8.97563 10.7871 9.00339 10.6958 9.0561C10.6046 9.1088 10.5289 9.1846 10.4762 9.27587C10.4236 9.36713 10.3959 9.47065 10.396 9.576V9.575Z"
+                        fill="#E9E9E0"
+                      />
+                    </svg>
+                  </div></a
+                >
+                <a href="https://x.com/athenago/" class="w-inline-block"><div class="w-embed">
+                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M13.729 10.929L18.942 5H17.706L13.179 10.147L9.565 5H5.396L10.862 12.783L5.396 19H6.631L11.41 13.564L15.226 19H19.396L13.729 10.929ZM12.037 12.852L11.483 12.076L7.076 5.911H8.974L12.531 10.888L13.083 11.664L17.706 18.134H15.809L12.037 12.852Z"
+                        fill="#E9E9E0"
+                      />
+                    </svg>
+                  </div></a
+                >
+                <a href="https://www.linkedin.com/company/athenago/" class="w-inline-block"><div class="w-embed">
+                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M7.836 8.885C8.636 8.885 9.276 8.235 9.276 7.445C9.276 6.655 8.626 6.005 7.836 6.005C7.046 6.005 6.396 6.655 6.396 7.445C6.396 8.235 7.046 8.885 7.836 8.885ZM10.646 9.975V17.995H13.126V14.035C13.126 12.985 13.326 11.975 14.616 11.975C15.906 11.975 15.906 13.175 15.906 14.095V17.995H18.396V13.595C18.396 11.435 17.936 9.77501 15.416 9.77501C14.206 9.77501 13.396 10.435 13.066 11.065H13.036V9.965H10.656L10.646 9.975ZM6.596 9.975H9.086V17.995H6.596V9.975Z"
+                        fill="#E9E9E0"
+                      />
+                    </svg>
+                  </div></a
+                >
+                <a href="https://www.tiktok.com/@athenacareersph/" class="w-inline-block"><div class="w-embed">
+                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M16.9962 5.82C16.3127 5.03953 15.936 4.0374 15.9362 3H12.8462V15.4C12.8228 16.0712 12.5397 16.7071 12.0565 17.1735C11.5732 17.6399 10.9278 17.9004 10.2562 17.9C8.83615 17.9 7.65615 16.74 7.65615 15.3C7.65615 13.58 9.31615 12.29 11.0262 12.82V9.66C7.57615 9.2 4.55615 11.88 4.55615 15.3C4.55615 18.63 7.31615 21 10.2462 21C13.3862 21 15.9362 18.45 15.9362 15.3V9.01C17.1892 9.90985 18.6935 10.3926 20.2362 10.39V7.3C20.2362 7.3 18.3562 7.39 16.9962 5.82Z"
+                        fill="#E9E9E0"
+                      />
+                    </svg>
+                  </div></a
+                >
+              </div>
+            </div>
+
+            <div class="athena flexbox default-horizontal gap96 mobile-reduce mobile-wrap">
+              <div class="athena text-color sage">
+                <div class="w-layout-vflex athena flexbox default-vertical">
+                  <div class="athena text-color white"><div class="athena body-18">About</div></div>
+                  <a href="/pricing" class="athena body-18">Pricing</a>
+                  <a href="/about" class="athena body-18">Company</a>
+                  <a href="/leadership" class="athena body-18">Leadership</a>
+                  <a href="https://jobs.athena.com/#openroles" class="athena body-18">Corporate Roles</a>
+                  <a href="/security" class="athena body-18">Security</a>
+                </div>
+              </div>
+              <div class="athena text-color sage">
+                <div class="w-layout-vflex athena flexbox default-vertical">
+                  <div class="athena text-color white"><div class="athena body-18">Resources</div></div>
+                  <a href="/blog" class="athena body-18">Blog</a>
+                  <a href="https://portal.athena.com" class="athena body-18">Client Portal</a>
+                  <a href="/art-of-delegation" class="athena body-18">Art of Delegation</a>
+                  <a href="/faqs" class="athena body-18">FAQs</a>
+                </div>
+              </div>
+              <div class="athena text-color sage">
+                <div class="w-layout-vflex athena flexbox default-vertical">
+                  <div class="athena text-color white"><div class="athena body-18">Assistants</div></div>
+                  <a href="https://jobs.athena.com/#benefits" class="athena body-18">Benefits</a>
+                  <a href="https://jobs.athena.com/#process" class="athena body-18">Hiring Process</a>
+                  <a href="https://jobs.athena.com/#testimonials" class="athena body-18">Testimonials</a>
+                  <a href="https://jobs.athena.com/#openroles" class="athena body-18">Apply Now</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-layout-hflex athena flexbox default-horizontal gap32 mobile-reduce mobile-wrap">
+              <p class="copyright-2024-athena-llc">Copyright © 2025 Athena LLC</p>
+              <a href="/terms" class="copyright-2024-athena-llc">Terms and Conditions</a>
+              <a href="/privacy" class="copyright-2024-athena-llc">Privacy Policy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script is:inline>
+    (function () {
+      const nav = document.querySelector('.athena.nav');
+      if (!nav) return;
+
+      const openBtn = nav.querySelector('[data-openbutton]');
+      const closeBtn = nav.querySelector('[data-closebutton]');
+
+      function setMobileOpen(isOpen) {
+        nav.setAttribute('data-mobile-open', isOpen ? '1' : '0');
+      }
+
+      openBtn?.addEventListener('click', () => setMobileOpen(true));
+      closeBtn?.addEventListener('click', () => setMobileOpen(false));
+
+      nav.querySelectorAll('a[href]').forEach((a) => {
+        a.addEventListener('click', () => {
+          const href = a.getAttribute('href') || '';
+          if (href.includes('#')) setMobileOpen(false);
+        });
+      });
+
+      const clientsEl = document.querySelector('.custom-swiper[data-swiper="clients"]');
+      if (clientsEl && typeof window.Swiper !== 'undefined') {
+        // eslint-disable-next-line no-new
+        new window.Swiper(clientsEl, {
+          wrapperClass: 'custom-swiper-wrapper',
+          slidesPerView: 5,
+          autoplay: { delay: 3000 },
+          spaceBetween: 16,
+          rewind: true,
+          breakpoints: {
+            0: { slidesPerView: 2 },
+            767: { slidesPerView: 4 },
+            991: { slidesPerView: 5 }
+          }
+        });
+      }
+    })();
+  </script>
+</AthenaComBase>
