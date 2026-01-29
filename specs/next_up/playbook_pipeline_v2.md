@@ -2,10 +2,12 @@
 
 Multi-step AI generation pipeline for Athena playbooks using JSON content collections.
 
+Tech: Bun + Vercel AI SDK v6 + Zod. No framework (Mastra etc) for v1.
+
 ## Design Principles
 
 - JSON as source of truth: AI generates structured JSON validated by Zod schema
-- Multi-step generation: content, diagrams, and images generated in separate phases
+- Multi-step generation: content, diagrams, and images in separate phases
 - Existing components: leverage built components for rich content embeds
 - Deterministic rendering: Astro templates render JSON to HTML; no MDX parsing complexity
 - Parallel generation: diagrams and images can be generated concurrently after content
@@ -13,8 +15,11 @@ Multi-step AI generation pipeline for Athena playbooks using JSON content collec
 ## Architecture Overview
 
 ```
+INPUT: Manual brief + source material (v1)
+       Automated research pipeline (v2, see playbook_research_pipeline.md)
+
 PHASE 1: Content Generation (AI)
-├── Input: playbook brief, source material, ontology
+├── Input: brief YAML + optional source material
 ├── Output: src/content/playbooks/<slug>.json
 └── Validation: Zod schema in src/content/config.ts
 
@@ -37,6 +42,30 @@ PHASE 3: Build (Astro)
 ├── Template components render each section type
 └── Output: static HTML
 ```
+
+## Input Format (v1: Manual)
+
+For v1, briefs are manually authored YAML with optional source material:
+
+```yaml
+# briefs/gift-automation.yaml
+slug: gift-automation
+topic: Gift automation for birthdays, holidays, and thank-you occasions
+area: relationships
+audience: both
+
+# Optional: paste existing content, Coda doc, or notes
+source_material: |
+  [paste existing playbook text here]
+  
+# Optional: known tools to feature
+tools:
+  - Airtable
+  - Zapier
+  - Amazon
+```
+
+Run: `bun scripts/generate_playbook.ts briefs/gift-automation.yaml`
 
 ## Directory Structure
 
@@ -250,6 +279,13 @@ const sectionSchema = z.object({
 
 ## Phase 1: Content Generation
 
+### Input: Brief YAML
+
+Phase 1 receives a manually authored brief containing:
+- Metadata: topic, area, audience
+- Optional: source_material (existing playbook text, Coda doc, notes)
+- Optional: tools list
+
 ### AI Prompt Structure
 
 ```markdown
@@ -261,8 +297,11 @@ const sectionSchema = z.object({
 - Target audience: {client | ea | both}
 - Area: {area from 16-area ontology}
 
-## Source Material
-{paste existing playbook text, coda doc, or brief}
+## Source Material (if provided)
+{paste existing playbook text, Coda doc, or notes}
+
+## Known Tools (if provided)
+{tool list}
 
 ## Output Format
 Generate valid JSON matching this schema:
@@ -505,25 +544,53 @@ const { embed } = Astro.props;
 
 ## CLI Scripts
 
-### generate_playbook.ts
-
-Orchestrates full pipeline:
+### Full Pipeline Orchestrator
 
 ```bash
-bun scripts/generate_playbook.ts \
-  --brief "Gift automation playbook for tracking birthdays and sending thoughtful gifts" \
-  --source athena/coda_playbooks_doc/gift_automation.txt \
-  --area relationships \
-  --audience both
+# Generate from brief YAML
+bun scripts/generate_playbook.ts briefs/gift-automation.yaml
+
+# Dry run (show plan, don't execute)
+bun scripts/generate_playbook.ts briefs/gift-automation.yaml --dry-run
 ```
 
-Phases:
-1. Generate content JSON (Phase 1)
-2. Generate diagrams in parallel (Phase 2a)
-3. Generate illustrations in parallel (Phase 2b)
-4. Generate embed data in parallel (Phase 2c)
-5. Validate final JSON against schema
-6. Write to src/content/playbooks/<slug>.json
+### Orchestrator Flow
+
+```typescript
+// scripts/generate_playbook.ts (pseudo-code)
+
+async function generatePlaybook(briefPath: string, options: Options) {
+  const brief = await parseBrief(briefPath);
+  
+  // PHASE 1: Content generation
+  console.log('Phase 1: Generating content...');
+  const playbook = await generateContent(brief);
+  const jsonPath = `src/content/playbooks/${brief.slug}.json`;
+  await Bun.write(jsonPath, JSON.stringify(playbook, null, 2));
+  
+  // PHASE 2: Asset generation (parallel)
+  console.log('Phase 2: Generating assets...');
+  await Promise.all([
+    generateDiagrams(brief.slug, playbook.diagram_intents),
+    generateIllustrations(brief.slug, playbook.illustration_intents),
+    generateEmbeds(brief.slug, playbook.embed_intents)
+  ]);
+  
+  // Update JSON with resolved asset paths
+  const finalPlaybook = resolveAssetPaths(playbook, brief.slug);
+  await Bun.write(jsonPath, JSON.stringify(finalPlaybook, null, 2));
+  
+  // Validate
+  console.log('Validating...');
+  const validation = await validatePlaybook(brief.slug);
+  if (!validation.success) {
+    console.error('Validation failed:', validation.errors);
+    process.exit(1);
+  }
+  
+  console.log(`Done: ${jsonPath}`);
+}
+```
 
 ### generate_playbook_diagrams.ts
 
