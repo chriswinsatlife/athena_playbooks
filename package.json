@@ -6,6 +6,7 @@
     "dev": "bun scripts/sync_playbooks_to_site.mjs && bunx astro dev",
     "build": "bun scripts/sync_playbooks_to_site.mjs && bunx astro build",
     "preview": "bun scripts/sync_playbooks_to_site.mjs && bunx astro preview",
+    "render:playbook-diagrams": "bun scripts/render_playbook_diagrams.ts",
     "astro": "bunx astro"
   },
   "dependencies": {
@@ -17,6 +18,8 @@
   "devDependencies": {
     "@astrojs/mdx": "^4.3.13",
     "@tailwindcss/postcss": "^4.1.18",
+    "@types/bun": "^1.3.7",
+    "@types/node": "^25.1.0",
     "autoprefixer": "^10.4.23",
     "daisyui": "^5.5.14",
     "postcss": "^8.5.6",

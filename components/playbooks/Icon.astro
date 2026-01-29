@@ -1,7 +1,4 @@
 ---
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
-
 type Props = {
   name: string;
   title?: string;
@@ -15,19 +12,16 @@ if (!name || /\.\.|\//.test(name)) {
   throw new Error(`Icon: invalid name: ${name}`);
 }
 
-const iconPath = join(
-  process.cwd(),
-  'athena',
-  'brand',
-  'icons',
-  'vendor',
-  'heroicons',
-  '24',
-  'outline',
-  `${name}.svg`
-);
+const icons = import.meta.glob('../../athena/brand/icons/vendor/heroicons/24/outline/*.svg', {
+  eager: true,
+  query: '?raw',
+  import: 'default'
+});
 
-let svg = await readFile(iconPath, 'utf8');
+const key = `../../athena/brand/icons/vendor/heroicons/24/outline/${name}.svg`;
+const raw = icons[key];
+if (!raw) throw new Error(`Icon: not found: ${name}`);
+let svg = String(raw);
 
 // Normalize to use currentColor so the parent can style the icon.
 svg = svg

@@ -5,9 +5,13 @@
 @source "../../components/**/*.astro";
 
 @theme {
-  --font-display: 'Instrument Serif', serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  /* Athena brand fonts */
+  --font-display: 'Playfair Display', serif;
+  --font-sans: 'Figtree', system-ui, sans-serif;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Figtree', system-ui, sans-serif;
 
+  /* Oatmeal template mist palette */
   --color-mist-50: oklch(98.7% 0.002 197.1);
   --color-mist-100: oklch(96.3% 0.002 197.1);
   --color-mist-200: oklch(92.5% 0.005 214.3);
@@ -19,6 +23,12 @@
   --color-mist-800: oklch(27.5% 0.011 216.9);
   --color-mist-900: oklch(21.8% 0.008 223.9);
   --color-mist-950: oklch(14.8% 0.004 228.8);
+
+  /* Athena brand colors */
+  --color-athena-primary: #05240C;
+  --color-athena-accent: #062812;
+  --color-athena-bg: #FFFFFF;
+  --color-athena-text: #000000;
 }
 
 @layer base {

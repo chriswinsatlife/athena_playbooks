@@ -25,141 +25,158 @@ import Wallpaper from '../../../components/elements/wallpaper.astro'
 ---
 
 <Base title="Showcase - All 20 Elements">
-  <div class="min-h-screen bg-base-200 p-8">
-    <div class="max-w-7xl mx-auto">
-      <h1 class="text-4xl font-bold mb-2">Element Components</h1>
-      <p class="text-base-content/60 mb-8">All 20 element components from the design system</p>
-      
+  <div class="min-h-screen bg-mist-100 dark:bg-mist-950">
+    <!-- Header -->
+    <header class="border-b border-mist-200 dark:border-mist-800 bg-white dark:bg-mist-900">
+      <div class="max-w-7xl mx-auto px-6 py-8">
+        <nav class="mb-4">
+          <a href="/showcase/" class="text-sm text-mist-600 dark:text-mist-400 hover:text-athena-primary dark:hover:text-white transition-colors">
+            ← Back to Showcase
+          </a>
+        </nav>
+        <h1 class="font-display text-4xl text-athena-primary dark:text-white tracking-tight">
+          Element Components
+        </h1>
+        <p class="mt-2 text-mist-600 dark:text-mist-400 font-sans">
+          All 20 element components from the design system
+        </p>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-12">
       <div class="grid gap-8">
         
         <!-- 1. AnnouncementBadge -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">1. AnnouncementBadge</h2>
-            <div class="py-4">
-              <AnnouncementBadge text="New feature available!" href="#" cta="Learn more" />
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">1. AnnouncementBadge</h2>
+          </div>
+          <div class="p-6">
+            <AnnouncementBadge text="New feature available!" href="#" cta="Learn more" />
           </div>
         </div>
 
         <!-- 2. Button -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">2. Button</h2>
-            <div class="py-4 flex flex-wrap gap-4">
-              <Button>Default Button</Button>
-              <Button size="lg">Large Button</Button>
-              <Button color="light">Light Button</Button>
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">2. Button</h2>
+          </div>
+          <div class="p-6 flex flex-wrap gap-4">
+            <Button>Default Button</Button>
+            <Button size="lg">Large Button</Button>
+            <Button color="light">Light Button</Button>
           </div>
         </div>
 
         <!-- 3. ButtonLink -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">3. ButtonLink</h2>
-            <div class="py-4 flex flex-wrap gap-4">
-              <ButtonLink href="#">Button Link</ButtonLink>
-              <ButtonLink href="#" size="lg">Large Link</ButtonLink>
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">3. ButtonLink</h2>
+          </div>
+          <div class="p-6 flex flex-wrap gap-4">
+            <ButtonLink href="#">Button Link</ButtonLink>
+            <ButtonLink href="#" size="lg">Large Link</ButtonLink>
           </div>
         </div>
 
         <!-- 4. PlainButton -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">4. PlainButton</h2>
-            <div class="py-4 flex flex-wrap gap-4">
-              <PlainButton>Plain Button</PlainButton>
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">4. PlainButton</h2>
+          </div>
+          <div class="p-6">
+            <PlainButton>Plain Button</PlainButton>
           </div>
         </div>
 
         <!-- 5. PlainButtonLink -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">5. PlainButtonLink</h2>
-            <div class="py-4 flex flex-wrap gap-4">
-              <PlainButtonLink href="#">Plain Button Link</PlainButtonLink>
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">5. PlainButtonLink</h2>
+          </div>
+          <div class="p-6">
+            <PlainButtonLink href="#">Plain Button Link</PlainButtonLink>
           </div>
         </div>
 
         <!-- 6. SoftButton -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">6. SoftButton</h2>
-            <div class="py-4 flex flex-wrap gap-4">
-              <SoftButton>Soft Button</SoftButton>
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">6. SoftButton</h2>
+          </div>
+          <div class="p-6">
+            <SoftButton>Soft Button</SoftButton>
           </div>
         </div>
 
         <!-- 7. SoftButtonLink -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">7. SoftButtonLink</h2>
-            <div class="py-4 flex flex-wrap gap-4">
-              <SoftButtonLink href="#">Soft Button Link</SoftButtonLink>
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">7. SoftButtonLink</h2>
+          </div>
+          <div class="p-6">
+            <SoftButtonLink href="#">Soft Button Link</SoftButtonLink>
           </div>
         </div>
 
         <!-- 8. Heading -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">8. Heading</h2>
-            <div class="py-4">
-              <Heading>Main Page Heading</Heading>
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">8. Heading</h2>
+          </div>
+          <div class="p-6">
+            <Heading>Main Page Heading</Heading>
           </div>
         </div>
 
         <!-- 9. Subheading -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">9. Subheading</h2>
-            <div class="py-4">
-              <Subheading>Section Subheading</Subheading>
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">9. Subheading</h2>
+          </div>
+          <div class="p-6">
+            <Subheading>Section Subheading</Subheading>
           </div>
         </div>
 
         <!-- 10. Eyebrow -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">10. Eyebrow</h2>
-            <div class="py-4">
-              <Eyebrow>CATEGORY LABEL</Eyebrow>
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">10. Eyebrow</h2>
+          </div>
+          <div class="p-6">
+            <Eyebrow>CATEGORY LABEL</Eyebrow>
           </div>
         </div>
 
         <!-- 11. Text -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">11. Text</h2>
-            <div class="py-4">
-              <Text>This is body text content that demonstrates the Text component styling.</Text>
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">11. Text</h2>
+          </div>
+          <div class="p-6">
+            <Text>This is body text content that demonstrates the Text component styling.</Text>
           </div>
         </div>
 
         <!-- 12. Link -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">12. Link</h2>
-            <div class="py-4">
-              <Link href="#">Regular Link Component</Link>
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">12. Link</h2>
+          </div>
+          <div class="p-6">
+            <Link href="#">Regular Link Component</Link>
           </div>
         </div>
 
         <!-- 13. Container -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">13. Container</h2>
-            <div class="py-4 bg-base-200 rounded">
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">13. Container</h2>
+          </div>
+          <div class="p-6">
+            <div class="bg-mist-100 dark:bg-mist-800 rounded-lg p-4">
               <Container>
                 <Text>Content inside a Container component</Text>
               </Container>
@@ -168,10 +185,12 @@ import Wallpaper from '../../../components/elements/wallpaper.astro'
         </div>
 
         <!-- 14. Main -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">14. Main</h2>
-            <div class="py-4 bg-base-200 rounded">
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">14. Main</h2>
+          </div>
+          <div class="p-6">
+            <div class="bg-mist-100 dark:bg-mist-800 rounded-lg p-4">
               <Main>
                 <Text>Content inside a Main component wrapper</Text>
               </Main>
@@ -180,10 +199,12 @@ import Wallpaper from '../../../components/elements/wallpaper.astro'
         </div>
 
         <!-- 15. Section -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">15. Section</h2>
-            <div class="py-4 bg-base-200 rounded">
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">15. Section</h2>
+          </div>
+          <div class="p-6">
+            <div class="bg-mist-100 dark:bg-mist-800 rounded-lg p-4">
               <Section>
                 <Text>Content inside a Section component</Text>
               </Section>
@@ -192,58 +213,60 @@ import Wallpaper from '../../../components/elements/wallpaper.astro'
         </div>
 
         <!-- 16. EmailSignupForm -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">16. EmailSignupForm</h2>
-            <div class="py-4">
-              <EmailSignupForm cta="Subscribe" placeholder="Enter your email" />
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">16. EmailSignupForm</h2>
+          </div>
+          <div class="p-6">
+            <EmailSignupForm cta="Subscribe" placeholder="Enter your email" />
           </div>
         </div>
 
         <!-- 17. InstallCommand -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">17. InstallCommand</h2>
-            <div class="py-4">
-              <InstallCommand command="npm install @example/package" />
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">17. InstallCommand</h2>
+          </div>
+          <div class="p-6">
+            <InstallCommand command="npm install @example/package" />
           </div>
         </div>
 
         <!-- 18. LogoGrid -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">18. LogoGrid</h2>
-            <div class="py-4">
-              <LogoGrid>
-                <div class="bg-base-300 rounded p-4 text-center">Logo 1</div>
-                <div class="bg-base-300 rounded p-4 text-center">Logo 2</div>
-                <div class="bg-base-300 rounded p-4 text-center">Logo 3</div>
-              </LogoGrid>
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">18. LogoGrid</h2>
+          </div>
+          <div class="p-6">
+            <LogoGrid>
+              <div class="bg-mist-200 dark:bg-mist-700 rounded-lg p-4 text-center text-mist-700 dark:text-mist-300">Logo 1</div>
+              <div class="bg-mist-200 dark:bg-mist-700 rounded-lg p-4 text-center text-mist-700 dark:text-mist-300">Logo 2</div>
+              <div class="bg-mist-200 dark:bg-mist-700 rounded-lg p-4 text-center text-mist-700 dark:text-mist-300">Logo 3</div>
+            </LogoGrid>
           </div>
         </div>
 
         <!-- 19. Screenshot -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">19. Screenshot</h2>
-            <div class="py-4">
-              <Screenshot>
-                <div class="bg-gradient-to-br from-primary to-secondary h-48 rounded flex items-center justify-center text-white">
-                  Screenshot Content Area
-                </div>
-              </Screenshot>
-            </div>
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">19. Screenshot</h2>
+          </div>
+          <div class="p-6">
+            <Screenshot>
+              <div class="bg-gradient-to-br from-athena-primary to-emerald-700 h-48 rounded-lg flex items-center justify-center text-white">
+                Screenshot Content Area
+              </div>
+            </Screenshot>
           </div>
         </div>
 
         <!-- 20. Wallpaper -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-sm opacity-60">20. Wallpaper</h2>
-            <div class="py-4 h-48 relative overflow-hidden rounded">
+        <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+          <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50">
+            <h2 class="text-sm font-medium text-mist-600 dark:text-mist-400">20. Wallpaper</h2>
+          </div>
+          <div class="p-6">
+            <div class="h-48 relative overflow-hidden rounded-lg">
               <Wallpaper />
               <div class="absolute inset-0 flex items-center justify-center">
                 <Text>Content over Wallpaper</Text>
@@ -254,13 +277,18 @@ import Wallpaper from '../../../components/elements/wallpaper.astro'
 
       </div>
       
-      <div class="mt-12 text-center">
-        <p class="text-base-content/60 mb-4">20/20 Element Components Rendered</p>
+      <!-- Footer Navigation -->
+      <div class="mt-16 text-center">
+        <p class="text-mist-600 dark:text-mist-400 mb-6">20/20 Element Components Rendered</p>
         <div class="flex gap-4 justify-center">
-          <a href="/showcase/" class="btn btn-outline">Back to Index</a>
-          <a href="/showcase/sections" class="btn btn-primary">View Sections</a>
+          <a href="/showcase/" class="px-6 py-3 rounded-lg border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300 hover:bg-mist-100 dark:hover:bg-mist-800 transition-colors">
+            Back to Index
+          </a>
+          <a href="/showcase/sections" class="px-6 py-3 rounded-lg bg-athena-primary text-white hover:bg-athena-accent transition-colors">
+            View Sections →
+          </a>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </Base>

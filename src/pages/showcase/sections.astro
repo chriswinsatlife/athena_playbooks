@@ -43,22 +43,74 @@ const sectionsList = [
   'TestimonialsThreeColumnGrid',
   'TestimonialsThreeColumnGridLayout'
 ]
+
+// Group sections by category
+const categories = {
+  'Hero Sections': sectionsList.filter(s => s.startsWith('Hero')),
+  'Features': sectionsList.filter(s => s.startsWith('Features')),
+  'Pricing': sectionsList.filter(s => s.startsWith('Pricing') || s.startsWith('Plan')),
+  'Testimonials': sectionsList.filter(s => s.startsWith('Testimonial')),
+  'Stats': sectionsList.filter(s => s.startsWith('Stats') || s === 'Stat'),
+  'Team': sectionsList.filter(s => s.startsWith('Team')),
+  'Footer': sectionsList.filter(s => s.startsWith('Footer') || s === 'SocialLink' || s === 'NewsletterForm'),
+  'Call to Action': sectionsList.filter(s => s.startsWith('CallToAction')),
+  'Brands': sectionsList.filter(s => s.startsWith('Brands'))
+}
 ---
 
 <Base title="Showcase - All Sections">
-  <div class="min-h-screen bg-base-200">
-    <div class="p-8 max-w-7xl mx-auto">
-      <h1 class="text-4xl font-bold mb-2">Section Components</h1>
-      <p class="text-base-content/60 mb-8">List of section components available in this repo.</p>
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-          <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-            {sectionsList.map((name) => (
-              <li class="rounded-lg border border-base-300 bg-base-100 px-4 py-3 font-mono text-sm">{name}</li>
-            ))}
-          </ul>
+  <div class="min-h-screen bg-mist-100 dark:bg-mist-950">
+    <!-- Header -->
+    <header class="border-b border-mist-200 dark:border-mist-800 bg-white dark:bg-mist-900">
+      <div class="max-w-7xl mx-auto px-6 py-8">
+        <nav class="mb-4">
+          <a href="/showcase/" class="text-sm text-mist-600 dark:text-mist-400 hover:text-athena-primary dark:hover:text-white transition-colors">
+            ← Back to Showcase
+          </a>
+        </nav>
+        <h1 class="font-display text-4xl text-athena-primary dark:text-white tracking-tight">
+          Section Components
+        </h1>
+        <p class="mt-2 text-mist-600 dark:text-mist-400 font-sans">
+          All 40 section components organized by category
+        </p>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-12">
+      <div class="grid gap-8">
+        {Object.entries(categories).map(([category, items]) => (
+          <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+            <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50 flex justify-between items-center">
+              <h2 class="font-display text-lg text-athena-primary dark:text-white">{category}</h2>
+              <span class="px-3 py-1 text-sm rounded-full bg-athena-primary text-white">{items.length}</span>
+            </div>
+            <div class="p-6">
+              <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {items.map((name) => (
+                  <li class="rounded-lg border border-mist-200 dark:border-mist-700 bg-mist-50 dark:bg-mist-800/50 px-4 py-3 font-mono text-sm text-mist-700 dark:text-mist-300 hover:border-athena-primary dark:hover:border-mist-500 transition-colors">
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Footer Navigation -->
+      <div class="mt-16 text-center">
+        <p class="text-mist-600 dark:text-mist-400 mb-6">{sectionsList.length} Section Components Available</p>
+        <div class="flex gap-4 justify-center">
+          <a href="/showcase/elements" class="px-6 py-3 rounded-lg border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300 hover:bg-mist-100 dark:hover:bg-mist-800 transition-colors">
+            ← View Elements
+          </a>
+          <a href="/showcase/catalyst" class="px-6 py-3 rounded-lg bg-athena-primary text-white hover:bg-athena-accent transition-colors">
+            View Catalyst →
+          </a>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </Base>

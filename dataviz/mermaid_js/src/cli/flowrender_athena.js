@@ -1,6 +1,6 @@
-#!/usr/bin/env node
-import { readFile, writeFile, mkdir } from 'fs/promises';
-import { dirname, resolve, extname, join } from 'path';
+#!/usr/bin/env bun
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { dirname, resolve, extname } from 'node:path';
 import { chromium } from 'playwright';
 
 function parseArgs(argv) {
@@ -10,8 +10,6 @@ function parseArgs(argv) {
     if (a === '--in' || a === '-i') args.in = argv[++i];
     else if (a === '--out' || a === '-o') args.out = argv[++i];
     else if (a === '--format' || a === '-f') args.format = argv[++i];
-    else if (a === '--width') args.width = Number(argv[++i]);
-    else if (a === '--height') args.height = Number(argv[++i]);
     else if (a === '--debug') args.debug = true;
     else if (a === '--help' || a === '-h') args.help = true;
   }
@@ -19,7 +17,7 @@ function parseArgs(argv) {
 }
 
 function usage() {
-  return `Usage: node flowrender_athena.js --in <file.md|.mmd> --out <file.{svg,png,jpg,pdf}> [--format svg|png|jpg|pdf]\n`;
+  return 'Usage: bun flowrender_athena.js --in <file.md|.mmd> --out <file.{svg,png,jpg,pdf}> [--format svg|png|jpg|pdf]\n';
 }
 
 function toDataUrlTtf(ttfBuf) {
@@ -28,12 +26,11 @@ function toDataUrlTtf(ttfBuf) {
 }
 
 async function loadFontDataUrls() {
-  // Keep local to avoid network in render.
   const figtree = await readFile(resolve(process.cwd(), 'dataviz/fonts/Figtree[wght].ttf'));
   const figtreeItalic = await readFile(resolve(process.cwd(), 'dataviz/fonts/Figtree-Italic[wght].ttf'));
   return {
     figtree: toDataUrlTtf(figtree),
-    figtreeItalic: toDataUrlTtf(figtreeItalic)
+    figtreeItalic: toDataUrlTtf(figtreeItalic),
   };
 }
 
@@ -60,15 +57,14 @@ const PAGE_HTML = (fonts) => String.raw`<!doctype html>
     :root{ --font-family:'Figtree', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Arial, sans-serif; }
     body{ margin:0; background:#fff; }
     #chart{ padding:0; }
-    svg{ width:100%; height:auto; display:block; }
   </style>
 </head>
 <body>
   <div id="chart"></div>
   <script src="https://cdn.jsdelivr.net/npm/@dagrejs/dagre@1.1.5/dist/dagre.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@11.0.0/dist/mermaid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11.12.2/dist/mermaid.min.js"></script>
   <script type="module">
-    import { parse as parseMermaidAst } from 'https://cdn.jsdelivr.net/npm/@mermaid-js/parser@0.6.2/+esm';
+    import { parse as parseMermaidAst } from 'https://cdn.jsdelivr.net/npm/@mermaid-js/parser@0.6.3/+esm';
     import { load as yamlLoad } from 'https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/+esm';
 
     function stripHtml(s){
@@ -170,21 +166,20 @@ const PAGE_HTML = (fonts) => String.raw`<!doctype html>
         nodePadX: 30,
         nodePadY: 20,
         nodesep: 90,
-        ranksep: 110,
+        ranksep: 90,
         startGap: 12,
         endGap: 18,
         diamondMinW: 150,
         diamondMinH: 90,
-        fontMinPx: 11,
-        fontMaxPx: 16,
+        fontMinPx: 12,
+        fontMaxPx: 18,
         nodeStroke: '#05240C',
         nodeFill: '#f6fbf7',
-        nodeStrokeWidth: 2,
+        nodeStrokeWidth: 2.2,
         nodeRadius: 12,
         edgeStroke: 'rgba(0,0,0,0.55)',
-        edgeStrokeWidth: 1.6
+        edgeStrokeWidth: 2.0
       };
-
       const settings = Object.assign({}, defaults, options||{});
 
       let fm = {};
@@ -209,6 +204,7 @@ const PAGE_HTML = (fonts) => String.raw`<!doctype html>
       }
 
       const rankdir = fm.rankdir || detectDir(mermaidCode);
+
       let nodes=[], links=[];
       try {
         const ast = parseMermaidAst('flowchart', mermaidCode);
@@ -216,57 +212,34 @@ const PAGE_HTML = (fonts) => String.raw`<!doctype html>
         nodes = g0.nodes;
         links = g0.links;
       } catch {
-        // fall through to Mermaid DB parsing
+        // fallback to Mermaid DB parsing
       }
 
       if (!nodes.length && window.mermaid?.mermaidAPI) {
-        try {
-          window.mermaid.mermaidAPI.initialize({ startOnLoad:false });
-          const diagram = await window.mermaid.mermaidAPI.getDiagramFromText(mermaidCode);
-          const db = diagram.db;
-          if (typeof db.getDirection === 'function') {
-            const d = db.getDirection();
-            if (d) {
-              // keep rankdir from frontmatter if present; otherwise trust Mermaid
-              if (!fm.rankdir) {
-                // eslint-disable-next-line no-param-reassign
-              }
-            }
+        window.mermaid.mermaidAPI.initialize({ startOnLoad:false });
+        const diagram = await window.mermaid.mermaidAPI.getDiagramFromText(mermaidCode);
+        const db = diagram.db;
+        const verts = typeof db.getVertices === 'function' ? db.getVertices() : null;
+        if (verts) {
+          const iter = verts instanceof Map ? verts.entries() : Object.entries(verts);
+          for (const [id,v] of iter) {
+            nodes.push({ id, label: stripHtml(v.text||id), type: mapShape(v.type) });
           }
-
-          const verts = typeof db.getVertices === 'function' ? db.getVertices() : null;
-          if (verts) {
-            const iter = verts instanceof Map ? verts.entries() : Object.entries(verts);
-            for (const [id,v] of iter) {
-              nodes.push({ id, label: stripHtml(v.text||id), type: mapShape(v.type) });
-            }
-          }
-
-          const edges = typeof db.getEdges === 'function' ? db.getEdges() : [];
-          for (const e of edges) {
-            links.push({ source: e.start, target: e.end, label: stripHtml(e.text)||undefined });
-          }
-        } catch (err) {
-          const pre = document.createElement('pre');
-          pre.textContent = 'Parse error: ' + (err?.message || err);
-          chart.appendChild(pre);
-          throw err;
+        }
+        const edges = typeof db.getEdges === 'function' ? db.getEdges() : [];
+        for (const e of edges) {
+          links.push({ source: e.start, target: e.end, label: stripHtml(e.text)||undefined });
         }
       }
 
-      if (!nodes.length) {
-        const pre = document.createElement('pre');
-        pre.textContent = 'No nodes parsed from diagram.';
-        chart.appendChild(pre);
-        throw new Error('No nodes parsed from diagram');
-      }
+      if (!nodes.length) throw new Error('No nodes parsed from diagram');
 
       const g = new dagre.graphlib.Graph();
-      g.setGraph({ rankdir, nodesep: settings.nodesep, ranksep: settings.ranksep, marginx:50, marginy:50, ranker:'network-simplex' });
+      g.setGraph({ rankdir, nodesep: settings.nodesep, ranksep: settings.ranksep, marginx:30, marginy:30, ranker:'network-simplex' });
       g.setDefaultEdgeLabel(function(){return {};});
 
       function pickFontSize(label, type){
-        const maxW = type==='diamond'? 260:220;
+        const maxW = type==='diamond'? 320:260;
         let size = settings.fontMaxPx;
         for (; size>=settings.fontMinPx; size--){
           const t = textSize(label, settings.fontFamily, settings.fontWeight, size);
@@ -304,8 +277,8 @@ const PAGE_HTML = (fonts) => String.raw`<!doctype html>
       });
 
       const graphInfo = g.graph();
-      const width = graphInfo.width + 100;
-      const height = graphInfo.height + 100;
+      const width = graphInfo.width + 60;
+      const height = graphInfo.height + 60;
 
       const svg = createSvgEl('svg');
       svg.setAttribute('id','chartSvg');
@@ -314,20 +287,150 @@ const PAGE_HTML = (fonts) => String.raw`<!doctype html>
       svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
       svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
 
+      // Styling lives inside the SVG so it works when embedded via <img>.
+      // Keep the palette close to athena.com: deep green ink + soft mint surfaces.
+      const fontFamilyCss = String(settings.fontFamily || "Figtree, ui-sans-serif, system-ui, -apple-system, Segoe UI, Arial, sans-serif").replace(/'/g, '');
+      const styleEl = createSvgEl('style');
+      styleEl.textContent = [
+        ':root{',
+          '  --a-ink: #05240C;',
+          '  --a-ink-2: #062812;',
+        '  --a-node-fill: url(#nodeGrad);',
+          '  --a-node-stroke: #05240C;',
+          '  --a-edge: rgba(0,0,0,0.46);',
+          '  --a-edge-label-bg: rgba(255,255,255,0.92);',
+          '  --a-edge-label-stroke: rgba(0,0,0,0.08);',
+          '  --a-text: rgba(0,0,0,0.86);',
+        '}',
+        '.canvas-bg{',
+        '  fill: url(#canvasGrad);',
+        '  stroke: rgba(0,0,0,0.05);',
+        '  stroke-width: 1;',
+        '}',
+        '.node-shape{',
+        '  fill: var(--a-node-fill);',
+        '  stroke: var(--a-node-stroke);',
+        '  stroke-width: ' + settings.nodeStrokeWidth + ';',
+        '  filter: url(#nodeShadow);',
+        '}',
+        '.node-decision{',
+        '  fill: url(#decisionGrad);',
+        '  stroke-dasharray: 6 6;',
+        '}',
+        '.edge-path{',
+        '  stroke: var(--a-edge);',
+        '  stroke-width: ' + settings.edgeStrokeWidth + ';',
+        '  stroke-linecap: round;',
+        '  stroke-linejoin: round;',
+        '  fill: none;',
+        '}',
+        '.node-label{',
+        '  fill: var(--a-text);',
+        '  font-family: ' + fontFamilyCss + ';',
+        '  font-weight: ' + settings.fontWeight + ';',
+        '  letter-spacing: -0.01em;',
+        '}',
+        '.edge-label{',
+        '  fill: rgba(0,0,0,0.74);',
+        '  font-family: ' + fontFamilyCss + ';',
+        '  font-weight: 700;',
+        '}',
+        '.edge-label-bg{',
+        '  fill: var(--a-edge-label-bg);',
+        '  stroke: var(--a-edge-label-stroke);',
+        '  stroke-width: 1;',
+        '}',
+      ].join('\n');
+
       const defs = createSvgEl('defs');
+
+      const canvasGrad = createSvgEl('linearGradient');
+      canvasGrad.setAttribute('id', 'canvasGrad');
+      canvasGrad.setAttribute('x1', '0');
+      canvasGrad.setAttribute('y1', '0');
+      canvasGrad.setAttribute('x2', '0');
+      canvasGrad.setAttribute('y2', '1');
+      const cg1 = createSvgEl('stop');
+      cg1.setAttribute('offset', '0%');
+      cg1.setAttribute('stop-color', '#FBFDFB');
+      const cg2 = createSvgEl('stop');
+      cg2.setAttribute('offset', '100%');
+      cg2.setAttribute('stop-color', '#F3F8F3');
+      canvasGrad.appendChild(cg1);
+      canvasGrad.appendChild(cg2);
+      defs.appendChild(canvasGrad);
+
+      const nodeGrad = createSvgEl('linearGradient');
+      nodeGrad.setAttribute('id', 'nodeGrad');
+      nodeGrad.setAttribute('x1', '0');
+      nodeGrad.setAttribute('y1', '0');
+      nodeGrad.setAttribute('x2', '1');
+      nodeGrad.setAttribute('y2', '1');
+      const ng1 = createSvgEl('stop');
+      ng1.setAttribute('offset', '0%');
+      ng1.setAttribute('stop-color', '#FFFFFF');
+      const ng2 = createSvgEl('stop');
+      ng2.setAttribute('offset', '100%');
+      ng2.setAttribute('stop-color', '#F2FAF3');
+      nodeGrad.appendChild(ng1);
+      nodeGrad.appendChild(ng2);
+      defs.appendChild(nodeGrad);
+
+      const decisionGrad = createSvgEl('linearGradient');
+      decisionGrad.setAttribute('id', 'decisionGrad');
+      decisionGrad.setAttribute('x1', '0');
+      decisionGrad.setAttribute('y1', '0');
+      decisionGrad.setAttribute('x2', '1');
+      decisionGrad.setAttribute('y2', '1');
+      const dg1 = createSvgEl('stop');
+      dg1.setAttribute('offset', '0%');
+      dg1.setAttribute('stop-color', '#EEF8EF');
+      const dg2 = createSvgEl('stop');
+      dg2.setAttribute('offset', '100%');
+      dg2.setAttribute('stop-color', '#FFFFFF');
+      decisionGrad.appendChild(dg1);
+      decisionGrad.appendChild(dg2);
+      defs.appendChild(decisionGrad);
+
+      const filter = createSvgEl('filter');
+      filter.setAttribute('id', 'nodeShadow');
+      filter.setAttribute('x', '-20%');
+      filter.setAttribute('y', '-20%');
+      filter.setAttribute('width', '140%');
+      filter.setAttribute('height', '140%');
+      const fe = createSvgEl('feDropShadow');
+      fe.setAttribute('dx', '0');
+      fe.setAttribute('dy', '2');
+      fe.setAttribute('stdDeviation', '2.4');
+      fe.setAttribute('flood-color', 'rgba(0,0,0,0.08)');
+      filter.appendChild(fe);
+      defs.appendChild(filter);
+
       const marker = createSvgEl('marker');
       marker.setAttribute('id','arrowhead');
-      marker.setAttribute('markerWidth','10');
-      marker.setAttribute('markerHeight','10');
-      marker.setAttribute('refX','10');
-      marker.setAttribute('refY','5');
+      marker.setAttribute('markerWidth','8');
+      marker.setAttribute('markerHeight','8');
+      marker.setAttribute('refX','8');
+      marker.setAttribute('refY','4');
       marker.setAttribute('orient','auto');
       const mpath = createSvgEl('path');
-      mpath.setAttribute('d','M 0 0 L 10 5 L 0 10 Z');
-      mpath.setAttribute('fill', settings.edgeStroke);
+      mpath.setAttribute('d','M 0 0 L 8 4 L 0 8 Z');
+      mpath.setAttribute('fill', 'rgba(0,0,0,0.46)');
       marker.appendChild(mpath);
       defs.appendChild(marker);
+
+      defs.appendChild(styleEl);
       svg.appendChild(defs);
+
+      const canvas = createSvgEl('rect');
+      canvas.setAttribute('class', 'canvas-bg');
+      canvas.setAttribute('x', '0');
+      canvas.setAttribute('y', '0');
+      canvas.setAttribute('width', String(width));
+      canvas.setAttribute('height', String(height));
+      canvas.setAttribute('rx', '24');
+      canvas.setAttribute('ry', '24');
+      svg.appendChild(canvas);
 
       const edgesG = createSvgEl('g');
       edgesG.setAttribute('class','edges');
@@ -362,23 +465,34 @@ const PAGE_HTML = (fonts) => String.raw`<!doctype html>
         const path = createSvgEl('path');
         path.setAttribute('d', dStr);
         path.setAttribute('class', 'edge-path');
-        path.setAttribute('stroke', settings.edgeStroke);
-        path.setAttribute('stroke-width', String(settings.edgeStrokeWidth));
-        path.setAttribute('fill', 'none');
         path.setAttribute('marker-end', 'url(#arrowhead)');
         edgesG.appendChild(path);
 
         if (link.label && pts.length >= 2){
           const mid = pts[Math.floor(pts.length/2)];
+          const labelFontSize = 12;
+          const s = textSize(link.label, settings.fontFamily, settings.fontWeight, labelFontSize);
+          const padX = 8;
+          const padY = 4;
+
+          const bg = createSvgEl('rect');
+          bg.setAttribute('class', 'edge-label-bg');
+          bg.setAttribute('x', String(mid.x - (s.w / 2) - padX));
+          bg.setAttribute('y', String((mid.y - settings.labelOffset) - (s.h / 2) - padY));
+          bg.setAttribute('width', String(s.w + padX * 2));
+          bg.setAttribute('height', String(s.h + padY * 2));
+          bg.setAttribute('rx', '999');
+          bg.setAttribute('ry', '999');
+          edgesG.appendChild(bg);
+
           const text = createSvgEl('text');
           text.textContent = link.label;
           text.setAttribute('class','edge-label');
           text.setAttribute('x', String(mid.x));
           text.setAttribute('y', String(mid.y - settings.labelOffset));
           text.setAttribute('text-anchor','middle');
-          text.setAttribute('font-family', settings.fontFamily);
-          text.setAttribute('font-weight', String(settings.fontWeight));
-          text.setAttribute('font-size','12px');
+          text.setAttribute('dominant-baseline','middle');
+          text.setAttribute('font-size', String(labelFontSize) + 'px');
           edgesG.appendChild(text);
         }
       });
@@ -395,18 +509,17 @@ const PAGE_HTML = (fonts) => String.raw`<!doctype html>
           el.setAttribute('rx', String(w));
           el.setAttribute('ry', String(h));
           el.setAttribute('class','node-shape');
-          el.setAttribute('fill', settings.nodeFill);
-          el.setAttribute('stroke', settings.nodeStroke);
-          el.setAttribute('stroke-width', String(settings.nodeStrokeWidth));
           gEl.appendChild(el);
         } else if (d.type === 'diamond'){
-          const poly = createSvgEl('polygon');
-          poly.setAttribute('points', '0,' + (-h) + ' ' + w + ',0 0,' + h + ' ' + (-w) + ',0');
-          poly.setAttribute('class','node-shape');
-          poly.setAttribute('fill', settings.nodeFill);
-          poly.setAttribute('stroke', settings.nodeStroke);
-          poly.setAttribute('stroke-width', String(settings.nodeStrokeWidth));
-          gEl.appendChild(poly);
+          const r = createSvgEl('rect');
+          r.setAttribute('x', String(-w));
+          r.setAttribute('y', String(-h));
+          r.setAttribute('width', String(w*2));
+          r.setAttribute('height', String(h*2));
+          r.setAttribute('rx', String(settings.nodeRadius + 6));
+          r.setAttribute('ry', String(settings.nodeRadius + 6));
+          r.setAttribute('class','node-shape node-decision');
+          gEl.appendChild(r);
         } else {
           const r = createSvgEl('rect');
           r.setAttribute('x', String(-w));
@@ -416,9 +529,6 @@ const PAGE_HTML = (fonts) => String.raw`<!doctype html>
           r.setAttribute('rx', String(settings.nodeRadius));
           r.setAttribute('ry', String(settings.nodeRadius));
           r.setAttribute('class','node-shape');
-          r.setAttribute('fill', settings.nodeFill);
-          r.setAttribute('stroke', settings.nodeStroke);
-          r.setAttribute('stroke-width', String(settings.nodeStrokeWidth));
           gEl.appendChild(r);
         }
 
@@ -429,9 +539,7 @@ const PAGE_HTML = (fonts) => String.raw`<!doctype html>
         t.setAttribute('y','0');
         t.setAttribute('text-anchor','middle');
         t.setAttribute('dominant-baseline','middle');
-        t.setAttribute('font-family', settings.fontFamily);
         t.setAttribute('font-size', String(d.fontSize||12) + 'px');
-        t.setAttribute('font-weight', String(settings.fontWeight));
         nodesG.appendChild(gEl);
         gEl.appendChild(t);
       });
@@ -455,14 +563,20 @@ async function main() {
   const inputPath = resolve(process.cwd(), args.in);
   const outPath = resolve(process.cwd(), args.out);
   const md = await readFile(inputPath, 'utf8');
-  const format = args.format || extname(outPath).slice(1).toLowerCase();
+  const format = (args.format || extname(outPath).slice(1)).toLowerCase();
 
   const fonts = await loadFontDataUrls();
 
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
   await page.setContent(PAGE_HTML(fonts), { waitUntil: 'load' });
-  await page.waitForFunction(() => typeof window.renderFromText === 'function');
+
+  if (args.debug) {
+    page.on('console', (msg) => console.log(`[page:${msg.type()}] ${msg.text()}`));
+    page.on('pageerror', (err) => console.error('[pageerror]', err));
+  }
+
+  await page.waitForFunction(() => typeof window.renderFromText === 'function', { timeout: 60000 });
   await page.evaluate(async (text) => { await window.renderFromText(text); }, md);
 
   const vb = await page.evaluate(() => {

@@ -3,120 +3,141 @@ import Base from '../../layouts/Base.astro'
 ---
 
 <Base title="Component Showcase - 182 Components">
-  <div class="min-h-screen bg-base-200 p-8">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-12">
-        <h1 class="text-5xl font-bold mb-4">Component Showcase</h1>
-        <p class="text-xl text-base-content/60">
-          Complete catalog of all <span class="font-bold text-primary">182 components</span> in this design system
+  <div class="min-h-screen bg-mist-100 dark:bg-mist-950">
+    <!-- Header -->
+    <header class="border-b border-mist-200 dark:border-mist-800 bg-white dark:bg-mist-900">
+      <div class="max-w-7xl mx-auto px-6 py-8">
+        <h1 class="font-display text-5xl text-athena-primary dark:text-white tracking-tight">
+          Component Showcase
+        </h1>
+        <p class="mt-3 text-lg text-mist-600 dark:text-mist-400 font-sans">
+          Complete catalog of all <span class="font-semibold text-athena-primary dark:text-white">182 components</span> in this design system
         </p>
       </div>
-      
-      <div class="grid gap-6">
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-12">
+      <div class="grid gap-8 md:grid-cols-2">
         
-        <!-- Elements -->
-        <a href="/showcase/elements" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
-          <div class="card-body">
-            <div class="flex justify-between items-center">
-              <div>
-                <h2 class="card-title text-2xl">Element Components</h2>
-                <p class="text-base-content/60">Core building blocks: buttons, headings, forms, containers</p>
-              </div>
-              <div class="badge badge-primary badge-lg">20</div>
+        <!-- Elements Card -->
+        <a href="/showcase/elements" class="group block rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 p-8 shadow-sm hover:shadow-lg hover:border-athena-primary dark:hover:border-mist-600 transition-all duration-200">
+          <div class="flex justify-between items-start">
+            <div>
+              <h2 class="font-display text-2xl text-athena-primary dark:text-white group-hover:text-athena-accent">
+                Element Components
+              </h2>
+              <p class="mt-2 text-mist-600 dark:text-mist-400 font-sans">
+                Core building blocks: buttons, headings, forms, containers
+              </p>
             </div>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="badge badge-outline">Button</span>
-              <span class="badge badge-outline">Heading</span>
-              <span class="badge badge-outline">Container</span>
-              <span class="badge badge-outline">EmailSignupForm</span>
-              <span class="badge badge-outline">+16 more</span>
-            </div>
+            <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-athena-primary text-white font-semibold text-lg">
+              20
+            </span>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-2">
+            <span class="px-3 py-1 text-sm rounded-full border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300">Button</span>
+            <span class="px-3 py-1 text-sm rounded-full border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300">Heading</span>
+            <span class="px-3 py-1 text-sm rounded-full border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300">Container</span>
+            <span class="px-3 py-1 text-sm rounded-full border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300">EmailSignupForm</span>
+            <span class="px-3 py-1 text-sm rounded-full bg-mist-100 dark:bg-mist-800 text-mist-600 dark:text-mist-400">+16 more</span>
           </div>
         </a>
 
-        <!-- Sections -->
-        <a href="/showcase/sections" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
-          <div class="card-body">
-            <div class="flex justify-between items-center">
-              <div>
-                <h2 class="card-title text-2xl">Section Components</h2>
-                <p class="text-base-content/60">Full page sections: heroes, features, pricing, testimonials</p>
-              </div>
-              <div class="badge badge-secondary badge-lg">40</div>
+        <!-- Sections Card -->
+        <a href="/showcase/sections" class="group block rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 p-8 shadow-sm hover:shadow-lg hover:border-athena-primary dark:hover:border-mist-600 transition-all duration-200">
+          <div class="flex justify-between items-start">
+            <div>
+              <h2 class="font-display text-2xl text-athena-primary dark:text-white group-hover:text-athena-accent">
+                Section Components
+              </h2>
+              <p class="mt-2 text-mist-600 dark:text-mist-400 font-sans">
+                Full page sections: heroes, features, pricing, testimonials
+              </p>
             </div>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="badge badge-outline">HeroSimpleCentered</span>
-              <span class="badge badge-outline">PricingMultiTier</span>
-              <span class="badge badge-outline">TestimonialGrid</span>
-              <span class="badge badge-outline">Footer</span>
-              <span class="badge badge-outline">+36 more</span>
-            </div>
+            <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-700 text-white font-semibold text-lg">
+              40
+            </span>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-2">
+            <span class="px-3 py-1 text-sm rounded-full border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300">HeroSimpleCentered</span>
+            <span class="px-3 py-1 text-sm rounded-full border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300">PricingMultiTier</span>
+            <span class="px-3 py-1 text-sm rounded-full border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300">TestimonialGrid</span>
+            <span class="px-3 py-1 text-sm rounded-full bg-mist-100 dark:bg-mist-800 text-mist-600 dark:text-mist-400">+37 more</span>
           </div>
         </a>
 
-        <!-- Catalyst -->
-        <a href="/showcase/catalyst" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
-          <div class="card-body">
-            <div class="flex justify-between items-center">
-              <div>
-                <h2 class="card-title text-2xl">Catalyst Components</h2>
-                <p class="text-base-content/60">Tailwind UI Kit components: layouts, lists, navigation</p>
-              </div>
-              <div class="badge badge-accent badge-lg">10</div>
+        <!-- Catalyst Card -->
+        <a href="/showcase/catalyst" class="group block rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 p-8 shadow-sm hover:shadow-lg hover:border-athena-primary dark:hover:border-mist-600 transition-all duration-200">
+          <div class="flex justify-between items-start">
+            <div>
+              <h2 class="font-display text-2xl text-athena-primary dark:text-white group-hover:text-athena-accent">
+                Catalyst Components
+              </h2>
+              <p class="mt-2 text-mist-600 dark:text-mist-400 font-sans">
+                Tailwind UI Kit components: layouts, lists, navigation
+              </p>
             </div>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="badge badge-outline">AuthLayout</span>
-              <span class="badge badge-outline">DescriptionList</span>
-              <span class="badge badge-outline">Pagination</span>
-              <span class="badge badge-outline">Divider</span>
-              <span class="badge badge-outline">+6 more</span>
-            </div>
+            <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-700 text-white font-semibold text-lg">
+              10
+            </span>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-2">
+            <span class="px-3 py-1 text-sm rounded-full border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300">AuthLayout</span>
+            <span class="px-3 py-1 text-sm rounded-full border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300">DescriptionList</span>
+            <span class="px-3 py-1 text-sm rounded-full border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300">Pagination</span>
+            <span class="px-3 py-1 text-sm rounded-full bg-mist-100 dark:bg-mist-800 text-mist-600 dark:text-mist-400">+7 more</span>
           </div>
         </a>
 
-        <!-- Icons -->
-        <a href="/showcase/icons" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
-          <div class="card-body">
-            <div class="flex justify-between items-center">
-              <div>
-                <h2 class="card-title text-2xl">Icon Components</h2>
-                <p class="text-base-content/60">SVG icons: UI, navigation, social media</p>
-              </div>
-              <div class="badge badge-info badge-lg">112</div>
+        <!-- Icons Card -->
+        <a href="/showcase/icons" class="group block rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 p-8 shadow-sm hover:shadow-lg hover:border-athena-primary dark:hover:border-mist-600 transition-all duration-200">
+          <div class="flex justify-between items-start">
+            <div>
+              <h2 class="font-display text-2xl text-athena-primary dark:text-white group-hover:text-athena-accent">
+                Icon Components
+              </h2>
+              <p class="mt-2 text-mist-600 dark:text-mist-400 font-sans">
+                SVG icons: UI, navigation, social media
+              </p>
             </div>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="badge badge-outline">107 Main Icons</span>
-              <span class="badge badge-outline">5 Social Icons</span>
-            </div>
+            <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sky-700 text-white font-semibold text-lg">
+              112
+            </span>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-2">
+            <span class="px-3 py-1 text-sm rounded-full border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300">107 Main Icons</span>
+            <span class="px-3 py-1 text-sm rounded-full border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300">5 Social Icons</span>
           </div>
         </a>
 
       </div>
-      
-      <div class="mt-12 text-center">
-        <div class="stats shadow">
-          <div class="stat">
-            <div class="stat-title">Elements</div>
-            <div class="stat-value text-primary">20</div>
+
+      <!-- Stats Footer -->
+      <div class="mt-16 rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 p-8">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
+          <div>
+            <div class="text-3xl font-display text-athena-primary dark:text-white">20</div>
+            <div class="mt-1 text-sm text-mist-600 dark:text-mist-400 font-sans">Elements</div>
           </div>
-          <div class="stat">
-            <div class="stat-title">Sections</div>
-            <div class="stat-value text-secondary">40</div>
+          <div>
+            <div class="text-3xl font-display text-emerald-700 dark:text-emerald-400">40</div>
+            <div class="mt-1 text-sm text-mist-600 dark:text-mist-400 font-sans">Sections</div>
           </div>
-          <div class="stat">
-            <div class="stat-title">Catalyst</div>
-            <div class="stat-value text-accent">10</div>
+          <div>
+            <div class="text-3xl font-display text-teal-700 dark:text-teal-400">10</div>
+            <div class="mt-1 text-sm text-mist-600 dark:text-mist-400 font-sans">Catalyst</div>
           </div>
-          <div class="stat">
-            <div class="stat-title">Icons</div>
-            <div class="stat-value text-info">112</div>
+          <div>
+            <div class="text-3xl font-display text-sky-700 dark:text-sky-400">112</div>
+            <div class="mt-1 text-sm text-mist-600 dark:text-mist-400 font-sans">Icons</div>
           </div>
-          <div class="stat">
-            <div class="stat-title">Total</div>
-            <div class="stat-value">182</div>
+          <div class="col-span-2 md:col-span-1">
+            <div class="text-3xl font-display text-athena-primary dark:text-white">182</div>
+            <div class="mt-1 text-sm text-mist-600 dark:text-mist-400 font-sans">Total</div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </Base>

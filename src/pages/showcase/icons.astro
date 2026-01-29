@@ -119,159 +119,190 @@ import YoutubeIcon from '../../../components/icons/social/youtube-icon.astro'
 ---
 
 <Base title="Showcase - All 112 Icons">
-  <div class="min-h-screen bg-base-200 p-8">
-    <div class="max-w-7xl mx-auto">
-      <h1 class="text-4xl font-bold mb-2">Icon Components</h1>
-      <p class="text-base-content/60 mb-8">All 112 icon components (107 main + 5 social)</p>
+  <div class="min-h-screen bg-mist-100 dark:bg-mist-950">
+    <!-- Header -->
+    <header class="border-b border-mist-200 dark:border-mist-800 bg-white dark:bg-mist-900">
+      <div class="max-w-7xl mx-auto px-6 py-8">
+        <nav class="mb-4">
+          <a href="/showcase/" class="text-sm text-mist-600 dark:text-mist-400 hover:text-athena-primary dark:hover:text-white transition-colors">
+            ← Back to Showcase
+          </a>
+        </nav>
+        <h1 class="font-display text-4xl text-athena-primary dark:text-white tracking-tight">
+          Icon Components
+        </h1>
+        <p class="mt-2 text-mist-600 dark:text-mist-400 font-sans">
+          All 112 icon components (107 main + 5 social)
+        </p>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-12">
       
       <!-- Social Icons -->
-      <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-4">Social Icons (5)</h2>
-        <div class="grid grid-cols-5 gap-4">
-          <div class="card bg-base-100 shadow p-4 flex flex-col items-center gap-2">
-            <div class="w-8 h-8 flex items-center justify-center"><FacebookIcon class="w-6 h-6" /></div>
-            <span class="text-xs opacity-60">Facebook</span>
-          </div>
-          <div class="card bg-base-100 shadow p-4 flex flex-col items-center gap-2">
-            <div class="w-8 h-8 flex items-center justify-center"><GithubIcon class="w-6 h-6" /></div>
-            <span class="text-xs opacity-60">Github</span>
-          </div>
-          <div class="card bg-base-100 shadow p-4 flex flex-col items-center gap-2">
-            <div class="w-8 h-8 flex items-center justify-center"><InstagramIcon class="w-6 h-6" /></div>
-            <span class="text-xs opacity-60">Instagram</span>
-          </div>
-          <div class="card bg-base-100 shadow p-4 flex flex-col items-center gap-2">
-            <div class="w-8 h-8 flex items-center justify-center"><XIcon class="w-6 h-6" /></div>
-            <span class="text-xs opacity-60">X</span>
-          </div>
-          <div class="card bg-base-100 shadow p-4 flex flex-col items-center gap-2">
-            <div class="w-8 h-8 flex items-center justify-center"><YoutubeIcon class="w-6 h-6" /></div>
-            <span class="text-xs opacity-60">Youtube</span>
+      <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden mb-8">
+        <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50 flex justify-between items-center">
+          <h2 class="font-display text-lg text-athena-primary dark:text-white">Social Icons</h2>
+          <span class="px-3 py-1 text-sm rounded-full bg-athena-primary text-white">5</span>
+        </div>
+        <div class="p-6">
+          <div class="grid grid-cols-5 gap-4">
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-4 flex flex-col items-center gap-2 hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors">
+              <div class="w-8 h-8 flex items-center justify-center text-athena-primary dark:text-white"><FacebookIcon class="w-6 h-6" /></div>
+              <span class="text-xs text-mist-600 dark:text-mist-400">Facebook</span>
+            </div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-4 flex flex-col items-center gap-2 hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors">
+              <div class="w-8 h-8 flex items-center justify-center text-athena-primary dark:text-white"><GithubIcon class="w-6 h-6" /></div>
+              <span class="text-xs text-mist-600 dark:text-mist-400">Github</span>
+            </div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-4 flex flex-col items-center gap-2 hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors">
+              <div class="w-8 h-8 flex items-center justify-center text-athena-primary dark:text-white"><InstagramIcon class="w-6 h-6" /></div>
+              <span class="text-xs text-mist-600 dark:text-mist-400">Instagram</span>
+            </div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-4 flex flex-col items-center gap-2 hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors">
+              <div class="w-8 h-8 flex items-center justify-center text-athena-primary dark:text-white"><XIcon class="w-6 h-6" /></div>
+              <span class="text-xs text-mist-600 dark:text-mist-400">X</span>
+            </div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-4 flex flex-col items-center gap-2 hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors">
+              <div class="w-8 h-8 flex items-center justify-center text-athena-primary dark:text-white"><YoutubeIcon class="w-6 h-6" /></div>
+              <span class="text-xs text-mist-600 dark:text-mist-400">Youtube</span>
+            </div>
           </div>
         </div>
       </div>
       
       <!-- Main Icons Grid -->
-      <div>
-        <h2 class="text-2xl font-bold mb-4">Main Icons (107)</h2>
-        <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-3">
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><AlertTriangleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Alert</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArchiveBoxIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Archive</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArchiveBoxXIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ArchiveX</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArrowDownArrowUpIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ArrowUD</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArrowLeftArrowRightIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ArrowLR</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArrowNarrowDownIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ArrDown</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArrowNarrowLeftIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ArrLeft</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArrowNarrowRightIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ArrRight</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ArrowNarrowUpIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ArrUp</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><AtSymbolIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">At</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BanknotesIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Bank</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BeakerIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Beaker</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BellIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Bell</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BookOpenIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Book</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BriefcaseIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Brief</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><Building2Icon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Build2</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BuildingIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Build</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BuildingLibraryIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Library</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><BuildingStorefrontIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Store</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CalendarIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Calendar</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CameraIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Camera</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CameraVideoIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Video</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChartBarIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ChartBar</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChartLineIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">ChartLine</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChartPieCircleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Pie</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChatBubbleCircleEllipsisIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Chat...</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChatBubbleCircleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Chat</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChatBubbleCircleStackedIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Chats</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChatBubbleRectangleEllipsisIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Msg...</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChatBubbleRectangleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Msg</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CheckmarkIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Check</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ChevronIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Chevron</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ClipboardIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Clip</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ClockIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Clock</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CloudArrowDownIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">CloudDn</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CloudArrowUpIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">CloudUp</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CloudIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Cloud</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CodeSquareIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Code</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CogIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Cog</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CompassIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Compass</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><CpuIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">CPU</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><Document2StackedIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Docs</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><DocumentIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Doc</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><EducationCapIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Edu</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FilterIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Filter</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FingerprintIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Finger</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FlagIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Flag</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FolderArrowLeftIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">FoldL</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FolderArrowRightIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">FoldR</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FolderIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Folder</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FolderMinusIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Fold-</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><FolderPlusIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Fold+</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><GitBranchIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Branch</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><GitDiffIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Diff</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><GitMergeIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Merge</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><GitPullIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Pull</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><HardDriveIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">HDD</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><HeartIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Heart</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><HeartPulseIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Pulse</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><HomeIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Home</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><InboxIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Inbox</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><InformationCircleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Info</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><KeyIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Key</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><LanguageIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Lang</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><LifebuoyIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Lifebuoy</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><LightBulbIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Bulb</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><LightingBoltIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Bolt</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><LockIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Lock</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><LockOpenIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Unlock</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MagnifyingGlassIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Search</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MailIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Mail</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MapIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Map</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MapPinIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Pin</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MicrophoneIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Mic</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MinusCircleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Minus</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MinusIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">-</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><MoonIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Moon</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><NewspaperIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">News</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><PaperclipIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Clip</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><PencilOnSquareIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Edit</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><PhotoIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Photo</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><PlusCircleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Plus</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><PlusIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">+</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><QuestionCircleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Help</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><RepeatIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Repeat</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><RocketIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Rocket</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ShieldExclamationIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Shield</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ShoppingBagIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Bag</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><ShoppingCartIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Cart</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><SlidersIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Sliders</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><SparklesIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Sparkle</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><Square3Stack3dIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Stack3D</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><Squares2StackedIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Squares</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><StarIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Star</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><SunIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Sun</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><TagIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Tag</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><TargetIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Target</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><TerminalIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Term</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><TicketIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Ticket</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><TrashIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Trash</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><UiLayoutIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">Layout</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><UnorderedListIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">List</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><User2Icon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">User2</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><UserArrowLeftIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">UserL</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><UserArrowRightIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">UserR</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><UserCircleDottedIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">UserDot</span></div>
-          <div class="card bg-base-100 shadow p-2 flex flex-col items-center"><UserCircleIcon class="w-5 h-5" /><span class="text-[8px] mt-1 opacity-50">User</span></div>
+      <div class="rounded-xl bg-white dark:bg-mist-900 border border-mist-200 dark:border-mist-800 overflow-hidden">
+        <div class="px-6 py-4 border-b border-mist-200 dark:border-mist-800 bg-mist-50 dark:bg-mist-800/50 flex justify-between items-center">
+          <h2 class="font-display text-lg text-athena-primary dark:text-white">Main Icons</h2>
+          <span class="px-3 py-1 text-sm rounded-full bg-athena-primary text-white">107</span>
+        </div>
+        <div class="p-6">
+          <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-3">
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><AlertTriangleIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Alert</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ArchiveBoxIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Archive</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ArchiveBoxXIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">ArchiveX</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ArrowDownArrowUpIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">ArrowUD</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ArrowLeftArrowRightIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">ArrowLR</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ArrowNarrowDownIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">ArrDown</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ArrowNarrowLeftIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">ArrLeft</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ArrowNarrowRightIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">ArrRight</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ArrowNarrowUpIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">ArrUp</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><AtSymbolIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">At</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><BanknotesIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Bank</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><BeakerIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Beaker</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><BellIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Bell</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><BookOpenIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Book</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><BriefcaseIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Brief</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><Building2Icon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Build2</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><BuildingIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Build</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><BuildingLibraryIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Library</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><BuildingStorefrontIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Store</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><CalendarIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Calendar</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><CameraIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Camera</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><CameraVideoIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Video</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ChartBarIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">ChartBar</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ChartLineIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">ChartLine</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ChartPieCircleIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Pie</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ChatBubbleCircleEllipsisIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Chat...</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ChatBubbleCircleIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Chat</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ChatBubbleCircleStackedIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Chats</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ChatBubbleRectangleEllipsisIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Msg...</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ChatBubbleRectangleIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Msg</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><CheckmarkIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Check</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ChevronIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Chevron</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ClipboardIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Clip</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ClockIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Clock</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><CloudArrowDownIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">CloudDn</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><CloudArrowUpIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">CloudUp</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><CloudIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Cloud</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><CodeSquareIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Code</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><CogIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Cog</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><CompassIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Compass</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><CpuIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">CPU</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><Document2StackedIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Docs</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><DocumentIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Doc</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><EducationCapIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Edu</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><FilterIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Filter</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><FingerprintIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Finger</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><FlagIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Flag</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><FolderArrowLeftIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">FoldL</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><FolderArrowRightIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">FoldR</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><FolderIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Folder</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><FolderMinusIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Fold-</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><FolderPlusIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Fold+</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><GitBranchIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Branch</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><GitDiffIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Diff</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><GitMergeIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Merge</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><GitPullIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Pull</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><HardDriveIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">HDD</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><HeartIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Heart</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><HeartPulseIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Pulse</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><HomeIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Home</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><InboxIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Inbox</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><InformationCircleIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Info</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><KeyIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Key</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><LanguageIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Lang</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><LifebuoyIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Lifebuoy</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><LightBulbIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Bulb</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><LightingBoltIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Bolt</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><LockIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Lock</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><LockOpenIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Unlock</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><MagnifyingGlassIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Search</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><MailIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Mail</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><MapIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Map</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><MapPinIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Pin</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><MicrophoneIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Mic</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><MinusCircleIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Minus</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><MinusIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">-</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><MoonIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Moon</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><NewspaperIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">News</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><PaperclipIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Clip</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><PencilOnSquareIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Edit</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><PhotoIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Photo</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><PlusCircleIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Plus</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><PlusIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">+</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><QuestionCircleIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Help</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><RepeatIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Repeat</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><RocketIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Rocket</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ShieldExclamationIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Shield</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ShoppingBagIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Bag</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><ShoppingCartIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Cart</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><SlidersIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Sliders</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><SparklesIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Sparkle</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><Square3Stack3dIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Stack3D</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><Squares2StackedIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Squares</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><StarIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Star</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><SunIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Sun</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><TagIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Tag</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><TargetIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Target</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><TerminalIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Term</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><TicketIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Ticket</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><TrashIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Trash</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><UiLayoutIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">Layout</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><UnorderedListIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">List</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><User2Icon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">User2</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><UserArrowLeftIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">UserL</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><UserArrowRightIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">UserR</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><UserCircleDottedIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">UserDot</span></div>
+            <div class="rounded-lg bg-mist-50 dark:bg-mist-800 p-2 flex flex-col items-center hover:bg-mist-100 dark:hover:bg-mist-700 transition-colors"><UserCircleIcon class="w-5 h-5 text-athena-primary dark:text-white" /><span class="text-[8px] mt-1 text-mist-500 dark:text-mist-400">User</span></div>
+          </div>
         </div>
       </div>
       
-      <div class="mt-12 text-center">
-        <p class="text-base-content/60 mb-4">112/112 Icon Components Rendered</p>
+      <!-- Footer Navigation -->
+      <div class="mt-16 text-center">
+        <p class="text-mist-600 dark:text-mist-400 mb-6">112/112 Icon Components Rendered</p>
         <div class="flex gap-4 justify-center">
-          <a href="/showcase/catalyst" class="btn btn-outline">View Catalyst</a>
-          <a href="/showcase/" class="btn btn-primary">Back to Index</a>
+          <a href="/showcase/catalyst" class="px-6 py-3 rounded-lg border border-mist-300 dark:border-mist-700 text-mist-700 dark:text-mist-300 hover:bg-mist-100 dark:hover:bg-mist-800 transition-colors">
+            ← View Catalyst
+          </a>
+          <a href="/showcase/" class="px-6 py-3 rounded-lg bg-athena-primary text-white hover:bg-athena-accent transition-colors">
+            Back to Index
+          </a>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </Base>

@@ -1,7 +1,4 @@
 ---
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
-
 type Props = {
   src: string;
   alt: string;
@@ -23,25 +20,27 @@ const {
 if (!src || !src.startsWith('/')) {
   throw new Error(`Diagram: src must be a site-root path like /playbooks/... (got: ${src})`);
 }
-
-const svgPath = join(process.cwd(), 'public', src.replace(/^\/+/, ''));
-const svg = await readFile(svgPath, 'utf8');
 const resolvedDownload = downloadSrc ?? src.replace(/\.svg$/i, '.png');
 ---
 
 <figure class="playbook-diagram">
   {title && <figcaption class="playbook-diagram__title">{title}</figcaption>}
-  <div class="playbook-diagram__frame" role="img" aria-label={alt} set:html={svg} />
+  <div class="playbook-diagram__frame">
+    <a class="playbook-diagram__open" href={src} target="_blank" rel="noreferrer" aria-label={`Open diagram: ${alt}`}>
+      <img class="playbook-diagram__img" src={src} alt={alt} loading="lazy" />
+    </a>
+  </div>
   {(caption || download) && (
     <figcaption class="playbook-diagram__caption">
       {caption && <span>{caption}</span>}
       {download && (
         <a class="playbook-diagram__download" href={resolvedDownload} download>
-          Download
+          Download PNG
         </a>
       )}
     </figcaption>
   )}
+  <div class="playbook-diagram__hint">Download for full-size view</div>
 </figure>
 
 <style>
@@ -81,26 +80,14 @@ const resolvedDownload = downloadSrc ?? src.replace(/\.svg$/i, '.png');
     --diagram-edge-stroke-width: 1.6;
     --diagram-label-fill: rgba(0,0,0,0.86);
   }
-  .playbook-diagram__frame :global(svg){
+  .playbook-diagram__img{
     display: block;
     width: auto;
     height: auto;
     max-width: none;
-    font-family: var(--diagram-font-family);
+    min-width: 100%;
   }
-  .playbook-diagram__frame :global(.node-shape){
-    fill: var(--diagram-node-fill);
-    stroke: var(--diagram-node-stroke);
-    stroke-width: var(--diagram-node-stroke-width);
-  }
-  .playbook-diagram__frame :global(.edge-path){
-    stroke: var(--diagram-edge-stroke);
-    stroke-width: var(--diagram-edge-stroke-width);
-  }
-  .playbook-diagram__frame :global(.node-label),
-  .playbook-diagram__frame :global(.edge-label){
-    fill: var(--diagram-label-fill);
-  }
+  .playbook-diagram__open{ display: block; }
   .playbook-diagram__caption{
     display: flex;
     gap: 0.75rem;
@@ -112,9 +99,27 @@ const resolvedDownload = downloadSrc ?? src.replace(/\.svg$/i, '.png');
   }
   .playbook-diagram__download{
     white-space: nowrap;
-    color: inherit;
-    text-decoration: underline;
-    text-decoration-color: rgba(0,0,0,0.3);
-    text-underline-offset: 3px;
+    color: #fff;
+    background: #05240C;
+    border: 1px solid rgba(0,0,0,0.14);
+    border-radius: 999px;
+    padding: 0.5rem 0.85rem;
+    text-decoration: none;
+  }
+  .playbook-diagram__download:hover{
+    background: #062812;
+  }
+  .playbook-diagram__hint{
+    display: none;
+    margin-top: 0.35rem;
+    font-size: 0.85rem;
+    color: rgba(0,0,0,0.55);
+  }
+  @media (max-width: 640px){
+    .playbook-diagram__caption{ flex-direction: column; align-items: flex-start; }
+    .playbook-diagram__download{ width: 100%; text-align: center; }
+    .playbook-diagram__hint{ display: block; }
+    .playbook-diagram__frame{ overflow: hidden; }
+    .playbook-diagram__img{ width: 100%; max-width: 100%; min-width: 0; }
   }
 </style>
