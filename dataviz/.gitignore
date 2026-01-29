@@ -11,9 +11,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Playwright
-playwright/.cache/
-
 # Generated assets (keep tracked by CI commits; comment out to ignore)
 # mermaid_js/generated/
 

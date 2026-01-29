@@ -1,7 +1,7 @@
 ---
 title: Externalized Mermaid Flowchart Renderer (D3 + Dagre + Rough)
 author: Amp
-status: draft
+status: superseded
 date: 2025-08-22
 links:
   - label: Current demo (AST-first)
@@ -11,7 +11,7 @@ links:
 ---
 
 # Summary
-Build a new, configurable flowchart renderer that consumes Mermaid definitions from external `.md`/`.mmd` files (with YAML frontmatter for style overrides), pulls all visual styles from a dedicated stylesheet, and can render to image formats (SVG/PNG/JPG/PDF) programmatically via a CLI without opening a browser window. The rendering should preserve the current hand-drawn look using D3 + Dagre + Rough, with the AST-first parsing path. The solution should be modular, documented, and testable.
+Deprecated/superseded. This repo no longer ships the Playwright-based `flowrender` pipeline or any PNG/JPG/PDF export for diagrams. Current direction is SVG-only.
 
 ## Goals
 - Externalize all styles to a CSS file; zero inline style constants in JS.
@@ -169,7 +169,7 @@ Expected:
 - `--help` output with examples and frontmatter schema.
 
 ## Rollout & risks
-- Dependencies (Playwright, optional Sharp) add install size/time; mitigate by defaulting to Playwright-only path (no Sharp) and documenting `bunx playwright install chromium`.
+- Dependencies add install size/time; keep the default path SVG-only and avoid heavyweight browser installs.
 - AST schema drift between parser versions; mitigate by pinning `@mermaid-js/parser` and tolerant traversal; add version in output metadata.
 - Resource-limited CI: make raster/PDF tests optional behind env flag.
 

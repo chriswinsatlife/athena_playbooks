@@ -4,17 +4,17 @@ Goal: AI generates Athena playbook articles plus diagrams and supporting visual 
 
 This spec assumes:
 - Playbooks are authored as MDX.
-- Diagrams are authored as Mermaid flowcharts and rendered to branded SVG/PNG via the existing D3 + Dagre pipeline in `dataviz/`.
+- Diagrams are authored as Mermaid flowcharts and rendered to branded SVG (SVG-only; no PNG/JPEG diagram outputs).
 
 MDX integration note:
 - The current root `package.json` does not include `@astrojs/mdx` yet. Serving playbooks as MDX pages will require adding that integration when implementing this spec.
 
 ## Context In This Repo
 
-- Existing diagram renderer (Mermaid AST -> Dagre layout -> SVG export via Playwright): `dataviz/mermaid_js/src/cli/flowrender.js`
+- Existing diagram renderer: superseded/removed.
 - Renderer docs and frontmatter knobs: `dataviz/mermaid_js/README_flowrender.md`
 - Current shared CSS (sketch-oriented): `dataviz/mermaid_js/styles/flowchart.css`
-- Current renderer is Rough.js-heavy and loads external CDN scripts/fonts (needs Athena-specific renderer for brand fit): `dataviz/mermaid_js/src/cli/flowrender.js`
+- Current renderer notes in this spec are historical; current direction is SVG-only outputs.
 
 Problem observed in legacy playbook exports:
 - Some playbook docs embed base64 images (hard to diff, huge files). Example: `athena/Playbooks_AK Copy.md`.
@@ -22,8 +22,8 @@ Problem observed in legacy playbook exports:
 ## Definitions
 
 - Playbook article: an MDX file that renders as a page.
-- Diagram source: a Mermaid flowchart (stored as text) used to generate SVG/PNG.
-- Rendered diagram: generated `.svg` and `.png` that are embedded in the article.
+- Diagram source: a Mermaid flowchart (stored as text) used to generate SVG.
+- Rendered diagram: generated `.svg` that is embedded inline in the article.
 - Playbook assets: all non-text assets referenced by the playbook (diagrams, screenshots, generated illustrations, etc).
 - Slug: URL-safe identifier for a playbook (example: `gift-automation`).
 
@@ -72,12 +72,10 @@ The frontmatter keys should match what the renderer already supports (see `datav
 
 ### V1 Rendering Requirement
 
-Render diagrams to SVG and PNG via a CLI step, not at Astro build time.
+Render diagrams to SVG via a CLI step, not at Astro build time.
 
-The existing entry points are:
-- `npm --prefix dataviz run install-playwright`
-- `npm --prefix dataviz run flowrender -- --in <infile> --out <outfile.svg>`
-- `npm --prefix dataviz run flowrender:all`
+The current entry point is:
+- `bun --prefix dataviz run render:all`
 
 However, Athena should not ship the Rough.js visual style.
 
@@ -100,12 +98,11 @@ Renderer behavior changes vs `dataviz/mermaid_js/src/cli/flowrender.js`:
 - Replace edge drawing with a single `<path>` per edge, with a `<marker>` arrowhead.
 - Embed a `<style>` block into the output SVG that references CSS variables (tokens) defined in `athena_flowchart.css`.
 - Avoid external CDN dependencies in the renderer page HTML.
-  - V1 can still use Playwright for measuring text.
+  - Avoid heavyweight browser installs in the build pipeline.
   - Prefer bundling required JS modules via Node rather than loading `d3/dagre/mermaid` from CDNs.
 
 Output targets per diagram:
 - `assets/diagrams/<diagram>.svg` (primary)
-- `assets/diagrams/<diagram>.png` (share/export)
 
 ## Astro Component Layer
 
@@ -138,7 +135,7 @@ Rationale:
 Create `components/playbooks/Diagram.astro`.
 
 Responsibilities:
-- Consistent figure layout (spacing, border, caption, optional download link).
+- Consistent figure layout (spacing, border, caption).
 - Responsive sizing.
 - Optional metadata affordances that can be expanded in v2.
 
@@ -147,12 +144,9 @@ Proposed props:
 - `alt` (string, required)
 - `title` (string, optional)
 - `caption` (string, optional)
-- `download` (boolean, default true)
-- `downloadSrc` (string, optional; default to PNG sibling)
 
 Implementation note:
-- V1 can use `<img>` for SVG display.
-- If we need theme-aware styling via CSS overrides, switch to inlining SVG via `set:html` in v2.
+- Render diagrams as inline SVG (no `<img>`, no iframes, no scroll/zoom UI).
 
 ### Image Component
 
@@ -185,7 +179,6 @@ V1 generation contract (what the AI writes to disk):
 Then run rendering (local or CI):
 - Render each `diagrams_src/*.md` to:
   - `assets/diagrams/<name>.svg`
-  - `assets/diagrams/<name>.png`
 - Generate images (if AI-generated) into `assets/images/<name>.<ext>`.
 
 MDX authoring pattern:
@@ -219,7 +212,6 @@ V1 fields (minimum):
   - `id` (string)
   - `src_mermaid` (string) : repo-relative path to diagram source
   - `src_svg` (string) : repo-relative path to rendered svg
-  - `src_png` (string) : repo-relative path to rendered png
   - `alt` (string)
   - `caption` (string, optional)
 - `images` (array)

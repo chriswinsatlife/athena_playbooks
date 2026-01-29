@@ -8,23 +8,12 @@ import Base from '../../layouts/Base.astro'
       <header class="mb-6">
         <h1 class="font-display text-4xl tracking-tight text-base-content">Gifting playbook</h1>
         <p class="mt-3 max-w-3xl text-base leading-relaxed text-base-content/70">
-          Prototype diagram renderer inspired by `dataviz/json_to_diagram/v12`.
+          This prototype page previously embedded an iframe-based diagram renderer. It is intentionally disabled.
         </p>
       </header>
 
-      <section class="overflow-hidden rounded-2xl border border-base-300 bg-base-100 shadow-sm">
-        <div class="border-b border-base-200 px-5 py-4">
-          <div class="text-sm font-semibold text-base-content">Diagram</div>
-          <div class="text-sm text-base-content/60">Hierarchy view of the gifting system</div>
-        </div>
-        <div class="h-[860px] w-full">
-          <iframe
-            title="Gifting playbook diagram"
-            class="h-full w-full"
-            src="/diagrams/gifting_playbook_v12/index.html"
-            loading="lazy"
-          />
-        </div>
+      <section class="rounded-2xl border border-base-300 bg-base-100 p-6 text-base-content/70 shadow-sm">
+        For the inline SVG diagrams, see the main page at <a class="link" href="/playbooks/gifting_playbook">/playbooks/gifting_playbook</a>.
       </section>
     </main>
   </div>

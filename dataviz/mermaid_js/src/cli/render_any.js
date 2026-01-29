@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFile, writeFile, mkdtemp } from 'fs/promises';
+import { readFile, writeFile, mkdtemp, mkdir } from 'fs/promises';
 import { tmpdir } from 'os';
 import { join, resolve, extname, dirname, basename } from 'path';
 import { spawn } from 'child_process';
@@ -18,7 +18,7 @@ function parseArgs(argv){
 }
 
 function usage(){
-  return 'Usage: node render_any.js --in <file.md|.mmd> --out <file.{svg,png,jpg,pdf}>';
+  return 'Usage: bun render_any.js --in <file.md|.mmd> --out <file.svg>';
 }
 
 function extractMermaid(md){
@@ -37,20 +37,11 @@ function extractMermaid(md){
   return { fm, code };
 }
 
-function detectDiagramType(code){
-  const first = code.trim().split(/\s+/)[0].toLowerCase();
-  return first; // e.g., 'flowchart', 'graph', 'pie', 'sequenceDiagram', 'xychart-beta'
-}
-
 function run(cmd, args, opts={}){
   return new Promise((resolve, reject)=>{
     const child = spawn(cmd, args, { stdio: 'inherit', ...opts });
     child.on('exit', (code)=> code===0 ? resolve() : reject(new Error(cmd+' failed: '+code)));
   });
-}
-
-async function renderWithFlowrender(inputPath, outputPath){
-  await run('node', ['mermaid_js/src/cli/flowrender.js', '--in', inputPath, '--out', outputPath]);
 }
 
 async function renderWithMmdcFromCode(code, fm, outputPath){
@@ -67,15 +58,13 @@ async function renderWithMmdcFromCode(code, fm, outputPath){
     await writeFile(configFile, JSON.stringify(config, null, 2), 'utf8');
   }
   const ext = extname(outputPath).slice(1).toLowerCase();
-  const outDir = dirname(resolve(outputPath));
   const outFile = resolve(outputPath);
+  const outDir = dirname(outFile);
+  await mkdir(outDir, { recursive: true });
   const mmdcBin = 'node_modules/.bin/mmdc';
   const args = ['-i', mmd, '-o', outFile];
   if (configFile) args.push('--configFile', configFile);
-  if (ext === 'png') args.push('-t', 'default'); // theme handled via config
-  if (ext === 'jpg' || ext === 'jpeg') args.push('--jpg');
-  if (ext === 'svg') {/* default */}
-  if (ext === 'pdf') args.push('-b', 'white');
+  if (ext !== 'svg') throw new Error('Only .svg output is supported (got: ' + ext + ')');
   await run(mmdcBin, args, { cwd: process.cwd() });
 }
 
@@ -84,15 +73,13 @@ async function main(){
   if (!args.in || !args.out){ console.error(usage()); process.exit(2); }
   const inPath = resolve(process.cwd(), args.in);
   const outPath = resolve(process.cwd(), args.out);
+  if (extname(outPath).toLowerCase() !== '.svg') {
+    console.error('Only .svg output is supported:', outPath);
+    process.exit(2);
+  }
   const md = await readFile(inPath, 'utf8');
   const { fm, code } = extractMermaid(md);
-  const typ = detectDiagramType(code);
-  const flowLike = typ === 'flowchart' || typ === 'graph' || typ === 'graphlr' || typ === 'graphrl' || typ === 'graphtb';
-  if (flowLike){
-    await renderWithFlowrender(inPath, outPath);
-  } else {
-    await renderWithMmdcFromCode(code, fm, outPath);
-  }
+  await renderWithMmdcFromCode(code, fm, outPath);
 }
 
 main().catch((err)=>{ console.error(err); process.exit(70); });

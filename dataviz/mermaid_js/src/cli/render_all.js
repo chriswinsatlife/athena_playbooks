@@ -28,8 +28,8 @@ async function listFiles(root, acc = []) {
 
 function runFlowrender(input, output) {
   return new Promise((resolve, reject) => {
-    const child = spawn('node', ['mermaid_js/src/cli/flowrender.js', '--in', input, '--out', output], { stdio: 'inherit' });
-    child.on('exit', (code) => code === 0 ? resolve() : reject(new Error('flowrender failed: ' + code)));
+    const child = spawn('bun', ['mermaid_js/src/cli/render_any.js', '--in', input, '--out', output], { stdio: 'inherit' });
+    child.on('exit', (code) => code === 0 ? resolve() : reject(new Error('render_any failed: ' + code)));
   });
 }
 
@@ -46,10 +46,8 @@ async function main() {
     const outSubDir = join(outDir, dirname(rel));
     await mkdir(outSubDir, { recursive: true });
     const svgOut = join(outSubDir, base + '.svg');
-    const pngOut = join(outSubDir, base + '.png');
-    if (debug) console.log('Rendering', input, '->', svgOut, 'and', pngOut);
+    if (debug) console.log('Rendering', input, '->', svgOut);
     await runFlowrender(input, svgOut);
-    await runFlowrender(input, pngOut);
   }
 }
 

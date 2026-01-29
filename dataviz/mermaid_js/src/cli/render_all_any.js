@@ -27,7 +27,7 @@ async function listFiles(root, acc=[]) {
 
 function runRenderAny(input, output){
   return new Promise((resolve, reject)=>{
-    const child = spawn('node', ['mermaid_js/src/cli/render_any.js', '--in', input, '--out', output], { stdio:'inherit' });
+    const child = spawn('bun', ['mermaid_js/src/cli/render_any.js', '--in', input, '--out', output], { stdio:'inherit' });
     child.on('exit', (code)=> code===0 ? resolve() : reject(new Error('render_any failed: '+code)));
   });
 }
@@ -41,10 +41,8 @@ async function main(){
     const outSub = join(outDir, dirname(rel));
     await mkdir(outSub, { recursive: true });
     const svgOut = join(outSub, base + '.svg');
-    const pngOut = join(outSub, base + '.png');
     if (debug) console.log('Rendering (any):', input);
     await runRenderAny(input, svgOut);
-    await runRenderAny(input, pngOut);
   }
 }
 

@@ -6,7 +6,6 @@
     "dev": "bun scripts/sync_playbooks_to_site.mjs && bunx astro dev",
     "build": "bun scripts/sync_playbooks_to_site.mjs && bunx astro build",
     "preview": "bun scripts/sync_playbooks_to_site.mjs && bunx astro preview",
-    "render:playbook-diagrams": "bun scripts/render_playbook_diagrams.ts",
     "astro": "bunx astro"
   },
   "dependencies": {

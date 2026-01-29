@@ -7,7 +7,6 @@
       "id": "workflow",
       "src_mermaid": "athena/playbooks/gift-automation/assets/diagrams_src/workflow.md",
       "src_svg": "athena/playbooks/gift-automation/assets/diagrams/workflow.svg",
-      "src_png": "athena/playbooks/gift-automation/assets/diagrams/workflow.png",
       "alt": "Gift automation workflow",
       "caption": "From trigger to delivery confirmation, including an escalation path for ambiguity."
     }

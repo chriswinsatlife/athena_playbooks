@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro'
+import FlowDiagram from '@components/playbooks/flow_diagram_client.astro'
 ---
 
 <Base title="Gifting Playbook">
@@ -18,11 +19,8 @@ import Base from '../../layouts/Base.astro'
             <div class="text-sm font-semibold text-base-content">Setup</div>
             <div class="text-sm text-base-content/60">Get the Airtable ready and handoff to EA</div>
           </div>
-          <div class="diagram-wrap">
-            <a class="diagram-link" href="/diagrams/gifting_playbook_flow/index.html?data=setup.json" target="_blank" rel="noreferrer">
-              <img class="diagram-img" src="/diagrams/gifting_playbook_flow/setup.png" alt="Setup flow" loading="lazy" />
-              <span class="diagram-cta">Open interactive diagram</span>
-            </a>
+          <div class="p-4">
+            <FlowDiagram id="gift-setup" dataUrl="/diagrams/gifting_playbook_flow/setup.json" height={300} />
           </div>
         </section>
 
@@ -31,11 +29,11 @@ import Base from '../../layouts/Base.astro'
             <div class="text-sm font-semibold text-base-content">Ongoing workflow</div>
             <div class="text-sm text-base-content/60">From “start looking” to delivery confirmation</div>
           </div>
-          <div class="diagram-wrap diagram-wrap--scroll">
-            <a class="diagram-link" href="/diagrams/gifting_playbook_flow/index.html?data=ongoing.json" target="_blank" rel="noreferrer">
-              <img class="diagram-img diagram-img--wide" src="/diagrams/gifting_playbook_flow/ongoing.png" alt="Ongoing workflow" loading="lazy" />
-              <span class="diagram-cta">Open interactive diagram</span>
-            </a>
+          <div class="p-4">
+            <div class="grid gap-4">
+              <FlowDiagram id="gift-ongoing-a" dataUrl="/diagrams/gifting_playbook_flow/ongoing_a.json" height={260} />
+              <FlowDiagram id="gift-ongoing-b" dataUrl="/diagrams/gifting_playbook_flow/ongoing_b.json" height={220} />
+            </div>
           </div>
         </section>
 
@@ -44,51 +42,11 @@ import Base from '../../layouts/Base.astro'
             <div class="text-sm font-semibold text-base-content">Maintenance</div>
             <div class="text-sm text-base-content/60">Keep the system fresh and compounding</div>
           </div>
-          <div class="diagram-wrap">
-            <a class="diagram-link" href="/diagrams/gifting_playbook_flow/index.html?data=maintenance.json" target="_blank" rel="noreferrer">
-              <img class="diagram-img" src="/diagrams/gifting_playbook_flow/maintenance.png" alt="Maintenance flow" loading="lazy" />
-              <span class="diagram-cta">Open interactive diagram</span>
-            </a>
+          <div class="p-4">
+            <FlowDiagram id="gift-maintenance" dataUrl="/diagrams/gifting_playbook_flow/maintenance.json" height={300} />
           </div>
         </section>
       </div>
     </main>
   </div>
 </Base>
-
-<style>
-  .diagram-wrap{ padding: 1rem; }
-  .diagram-wrap--scroll{ overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-  .diagram-link{ display: block; text-decoration: none; }
-
-  .diagram-img{
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 14px;
-    border: 1px solid rgba(0,0,0,0.06);
-    background: rgba(5,36,12,0.03);
-  }
-
-  /* Keep long flows readable: don't scale down, allow horizontal scroll. */
-  .diagram-img--wide{ width: auto; max-width: none; }
-
-  .diagram-cta{
-    display: inline-block;
-    margin-top: 0.85rem;
-    padding: 0.55rem 0.9rem;
-    border-radius: 999px;
-    background: #05240C;
-    color: #fff;
-    font-weight: 650;
-  }
-
-  .diagram-link:hover .diagram-cta{ background: #062812; }
-
-  @media (max-width: 640px){
-    .diagram-wrap--scroll{ overflow-x: hidden; }
-    .diagram-img--wide{ width: 100%; max-width: 100%; }
-    .diagram-cta{ width: 100%; text-align: center; }
-  }
-</style>

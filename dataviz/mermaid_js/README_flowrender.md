@@ -1,12 +1,11 @@
-# Flowrender: CI + local rendering of Mermaid-based flowcharts (sketch style)
+# Mermaid rendering: CI + local rendering of Mermaid diagrams
 
-This folder contains a headless renderer that converts Mermaid flowcharts in `.md`/`.mmd` files into SVG and PNG assets using our D3 + Dagre + Rough.js pipeline (AST-first parsing). It works locally and in GitHub Actions.
+This folder contains a renderer that converts Mermaid diagrams in `.md`/`.mmd` files into SVG assets. It works locally and in GitHub Actions.
 
 ## Where outputs go
 - Generated assets are written to `mermaid_js/generated/`, mirroring input subdirectories.
 - Example: `mermaid_js/examples/sample_flow.md` →
   - `mermaid_js/generated/examples/sample_flow.svg`
-  - `mermaid_js/generated/examples/sample_flow.png`
 
 You can reference these directly in blog markdown or presentations.
 
@@ -42,27 +41,19 @@ B -->|Yes| C["Login"]
 3. Commit and push. The CI job will render SVG+PNG and commit to `mermaid_js/generated/`.
 
 ## Use in your blog/presentation
-- Markdown: `![diagram](mermaid_js/generated/examples/sample_flow.png)`
 - HTML: `<img src="/path/to/repo/mermaid_js/generated/examples/sample_flow.svg" alt="diagram" />`
 
 ## Commands (local)
-- Install Playwright Chromium once:
-
-```bash
-npm run install-playwright
-```
-
 - Render one file:
 
 ```bash
-npm run flowrender -- --in mermaid_js/examples/sample_flow.md --out mermaid_js/generated/examples/sample_flow.svg
-npm run flowrender -- --in mermaid_js/examples/sample_flow.md --out mermaid_js/generated/examples/sample_flow.png
+bun mermaid_js/src/cli/render_any.js --in mermaid_js/examples/sample_flow.md --out mermaid_js/generated/examples/sample_flow.svg
 ```
 
 - Render all `.md`/`.mmd` under `mermaid_js/`:
 
 ```bash
-npm run flowrender:all
+bun mermaid_js/src/cli/render_all.js --inDir mermaid_js --outDir mermaid_js/generated
 ```
 
 ## GitHub Actions
@@ -73,9 +64,7 @@ Workflow: [.github/workflows/flowrender.yml](../.github/workflows/flowrender.yml
 Artifacts are also available in the workflow run for download.
 
 ## Notes & troubleshooting
-- This pipeline uses a headless browser (Chromium) for accurate text metrics and Rough.js output.
-- If CI fails on Playwright install, rerun with `--with-deps` (already configured). Locally, ensure `npm run install-playwright` has been run at least once.
-- If you need vector PDF: render SVG and convert with your preferred tool (or use the in-browser export PDF which rasterizes to a page-sized PDF).
+- If you need PDF: render SVG and convert with your preferred tool.
 
 ## Advanced
 - Styles are defined via CSS variables in [styles/flowchart.css](styles/flowchart.css).
