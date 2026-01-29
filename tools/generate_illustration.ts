@@ -193,15 +193,33 @@ function extractPromptSkeleton(styleBody: string): string {
   return styleBody.split("\n").slice(0, 40).join("\n").trim();
 }
 
-function buildPrompt(styleBody: string, system: string, subject: string, scene: string, notes?: string): string {
+function buildPrompt(
+  styleBody: string,
+  system: string,
+  subject: string,
+  scene: string,
+  notes: string | undefined,
+  mode: "text" | "restyle",
+): string {
   const skeleton = extractPromptSkeleton(styleBody);
   const filled = skeleton
     .replace(/\$SUBJECT/g, subject)
     .replace(/\$SCENE/g, scene)
     .replace(/\$NOTES/g, notes ?? "");
 
-  // Keep prompt compact for Gemini: skeleton first, then system instructions.
-  const parts = [filled.trim()];
+  // Keep prompt compact for Gemini.
+  const parts: string[] = [filled.trim()];
+
+  if (mode === "restyle") {
+    parts.push(
+      "",
+      "Restyle instruction:",
+      "- Preserve the input image framing and subject scale.",
+      "- Do NOT introduce large blank margins or extra white space compared to the input.",
+      "- Apply ONLY the medium/linework/wash/texture/color behavior of the target style.",
+    );
+  }
+
   if (system.trim()) {
     parts.push("", "System constraints:", system.trim());
   }
@@ -275,7 +293,7 @@ async function generateImageFromInput(
           {
             text:
               prompt +
-              "\n\nInstruction: Restyle the provided input image into the described illustration style. Preserve the subject identity and general composition, but do not copy any specific reference scene. Do not add text. Do not add logos.",
+              "\n\nInstruction: Restyle the provided input image into the described illustration style. Preserve framing and subject scale. Do not add extra margins/white space. Do not add any text or logos.",
           },
         ],
       },
@@ -486,7 +504,14 @@ async function main() {
   const system = await loadSystemInstructions();
   const qualityPrompt = options.skipQualityCheck ? "" : await loadQualityPrompt();
 
-  const prompt = buildPrompt(styleBody, system, options.subject, options.scene, options.notes);
+  const prompt = buildPrompt(
+    styleBody,
+    system,
+    options.subject,
+    options.scene,
+    options.notes,
+    options.inputImagePath ? "restyle" : "text",
+  );
   const aspectRatio = normalizeAspectRatio(meta.aspectRatio);
 
   if (options.debug) {

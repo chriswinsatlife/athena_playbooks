@@ -79,4 +79,4 @@ bun tools/generate_illustration.ts wattenberger_watercolor_footer_style \
 ## Notes
 
 - The generation prompt is intentionally short and derived from the style template's "Prompt Skeleton".
-- `prompts/system_instructions.md` is appended to every generation prompt. Most important: no logos.
+- `prompts/illustration_system_instructions.md` is appended to every illustration generation prompt. Most important: no logos, no text.
