@@ -148,7 +148,7 @@ async function generatePlaybookContent(
     experimental_output: Output.object({
       schema: generationSchema,
     }),
-    maxTokens: 8000,
+    maxOutputTokens: 8000,
     temperature: 0.7,
   });
 

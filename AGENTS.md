@@ -23,7 +23,9 @@
 - `maggie_appleton_components/` is a collection of well-designed Astro components for reference.
 - There is a `docs/illustration_generation_system.md`
 - There is a metaprompting system (`docs/diagram_generation_system.md`) which enables generating prompts as markdown files for imitating the layouts, styles, or other aspects of any input image file; use `tools/analyze_reference.ts` to create templates and `tools/generate_diagram.ts` to generate on-brand diagrams
-- There is a Mermaid-based diagram system (`dataviz/mermaid_js/`), with corresponding Astro component (`components/playbooks/Diagram.astro`), and a separate D3/Dagre-based diagram system (`dataviz/dagre.md` and `dataviz/mermaid_js/d3_and_dagre_flowchart_demo.html`)
+
+## Astro Component Library
+
 - The playbook component library is `src/components/`, e.g.:
   - `Messages.astro` - WhatsApp, iMessage, ChatGPT, Claude Code, Telegram, OpenCode
   - `Notifications.astro` - macOS, iOS, Android, Windows, Liquid Glass
@@ -40,6 +42,8 @@
   - `elements/` - Buttons, links, inputs
   - `catalyst/` - UI kit components
   - `icons/` - Icon library
+  - Some of these may be copied/extended for playbook-related use cases, though all playbook-specific components should be in the `src/` directory version
+- There is a Mermaid-based diagram system (`dataviz/mermaid_js/`), with corresponding Astro component (`components/playbooks/Diagram.astro`), and a separate D3/Dagre-based diagram system (`dataviz/dagre.md` and `dataviz/mermaid_js/d3_and_dagre_flowchart_demo.html`); when making diagrams, be sure to ask the user for clarification if it is unclear which approach should be used
 
 ## What Goes Where
 

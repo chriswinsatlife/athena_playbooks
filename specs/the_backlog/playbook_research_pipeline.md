@@ -1,75 +1,80 @@
-# Playbook Research Pipeline (Future)
+# Playbook Research Pipeline
 
-Automated research pipeline that enriches playbook briefs with curated sources, tool discovery, and generated outlines before content generation.
+Automated research pipeline that enriches playbook briefs with curated sources, tool discovery, and structured analysis before content generation.
 
-Status: **Backlog** - implement after Phases 1-3 are working
+Status: **Next Up** - input spec and prompts defined, implementation pending
 
-## Purpose
+## References
 
-Currently, playbook briefs are manually authored with optional source_material. This pipeline would automate:
-- Tool/service discovery for the playbook topic
-- Best practices research from web sources
-- Outline generation with section-specific sources
-- Source relevance filtering
+- Input spec: `specs/next_up/playbook_research_task_input.md`
+- Implementation: `scripts/research_playbook.ts` (planned)
+- Prompts:
+  - `prompts/playbook_research_system.md` - system prompt with verification checklist, source priorities
+  - `prompts/playbook_research_query.md` - 9-section research template (problem, workflows, tools, delegation, etc)
+  - `prompts/playbook_analysis.md` - synthesis output format
 
 ## Input
 
-Simple brief YAML:
-
-```yaml
-slug: gift-automation
-topic: Gift automation for birthdays, holidays, and thank-you occasions
-area: relationships
-audience: both
-research_guidance: |
-  - Personal CRM tools (Clay, Monica, Dex, etc)
-  - Gift recommendation services
-  - Calendar/reminder automation patterns
-```
-
-## Output
-
-Enriched brief JSON with sources:
+5-field JSON per `specs/next_up/playbook_research_task_input.md`:
 
 ```json
 {
   "slug": "gift-automation",
-  "topic": "...",
-  "outline": {
-    "sections": [
-      { "id": "tools", "title": "Tools & Templates", "sources": [...] }
-    ]
+  "topic": "Automating gift-giving for birthdays, holidays, anniversaries...",
+  "area": "relationships",
+  "research_guidance": "Focus on practical delegation systems, not DIY...",
+  "source_material": "(optional) existing content to transform"
+}
+```
+
+## Output
+
+Exa search results + LLM synthesis:
+
+```json
+{
+  "slug": "gift-automation",
+  "research_summary": {
+    "confidence_level": "high",
+    "research_date": "2026-01-30"
   },
-  "tool_candidates": [
-    { "name": "Clay", "url": "https://clay.com", "category": "crm" }
+  "sources": [
+    {
+      "url": "https://athena.com/resources/...",
+      "title": "How to Systematize Gift-Giving",
+      "type": "case_study",
+      "relevance_score": 5,
+      "key_findings": ["...", "..."]
+    }
   ],
-  "global_sources": [...]
+  "delegation_analysis": {
+    "pathway": "direct-offensive",
+    "modality": "process-driven",
+    "ea_level_required": "intermediate"
+  },
+  "tool_stack": { "required": [...], "optional": [...] },
+  "templates_found": [...],
+  "implementation_evidence": { "real_examples": [...], "common_mistakes": [...] }
 }
 ```
 
 ## Pipeline Steps
 
 ```
-0a. Parse brief
-0b. Generate search queries from topic + research_guidance
-0c. Execute searches (Tavily/Exa) in parallel
-0d. AI filters sources by relevance (keep score >= 3)
-0e. Generate outline with research flags per section
-0f. Section-specific research for flagged sections
+1. Parse input JSON (slug, topic, area, research_guidance, source_material)
+2. Generate search queries from topic + research_guidance
+3. Execute Exa searches in parallel (tool-focused, practitioner examples)
+4. LLM filters sources by relevance (keep score >= 3)
+5. LLM synthesizes findings per playbook_analysis.md structure
+6. Output enriched JSON to briefs/enriched/<slug>.json
 ```
 
 ## Tech Stack
 
 - Bun + Vercel AI SDK v6 + Zod
-- Tavily API for general web search
-- Exa API for tool/code-focused search
-- Same pattern as mAIstro n8n workflow (workflow ID: rscJDp0jyTjleNNA)
+- Exa API for search (practitioner examples, tool docs, case studies)
+- Prompt templates with Handlebars-style interpolation
 
 ## Integration
 
-This pipeline runs before `generate_playbook.ts` and outputs to `briefs/enriched/<slug>.json`, which the main pipeline can consume.
-
-## Reference
-
-- mAIstro workflow: `n8n workflow mermaid --id rscJDp0jyTjleNNA`
-- Main pipeline spec: `specs/next_up/playbook_pipeline_v2.md`
+Runs before `generate_playbook.ts`. Outputs to `briefs/enriched/<slug>.json` for main pipeline consumption.
