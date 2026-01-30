@@ -1,0 +1,23 @@
+---
+name: "Foundation Preferences [CLIENT'S COPY]"
+source_url: "https://docs.google.com/spreadsheets/d/13VbmOxH_2qOmDPpxC-DP4b7_l2oV_eUROHgc95oDdQs/edit"
+export_date: "2026-01-30T17:19:40.024Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 13
+---
+
+Category,Preference,Notes
+Pre-Flight Check-In,Yes/No,"IF not online, set a calendar reminder for 24 hrs before "
+Boarding Passes,Send via SMS and email,Include boarding pass  in WhatsApp too 
+Luggage Preferences,N/A,Preferences on packing and luggage weight for reminder/notification
+Transportation to Airport,Taxi/Rideshare/Private Car/Public Transport,Preferred service for EA to book
+Airport Arrival Time,X hours before flight,Preference on what time to leave for the airport
+Mobility Assistance
+Airport Security,Regular/TSA PreCheck/Other expedited,Preference for security check process for reminder/notification
+Airport Lounge Access,Yes/No,"If yes, details of lounge access and any special requests for reminder"
+Meal Before Flight,Order delivery/Prepare own/Eat at airport,"If order delivery, preferences on food and timing"
+Snacks and Drinks for the Flight,Yes/No,Preferences for reminder to prepare own snacks/drinks
+On-Flight Entertainment,Download Own/Use Airline's,"Reminder to download movies, music, books, work materials"
+Flight Status Notifications,Yes/No,Set up flight status notifications on client's phone
+On-Ground Services at Destination,Rental car/Hotel shuttle/Other,Details for booking on-ground transportation

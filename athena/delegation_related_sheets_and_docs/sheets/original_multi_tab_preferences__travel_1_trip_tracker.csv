@@ -1,0 +1,13 @@
+---
+name: "Foundation Preferences [CLIENT'S COPY]"
+source_url: "https://docs.google.com/spreadsheets/d/13VbmOxH_2qOmDPpxC-DP4b7_l2oV_eUROHgc95oDdQs/edit"
+export_date: "2026-01-30T17:19:38.897Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 13
+---
+
+Destination,Departure Date,Return Date,Description (Reaon for the trip),Travelers,Business or Personal Trip ,Flights ,Ground Transport ,Accommodation ,Restaurants,Activities,Co-working spaces,Status,Planning Status
+"Washington, DC",1/1/2023,1/6/2023,Offsite planning for the company event ,Client,Business,Complete,Needed,Complete,Currently planning ,Not Needed,Needed,Past Trip,Complete
+"Los Angeles, CA",1/1/2024,1/6/2024,Remote work + parent's birthday celebration,Client + Partner,Personal,Needed,Not Needed,Not Needed,Not Needed,Currently planning ,Not Needed,Upcoming Trip,Planned
+"Orlando, FL",Summer 2024,,Summer getaway,Client + Partner + Children,Business & Personal,Currently planning ,Currently planning ,Currently planning ,Currently planning ,Currently planning ,Currently planning ,TBD,Planning Required

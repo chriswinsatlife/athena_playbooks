@@ -1,0 +1,13 @@
+---
+name: "Athena Delegation Levels"
+source_url: "https://docs.google.com/spreadsheets/d/1uxPJ86n24N6buNOYKVVPuGYZVQvNcAzIJR8LUNRR9bQ/edit"
+export_date: "2026-01-30T17:19:28.384Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 2
+---
+
+# Sheets Export
+
+- outputs/delegation_related_sheets_and_docs/sheets/delegation_levels__levels.csv
+- outputs/delegation_related_sheets_and_docs/sheets/delegation_levels__original_notes.csv

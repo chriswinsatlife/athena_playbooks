@@ -1,0 +1,67 @@
+---
+name: "Foundation Preferences [CLIENT'S COPY]"
+source_url: "https://docs.google.com/spreadsheets/d/13VbmOxH_2qOmDPpxC-DP4b7_l2oV_eUROHgc95oDdQs/edit"
+export_date: "2026-01-30T17:19:39.467Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 13
+---
+
+Type,Name,Options,Search Terms,Additional Notes
+Flights,Airline,"Delta,SouthWest","Search Personal and Professional Inboxes for ""boarding pass""",It looks like my client flies with SouthWest when traveling to Texas but flies Delta on most other trips.
+Flights,Preferred Airport,"LaGuardia, JFK","Search Personal and Professional Inboxes for ""boarding pass"""
+Flights,TSA Pre✔️ / Trusted Traveler / NEXUS,Yes,"Search Personal and Professional Inboxes for ""boarding pass"" and look for the TSA Pre✔️logo",I saw that my client has TSA Pre✔️so I asked for his known traveler number since I could not find it directly in his email
+Flights,In-Flight Meals,Vegetarian Option
+Transportation,To/from Airport,Uber,"Search Personal and Professional Inboxes for ""Uber Receipts"" and ""Lyft Ride Receipt""",My client tends to Book UberX and UberBLACK services for car transportation
+Transportation,Rental Car,Hertz,"Search Personal and Professional Inboxes for ""rental car"", ""Enterprise"", ""Budget"", ""Alamo"" and ""Hertz""","Automatic, unless it's not available in the location "
+Activity,Restaurants,$$$ on Yelp
+Activity,Activities at Destination,"Local coffee shops, lunch with friends in the city"
+
+💼 Business Travel Preferences
+Client overall travel priorities when booking flights/hotels/travel: 1)  Maintain status 2) Maintain my sleep/workout schedule 3) Economy if flight less than 5 hours; business if longer
+Type,Name,Options,Search Terms,Additional Notes
+Accommodation,Accommodations,Hotel,"Search Personal and Professional Inboxes for ""Hotel, travel, airbnb, vrbo, suite, booked""",When traveling alone for business my client appears to prefer hotels. It appears that he regular stays in Hilton hotels near the center of cities where a car is not needed.
+Flights,Frequent Flyer,Yes,"Search Personal and Professional Inboxes for ""boarding pass"". Frequent Flyer is usually located on the boarding pass itself",I found my client's American Airlines frequent flyer number on his boarding pass from a previous flight.
+Flights,Passport Number
+Flights,Seating Class,"Other,Private","Search Personal and Professional Inboxes for ""boarding pass""",My client usually flies through his company's private jet service and uses BLADE when traveling in New York City.
+Flights,Window / Aisle,Window,"Search Personal and Professional Inboxes for ""boarding pass"". Observe plane seating diagrams for reference if seating position not clear.",He always books window seats when possible. I also noticed that he tends to prefer the left side of the plane.
+Flights,Front / Back,Front,"Search Personal and Professional Inboxes for ""boarding pass"". Observe plane seating diagrams for reference if seating position not clear.",It appears my client prefers to sit toward the front of the plane when possible.
+Flights,Nonstop or Layover Flights,,"Search Personal and Professional Inboxes for ""boarding pass"""
+Flights,Time of Day for Departure Flights,,"Search Personal and Professional Inboxes for ""boarding pass"""
+Flights,Time of Day for Return Flights,,"Search Personal and Professional Inboxes for ""boarding pass"""
+Flights,Baggage,"Carry-on, Check","Search Personal and Professional Inboxes for ""checked"""," i.e. ""If it's a business trip of less than 3 days I never check a bag. If it's a business trip of more than 3 days, I always check a bag. If it's a family or personal trip, I always check a bag."""
+Transportation,Rental Car,Hertz,"Search Personal and Professional Inboxes for ""rental car"", ""Enterprise"", ""Budget"", ""Alamo"" and ""Hertz"""
+Transportation,Rental insurance 
+Activity ,Co-working spaces
+
+
+🏝️Leisure Travel Preferences
+Client overall travel priorities when booking flights/hotels/travel: 1)  Maintain status 2) Maintain my sleep/workout schedule 3) Economy if flight less than 5 hours; business if longer
+Type,Name,Options,Search Terms,Additional Notes
+Accommodation,Accommodations,Airbnb,"Search Personal and Professional Inboxes for ""Hotel, travel, airbnb, vrbo, suite, booked""",When traveling for leisure my client appears to prefer Airbnbs. It appears that he regularly rents at least a two-bedroom condo or house.
+Flights,Frequent Flyer,Yes,"Search Personal and Professional Inboxes for ""boarding pass"". Frequent Flyer is usually located on the boarding pass itself",I found my client's American Airlines frequent flyer number on his boarding pass from a previous flight.
+Flights,Passport Number
+Flights,Seating Class,,"Search Personal and Professional Inboxes for ""boarding pass"""
+Flights,Window / Aisle,Window,"Search Personal and Professional Inboxes for ""boarding pass"". Observe plane seating diagrams for reference if seating position not clear.",He always books window seats when possible. I also noticed that he tends to prefer the left side of the plane.
+Flights,Front / Back,Front,"Search Personal and Professional Inboxes for ""boarding pass"". Observe plane seating diagrams for reference if seating position not clear.",It appears my client prefers to sit toward the front of the plane when possible.
+
+Flights,Time of Date for Departure Flights,,"Search Personal and Professional Inboxes for ""boarding pass"""
+Flights,Time of Date for Return Flights,,"Search Personal and Professional Inboxes for ""boarding pass"""
+Flights,Baggage,"Carry-on, Check","Search Personal and Professional Inboxes for ""checked"""," i.e. ""If it's a business trip of less than 3 days I never check a bag. If it's a business trip of more than 3 days, I always check a bag. If it's a family or personal trip, I always check a bag."""
+
+Activity,Restaurants,2 or 3 Michelin Star,,My client wants to try and get reservations at 2 and 3 Michelin star restaurants
+Activity,Activities at Destination,"Try local food, relaxing at the beach"
+
+👪 Family Travel Preferences
+Client overall travel priorities when booking flights/hotels/travel: 1)  Maintain status 2) Maintain my sleep/workout schedule 3) Economy if flight less than 5 hours; business if longer
+Type,Name,Options,Search Terms,Additional Notes
+Accommodation,Accommodations,"Airbnb, Vacation houses or villas","Search Personal and Professional Inboxes for ""Hotel, travel, airbnb, vrbo, suite, booked""",When traveling for leisure my client appears to prefer Airbnbs. It appears that he regularly rents at least a two-bedroom condo or house.
+Flights,Nonstop or Layover Flights,Direct flights,"Search Personal and Professional Inboxes for ""boarding pass"""
+Flights,Family Seating ,Yes,"Search Personal and Professional Inboxes for ""boarding pass"""
+Flights,In-flight entertainment ,"Yes, if available","Search Personal and Professional Inboxes for ""boarding pass"""
+Flights,Child-friendly amenities,,"Search Personal and Professional Inboxes for ""boarding pass"""
+Flights,Baggage Allowances,,"Search Personal and Professional Inboxes for ""boarding pass"""
+Flights,Family Boarding ,,"Search Personal and Professional Inboxes for ""boarding pass"""
+Activity,Restaurants,2 or 3 Michelin Star,,My client wants to try and get reservations at 2 and 3 Michelin star restaurants
+Activity,Activities at Destination,Outdoor activities preschool kids will enjoy
+Transportation,Rental Car,Hertz,"Search Personal and Professional Inboxes for ""rental car"", ""Enterprise"", ""Budget"", ""Alamo"" and ""Hertz""",Car seat available for kids

@@ -1,0 +1,18 @@
+---
+name: "Foundation Preferences [CLIENT'S COPY]"
+source_url: "https://docs.google.com/spreadsheets/d/13VbmOxH_2qOmDPpxC-DP4b7_l2oV_eUROHgc95oDdQs/edit"
+export_date: "2026-01-30T17:19:37.200Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 13
+---
+
+Inbox Sweep Rules
+Email sweep priorities:
+1) Client will review emails at [TIME]
+2) Will personally respond to all emails from family and friends
+3) Message client on WhatsApp for incoming VIP messages
+Email Sweep Time,Goal
+Start of shift sweep: [TIME] AM,Review messages the client received overnight and prepare for client review in morning sync
+Mid shift sweep: [TIME] AM/PM,Review morning incomings and pre-draft responses for client's sweep 
+End of shift sweep: [TIME] PM,"Review afternoon incomings, pre-draft responses; review any pre-drafts the client has sent"

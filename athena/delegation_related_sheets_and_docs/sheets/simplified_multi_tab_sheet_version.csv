@@ -1,0 +1,16 @@
+---
+name: "Client - EA Preferences Template"
+source_url: "https://docs.google.com/spreadsheets/d/1PJ5OYeta1IX5uwSnNpHdrKAeABHYncNEScMYf2Tp5_8/edit"
+export_date: "2026-01-30T17:20:57.826Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 5
+---
+
+# Sheets Export
+
+- outputs/delegation_related_sheets_and_docs/sheets/simplified_multi_tab_sheet_version__basics.csv
+- outputs/delegation_related_sheets_and_docs/sheets/simplified_multi_tab_sheet_version__email.csv
+- outputs/delegation_related_sheets_and_docs/sheets/simplified_multi_tab_sheet_version__calendar.csv
+- outputs/delegation_related_sheets_and_docs/sheets/simplified_multi_tab_sheet_version__travel.csv
+- outputs/delegation_related_sheets_and_docs/sheets/simplified_multi_tab_sheet_version__gifts.csv

@@ -1,0 +1,43 @@
+---
+name: "Client - EA Preferences Template"
+source_url: "https://docs.google.com/spreadsheets/d/1PJ5OYeta1IX5uwSnNpHdrKAeABHYncNEScMYf2Tp5_8/edit"
+export_date: "2026-01-30T17:20:55.755Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 5
+---
+
+Section,Item,Detail,Notes
+Apps,Task & Project Management,Todoist,For tasks assigned to EA (and ideally same as personal to-do list); not company's project management SaaS
+Apps,Instant Messaging & Voice Notes,Slack,For EA conversations
+Apps,Knowledge Management,Google Drive
+Apps,Screen Recording,Loom
+Apps,Password Manager,1Password
+Apps,Calendar,Motion
+Apps,Email,Shortwave
+Apps,Video Conferencing,Zoom
+Apps,Voice Calling,OpenPhone,OpenPhone is provided by Athena to ensure EAs can make international phone calls on your behalf.
+Apps,Meeting Notetaker,Fireflies
+Apps,Workflow Automations,Zapier
+Accts/Links,Personal Email Address/Alias for EA,name@name.domain
+Accts/Links,Business Email Address/Alias for EA,name@company.domain
+Accts/Links,Meeting URL,https://us06web.zoom.us/j/12345
+Accts/Links,Scheduling URLs,"https://cal.com/name/meeting-30
+https://cal.com/name/urgent",E.g. use urgent only for VIPs
+Finance,Primary Personal Credit Card,Chase Sapphire Reserve,E.g. use for everything except flights
+Finance,Other Personal Credit Cards,Amex Platinum
+Finance,Primary Personal Bank,Mercury Personal
+Finance,Other Personal Bank Accounts,N/A
+Finance,Primary Business Credit Card,Ramp,E.g. create separate virtual card for new vendors
+Finance,Other Business Credit Cards,N/A
+Finance,Primary Business Bank,Mercury
+Finance,Other Business Bank Accounts,N/A
+Loyalty Programs,Personal Credit Card Points,Chase UR,Transfers to most airlines & hotels; use for any points-based flight or hotel searches
+Loyalty Programs,Business Credit Card Points,Amex MR
+Loyalty Programs,Primary Frequent Flyer Programs,United (Gold)
+Loyalty Programs,Other Frequent Flyer Programs,N/A
+Loyalty Programs,Primary Hotel Loyalty Programs,Marriott (Titanium),Not loyal; will go to any brand if better price/location/amenities
+Loyalty Programs,Other Hotel Loyalty Programs,Hyatt (Corporate)
+Loyalty Programs,Primary Rental Car Program,Turo
+Loyalty Programs,Other Car Rental Programs,"Hertz, Enterprise, National"
+Loyalty Programs,Primary Rideshare Services,"Uber, Grab"

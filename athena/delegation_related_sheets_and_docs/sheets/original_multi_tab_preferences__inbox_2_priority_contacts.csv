@@ -1,0 +1,21 @@
+---
+name: "Foundation Preferences [CLIENT'S COPY]"
+source_url: "https://docs.google.com/spreadsheets/d/13VbmOxH_2qOmDPpxC-DP4b7_l2oV_eUROHgc95oDdQs/edit"
+export_date: "2026-01-30T17:19:36.604Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 13
+---
+
+Order of Importance,VIP Name,Contact Category,Action,Priority Tag,Additional Notes
+1,Investor #1,Investor,"Message me in Whatsapp, copy and paste message",Urgent,"""Series B Funding ending in Oct 31"""
+2,Investor #2,Investor,"Message me in Whatsapp, copy and paste message",Urgent,"""Series B Funding ending in Oct 31"""
+3,Coworker #1,Manager,"IF regarding issue with Project A, THEN message me in Whatsapp; otherwise, sweep and label as usual"
+4,Coworker #2,Direct Report,"IF subject line contains ""URGENT"", THEN message me in Whatsapp;  otherwise, sweep and label as usual"
+5,Mom,Family,do not predraft reply ,Family,Main family communicator 
+6,Investor #3,Investor,"Message me in Whatsapp, copy and paste message",Urgent,Interested in our new product line
+7,Coworker #3,Peer,"IF subject line contains ""REPORT"", THEN message me in Whatsapp; otherwise, sweep and label as usual",Urgent,Working on quarterly financials
+8,Friend #1,Personal,"If email subject contains ""Party"" or ""Meetup"", send me a Whatsapp message with a smiley",Personal,Often sends event invites
+9,Vendor #1,External,"IF regarding a contract or payment issue, THEN message me in Whatsapp; otherwise, sweep and label as usual",Vendor,Provides IT support
+10,Dad,Family,do not predraft reply; prompt me if no action in 24 hours,Family,Frequently sends family updates
+11,Lawyer,Personal,do not predraft reply; prompt me if no action in 24 hours,Personal,Handling sensitive business matter

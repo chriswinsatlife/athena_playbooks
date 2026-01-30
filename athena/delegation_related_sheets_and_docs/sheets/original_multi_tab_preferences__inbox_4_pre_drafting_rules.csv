@@ -1,0 +1,21 @@
+---
+name: "Foundation Preferences [CLIENT'S COPY]"
+source_url: "https://docs.google.com/spreadsheets/d/13VbmOxH_2qOmDPpxC-DP4b7_l2oV_eUROHgc95oDdQs/edit"
+export_date: "2026-01-30T17:19:37.780Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 13
+---
+
+Contact Type,Pre-draft as:,Notes
+VIPs,Client,EA will dictate 
+Family,Client,Flag during sweep 
+Friends,Client,Client will send outline
+Internal reports,EA,Review calendar and action
+Internal managers,Client,Review calendar and action
+External Business Contacts,EA,Client will send outline
+Acquaintances,EA,Client will send outline
+"Legal Contacts (Lawyer, Legal Advisor)",Client,"Due to the sensitive nature of legal matters, client should directly draft these communications"
+"Medical Contacts (Doctor, Therapist)",Client,Personal health matters should be dealt with directly by the client; flag these during email sweep
+Human Resources,Client,"Performance reviews, feedback, and other HR matters should be dealt with directly by the client"
+Customer Service ,EA 

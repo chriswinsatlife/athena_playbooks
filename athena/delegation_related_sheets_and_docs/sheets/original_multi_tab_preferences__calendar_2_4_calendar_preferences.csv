@@ -1,0 +1,86 @@
+---
+name: "Foundation Preferences [CLIENT'S COPY]"
+source_url: "https://docs.google.com/spreadsheets/d/13VbmOxH_2qOmDPpxC-DP4b7_l2oV_eUROHgc95oDdQs/edit"
+export_date: "2026-01-30T17:19:34.890Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 13
+---
+
+Calendar Preferences
+"Client overall calendar priorities: 
+1)  [No meetings before 9am or after 5pm Eastern time]
+2) [Client meetings take precidence over internal meetings if things need to be rescheduled] 
+3) [etc.]"
+Color code ,Event
+Yellow ,Tasks
+Red,Non-flexible
+Purple,Placeholders
+Gray,Sleep 
+Geen ,1:1s
+Dark violet,External Meetings
+Light blue ,Internal Meetings
+Dark blue,Team-wide meetings
+Pink,Family / personal meetings
+Orange,Errands
+
+Question,Answer #1,Answer #2,,Answer #3,Answer #4,Notes
+Universal (Applicable to both virtual and in-person meetings:
+Hard start to your day,8 :30 am
+Hard stop to your day,5:30 PM,,,,,"Pick up Eva before 6 
+
+No meetings can get pass 5:45 pm"
+Nonflexible meetings,Lunch: 1 - 1:30 pm,,,,,"Flexible for a working lunch 
+
+Prefer no-camera meetings at this time "
+Preferred day and block for internal 1:1 meetings,45 mins that Alex initiated ,,,,,"Rare 1 hour 1:1s
+
+Having 1:1s in one day, preferably a Monday 
+
+Flexible to have 1:1s on a Tuesday if not possible on a Monday"
+Preferred day and block for internal team meetings,Ideally an hour ,Quarterly rituals for a larger scale = 2 hours is okay ,,,,"Team meetings should happen later in the week, ideally on a Tuesday 
+
+2 hours is the max threshold for a meeting"
+Optimal meeting size,Only invite key stakeholders = fewer attendees,,,,,EAs are welcome to join but ideally mostly key stakeholders in the room 
+"Preferred day for ""no meetings""",Wednesday,,,,,"Deep work 
+
+No recurring meetings 
+
+Funnel urgent meetings during Wednesday mornings, if any"
+Special dates to observe,Try to avoid work on Jewish Holidays ,Eva's birthday is October 21st ,,"Birthday = August 7 (still work but would like to hop earlier) 
+
+
+
+
+",Canadian Holidays (what most people would take) 
+Focus time 
+Virtual Meeting Preferences
+What calendar to use for what events?,Professional for anything company related ,Personal for non-work related stuff,,,,Make sure to invite company calendar to personal events to block time
+Preferred tool for video meetings,Zoom (for external clients),Google Meet (for internal meetings),,,,"Zoom for both external and internal meeting (default)
+
+"
+Preferred meeting duration by type of meeting,30 minutes is the minimum threshold ,2 hours is the maximum meeting thress hold ,,45 mins - 1 hour is the sweet spot ,,Below 30 mins = no meeting required
+Preferred naming of events,Adding the type of meeting before the attendee's names
+Video meeting preferences,Waiting room / don't let anyone bypass
+Meeting buffers ,More than 2 hour meetings back to back = 10 minute break/placeholder,Travel placeholders so people don't book over it 
+In-Person Meetings preferences
+Preferred meeting types,Co-working ,Lunch meetings ,,Coffee chats
+Preferred locations ,The Spaces (180 John Street)  ,ByMark (66 Wellington street),,Deneen (Yonge street)
+Preferred day for external meetings,Tuesdays / Thursdays
+
+
+
+
+Meeting Support Preferences
+,Pre-meeting prep,During the meeting prep,,Post meeting prep,Notes
+Types of meetings ,Meeting bio or agenda needed,EA needs to attend? ,AI note- taker only ,Any Action items?
+External Meetings,High-level Meeting Bio ,Renee to attend for meetings when presentation is needed ,Default (always Add Fathom inside the room),Post meeting notes made by Renee (default) ,"Make the bio less text-heavy by highlighting the recent updates
+
+First time meeting = defo need a bio  "
+Internal Meeting,Simple meeting bio for people new to the org ,,Default (always Add Fathom inside the room),"AI auto summary will suffice for recurring 1:1
+
+Internal team meeting = summary made by Renee"
+Personal Meeting ,N/A
+In-person meeting ,High-level Meeting Bio for clients 
+Focus groups ,"Know one thing about the room (details) / trivia!
+",Renee to attend (defauls),Default (always Add Fathom inside the room),Post meeting notes made by Renee (default) ,Add details that allows Alex to connect and build rapport with the attendees 

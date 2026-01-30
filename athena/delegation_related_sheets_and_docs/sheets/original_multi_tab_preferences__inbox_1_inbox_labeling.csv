@@ -1,0 +1,50 @@
+---
+name: "Foundation Preferences [CLIENT'S COPY]"
+source_url: "https://docs.google.com/spreadsheets/d/13VbmOxH_2qOmDPpxC-DP4b7_l2oV_eUROHgc95oDdQs/edit"
+export_date: "2026-01-30T17:19:36.019Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 13
+---
+
+Email Type,Action,Add to Label,Notes
+AI Newsletters,Label under,"Reading List, FYI",Make sure these newsletters end up in pocket reader
+Calendar Invites,Move to,"Invites, FYI"
+Other FYIs (Receipts and CC payment reminder),Label under,FYI
+Internal Communications ,Label under,FYI,"Flag, any org changes "
+Urgent / important,Label under,Urgent
+Urgent / not important,Label under,Action
+Not urgent / important ,Label under,EA to Action
+Emails from Boss/Founder/Extreme VIPs,Auto-sorted,"VIPS, Urgent"
+
+👪 Personal Labeling 
+Email Type,Action,Add to Label,Notes
+Calendar Invites,Move to,Invites
+Receipts & Invoices ,Move to,Receipts
+CC Payment Reminder,Label Under ,Payment Reminder
+Bills,Label under ,Bills
+Doctor's appointments,Label under ,Appointments
+Eva stuff,Move to ,"Eva Stuff, FYI"
+Family emails ,Label under ,Family ,"ANything under family should be in Family, except for Uncle Dave "
+Other FYIs,Label under ,Mortgage ,Maintain this label until July 
+Substack Newsletters,Auto-sorted ,Forums,Some newsletters to be fed to the pocket reader
+Amazon / UPS / Fedex / Canada post ,Label under ,Online Tracking,"Confirmation, tracking, updates, etc. "
+Update emails ,Move to ,Primary ,"Any actionable email (Insurance stuff, life admin stuff, open table confirmations)"
+
+🗂️ For Triaging (Tools)
+Email Type,Which tool? ,Notes
+Asana notifications ,Asana
+Gsuite mentions ,Asana
+Flight details ,Tripit
+Any newsletter captured in the Forum (Personal),Pocket reader
+
+☑️ Considerations before archiving or subscribing 
+Email Type,"Maintain sub, Unsub, or Archive?",Notes
+Calendar Invites,Archive,Flag Alex for any meeting changes 
+Uncle Dave emails (forwarded emails) ,Archive,Only archive the chain letters / subj has fwd = archive
+Outreach emails (profersional email),Archive,External sender / not a client / marketing emails = auto archive 
+Meeting notes from Fathom notif ,Archive,Turn off notif if that's an option 
+Any unread newsletters / email in Socials and Promo (Personal),Archive and unsubscribe,"Renee to revisit Socials and Promo folders and check patterns on read emails = sort of important
+
+Everything's junk basically  "
+Primary emails ,Archive,As soon as it's actioned on or taken cared of

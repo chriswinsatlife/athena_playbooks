@@ -1,0 +1,30 @@
+---
+name: "Athena Delegation Levels"
+source_url: "https://docs.google.com/spreadsheets/d/1uxPJ86n24N6buNOYKVVPuGYZVQvNcAzIJR8LUNRR9bQ/edit"
+export_date: "2026-01-30T17:19:28.383Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 2
+---
+
+Level,Name,Leverage,Details,Criteria,Baseline: Average,Baseline: Athenians,Baseline: Top 10%
+1,Task-oriented delegation,1x - 2x,You assign tasks as they come up and give feedback most of the time,"You're already here—try to exit as soon as possible
+","Most people with EAs start here, and many tragically remain here forever"
+,,,"You frequently wonder whether you're delegating enough, or getting as much leverage as you could (should) be getting"
+,,,"You somewhat regularly commit the cardinal sin of the delegator: doing something yourself because you can do it faster / better, or are too lazy to clarify how it should be done to someone else"
+
+2,Process-oriented delegation,3x - 5x,"You see yourself as an algorithm (e.g. what rules do I use when I'm booking flights?), and can consistently translate this into steps for your EA or other outsourced teammates",You have at least 5 active playbooks,Average people reach this level after 3-6 months,Athenians typically reach this level by the end of month 1,Athena's Top 10% reach this level within two weeks
+,,,You always review a task you're about to delegate to see whether it can be transformed into a broader SOP or system,You've delegated at least two things in 4/8 personal areas
+,,,"You regularly give feedback to your EA on refining SOPs/systems as edge cases are discovered, new situations arise, or priorities change","You send voice notes 5x/wk or more, unless you truly can't do voice as a platform"
+,,,You are likely delegating and providing feedback so much that you are using voice on a daily basis
+
+3,Goal-oriented delegation,5x - 10x,"You and your EA have a clear picture of your personal and business goals, near-term & long-term",Your EA has suggested 3 tasks related to your goals which you accepted in last 28d,Average people typically never reach this level; those who do tend to take 3-5 years,Athenians generally reach this level within 6-18 months,Athena's top 10% can reach this level within 3m-6m
+,,,"You regularly assess your life and work to gauge whether you are on track to reach your goals, if your velocity can be improved, and how your EA can help","You have at least 10 active playbooks, which your EA has iterated without your input"
+,,,Your EA is so intimately knowledgable with your goals and thought processes that they can consistently suggest tasks that you approve (which you encourage),"Your EA has suggested a playbook related to a goal, which you now actively use"
+,,,"Your EA is in direct contact with all other individuals who are related to your goals, and they often act as liaison for hiring experts, coaches, and contractors; moreover, your significant other + coworkers route goal-related tasks to the EA if req'd",You've delegated something in all 8 personal areas
+,,,You give so much feedback and have developed such a strong relationship with your EA that they are confident enough to act autonomously and make small mistakes
+
+4,Clairvoyant delegation,10x / beyond,You have an abundant sense of time affluence and self-rate 10/10 on productivity,"Your EA has done 10 tasks in the last quarter which you have not suggested nor approved, and at least one of these tasks was new","Typical delegators not only fail to reach this level, but they may not believe it exists",Only the top 10% of Athenians reach this level (although we're working on making it easier),"Those who reach this level virtually always take more than 18-24 months, often 3-10 years"
+,,,"Your and your EA's actions are in total alignment with your greater purpose in work and life, with almost zero friction",Most of your personal and work tasks are run through playbooks; fewer than 20% of EA tasks are outside the scope of a playbook
+,,,You worry about almost nothing other than the most complex issues you are unique among the world's humans in being able to solve,"Your EA has written and proposed a complete playbook without your input, which they did not source from Athena's internal playbook library"
+,,,You trust your EA like a family member and they act almost as if a second brain; they regularly discover and execute tasks without your input; the first you hear of many tasks is a note confirming that it's done

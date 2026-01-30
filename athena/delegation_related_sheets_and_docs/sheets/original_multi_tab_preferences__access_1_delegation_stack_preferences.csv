@@ -1,0 +1,21 @@
+---
+name: "Foundation Preferences [CLIENT'S COPY]"
+source_url: "https://docs.google.com/spreadsheets/d/13VbmOxH_2qOmDPpxC-DP4b7_l2oV_eUROHgc95oDdQs/edit"
+export_date: "2026-01-30T17:19:33.676Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 13
+---
+
+Category,Client Preference,Athena Recommendation,Alternatives,Use Case,Purpose,Notes
+Task & Project Management,,Asana,"Notion Projects, Monday.com, Trello, ClickUp",Funnel for all tasks and incoming delegations.,"Shared task & project management system to assign tasks, track progress, and see what’s been completed.",Use the following categories to track completions: Incoming Delegations / In progress / Backlog / Done
+Instant Messaging with Voice Capabilities,,Slack,"Athena App
+Signal/ iMessage/Whatsapp",Creating a direct line where you and your EA can reach each other easily. ,Establishing a direct line between you and your EA so you can notify and unblock each other. Pick the platform you use the most and make sure each others notifications are on. Voice notes enable more loss-less delegation as it's faster and easier to convey context.,Use WhatsApp for non-urgent messages (95% of messages); direct text for urgent messages
+Knowledge Management,,Notion,Google Drive,"Storage for all client preferences, and shared documents.","Cloud-enabled document management/note-taking platform where your EA can access your existing documents and notes, and create new documents. (You may have different personal and professional systems.)","Use ""Shared Home"" folder; create appropriately-titled subfolders within"
+Screen/Presentation recording,,Loom,Record self on Zoom/ Google Meets,Mirror/document processes,Screen-sharing and walking through how you approach a process or task is one of the most effective ways to share instructions asynchronously.,Client prefers in lieu of real-time syncs 
+Password Manager,,1Password ,"Dashlane, Bitwarden",Password management,A secure place to easily provide access to passwords. An EA without password access is severely limited in how much leverage they can create for you.,"Client previously used LastPass, needs migration "
+Calendar,,Google Calendar,Outlook,Calendar management,"A digital planner where your EA can organize, add, edit and remove events and protect your time."
+Email ,,Superhuman,"Gmail, Outlook",Email ,"To be most effective, your EA needs access to your inbox, and any other messaging platforms you use personally and professionally.",Runs on top of client g-suite account 
+Video Conferencing,,Zoom,"Google Meet, Teams",Daily & weekly syncs and shadow sessions.,Essential for remote collaboration
+Voice calling,,OpenPhone,Google Voice,OpenPhone is provided by Athena to ensure EAs can make international phone calls on your behalf. ,A method for the EA to dial out and make phone calls on your behalf.,Client may have in-person appointments EA needs to schedule by phone 
+Meeting Note taker,,Fathom,"Otter, Fireflies",Meeting notes; action items,A tool to help your EA quickly produce transcripts and summaries of all video meetings

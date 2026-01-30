@@ -1,0 +1,14 @@
+---
+name: "Client Journey & Milestones"
+source_url: "https://docs.google.com/spreadsheets/d/123hODub5IX35kQ3dM0TS-tGcq1lDLdIGkiTpWdVaxQg/edit"
+export_date: "2026-01-30T17:21:41.458Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 3
+---
+
+# Sheets Export
+
+- outputs/delegation_related_sheets_and_docs/sheets/client_journey_and_milestones__all.csv
+- outputs/delegation_related_sheets_and_docs/sheets/client_journey_and_milestones__focus_goals.csv
+- outputs/delegation_related_sheets_and_docs/sheets/client_journey_and_milestones__experience.csv

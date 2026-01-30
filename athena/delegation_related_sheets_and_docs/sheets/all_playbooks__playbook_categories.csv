@@ -1,0 +1,17 @@
+---
+name: "Athena Website Playbooks"
+source_url: "https://docs.google.com/spreadsheets/d/1ul0s64pGEjF0hr_2iu8B_t7ECA5R5Yk5k6PDBQj_jhU/edit"
+export_date: "2026-01-30T17:21:54.216Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 2
+---
+
+Category,URL
+Foundations,https://playbooks.athena.com/foundations
+Essentials,https://playbooks.athena.com/essentials
+Career,https://playbooks.athena.com/career
+Lifestyle,https://playbooks.athena.com/lifestyle
+Health,https://playbooks.athena.com/health
+Fulfillment,https://playbooks.athena.com/fulfillment
+Relationships,https://playbooks.athena.com/relationships

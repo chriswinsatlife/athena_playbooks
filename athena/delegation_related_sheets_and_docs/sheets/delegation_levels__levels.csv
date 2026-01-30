@@ -1,0 +1,35 @@
+---
+name: "Athena Delegation Levels"
+source_url: "https://docs.google.com/spreadsheets/d/1uxPJ86n24N6buNOYKVVPuGYZVQvNcAzIJR8LUNRR9bQ/edit"
+export_date: "2026-01-30T17:19:27.659Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 2
+---
+
+ID,Requirement,Type,Source,Details,Level 1,Level 2,Level 3,Level 4,Level 5,Level 6,Level 7,Level 8,Level 9,Level 10
+1,EAs,Numeric,Manpower,Total number of active EAs,1,1,1,1,1,1,2,2,2,3
+2,Athena Playbooks,Numeric,"EA, manual",Active playbooks from Athena's library,0,3,5,8,12,15,20,25,30,40
+3,Shared Playbooks,Numeric,"EA, manual",Playbooks you've authored and shared with Athena client base,0,0,0,0,0,0,1,2,3,5
+10,"Feedback %, last 30d",Percentage,"EA, manual",S/E,—,50%,75%,90%,—,—,—,—,—,—
+9,"Voice notes, per week",Numeric,Athena Backend,S/E,—,5,10,15,20,—,—,—,—,—
+8,"Voice share, tasks",Percentage,Athena Backend,Percentage of voice tasks of all assigned tasks
+5,"Areas delegated, tasks",Numeric,"EA, manual",From 0/16,4,8,12,16,16,16,16,16,16,16
+6,"Areas delegated, playbooks",Numeric,"EA, manual",From 0/16,0,2,4,6,8,10,12,14,16,16
+7,Business / personal split,Percentage,"EA, manual",Percentage of personal tasks (most under-delegate personal),10%,20%,30%,40%,50%,—,—,—,—,—
+11,EA rates feedback as HQ,Lickert,EA survey,EA rates client feedback as high-quality (clarify definition in survey),,,5,6,6,7,7,8,8,9
+16,Recurring tasks,Numeric,Asana,S/E
+17,EA answer: client trust,Lickert,EA survey,S/E,,,5,6,6,7,7,8,8,9
+12,EA knows business goals,Boolean,EA survey,S/E,—,—,Y,Y,Y,Y,Y,Y,Y,Y
+13,EA knows personal goals,Boolean,EA survey,S/E,—,—,Y,Y,Y,Y,Y,Y,Y,Y
+24,"Weekly meetings w EA, last 30d",Numeric,Google Calendar,S/E,0,2,4,4,4,4,—,—,—,—
+14,Accepted proactive tasks,Numeric,"EA, manual",S/E,,,,1,5,10,15,20,25,40
+15,"Accepted proactive tasks, last 30d",Numeric,"EA, manual",S/E,,,,—,1,1,3,3,3,5
+18,Client answer: time affluence,Lickert,Client survey,S/E,,,5,6,6,7,7,8,8,9
+19,Client answer: ataraxia,Lickert,Client survey,S/E,,,5,6,6,7,7,8,8,9
+20,Client answer: goals,Lickert,Client survey,S/E,,,5,6,6,7,7,8,8,9
+21,Client answer: flourishing,Lickert,Client survey,S/E,,,5,6,6,7,7,8,8,9
+22,EA: empowered to make mistakes,Lickert,EA survey,S/E,,,5,6,6,7,7,8,8,9
+23,EA: empowered to be proactive,Lickert,EA survey,S/E,,,5,6,6,7,7,8,8,9
+4,Tasks / week,Numeric,Asana,S/E
+25,EA points of contact,Numeric,"EA, manual","People EA accepts tasks from or coordinates w/, e.g. partner, co-founder"

@@ -1,0 +1,13 @@
+---
+name: "Athena Website Playbooks"
+source_url: "https://docs.google.com/spreadsheets/d/1ul0s64pGEjF0hr_2iu8B_t7ECA5R5Yk5k6PDBQj_jhU/edit"
+export_date: "2026-01-30T17:21:54.217Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 2
+---
+
+# Sheets Export
+
+- outputs/delegation_related_sheets_and_docs/sheets/all_playbooks__playbooks.csv
+- outputs/delegation_related_sheets_and_docs/sheets/all_playbooks__playbook_categories.csv

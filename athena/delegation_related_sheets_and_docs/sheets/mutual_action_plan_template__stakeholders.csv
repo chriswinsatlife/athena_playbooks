@@ -1,0 +1,12 @@
+---
+name: "Accord - Mutual Action Plan Template"
+source_url: "https://docs.google.com/spreadsheets/d/1hRDK6cBgTkIO9hR4QKB2ZAban_mYbQrEdgz3U4KIkAY/edit"
+export_date: "2026-01-30T17:21:10.950Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 4
+---
+
+,Account Executive,name & email,,Project Lead,name & email
+,Sales Engineer,name & email,,Technical Lead,name & email
+,Executive Sponsor,name & email,,Executive Sponsor,name & email

@@ -1,0 +1,13 @@
+---
+name: "Athena 100 Day Onboarding"
+source_url: "https://docs.google.com/spreadsheets/d/1r-dsA9QVPtPFJdDH92HWf6RMOosVRHyUFT93bdXvlOg/edit"
+export_date: "2026-01-30T17:21:48.038Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 2
+---
+
+# Sheets Export
+
+- outputs/delegation_related_sheets_and_docs/sheets/100_day_journey_playbook_and_onboarding_tasks__100_days.csv
+- outputs/delegation_related_sheets_and_docs/sheets/100_day_journey_playbook_and_onboarding_tasks__ocr.csv

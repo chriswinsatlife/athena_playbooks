@@ -1,0 +1,15 @@
+---
+name: "Accord - Mutual Action Plan Template"
+source_url: "https://docs.google.com/spreadsheets/d/1hRDK6cBgTkIO9hR4QKB2ZAban_mYbQrEdgz3U4KIkAY/edit"
+export_date: "2026-01-30T17:21:10.951Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 4
+---
+
+# Sheets Export
+
+- outputs/delegation_related_sheets_and_docs/sheets/mutual_action_plan_template__action_plan.csv
+- outputs/delegation_related_sheets_and_docs/sheets/mutual_action_plan_template__resources.csv
+- outputs/delegation_related_sheets_and_docs/sheets/mutual_action_plan_template__executive_summary.csv
+- outputs/delegation_related_sheets_and_docs/sheets/mutual_action_plan_template__stakeholders.csv

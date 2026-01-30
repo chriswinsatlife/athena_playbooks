@@ -1,0 +1,44 @@
+---
+name: "Client - EA Preferences Template"
+source_url: "https://docs.google.com/spreadsheets/d/1PJ5OYeta1IX5uwSnNpHdrKAeABHYncNEScMYf2Tp5_8/edit"
+export_date: "2026-01-30T17:20:57.297Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 5
+---
+
+Section,Item,Detail,Notes
+Flights,Primary Airilne & Alliance,"United, Star Alliance"
+Flights,Other Acceptable Airlines,"Delta, Southwest, Jetblue"
+Flights,Blacklisted Airlines,E.g. Spirit
+Flights,Preferred Airport (Home),"EWR, JFK or LGA if much better flights"
+Flights,Preferred Airports (Common Destinations),"Bay Area: SFO, avoid OAK"
+Flights,Preferred Layover Airports,"IAH, MIA"
+Flights,TSA Pre✔️ / Global Entry / Clear,Yes; KTN: 12345; Clear: name@email.com
+Flights,In-Flight Meals,e.g. Vegetarian Option
+Flights,Seating Class,"E.g. business for long-haul international, economy plus for domestic or less than 5h"
+Flights,Window / Aisle,Window
+Flights,Front / Back,"Front, away from restrooms"
+Flights,Nonstop or Layover Flights,"If layovers are necessary, prefer > 1h and < 4h and at airports with Centurion Lounge"
+Flights,Time of Day for Departure Flights,"Afternoon, morning, early morning"
+Flights,Time of Day for Return Flights,"Afternoon, morning, early morning"
+Flights,Typical Baggage,"1 carry-on, 1 checked"
+Flights,EA Pre-Flight Check-In?,Yes
+Flights,Boarding Passes,"Save in Google Drive, add to Apple Note"
+Flights,Transportation to Airport,Taxi/Rideshare/Private Car/Public Transport
+Flights,Airport Arrival Time,90 min before domestic; 2.5h before international
+Flights,Airport Lounge Access,Yes/No
+Flights,On-Ground Services,Ask about car service vs Uber each time
+Accommodation,Key Constraints,"Prefer to stay close to business venue, prefer early check-in"
+Accommodation,Hotels vs Airbnb/Apartment Rentals,Hotels preferred unless Airbnbs much better/cheaper/closer to meeting location
+Accommodation,Hotel Brands Preferred,"JW Marriott, AC, Grand Hyatt"
+Accommodation,Hotel Brands Blacklisted,"Sheraton, Hilton"
+Accommodation,Required Hotel Amenities,Gym with Peloton or elliptical
+Accommodation,Nice-to-Have Hotel Amenities,"Pool, sauna/spa, co-working"
+Accommodation,Hotel Room Preferences,"Single room, king bed; away from elevators"
+Accommodation,Airbnb/Apartment Rental Preferences,Self check-in and superhosts only; verify reviews have no complaints about noise or internet
+Accommodation,Amenities,"Stable wifi, desk available in room, pool, gym"
+Accommodation,Price (per night),<$250 per night personal; <$500 per night business
+Accommodation,Check-in/Checkout Times,"Check-in: No later than 3 PM
+Checkout: No earlier than 11 AM"
+Accommodation,Aesthetics,Minimalist

@@ -1,0 +1,36 @@
+---
+name: "Client - EA Preferences Template"
+source_url: "https://docs.google.com/spreadsheets/d/1PJ5OYeta1IX5uwSnNpHdrKAeABHYncNEScMYf2Tp5_8/edit"
+export_date: "2026-01-30T17:20:56.786Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 5
+---
+
+Section,Item,Detail,Notes
+Preferences,Ideal day
+Preferences,Focus time policies,E.g. aim for 3 x 2h blocks in mornings per week
+Preferences,Preferred first meeting time,11 AM,Exceptions for X/Y/Z
+Preferences,Earliest possible meeting time,9 AM
+Preferences,Preferred final meeting end time,6 PM,Exceptions for X/Y/Z
+Preferences,Latest possible meeting end time,8 PM
+Preferences,Lunch policy,Avoid booking 1-2 PM; free to book over in emergencies
+Preferences,Meeting buffer policy,More than 2 hour meetings back to back = 10 minute break/placeholder
+Preferences,Preferred naming of events,Adding the type of meeting before the attendee's names; put my name last
+Preferences,Moveable recurring meetings
+Preferences,Non-moveable recurring meetings
+Preferences,No meeting day,Wednesday
+Preferences,Meeting day themes,"Tuesday for 1-1s, Thursday for external"
+Preferences,Special dates to observe
+Preferences,Calendar coloring / labeling policy
+Virtual Meetings,Preferred account for personal video calls,Zoom
+Virtual Meetings,Preferred account for company video calls,Google Meet (company account)
+Virtual Meetings,Rules for external meetings / platforms,Ask to avoid Teams if possible
+IRL Meetings,Co-working locations,The Spaces
+IRL Meetings,Coffee locations,Deneen
+IRL Meetings,Lunch meeting locations,ByMark
+IRL Meetings,VIP dinner locations,Susur
+IRL Meetings,Preferred day for external meetings,Tuesdays / Thursdays
+EA Support,Pre-meeting bios policy,"VCs for first meeting, recruiting candidates"
+EA Support,Post-meeting action items policy,"Review Fireflies and create tasks for EA in ClickUp, client in Todoist"
+EA Support,Daily agenda policy,Via DM at 8 AM

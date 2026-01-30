@@ -1,0 +1,24 @@
+---
+name: "Foundation Preferences [CLIENT'S COPY]"
+source_url: "https://docs.google.com/spreadsheets/d/13VbmOxH_2qOmDPpxC-DP4b7_l2oV_eUROHgc95oDdQs/edit"
+export_date: "2026-01-30T17:19:40.578Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 13
+---
+
+# Sheets Export
+
+- outputs/delegation_related_sheets_and_docs/sheets/original_multi_tab_preferences__access_1_delegation_stack_preferences.csv
+- outputs/delegation_related_sheets_and_docs/sheets/original_multi_tab_preferences__calendar_1_calendar_pain_points.csv
+- outputs/delegation_related_sheets_and_docs/sheets/original_multi_tab_preferences__calendar_2_4_calendar_preferences.csv
+- outputs/delegation_related_sheets_and_docs/sheets/original_multi_tab_preferences__calendar_5_ideal_week.csv
+- outputs/delegation_related_sheets_and_docs/sheets/original_multi_tab_preferences__inbox_1_inbox_labeling.csv
+- outputs/delegation_related_sheets_and_docs/sheets/original_multi_tab_preferences__inbox_2_priority_contacts.csv
+- outputs/delegation_related_sheets_and_docs/sheets/original_multi_tab_preferences__inbox_3_inbox_sweeps.csv
+- outputs/delegation_related_sheets_and_docs/sheets/original_multi_tab_preferences__inbox_4_pre_drafting_rules.csv
+- outputs/delegation_related_sheets_and_docs/sheets/original_multi_tab_preferences__inbox_5_email_style_guide.csv
+- outputs/delegation_related_sheets_and_docs/sheets/original_multi_tab_preferences__travel_1_trip_tracker.csv
+- outputs/delegation_related_sheets_and_docs/sheets/original_multi_tab_preferences__travel_2_travel_preference.csv
+- outputs/delegation_related_sheets_and_docs/sheets/original_multi_tab_preferences__travel_3_day_of_travel_preferences.csv
+- outputs/delegation_related_sheets_and_docs/sheets/original_multi_tab_preferences__travel_4_accommodations_preferences.csv

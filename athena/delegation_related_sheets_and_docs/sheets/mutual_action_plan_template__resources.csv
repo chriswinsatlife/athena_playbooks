@@ -1,0 +1,22 @@
+---
+name: "Accord - Mutual Action Plan Template"
+source_url: "https://docs.google.com/spreadsheets/d/1hRDK6cBgTkIO9hR4QKB2ZAban_mYbQrEdgz3U4KIkAY/edit"
+export_date: "2026-01-30T17:21:09.879Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 4
+---
+
+,<Your Company> / <Their Company>
+
+,Case Studies
+,Case Study 1,link
+,Case Study 2,link
+
+,Help Docs
+,Order Form,payushere.docs.com 
+,ROI Calculator,link
+
+,Technical Docs
+,Title,link
+,Title,link

@@ -1,0 +1,17 @@
+---
+name: "Client - EA Preferences Template"
+source_url: "https://docs.google.com/spreadsheets/d/1PJ5OYeta1IX5uwSnNpHdrKAeABHYncNEScMYf2Tp5_8/edit"
+export_date: "2026-01-30T17:20:57.825Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 5
+---
+
+Name,Relation,Birthday,Address,Gift Events,Recent Gifts,Notes
+,Partner,,,"Birthday, anniversary, Valentine's Day, Christmas"
+,Mother,,,"Birthday, Mother's Day, Christmas"
+,Father,,,"Birthday, Father's Day, Christmas"
+,Son,,,"Birthday, Christmas"
+,Friend 1,,,"Birthday, Christmas"
+,Friend 2,,,Birthday
+,Friend 3,,,Birthday

@@ -1,0 +1,21 @@
+---
+name: "Client Context Extraction via LLMs Project | Athena"
+source_url: "https://docs.google.com/spreadsheets/d/1WXZBTeFgz9viG5-K41AR2E4oMrCNJGTSFQAXYEk3iYA/edit"
+export_date: "2026-01-30T17:21:59.320Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 2
+---
+
+Short Name,Description,Value / 10,Difficulty / 10,Score,Data Sources,Notes
+Logins & Accounts,"Active SaaS apps, financial/ecomm/travel accounts, etc for EA to get access to in 1Password",8,3,27,"Email, password manager"
+Gifts,Past gift recipients and purchases,6,3,20,Email
+Preferences,"Basic set of preferences (e.g. flights, hotels, food ordering)",8,5,16,"Email, calendar, credit card transactions"
+Data & Logistics,"Logistical data points like client address, company address, tax IDs (e.g. EINs), and other data points used in delegations",5,4,13,"Email, password manager, files"
+Calendar,Time preferences or schedule patterns,5,4,13,Calendar
+Key Contacts,"Stakeholders (e.g. investors, closest colleagues, etc)",6,5,12,"Email, calendar, HRIS"
+Loyalty Numbers,"Frequent flyer, hotel loyalty, and other program ID numbers",3,3,10,"Email, password manager"
+Vendors,"Key vendors (e.g. attorney, accountant, for business; massuuse, housekeeper, or nanny for personal, etc; also locations like client gym, spa, favorite cafes, etc)",6,6,10,"Email, calendar, credit card transactions"
+Delegations,Potentially delegatable tasks or responsibility areas (i.e. from email threads of X length/replies),7,7,10,"Email, calendar, credit card transactions"
+Org Chart,Potential collaborators within company (e.g. employees the EA may coordinate with on company delegations),3,4,8,"Email, calendar, HRIS"
+Interests,"Client interests (e.g. purchased books, subscribed newsletters, etc)",2,4,5,"Email, Amazon, social media"

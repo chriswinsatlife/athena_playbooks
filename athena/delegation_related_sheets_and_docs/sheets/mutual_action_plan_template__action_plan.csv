@@ -1,0 +1,42 @@
+---
+name: "Accord - Mutual Action Plan Template"
+source_url: "https://docs.google.com/spreadsheets/d/1hRDK6cBgTkIO9hR4QKB2ZAban_mYbQrEdgz3U4KIkAY/edit"
+export_date: "2026-01-30T17:21:09.248Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 4
+---
+
+{Your Company} & {Buyer Company} Mutual Plan
+n
+"The goal of this shared plan is to help {Buyer Company} evaluate {Your Company} as a solution for the initiative: {Insert business objective / OKR here}.
+This plan is meant to provide a transparent and collaborative evaluation, validation, and onboarding!"
+
+
+,Key Stakeholders
+,Your Company,,,Buyer Company
+,Account Executive,name & email,,Project Lead,name & email
+,Sales Engineer,name & email,,Technical Lead,name & email
+,Executive Sponsor,name & email,,Executive Sponsor,name & email
+,,  
+Due Date,Next Steps ,,Type,Stakeholders,Status,Notes
+,Discovery
+3/1/2024,Intros & Goals for Buyer Company,,Meeting,,Complete
+,Evaluation Process,,Deliverable ,,In Progress
+,Pilot Planning,,Meeting,,Not Scheduled
+
+,Pilot 
+,POC Kickoff,,,,In Progress
+,Technical Checkpoint,,Meeting,,Complete
+,Results and Review ,,Meeting,,Not Scheduled
+,Business Recommendation ,,Deliverable ,,Scheduled
+
+,Partnership Formalization
+,Contracting Kickoff,,Meeting
+,Redlines & Legal ,,Task 
+,Signatures,,Task 
+
+,Onboarding & Setup
+,Onboarding Kickoff,,Meeting
+,Onboarding Steps,,Task
+,30 Day Check-in,,Task

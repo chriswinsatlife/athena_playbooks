@@ -1,0 +1,13 @@
+---
+name: "Client Context Extraction via LLMs Project | Athena"
+source_url: "https://docs.google.com/spreadsheets/d/1WXZBTeFgz9viG5-K41AR2E4oMrCNJGTSFQAXYEk3iYA/edit"
+export_date: "2026-01-30T17:21:59.898Z"
+type: "google_sheet"
+export_format: "csv"
+sheet_count: 2
+---
+
+# Sheets Export
+
+- outputs/delegation_related_sheets_and_docs/sheets/client_context_extraction_sheet__context_areas.csv
+- outputs/delegation_related_sheets_and_docs/sheets/client_context_extraction_sheet__gmail_queries.csv
