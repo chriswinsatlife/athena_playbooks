@@ -14,6 +14,7 @@ import BeforeAfter from '../../components/playbook/BeforeAfter.astro';
 import Section from '../../components/playbook/Section.astro';
 import FAQ from '../../components/playbook/FAQ.astro';
 import RelatedPlaybooks from '../../components/playbook/RelatedPlaybooks.astro';
+import CallToAction from '../../components/playbook/CallToAction.astro';
 
 // Shared embed components
 import Notifications from '../../components/Notifications.astro';
@@ -94,6 +95,8 @@ const pageTitle = `${data.meta.title} | Athena Playbooks`;
           </ul>
         </section>
       )}
+
+      <CallToAction />
     </article>
   </main>
 </Base>
