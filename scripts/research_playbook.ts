@@ -147,7 +147,7 @@ function cleanMarkdownOutput(text: string): string {
 
 function extractUniqueSources(citations: Record<string, string> | undefined): string[] {
   if (!citations) return [];
-  return [...new Set(Object.values(citations))];
+  return Array.from(new Set(Object.values(citations)));
 }
 
 async function main() {

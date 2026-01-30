@@ -1,0 +1,64 @@
+slug: gift-automation
+area: relationships
+
+topic: |
+  Automating gift-giving for birthdays, holidays, anniversaries, and thank-you occasions
+  so the client never misses an important date or sends a generic gift again.
+
+  This playbook covers the complete system: building a gift database of recipients with
+  preferences, budgets, and important dates; setting up proactive reminders; using the
+  "reply with a number" paradigm where the EA researches and presents 3-5 curated options;
+  handling procurement, wrapping, and delivery logistics; and tracking gift history to
+  avoid repeats.
+
+  The system should handle recurring occasions (birthdays, holidays) and one-off events
+  (thank you gifts, congratulations, sympathy). It should scale from 10 recipients to 100+
+  without proportionally increasing client time investment.
+
+  Edge cases include: last-minute gifts (24-48 hour turnaround), international shipping,
+  corporate gift policies and limits, dietary restrictions for food gifts, and handling
+  returns or exchanges.
+
+persona:
+  archetype: "Time-starved founder with 50+ important relationships to maintain"
+  pain_points:
+    - Forgets birthdays until the day-of, scrambles for Amazon gift cards
+    - Sends generic gifts that don't reflect the relationship
+    - Spends 2+ hours per gift researching and ordering
+    - Has no memory of what was sent previously, risks repeats
+  goals:
+    - Never miss an important date
+    - Send thoughtful, personalized gifts that strengthen relationships
+    - Reduce per-gift time investment to under 30 seconds (pick a number)
+    - Build reputation as someone who "always remembers"
+
+research_guidance:
+  must_cover:
+    - Gift database setup (Airtable/Notion template)
+    - Reply-with-number workflow for gift selection
+    - Proactive reminder system (2 weeks, 1 week, 3 days before)
+    - Procurement and fulfillment delegation
+    - Gift history tracking to prevent repeats
+  do_not_cover:
+    - Specific gift recommendations or product reviews
+    - DIY gift-making
+    - Gift wrapping tutorials
+  depth_guidance: "Practitioner depth - specific enough to implement immediately"
+  angles:
+    - Delegation-first (what client does vs what EA handles)
+    - Relationship ROI (gifts as relationship investment)
+    - Scale without stress (system handles 10 or 100 recipients)
+
+section_hints:
+  - The gift database (what to track, how to structure)
+  - Setting up the reminder system
+  - The reply-with-number gift selection workflow
+  - Delegation handoff (what the EA needs to execute)
+  - Handling edge cases (rush orders, international, corporate limits)
+
+delegation_focus: |
+  This is a vicarious-offensive delegation: the EA proactively surfaces opportunities
+  and presents curated options. The client's only job is to pick a number.
+  
+  The EA handles: research, curation, procurement, tracking, reminders.
+  The client handles: initial preferences, final selection (30 seconds), personal notes.

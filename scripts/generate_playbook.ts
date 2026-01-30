@@ -10,7 +10,7 @@
  */
 
 import { generateText, Output } from 'ai';
-import { anthropic } from '@ai-sdk/anthropic';
+import { google } from '@ai-sdk/google';
 import { z } from 'zod';
 import { parseBrief, type Brief } from '../src/lib/brief_parser';
 import { createPipelineRun, createPhaseLogger } from '../src/lib/pipeline_logger';
@@ -139,10 +139,10 @@ async function generatePlaybookContent(
   brief: Brief,
   options: GenerateOptions = {}
 ): Promise<GeneratedPlaybook> {
-  const model = options.model || 'claude-sonnet-4-20250514';
+  const model = options.model || 'gemini-3-flash';
 
   const { output, usage } = await generateText({
-    model: anthropic(model),
+    model: google(model),
     system: buildSystemPrompt(),
     prompt: buildUserPrompt(brief),
     experimental_output: Output.object({
