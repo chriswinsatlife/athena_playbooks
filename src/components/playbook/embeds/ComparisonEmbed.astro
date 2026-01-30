@@ -1,0 +1,232 @@
+---
+/**
+ * ComparisonEmbed - Renders before/after comparisons within playbook sections
+ *
+ * Usage:
+ *   <ComparisonEmbed
+ *     layout="side-by-side"
+ *     before={{ label: "Before Athena", embed: { type: "calendar", ... } }}
+ *     after={{ label: "After Athena", embed: { type: "calendar", ... } }}
+ *   />
+ *
+ * Props:
+ *   - layout?: 'side-by-side' | 'stacked' - Layout orientation (default: side-by-side)
+ *   - before: { label: string, embed: Embed } - The "before" state
+ *   - after: { label: string, embed: Embed } - The "after" state
+ *
+ * Recursively renders nested embeds using EmbedRenderer.
+ */
+
+import EmbedRenderer from '../EmbedRenderer.astro';
+
+interface ComparisonSide {
+  label: string;
+  embed: Record<string, unknown>;
+}
+
+export interface Props {
+  layout?: 'side-by-side' | 'stacked';
+  before: ComparisonSide;
+  after: ComparisonSide;
+  type?: 'comparison';
+}
+
+const { layout = 'side-by-side', before, after } = Astro.props;
+
+const containerClass = layout === 'stacked' ? 'comparison-stacked' : 'comparison-side-by-side';
+---
+
+<div class={`comparison-embed ${containerClass}`}>
+  <div class="comparison-panel comparison-before">
+    <div class="comparison-label comparison-label-before">
+      <span class="label-icon">&#x2715;</span>
+      <span class="label-text">{before.label}</span>
+    </div>
+    <div class="comparison-content">
+      <EmbedRenderer embed={before.embed} />
+    </div>
+  </div>
+
+  <div class="comparison-divider">
+    <div class="divider-arrow">
+      {layout === 'stacked' ? (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M19 12l-7 7-7-7" />
+        </svg>
+      ) : (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      )}
+    </div>
+  </div>
+
+  <div class="comparison-panel comparison-after">
+    <div class="comparison-label comparison-label-after">
+      <span class="label-icon">&#x2713;</span>
+      <span class="label-text">{after.label}</span>
+    </div>
+    <div class="comparison-content">
+      <EmbedRenderer embed={after.embed} />
+    </div>
+  </div>
+</div>
+
+<style>
+  .comparison-embed {
+    margin: 2rem 0;
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  /* Side-by-side layout */
+  .comparison-side-by-side {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .comparison-side-by-side .comparison-panel {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .comparison-side-by-side .comparison-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.5rem;
+  }
+
+  /* Stacked layout */
+  .comparison-stacked {
+    flex-direction: column;
+  }
+
+  .comparison-stacked .comparison-panel {
+    width: 100%;
+  }
+
+  .comparison-stacked .comparison-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+
+  /* Panel styling */
+  .comparison-panel {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+  }
+
+  .comparison-before {
+    border-color: #fecaca;
+  }
+
+  .comparison-after {
+    border-color: #bbf7d0;
+  }
+
+  /* Label styling */
+  .comparison-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+  }
+
+  .comparison-label-before {
+    background: #fef2f2;
+    color: #b91c1c;
+  }
+
+  .comparison-label-after {
+    background: #f0fdf4;
+    color: #15803d;
+  }
+
+  .label-icon {
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  /* Content area */
+  .comparison-content {
+    flex: 1;
+    overflow: auto;
+  }
+
+  /* Remove margin from nested embeds */
+  .comparison-content :global(> *) {
+    margin: 0;
+  }
+
+  /* Divider styling */
+  .comparison-divider {
+    flex-shrink: 0;
+  }
+
+  .divider-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: #f3f4f6;
+    border-radius: 50%;
+    color: #6b7280;
+  }
+
+  /* Responsive: stack on mobile */
+  @media (max-width: 768px) {
+    .comparison-side-by-side {
+      flex-direction: column;
+    }
+
+    .comparison-side-by-side .comparison-divider {
+      padding: 0.5rem 0;
+    }
+
+    .comparison-side-by-side .divider-arrow svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .comparison-panel {
+      background: #1f2937;
+      border-color: #374151;
+    }
+
+    .comparison-before {
+      border-color: #7f1d1d;
+    }
+
+    .comparison-after {
+      border-color: #166534;
+    }
+
+    .comparison-label-before {
+      background: #450a0a;
+      color: #fca5a5;
+    }
+
+    .comparison-label-after {
+      background: #052e16;
+      color: #86efac;
+    }
+
+    .divider-arrow {
+      background: #374151;
+      color: #9ca3af;
+    }
+  }
+</style>

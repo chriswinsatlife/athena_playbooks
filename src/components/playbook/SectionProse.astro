@@ -1,0 +1,103 @@
+---
+/**
+ * SectionProse - Renders prose format content
+ * 
+ * Takes markdown text and renders it as styled paragraphs.
+ * Supports basic markdown: paragraphs, bold, italic, links, lists
+ */
+
+export interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+
+/**
+ * Simple markdown to HTML conversion for prose content
+ * Handles: paragraphs, bold, italic, links, inline code
+ */
+function parseMarkdown(markdown: string): string {
+  // Split into paragraphs
+  const paragraphs = markdown.split(/\n\n+/);
+  
+  return paragraphs
+    .map(para => {
+      let html = para.trim();
+      
+      // Skip empty paragraphs
+      if (!html) return '';
+      
+      // Bold: **text** or __text__
+      html = html.replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-zinc-900">$1</strong>');
+      html = html.replace(/__(.+?)__/g, '<strong class="font-semibold text-zinc-900">$1</strong>');
+      
+      // Italic: *text* or _text_
+      html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+      html = html.replace(/_(.+?)_/g, '<em>$1</em>');
+      
+      // Links: [text](url)
+      html = html.replace(
+        /\[(.+?)\]\((.+?)\)/g, 
+        '<a href="$2" class="text-[#062812] underline decoration-[#062812]/30 hover:decoration-[#062812] transition-colors">$1</a>'
+      );
+      
+      // Inline code: `code`
+      html = html.replace(
+        /`(.+?)`/g, 
+        '<code class="px-1.5 py-0.5 bg-zinc-100 rounded text-sm font-mono text-zinc-800">$1</code>'
+      );
+      
+      // Check if it's a list item (starts with - or *)
+      if (html.match(/^[-*]\s/)) {
+        // Handle as unordered list
+        const listItems = html.split(/\n/).map(line => {
+          const content = line.replace(/^[-*]\s+/, '');
+          return `<li class="pl-1">${content}</li>`;
+        }).join('');
+        return `<ul class="list-disc list-outside ml-5 space-y-2 text-zinc-600 leading-relaxed">${listItems}</ul>`;
+      }
+      
+      // Check if it's a numbered list (starts with 1. 2. etc)
+      if (html.match(/^\d+\.\s/)) {
+        const listItems = html.split(/\n/).map(line => {
+          const content = line.replace(/^\d+\.\s+/, '');
+          return `<li class="pl-1">${content}</li>`;
+        }).join('');
+        return `<ol class="list-decimal list-outside ml-5 space-y-2 text-zinc-600 leading-relaxed">${listItems}</ol>`;
+      }
+      
+      // Wrap in paragraph
+      return `<p class="text-base text-zinc-600 leading-relaxed">${html}</p>`;
+    })
+    .filter(Boolean)
+    .join('\n');
+}
+
+const htmlContent = parseMarkdown(text);
+---
+
+<div class="prose-container space-y-4" set:html={htmlContent} />
+
+<style>
+  .prose-container {
+    font-family: 'Figtree', system-ui, -apple-system, sans-serif;
+  }
+  
+  .prose-container :global(p + p) {
+    margin-top: 1rem;
+  }
+  
+  .prose-container :global(ul),
+  .prose-container :global(ol) {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .prose-container :global(a:hover) {
+    text-decoration-color: currentColor;
+  }
+  
+  .prose-container :global(strong) {
+    font-weight: 600;
+  }
+</style>

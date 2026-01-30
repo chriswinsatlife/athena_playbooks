@@ -1,0 +1,263 @@
+---
+/**
+ * EmbedRenderer - Main dispatcher for playbook embeds
+ *
+ * Renders rich interactive components based on embed type.
+ * Maps embed types to their respective components.
+ *
+ * Usage:
+ *   <EmbedRenderer embed={{ type: "diagram", src: "/path/to.svg", alt: "..." }} />
+ *   <EmbedRenderer embed={{ type: "messages", style: "whatsapp", messages: [...] }} />
+ *
+ * Supported embed types:
+ *   - diagram: SVG diagrams (DiagramEmbed)
+ *   - image: Static images (ImageEmbed)
+ *   - comparison: Before/after comparisons (ComparisonEmbed)
+ *   - notifications: Push notifications (Notifications.astro)
+ *   - messages: Chat conversations (Messages.astro)
+ *   - calendar: Calendar views (Calendar.astro)
+ *   - email: Email threads (EmailThread.astro)
+ *   - datatable: Data tables (DataTableViewer.astro)
+ */
+
+// Existing shared components
+import Notifications from '../Notifications.astro';
+import Messages from '../Messages.astro';
+import Calendar from '../Calendar.astro';
+import EmailThread from '../EmailThread.astro';
+import DataTableViewer from '../DataTableViewer.astro';
+
+// Playbook-specific embed components
+import DiagramEmbed from './embeds/DiagramEmbed.astro';
+import ImageEmbed from './embeds/ImageEmbed.astro';
+import ComparisonEmbed from './embeds/ComparisonEmbed.astro';
+
+// Embed type definitions based on spec schema
+type EmbedType =
+  | 'diagram'
+  | 'image'
+  | 'comparison'
+  | 'notifications'
+  | 'messages'
+  | 'calendar'
+  | 'email'
+  | 'datatable';
+
+interface BaseEmbed {
+  type: EmbedType;
+  id?: string;
+}
+
+interface DiagramEmbedType extends BaseEmbed {
+  type: 'diagram';
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface ImageEmbedType extends BaseEmbed {
+  type: 'image';
+  src: string;
+  alt: string;
+  caption?: string;
+  width?: number;
+}
+
+interface ComparisonEmbedType extends BaseEmbed {
+  type: 'comparison';
+  layout?: 'side-by-side' | 'stacked';
+  before: { label: string; embed: Embed };
+  after: { label: string; embed: Embed };
+}
+
+interface NotificationsEmbedType extends BaseEmbed {
+  type: 'notifications';
+  style: 'macos' | 'ios' | 'android' | 'windows' | 'liquidglass';
+  mode?: 'light' | 'dark' | 'auto';
+  notifications: Array<{
+    app: string;
+    title: string;
+    body?: string;
+    time?: string;
+    icon?: string;
+  }>;
+}
+
+interface MessagesEmbedType extends BaseEmbed {
+  type: 'messages';
+  style: 'whatsapp' | 'imessage' | 'chatgpt' | 'claudecode' | 'opencode' | 'telegram';
+  mode?: 'light' | 'dark' | 'auto';
+  agent?: string;
+  messages: Array<{
+    user: number;
+    text: string;
+    name?: string;
+    avatar?: string;
+    timestamp?: string;
+  }>;
+}
+
+interface CalendarEmbedType extends BaseEmbed {
+  type: 'calendar';
+  style: 'google' | 'apple' | 'outlook';
+  view?: 'week' | 'day';
+  mode?: 'light' | 'dark' | 'auto';
+  date?: string;
+  events: Array<{
+    title: string;
+    start: string;
+    end: string;
+    color?: 'blue' | 'green' | 'red' | 'purple' | 'orange' | 'cyan' | 'pink' | 'yellow';
+    location?: string;
+  }>;
+}
+
+interface EmailEmbedType extends BaseEmbed {
+  type: 'email';
+  subject: string;
+  labels?: string[];
+  mode?: 'light' | 'dark' | 'auto';
+  messages: Array<{
+    from: { name: string; email: string };
+    to: Array<{ name: string; email: string }>;
+    cc?: Array<{ name: string; email: string }>;
+    body: string;
+    date: string;
+    attachments?: Array<{
+      name: string;
+      size?: string;
+      type?: 'pdf' | 'doc' | 'image' | 'spreadsheet' | 'archive' | 'other';
+    }>;
+  }>;
+}
+
+interface DatatableEmbedType extends BaseEmbed {
+  type: 'datatable';
+  style: 'sheets' | 'notion' | 'airtable' | 'excel' | 'plain';
+  data: Array<Record<string, unknown>>;
+  columns?: Array<{
+    key: string;
+    label?: string;
+    type?: 'text' | 'number' | 'checkbox' | 'tag' | 'date' | 'url';
+  }>;
+  showRowNumbers?: boolean;
+  showHeader?: boolean;
+}
+
+type Embed =
+  | DiagramEmbedType
+  | ImageEmbedType
+  | ComparisonEmbedType
+  | NotificationsEmbedType
+  | MessagesEmbedType
+  | CalendarEmbedType
+  | EmailEmbedType
+  | DatatableEmbedType;
+
+export interface Props {
+  embed: Embed | Record<string, unknown>;
+}
+
+const { embed } = Astro.props;
+
+// Type guard helper
+function isEmbedType<T extends Embed>(e: unknown, type: T['type']): e is T {
+  return typeof e === 'object' && e !== null && 'type' in e && (e as BaseEmbed).type === type;
+}
+---
+
+<div class="embed-wrapper">
+  {isEmbedType<DiagramEmbedType>(embed, 'diagram') && (
+    <DiagramEmbed
+      src={embed.src}
+      alt={embed.alt}
+      caption={embed.caption}
+      id={embed.id}
+    />
+  )}
+
+  {isEmbedType<ImageEmbedType>(embed, 'image') && (
+    <ImageEmbed
+      src={embed.src}
+      alt={embed.alt}
+      caption={embed.caption}
+      width={embed.width}
+    />
+  )}
+
+  {isEmbedType<ComparisonEmbedType>(embed, 'comparison') && (
+    <ComparisonEmbed
+      layout={embed.layout}
+      before={embed.before}
+      after={embed.after}
+    />
+  )}
+
+  {isEmbedType<NotificationsEmbedType>(embed, 'notifications') && (
+    <Notifications
+      style={embed.style}
+      mode={embed.mode}
+      notifications={embed.notifications}
+    />
+  )}
+
+  {isEmbedType<MessagesEmbedType>(embed, 'messages') && (
+    <Messages
+      style={embed.style}
+      mode={embed.mode}
+      agent={embed.agent}
+      messages={embed.messages}
+    />
+  )}
+
+  {isEmbedType<CalendarEmbedType>(embed, 'calendar') && (
+    <Calendar
+      style={embed.style}
+      view={embed.view}
+      mode={embed.mode}
+      date={embed.date}
+      events={embed.events}
+    />
+  )}
+
+  {isEmbedType<EmailEmbedType>(embed, 'email') && (
+    <EmailThread
+      subject={embed.subject}
+      labels={embed.labels}
+      mode={embed.mode}
+      messages={embed.messages}
+    />
+  )}
+
+  {isEmbedType<DatatableEmbedType>(embed, 'datatable') && (
+    <DataTableViewer
+      style={embed.style}
+      data={embed.data}
+      columns={embed.columns}
+      showRowNumbers={embed.showRowNumbers}
+      showHeader={embed.showHeader}
+    />
+  )}
+</div>
+
+<style>
+  .embed-wrapper {
+    margin: 1.5rem 0;
+  }
+
+  /* Remove double margins from nested components */
+  .embed-wrapper :global(> .diagram-embed),
+  .embed-wrapper :global(> .image-embed),
+  .embed-wrapper :global(> .comparison-embed) {
+    margin: 0;
+  }
+
+  /* Ensure proper sizing for interactive embeds */
+  .embed-wrapper :global(> .notifications-container),
+  .embed-wrapper :global(> .messages-container),
+  .embed-wrapper :global(> .calendar-container),
+  .embed-wrapper :global(> .email-thread),
+  .embed-wrapper :global(> .table-viewer) {
+    max-width: 100%;
+  }
+</style>

@@ -8,6 +8,7 @@
 - The content is focused around the concept of a playbook, which are essentially SOPs and strategic approaches for how to achieve some goal, manage an ongoing concern, optimize some area in one's personal or professsional life, and so on. These necessarily involve utilizing the executive assistant, and often also involve AI agents alongside specific software stacks. See `athena/coda_playbooks_doc/CqI5pastxC.txt` for illustrative outline.
 - The playbooks will be generated using a structured data schema from other artifacts, e.g. general web research performed by AI agents, specific podcast episodes, biographies, raw corpuses of email or messages or calendar data or automation workflow JSON, and so on.
 - The playbooks will connect structured data to a set of custom components for rendering rich experiences.
+- Playbooks are for prospective clients (primary audience) and existing clients (secondary audience). Playbooks are **NEVER** for executive assistants.
 - The Athena style guide is at: `athena/brand/athena_com_style_guide.md`.
 - The Athena brand voice guide is at: `athena/brand/athena_com_voice_and_copy.md`.
 
@@ -23,6 +24,22 @@
 - There is a `docs/illustration_generation_system.md`
 - There is a metaprompting system (`docs/diagram_generation_system.md`) which enables generating prompts as markdown files for imitating the layouts, styles, or other aspects of any input image file; use `tools/analyze_reference.ts` to create templates and `tools/generate_diagram.ts` to generate on-brand diagrams
 - There is a Mermaid-based diagram system (`dataviz/mermaid_js/`), with corresponding Astro component (`components/playbooks/Diagram.astro`), and a separate D3/Dagre-based diagram system (`dataviz/dagre.md` and `dataviz/mermaid_js/d3_and_dagre_flowchart_demo.html`)
+- The playbook component library is `src/components/`, e.g.:
+  - `Messages.astro` - WhatsApp, iMessage, ChatGPT, Claude Code, Telegram, OpenCode
+  - `Notifications.astro` - macOS, iOS, Android, Windows, Liquid Glass
+  - `Calendar.astro` - Google, Apple, Outlook week/day views
+  - `EmailThread.astro` - Gmail-style email threads
+  - `DataTableViewer.astro` - Sheets, Notion, Airtable, Excel
+  - `SocialQuote.astro` - Twitter, LinkedIn, Podcast, Book, Article
+  - `PlaybookCard.astro` - Playbook cards for listings
+  - `StackChips.astro` - Tool stack chips
+  - `PromptLauncher.astro` - Buttons to copy prompts to preferred AI assistant to implement the playbook
+- The core playbook components are used as rich elements within playbooks to highlight content, display impact, depict scenarios, simulate an experience, add social proof, etc
+- The root directory's `components/` folder contains general marketing/landing page components, e.g.:
+  - `sections/` - Hero variants, pricing, testimonials, footers, CTAs, team grids, stats
+  - `elements/` - Buttons, links, inputs
+  - `catalyst/` - UI kit components
+  - `icons/` - Icon library
 
 ## What Goes Where
 

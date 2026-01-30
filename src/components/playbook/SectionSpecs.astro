@@ -1,0 +1,64 @@
+---
+/**
+ * SectionSpecs - Renders specs format content
+ * 
+ * Displays items as key-value pairs in a grid/table layout
+ */
+
+export interface SpecItem {
+  label: string;
+  value: string;
+}
+
+export interface Props {
+  items: SpecItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="specs-container">
+  <dl class="grid grid-cols-1 sm:grid-cols-[minmax(120px,30%)_1fr] gap-x-6">
+    {items.map((item, index) => (
+      <Fragment>
+        <dt class:list={[
+          'text-sm font-medium text-zinc-500 py-3',
+          'sm:border-t sm:border-zinc-100',
+          index === 0 && 'border-t-0 sm:border-t-0'
+        ]}>
+          {item.label}
+        </dt>
+        <dd class:list={[
+          'text-base text-zinc-900 pb-3 sm:py-3',
+          'border-b border-zinc-100 sm:border-t sm:border-b-0',
+          index === 0 && 'sm:border-t-0',
+          index === items.length - 1 && 'border-b-0'
+        ]}>
+          {item.value}
+        </dd>
+      </Fragment>
+    ))}
+  </dl>
+</div>
+
+<style>
+  .specs-container {
+    font-family: 'Figtree', system-ui, -apple-system, sans-serif;
+  }
+  
+  /* First row special styling on mobile */
+  @media (max-width: 639px) {
+    .specs-container dt {
+      padding-top: 0.75rem;
+      padding-bottom: 0.25rem;
+    }
+    
+    .specs-container dt:first-of-type {
+      padding-top: 0;
+    }
+    
+    .specs-container dd {
+      padding-top: 0;
+    }
+  }
+</style>

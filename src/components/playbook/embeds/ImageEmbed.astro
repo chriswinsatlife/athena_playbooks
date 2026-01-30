@@ -1,0 +1,87 @@
+---
+/**
+ * ImageEmbed - Renders images within playbook sections
+ *
+ * Usage:
+ *   <ImageEmbed
+ *     src="/playbooks/gift-automation/images/hero.png"
+ *     alt="Gift boxes and calendar illustration"
+ *     caption="A visual representation of automated gift management"
+ *     width={800}
+ *   />
+ *
+ * Props:
+ *   - src: string - Path to the image file (required)
+ *   - alt: string - Accessible description (required)
+ *   - caption?: string - Optional figcaption text
+ *   - width?: number - Optional max-width in pixels
+ */
+
+export interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  width?: number;
+  type?: 'image';
+}
+
+const { src, alt, caption, width } = Astro.props;
+
+const imageStyle = width ? `max-width: ${width}px;` : '';
+---
+
+<figure class="image-embed">
+  <div class="image-container">
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      class="embed-image"
+      style={imageStyle}
+    />
+  </div>
+  {caption && (
+    <figcaption class="image-caption">{caption}</figcaption>
+  )}
+</figure>
+
+<style>
+  .image-embed {
+    margin: 1.5rem 0;
+    padding: 0;
+  }
+
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .embed-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+
+  .image-caption {
+    margin-top: 0.75rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-style: normal;
+    line-height: 1.5;
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .embed-image {
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+    }
+
+    .image-caption {
+      color: #9ca3af;
+    }
+  }
+</style>

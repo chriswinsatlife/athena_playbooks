@@ -9,9 +9,11 @@
     "astro": "bunx astro"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.33",
     "@google/genai": "^1.38.0",
     "@heroicons/react": "^2.2.0",
     "@popperjs/core": "^2.11.8",
+    "ai": "^6.0.62",
     "astro": "^5.16.16",
     "beautiful-mermaid": "^0.1.3",
     "rehype-stringify": "^10.0.1",

@@ -294,24 +294,89 @@ PHASE 3: Build (Astro)
 
 ## Input Format (v1: Manual)
 
-For v1, briefs are manually authored YAML with optional source material:
+Briefs are manually authored YAML with extensive steering for LLM generation.
+Playbooks are ALWAYS for Athena clients. No "audience" field at brief level.
+
+### Required Fields
+
+- `slug` - kebab-case identifier
+- `area` - one of the 16-area taxonomy
+- `topic` - MINIMUM 300 chars, multiple paragraphs covering scope, workflows, edge cases, success criteria
+
+### Optional But Critical Fields
+
+- `persona` - specific reader archetype with pain points, goals, context
+- `research_guidance` - steering for AI research, including:
+  - `whitelist` / `blacklist` - source control
+  - `primary_sources` - URLs to scrape directly
+  - `angles` / `frameworks` / `mental_models` - framing guidance
+  - `must_cover` / `do_not_cover` - scope control
+  - `quality_signals` / `red_flags` - what makes sources good/bad
+  - `keywords` / `negative_keywords` - search guidance
+  - `depth_guidance` - surface overview vs practitioner vs expert
+- `source_material` - existing content to transform
+- `section_hints` - suggested structure
+- `delegation_focus` - what aspect of delegation to emphasize
+
+### Example Brief
 
 ```yaml
-# briefs/gift-automation.yaml
 slug: gift-automation
-topic: Gift automation for birthdays, holidays, and thank-you occasions
 area: relationships
-audience: both
 
-# Optional: paste existing content, Coda doc, or notes
-source_material: |
-  [paste existing playbook text here]
+topic: |
+  Automating gift-giving for birthdays, holidays, anniversaries so the client
+  spends under 30 seconds per gift. Covers database setup, historical data
+  population, reminder cadences (30 days default), EA gift research workflow,
+  client approval (reply with number 1-5), order fulfillment, thank-you tracking.
   
-# Optional: known tools to feature
-tools:
-  - Airtable
-  - Zapier
-  - Amazon
+  Key workflows: one-time setup, EA backfill from email, recurring approval flow.
+  Edge cases: international shipping (6+ weeks), custom items, corporate compliance.
+  Success: never miss a date, excited thank-you texts, 10+ hours/year reclaimed.
+
+persona:
+  archetype: Time-starved founder who values relationships but forgets dates
+  pain_points:
+    - Forgets birthdays until day-of
+    - Gives generic gifts from lack of research time
+    - Feels guilty about dropped balls
+  goals:
+    - Never miss an important date
+    - Give genuinely thoughtful gifts
+
+research_guidance:
+  whitelist:
+    - thestrategist.com
+    - wirecutter.com
+    - athena.com/resources
+  blacklist:
+    - affiliate listicles
+    - Amazon best seller lists
+  must_cover:
+    - Database setup (Airtable)
+    - Historical gift data population
+    - Reply with a number approval flow
+  do_not_cover:
+    - Specific gift recommendations
+    - DIY calendar reminders
+  quality_signals:
+    - Specific actionable steps
+    - Time estimates
+    - Edge case handling
+
+source_material: |
+  From existing Coda playbook: Airtable with People, Gifts, Gift Events tabs...
+
+section_hints:
+  - What elite gift-giving looks like
+  - One-time client setup (10 min checklist)
+  - EA onboarding and historical data population
+  - The recurring gift workflow
+  - Special cases (international, corporate)
+
+delegation_focus: |
+  Vicarious-offensive: EA monitors calendar and surfaces opportunities proactively.
+  Client's only job is to approve one of the curated options.
 ```
 
 Run: `bun scripts/generate_playbook.ts briefs/gift-automation.yaml`
@@ -509,8 +574,6 @@ const sectionSchema = z.object({
   id: z.string(),
   title: z.string(),
   icon: z.string().optional(),
-  audience: z.enum(['client', 'ea', 'both']).default('both'),
-  intro: z.string().optional(),
   
   content: z.discriminatedUnion('format', [
     z.object({ format: z.literal('prose'), text: z.string() }),
@@ -519,21 +582,25 @@ const sectionSchema = z.object({
     z.object({ format: z.literal('steps'), items: z.array(z.object({ label: z.string(), details: z.string().optional() })) }),
   ]),
   
-  closing: z.string().optional(),
-  
-  // Embeds appear after content, before closing
+  // Embeds: rich UI mockups illustrating the content
   embeds: z.array(embedSchema).optional(),
+  
+  // Optional callout for tips/warnings
+  callout: calloutSchema.optional(),
 });
 ```
+
+Note: No audience/actor field. Playbooks are always for clients. The prose content itself
+describes what the client does vs what they delegate to the EA.
 
 ## Phase 1: Content Generation
 
 ### Input: Brief YAML
 
 Phase 1 receives a manually authored brief containing:
-- Metadata: topic, area, audience
-- Optional: source_material (existing playbook text, Coda doc, notes)
-- Optional: tools list
+- Metadata: slug, area, extensive topic description
+- Research guidance: whitelists, blacklists, angles, scope control
+- Optional: persona, source_material, section_hints
 
 ### AI Prompt Structure
 
@@ -543,7 +610,7 @@ Phase 1 receives a manually authored brief containing:
 ## Context
 - Athena helps clients delegate to EAs
 - This playbook covers: {topic}
-- Target audience: {client | ea | both}
+- Playbook audience: Athena clients (prospective and existing)
 - Area: {area from 16-area ontology}
 
 ## Source Material (if provided)

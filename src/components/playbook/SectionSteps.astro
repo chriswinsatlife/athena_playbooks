@@ -1,0 +1,90 @@
+---
+/**
+ * SectionSteps - Renders steps format content
+ * 
+ * Displays items as numbered steps with optional details
+ */
+
+export interface StepItem {
+  label: string;
+  details?: string;
+}
+
+export interface Props {
+  items: StepItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="steps-container">
+  <ol class="space-y-6" role="list">
+    {items.map((item, index) => (
+      <li class="step-item flex gap-4">
+        {/* Step number */}
+        <div class="flex-shrink-0">
+          <div class="
+            w-8 h-8 rounded-full 
+            bg-[#05240C] text-white
+            flex items-center justify-center
+            text-sm font-semibold
+          ">
+            {index + 1}
+          </div>
+        </div>
+        
+        {/* Step content */}
+        <div class="flex-1 min-w-0 pt-0.5">
+          <p class="text-base font-medium text-zinc-900 leading-relaxed">
+            {item.label}
+          </p>
+          
+          {item.details && (
+            <p class="mt-2 text-sm text-zinc-500 leading-relaxed">
+              {item.details}
+            </p>
+          )}
+        </div>
+      </li>
+    ))}
+  </ol>
+  
+  {/* Connecting line between steps */}
+  <style>
+    .steps-container ol {
+      position: relative;
+    }
+    
+    .step-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 40px;
+      width: 2px;
+      height: calc(100% - 40px);
+      background: linear-gradient(to bottom, #05240C 0%, #e4e4e7 100%);
+      opacity: 0.3;
+    }
+  </style>
+</div>
+
+<style>
+  .steps-container {
+    font-family: 'Figtree', system-ui, -apple-system, sans-serif;
+  }
+  
+  /* Connecting line between steps */
+  .step-item {
+    position: relative;
+  }
+  
+  .step-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 36px;
+    width: 2px;
+    height: calc(100% + 8px);
+    background-color: #e4e4e7;
+  }
+</style>

@@ -1,0 +1,114 @@
+---
+/**
+ * Section - Main dispatcher component for playbook sections
+ *
+ * Renders a section with its content and embeds, dispatching to format-specific
+ * renderers based on content.format.
+ *
+ * Playbooks are always for clients. The content itself describes what the client
+ * does vs what they delegate to the EA.
+ */
+
+import SectionChecklist from './SectionChecklist.astro';
+import SectionSteps from './SectionSteps.astro';
+import SectionSpecs from './SectionSpecs.astro';
+import SectionProse from './SectionProse.astro';
+import EmbedRenderer from './EmbedRenderer.astro';
+
+export interface ChecklistItem {
+  label: string;
+  details?: string;
+  substeps?: string[];
+}
+
+export interface StepItem {
+  label: string;
+  details?: string;
+}
+
+export interface SpecItem {
+  label: string;
+  value: string;
+}
+
+export interface ProseContent {
+  format: 'prose';
+  text: string;
+}
+
+export interface ChecklistContent {
+  format: 'checklist';
+  items: ChecklistItem[];
+}
+
+export interface StepsContent {
+  format: 'steps';
+  items: StepItem[];
+}
+
+export interface SpecsContent {
+  format: 'specs';
+  items: SpecItem[];
+}
+
+export type SectionContent = ProseContent | ChecklistContent | StepsContent | SpecsContent;
+
+export interface Embed {
+  type: string;
+  [key: string]: unknown;
+}
+
+export interface Props {
+  id: string;
+  title: string;
+  icon?: string;
+  content: SectionContent;
+  embeds?: Embed[];
+}
+
+const { id, title, icon, content, embeds } = Astro.props;
+---
+
+<section id={id} class="playbook-section py-10 md:py-14">
+  <div class="max-w-3xl">
+    <header class="mb-6">
+      <h2 class="text-2xl md:text-3xl font-semibold text-[#05240C] font-['Playfair_Display',serif] flex items-center gap-3">
+        {icon && <span class="section-icon text-xl md:text-2xl opacity-80">{icon}</span>}
+        {title}
+      </h2>
+    </header>
+
+    <div class="section-content mb-8">
+      {content.format === 'prose' && (
+        <SectionProse text={content.text} />
+      )}
+      {content.format === 'checklist' && (
+        <SectionChecklist items={content.items} />
+      )}
+      {content.format === 'steps' && (
+        <SectionSteps items={content.items} />
+      )}
+      {content.format === 'specs' && (
+        <SectionSpecs items={content.items} />
+      )}
+    </div>
+
+    {embeds && embeds.length > 0 && (
+      <div class="section-embeds space-y-6 my-8">
+        {embeds.map((embed) => (
+          <EmbedRenderer embed={embed} />
+        ))}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .playbook-section {
+    font-family: 'Figtree', system-ui, -apple-system, sans-serif;
+  }
+
+  .playbook-section + .playbook-section {
+    border-top: 1px solid #e4e4e7;
+  }
+</style>

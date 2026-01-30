@@ -1,0 +1,87 @@
+---
+/**
+ * DiagramEmbed - Renders SVG diagrams within playbook sections
+ *
+ * Usage:
+ *   <DiagramEmbed
+ *     src="/playbooks/gift-automation/diagrams/workflow.svg"
+ *     alt="Gift automation workflow diagram"
+ *     caption="The gift workflow from trigger to thank-you"
+ *   />
+ *
+ * Props:
+ *   - src: string - Path to the SVG file (required)
+ *   - alt: string - Accessible description (required)
+ *   - caption?: string - Optional figcaption text
+ *   - id?: string - Optional identifier for the diagram
+ */
+
+export interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  id?: string;
+  type?: 'diagram';
+}
+
+const { src, alt, caption, id } = Astro.props;
+---
+
+<figure class="diagram-embed" id={id}>
+  <div class="diagram-container">
+    <img src={src} alt={alt} loading="lazy" class="diagram-svg" />
+  </div>
+  {caption && (
+    <figcaption class="diagram-caption">{caption}</figcaption>
+  )}
+</figure>
+
+<style>
+  .diagram-embed {
+    margin: 1.5rem 0;
+    padding: 0;
+  }
+
+  .diagram-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .diagram-svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .diagram-caption {
+    margin-top: 0.75rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-style: normal;
+    line-height: 1.5;
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .diagram-container {
+      background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+      border-color: #374151;
+    }
+
+    .diagram-caption {
+      color: #9ca3af;
+    }
+
+    /* Invert diagrams for dark mode if they have light backgrounds */
+    .diagram-svg {
+      filter: none;
+    }
+  }
+</style>

@@ -1,0 +1,188 @@
+---
+/**
+ * FAQ - Expandable FAQ accordion with JSON-LD schema markup
+ *
+ * Usage:
+ *   <FAQ
+ *     items={[
+ *       { question: "How does it work?", answer: "It works by..." },
+ *       { question: "What if I need help?", answer: "Contact support..." }
+ *     ]}
+ *   />
+ */
+
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export interface Props {
+  items: FAQItem[];
+  title?: string;
+}
+
+const { items, title = 'Frequently Asked Questions' } = Astro.props;
+
+// Build JSON-LD schema for SEO
+const jsonLdSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<section class="faq-section">
+  <h2 class="faq-title">{title}</h2>
+
+  <div class="faq-list">
+    {items.map((item, index) => (
+      <details class="faq-item" id={`faq-${index}`}>
+        <summary class="faq-question">
+          <span class="faq-question-text">{item.question}</span>
+          <span class="faq-toggle" aria-hidden="true">
+            <svg class="faq-icon-plus" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+            <svg class="faq-icon-minus" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </span>
+        </summary>
+        <div class="faq-answer">
+          <p>{item.answer}</p>
+        </div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLdSchema)} />
+
+<style>
+  .faq-section {
+    --faq-fg: #403422;
+    --faq-muted: #666;
+    --faq-border: #e5e5e5;
+    --faq-sage: #5A8669;
+    --faq-hover-bg: #fafafa;
+
+    margin-bottom: 2.5rem;
+  }
+
+  .faq-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--faq-fg);
+    margin: 0 0 1.25rem 0;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--faq-border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--faq-border);
+  }
+
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    background: #fff;
+    transition: background-color 0.15s ease;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question:hover {
+    background: var(--faq-hover-bg);
+  }
+
+  .faq-question-text {
+    font-family: 'Figtree', system-ui, sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    color: var(--faq-fg);
+    line-height: 1.4;
+  }
+
+  .faq-toggle {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--faq-sage);
+  }
+
+  .faq-icon-plus,
+  .faq-icon-minus {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .faq-icon-minus {
+    display: none;
+  }
+
+  .faq-item[open] .faq-icon-plus {
+    display: none;
+  }
+
+  .faq-item[open] .faq-icon-minus {
+    display: block;
+  }
+
+  .faq-answer {
+    padding: 0 1.5rem 1.25rem 1.5rem;
+    background: #fff;
+  }
+
+  .faq-answer p {
+    font-family: 'Figtree', system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--faq-muted);
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    .faq-question {
+      padding: 1rem 1.25rem;
+    }
+
+    .faq-question-text {
+      font-size: 1rem;
+    }
+
+    .faq-answer {
+      padding: 0 1.25rem 1rem 1.25rem;
+    }
+
+    .faq-answer p {
+      font-size: 0.9375rem;
+    }
+  }
+</style>

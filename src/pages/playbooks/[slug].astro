@@ -1,0 +1,166 @@
+---
+/**
+ * Dynamic Playbook Route
+ *
+ * Renders playbooks from JSON content collection.
+ * Path: /playbooks/[slug]
+ */
+
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/playbook/Hero.astro';
+import ToolsGrid from '../../components/playbook/ToolsGrid.astro';
+import BeforeAfter from '../../components/playbook/BeforeAfter.astro';
+import Section from '../../components/playbook/Section.astro';
+import FAQ from '../../components/playbook/FAQ.astro';
+import RelatedPlaybooks from '../../components/playbook/RelatedPlaybooks.astro';
+
+// Shared embed components
+import Notifications from '../../components/Notifications.astro';
+import Messages from '../../components/Messages.astro';
+import Calendar from '../../components/Calendar.astro';
+import EmailThread from '../../components/EmailThread.astro';
+import DataTableViewer from '../../components/DataTableViewer.astro';
+
+export async function getStaticPaths() {
+  const playbooks = await getCollection('playbooks');
+  return playbooks.map((playbook) => ({
+    params: { slug: playbook.data.meta.slug },
+    props: { playbook },
+  }));
+}
+
+const { playbook } = Astro.props;
+const { data } = playbook;
+
+// Page title for SEO
+const pageTitle = `${data.meta.title} | Athena Playbooks`;
+---
+
+<Base title={pageTitle}>
+  <main class="playbook-page">
+    <article class="playbook-container">
+      <Hero
+        headline={data.hero.headline}
+        subheadline={data.hero.subheadline}
+        value_prop={data.hero.value_prop}
+        stats={data.hero.stats}
+        optimized_for={data.meta.optimized_for}
+        image={data.hero.image}
+      />
+
+      {data.tools && data.tools.length > 0 && (
+        <ToolsGrid playbook_tools={data.tools} />
+      )}
+
+      {data.before_after && (
+        <BeforeAfter
+          before={data.before_after.before}
+          after={data.before_after.after}
+        />
+      )}
+
+      <div class="playbook-sections">
+        {data.sections.map((section) => (
+          <Section
+            id={section.id}
+            title={section.title}
+            icon={section.icon}
+            content={section.content}
+            embeds={section.embeds}
+          />
+        ))}
+      </div>
+
+      <FAQ items={data.faq} />
+
+      {data.related && data.related.length > 0 && (
+        <RelatedPlaybooks slugs={data.related} />
+      )}
+
+      {data.references && data.references.length > 0 && (
+        <section class="references-section">
+          <h2 class="references-title">References</h2>
+          <ul class="references-list">
+            {data.references.map((ref) => (
+              <li class="reference-item">
+                <a href={ref.url} target="_blank" rel="noopener noreferrer">
+                  {ref.title}
+                </a>
+                {ref.source && <span class="reference-source"> - {ref.source}</span>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </article>
+  </main>
+</Base>
+
+<style>
+  .playbook-page {
+    --playbook-max-width: 900px;
+    --playbook-padding: 2rem;
+
+    min-height: 100vh;
+    background: #fafaf8;
+  }
+
+  .playbook-container {
+    max-width: var(--playbook-max-width);
+    margin: 0 auto;
+    padding: var(--playbook-padding);
+  }
+
+  .playbook-sections {
+    margin-top: 2rem;
+  }
+
+  .references-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .references-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #403422;
+    margin: 0 0 1rem 0;
+  }
+
+  .references-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .reference-item {
+    font-family: 'Figtree', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .reference-item a {
+    color: #5A8669;
+    text-decoration: none;
+  }
+
+  .reference-item a:hover {
+    text-decoration: underline;
+  }
+
+  .reference-source {
+    color: #666;
+  }
+
+  @media (max-width: 768px) {
+    .playbook-container {
+      padding: 1.25rem;
+    }
+  }
+</style>
