@@ -6,37 +6,51 @@ import StackChips from '../components/StackChips.astro';
 <Base title="StackChips Component Demo">
   <main class="p-8 space-y-16 max-w-4xl mx-auto">
     <h1 class="text-3xl font-heading font-bold">StackChips Component Demo</h1>
-    <p class="text-mist-600">Display tool/app stacks as styled chips with icons, matching the playbook data model.</p>
+    <p class="text-mist-600">Display tool/app stacks as styled chips with icons. Logos auto-resolve from <code>/public/logos/</code> based on slug.</p>
     
-    <!-- Basic Usage -->
+    <!-- Basic Usage with Auto-resolved Logos -->
     <section class="space-y-8">
-      <h2 class="text-2xl font-semibold border-b pb-2">Basic Usage (Outline)</h2>
+      <h2 class="text-2xl font-semibold border-b pb-2">Auto-resolved Logos (from /public/logos/)</h2>
+      <p class="text-sm text-mist-500">Just provide name and slug - logos load automatically from local files.</p>
       
       <StackChips
         tools={[
-          { name: "ChatGPT Deep Research", category: "ai", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/512px-ChatGPT_logo.svg.png" },
-          { name: "Google Calendar", category: "calendar", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Calendar_icon_%282020%29.svg/512px-Google_Calendar_icon_%282020%29.svg.png" },
-          { name: "Asana", category: "project-management", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Asana_logo.svg/512px-Asana_logo.svg.png" },
-          { name: "Airtable", category: "database", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Airtable_Logo.svg/512px-Airtable_Logo.svg.png" },
-          { name: "WhatsApp", category: "messaging", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png" },
-          { name: "Superhuman", category: "email", logo: "https://asset.brandfetch.io/idEnT5QXUD/idCOV_YNCB.png" },
-          { name: "Mercury Personal", category: "banking", logo: "https://asset.brandfetch.io/idJmU6e98X/idI5HJYzQi.svg" },
+          { name: "Airtable", slug: "airtable", category: "database", url: "https://airtable.com" },
+          { name: "Google Calendar", slug: "google-calendar", category: "calendar" },
+          { name: "Asana", slug: "asana", category: "project-management" },
+          { name: "Notion", slug: "notion", category: "notes" },
+          { name: "WhatsApp", slug: "whatsapp", category: "messaging" },
+          { name: "Slack", slug: "slack", category: "messaging" },
+          { name: "Zapier", slug: "zapier", category: "automation" },
         ]}
       />
     </section>
     
-    <!-- Without Logo -->
+    <!-- Firecrawl-sourced Logos -->
     <section class="space-y-8">
-      <h2 class="text-2xl font-semibold border-b pb-2">Without Logos (Placeholder)</h2>
+      <h2 class="text-2xl font-semibold border-b pb-2">Firecrawl-sourced Logos</h2>
+      <p class="text-sm text-mist-500">Logos fetched via Firecrawl branding endpoint for tools not in svgporn.</p>
       
       <StackChips
         tools={[
-          { name: "Notion", category: "notes" },
-          { name: "Slack", category: "messaging" },
-          { name: "Figma", category: "design" },
-          { name: "Linear", category: "project-management" },
+          { name: "Mercury", slug: "mercury", category: "banking", url: "https://mercury.com" },
+          { name: "Superhuman", slug: "superhuman", category: "email", url: "https://superhuman.com" },
         ]}
-        label="Productivity Stack"
+        label="Fintech Stack"
+      />
+    </section>
+    
+    <!-- Fallback Placeholders -->
+    <section class="space-y-8">
+      <h2 class="text-2xl font-semibold border-b pb-2">Fallback Placeholders</h2>
+      <p class="text-sm text-mist-500">When logo file doesn't exist, shows first letter placeholder.</p>
+      
+      <StackChips
+        tools={[
+          { name: "Unknown Tool", slug: "unknown-tool", category: "misc" },
+          { name: "Custom App", slug: "custom-app", category: "misc" },
+        ]}
+        label="Missing Logos"
       />
     </section>
     
@@ -47,9 +61,9 @@ import StackChips from '../components/StackChips.astro';
       <StackChips
         variant="filled"
         tools={[
-          { name: "Zapier", category: "automation", logo: "https://asset.brandfetch.io/idnGwTFApN/idBZxNr2wT.png" },
-          { name: "Make", category: "automation", logo: "https://asset.brandfetch.io/idkUQ9GxBm/id_-yQvqfr.png" },
-          { name: "n8n", category: "automation" },
+          { name: "Zapier", slug: "zapier", category: "automation" },
+          { name: "Slack", slug: "slack", category: "messaging" },
+          { name: "Notion", slug: "notion", category: "notes" },
         ]}
         label="Automation"
       />
@@ -62,9 +76,9 @@ import StackChips from '../components/StackChips.astro';
       <StackChips
         variant="ghost"
         tools={[
-          { name: "VS Code", category: "dev-tools" },
-          { name: "GitHub", category: "dev-tools" },
-          { name: "Vercel", category: "deployment" },
+          { name: "Airtable", slug: "airtable", category: "database" },
+          { name: "Asana", slug: "asana", category: "project-management" },
+          { name: "Slack", slug: "slack", category: "messaging" },
         ]}
         label="Dev Stack"
       />
@@ -81,9 +95,9 @@ import StackChips from '../components/StackChips.astro';
             size="sm"
             showLabel={false}
             tools={[
-              { name: "Notion", category: "notes" },
-              { name: "Slack", category: "messaging" },
-              { name: "Zoom", category: "video" },
+              { name: "Notion", slug: "notion", category: "notes" },
+              { name: "Slack", slug: "slack", category: "messaging" },
+              { name: "Zapier", slug: "zapier", category: "automation" },
             ]}
           />
         </div>
@@ -94,9 +108,9 @@ import StackChips from '../components/StackChips.astro';
             size="md"
             showLabel={false}
             tools={[
-              { name: "Notion", category: "notes" },
-              { name: "Slack", category: "messaging" },
-              { name: "Zoom", category: "video" },
+              { name: "Notion", slug: "notion", category: "notes" },
+              { name: "Slack", slug: "slack", category: "messaging" },
+              { name: "Zapier", slug: "zapier", category: "automation" },
             ]}
           />
         </div>
@@ -107,52 +121,13 @@ import StackChips from '../components/StackChips.astro';
             size="lg"
             showLabel={false}
             tools={[
-              { name: "Notion", category: "notes" },
-              { name: "Slack", category: "messaging" },
-              { name: "Zoom", category: "video" },
+              { name: "Notion", slug: "notion", category: "notes" },
+              { name: "Slack", slug: "slack", category: "messaging" },
+              { name: "Zapier", slug: "zapier", category: "automation" },
             ]}
           />
         </div>
       </div>
-    </section>
-    
-    <!-- With URLs (Clickable) -->
-    <section class="space-y-8">
-      <h2 class="text-2xl font-semibold border-b pb-2">With URLs (Clickable)</h2>
-      
-      <StackChips
-        tools={[
-          { 
-            name: "Airtable", 
-            category: "database", 
-            logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Airtable_Logo.svg/512px-Airtable_Logo.svg.png",
-            url: "https://airtable.com",
-            description: "Track people, events, and gift history"
-          },
-          { 
-            name: "Zapier", 
-            category: "automation", 
-            logo: "https://asset.brandfetch.io/idnGwTFApN/idBZxNr2wT.png",
-            url: "https://zapier.com",
-            description: "Automate workflows between apps"
-          },
-        ]}
-        label="Required Tools"
-      />
-    </section>
-    
-    <!-- No Label -->
-    <section class="space-y-8">
-      <h2 class="text-2xl font-semibold border-b pb-2">Without Label</h2>
-      
-      <StackChips
-        showLabel={false}
-        tools={[
-          { name: "Stripe", category: "payments" },
-          { name: "Plaid", category: "banking" },
-          { name: "QuickBooks", category: "accounting" },
-        ]}
-      />
     </section>
     
     <!-- Full Playbook Example -->
@@ -167,7 +142,6 @@ import StackChips from '../components/StackChips.astro';
               name: "Airtable", 
               slug: "airtable",
               category: "database", 
-              logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Airtable_Logo.svg/512px-Airtable_Logo.svg.png",
               url: "https://airtable.com",
               required: true,
               description: "Track people, events, and gift history",
@@ -177,7 +151,6 @@ import StackChips from '../components/StackChips.astro';
               name: "Zapier", 
               slug: "zapier",
               category: "automation", 
-              logo: "https://asset.brandfetch.io/idnGwTFApN/idBZxNr2wT.png",
               url: "https://zapier.com",
               required: false,
               description: "Optional: automate reminders",
@@ -187,7 +160,6 @@ import StackChips from '../components/StackChips.astro';
               name: "Google Calendar",
               slug: "google-calendar",
               category: "calendar",
-              logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Calendar_icon_%282020%29.svg/512px-Google_Calendar_icon_%282020%29.svg.png",
               url: "https://calendar.google.com",
               required: true,
               description: "Sync gift events and reminders"
@@ -196,6 +168,14 @@ import StackChips from '../components/StackChips.astro';
           label="Stack"
         />
       </div>
+    </section>
+    
+    <!-- Usage Instructions -->
+    <section class="space-y-4 bg-mist-100 p-6 rounded-lg">
+      <h2 class="text-xl font-semibold">Adding New Logos</h2>
+      <p class="text-sm">Use the fetch_logo script to download logos:</p>
+      <pre class="bg-mist-900 text-white p-4 rounded text-sm overflow-x-auto">bun scripts/fetch_logo.ts airtable.com notion.so mercury.com</pre>
+      <p class="text-sm text-mist-600">Logos are saved to <code>/public/logos/{'{slug}'}.svg</code> and auto-resolved by the component.</p>
     </section>
   </main>
 </Base>

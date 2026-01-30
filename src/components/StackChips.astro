@@ -84,6 +84,18 @@ if (src && !propTools) {
 function getToolUrl(tool: PlaybookTool): string | undefined {
   return tool.affiliate_url || tool.url
 }
+
+// Helper to resolve logo path - check local /logos/ first, then use provided logo
+function getLogoPath(tool: PlaybookTool): string | undefined {
+  // If logo is explicitly provided, use it
+  if (tool.logo) return tool.logo
+  
+  // Try to resolve from slug or name
+  const slug = tool.slug || tool.name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-')
+  
+  // Return local path - Astro will 404 gracefully if not found
+  return `/logos/${slug}.svg`
+}
 ---
 
 {tools.length > 0 && (
@@ -98,18 +110,23 @@ function getToolUrl(tool: PlaybookTool): string | undefined {
     <div class="sc-grid">
       {tools.map((tool) => {
         const url = getToolUrl(tool)
+        const logo = getLogoPath(tool)
         const ChipTag = url ? 'a' : 'div'
         const chipProps = url ? { href: url, target: '_blank', rel: 'noopener noreferrer' } : {}
         
         return (
           <ChipTag class="sc-chip" {...chipProps} title={tool.description || tool.name}>
-            {tool.logo ? (
+            {logo ? (
               <img 
-                src={tool.logo} 
+                src={logo} 
                 alt={`${tool.name} icon`} 
                 class="sc-icon"
                 loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
               />
+              <span class="sc-icon-placeholder" style="display:none">
+                {tool.name.charAt(0).toUpperCase()}
+              </span>
             ) : (
               <span class="sc-icon-placeholder">
                 {tool.name.charAt(0).toUpperCase()}
