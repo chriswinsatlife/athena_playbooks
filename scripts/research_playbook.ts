@@ -261,7 +261,24 @@ async function main() {
   if (result.sources) log('Debug', `sources count: ${result.sources.length}`);
   
   // Try different output field names
-  const rawText = result.text || result.answer || (typeof result.output === 'string' ? result.output : '') || '';
+  let rawText = '';
+  if (result.text) {
+    rawText = result.text;
+  } else if (result.answer) {
+    rawText = result.answer;
+  } else if (result.output) {
+    if (typeof result.output === 'string') {
+      rawText = result.output;
+    } else if (typeof result.output === 'object' && result.output !== null) {
+      // output.content is the actual research
+      const outputObj = result.output as { content?: string };
+      if (outputObj.content) {
+        rawText = outputObj.content;
+      } else {
+        rawText = JSON.stringify(result.output, null, 2);
+      }
+    }
+  }
   const cleanedText = cleanMarkdownOutput(rawText);
   
   // Handle sources - could be array of objects or Record

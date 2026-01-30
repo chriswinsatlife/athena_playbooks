@@ -67,25 +67,27 @@ Please provide specific, actionable next steps to get started.`;
         </div>
       )}
 
-      {data.before_after && (
-        <BeforeAfter
-          before={data.before_after.before}
-          after={data.before_after.after}
-        />
-      )}
-
       <div class="content-with-sidebar">
-        <div class="playbook-sections">
-          {data.sections.map((section) => (
-            <Section
-              id={section.id}
-              title={section.title}
-              icon={section.icon}
-              content={section.content}
-              embeds={section.embeds}
-              callout={section.callout}
+        <div class="playbook-main">
+          {data.before_after && (
+            <BeforeAfter
+              before={data.before_after.before}
+              after={data.before_after.after}
             />
-          ))}
+          )}
+
+          <div class="playbook-sections">
+            {data.sections.map((section) => (
+              <Section
+                id={section.id}
+                title={section.title}
+                icon={section.icon}
+                content={section.content}
+                embeds={section.embeds}
+                callout={section.callout}
+              />
+            ))}
+          </div>
         </div>
 
         <aside class="playbook-sidebar">
@@ -150,8 +152,12 @@ Please provide specific, actionable next steps to get started.`;
     margin-top: 2rem;
   }
 
-  .playbook-sections {
+  .playbook-main {
     min-width: 0;
+  }
+
+  .playbook-sections {
+    margin-top: 2rem;
   }
 
   .playbook-sidebar {

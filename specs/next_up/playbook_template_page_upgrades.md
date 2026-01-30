@@ -82,3 +82,28 @@ Latest preview URL: [http://localhost:4321/playbooks/automated-gifting-system/]
 - The current implementation (`src/pages/playbooks/[slug].astro`), alongside the JSON schema which populates the page, does include some elements which are desirable but _absent_ from the conceptual mockup (`docs/playbook_page_mockup.png`), which focused more on aesthetics and was made _prior_ to the finalization of the playbook data model & schema
 - We may need to create more components or create final designs for components which were YOLO'd with code in the existing page but not present in the illustrative mockup
 - There are many desirable components which assist with communicating the narrative, value, tactics, and key moments of the playbook which were _neither_ in the illustrative mockup _nor_ in the current implementation; we may need to update our prompting or schema to facilitate the usage of these components; these include amongst other things, quotes, messages, emails, calendar items, and so on in `src/components/`
+
+#### In current implementation but NOT in mockup, i.e. "needs design":
+
+- BeforeAfter transformation cards
+- SectionSpecs tables
+- SectionChecklist with substeps
+- FAQ accordion
+- References section
+
+#### In mockup but NOT yet fully implemented, i.e. "needs Astro component" or "needs implementation in template page":
+
+- Custom watercolor hero illustrations
+- Author/profile cards
+- Flowchart/process diagrams (FlowDiagram component exists but not wired to generated playbooks)
+- Vertical dividers framing editorial text
+- "More Playbooks" discovery section with cards
+
+#### Rich embed components available but unused, i.e. "needs update to prompt/schema/other" (and possibly guidance on how to include these from both a design and content standpoint):
+
+- Messages.astro - WhatsApp/iMessage/ChatGPT conversations
+- Calendar.astro - Google/Apple/Outlook views
+- EmailThread.astro - Gmail-style threads
+- Notifications.astro - macOS/iOS/Android alerts
+- DataTableViewer.astro - Sheets/Notion/Airtable tables
+- SocialQuote.astro - Twitter/LinkedIn/Podcast quotes
