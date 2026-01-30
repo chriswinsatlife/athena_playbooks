@@ -20,6 +20,9 @@
 - `tailwind_templates/oatmeal-mist-instrument/` is the official Tailwind theme with specific styles, page layouts, and so on that we can copy from.
 - The Oatmeal template is reasonably close to the Athena brand style, and can be used as a starting point for pages/styles/components, which can be adapted based on new design assets or the Athena style guide.
 - `maggie_appleton_components/` is a collection of well-designed Astro components for reference.
+- There is a `docs/illustration_generation_system.md`
+- There is a metaprompting system (`docs/diagram_generation_system.md`) which enables generating prompts as markdown files for imitating the layouts, styles, or other aspects of any input image file; use `tools/analyze_reference.ts` to create templates and `tools/generate_diagram.ts` to generate on-brand diagrams
+- There is a Mermaid-based diagram system (`dataviz/mermaid_js/`), with corresponding Astro component (`components/playbooks/Diagram.astro`), and a separate D3/Dagre-based diagram system (`dataviz/dagre.md` and `dataviz/mermaid_js/d3_and_dagre_flowchart_demo.html`)
 
 ## What Goes Where
 
