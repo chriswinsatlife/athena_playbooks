@@ -1,0 +1,206 @@
+{
+  "meta": {
+    "title": "Automated Gifting System",
+    "slug": "automated-gifting-system",
+    "description": "Never miss a birthday or anniversary again. Learn how to delegate gift research, procurement, and logistics to your EA so you only spend 30 seconds picking the perfect option.",
+    "area": "relationships",
+    "type": "playbook",
+    "status": "published",
+    "optimized_for": [
+      "relationship ROI",
+      "founder focus",
+      "automated reminders",
+      "gift curation"
+    ],
+    "complexity": 4,
+    "scope": 5,
+    "intimacy": 8,
+    "time_savings": "2-4 hours per gift",
+    "delegation": {
+      "pathway": "vicarious-offensive",
+      "modality": "goal-driven",
+      "frequency": "recurring",
+      "level": "intermediate"
+    }
+  },
+  "hero": {
+    "headline": "Turn Thoughtfulness into a System",
+    "subheadline": "Stop scrambling for last-minute gift cards. Use your EA to curate personal, high-impact gifts that strengthen your most important relationships.",
+    "value_prop": "This system moves you from reactive 'emergency' gifting to a proactive strategy where your only job is to reply with a number to a curated list of options.",
+    "stats": [
+      {
+        "value": "30s",
+        "label": "Client decision time"
+      },
+      {
+        "value": "100%",
+        "label": "On-time delivery"
+      },
+      {
+        "value": "0",
+        "label": "Missed milestones"
+      }
+    ]
+  },
+  "tools": [
+    {
+      "name": "Airtable",
+      "slug": "airtable",
+      "category": "Database",
+      "url": "https://airtable.com",
+      "description": "Used for tracking recipient profiles, dates, and gift history.",
+      "required": false
+    },
+    {
+      "name": "Handwrytten",
+      "slug": "handwrytten",
+      "category": "Fulfillment",
+      "url": "https://handwrytten.com",
+      "description": "Service for sending real pen-and-ink notes at scale.",
+      "required": false
+    },
+    {
+      "name": "1Password",
+      "slug": "1password",
+      "category": "Security",
+      "url": "https://1password.com",
+      "description": "Securely share credit card details with your EA for purchases.",
+      "required": false
+    }
+  ],
+  "before_after": {
+    "before": {
+      "title": "Reactive Gifting",
+      "pain_points": [
+        "Realizing it's a birthday at 4 PM and sending a generic Amazon gift card.",
+        "Spending 2 hours browsing gift sites when you should be working.",
+        "The anxiety of potentially sending the same gift twice.",
+        "Missing key milestones for high-value business partners."
+      ]
+    },
+    "after": {
+      "title": "Strategic Thoughtfulness",
+      "benefits": [
+        "Every gift is personalized and arrives 2 days early.",
+        "Your total time investment is 30 seconds of decision-making.",
+        "Your reputation for being 'thoughtful' and 'detail-oriented' grows.",
+        "A complete history of every gift ever sent is at your fingertips."
+      ]
+    }
+  },
+  "sections": [
+    {
+      "id": "gift-database",
+      "title": "The Relationship Database",
+      "content": {
+        "format": "specs",
+        "items": [
+          {
+            "label": "Recipient Profile",
+            "value": "Name, relationship type (Personal/Business), and shipping address."
+          },
+          {
+            "label": "Key Dates",
+            "value": "Birthdays, anniversaries, or annual company milestones."
+          },
+          {
+            "label": "Preferences",
+            "value": "Dietary restrictions, favorite colors, hobbies, and 'never-gift' items."
+          },
+          {
+            "label": "Budget Tiers",
+            "value": "Tier A ($500+), Tier B ($100-$250), Tier C (<$100)."
+          },
+          {
+            "label": "Gift History",
+            "value": "Date, item sent, and recipient reaction to avoid repeats."
+          }
+        ]
+      },
+      "callout": {
+        "type": "tip",
+        "content": "Have your EA set up this database in Notion or Airtable. It serves as the single source of truth for all relationship management."
+      }
+    },
+    {
+      "id": "selection-workflow",
+      "title": "The 30-Second Selection Workflow",
+      "content": {
+        "format": "steps",
+        "items": [
+          {
+            "label": "EA Proactive Alert",
+            "details": "14 days before an event, your EA sends a Slack/message with 3 curated gift options based on the recipient's profile."
+          },
+          {
+            "label": "The 'Reply with a Number' Choice",
+            "details": "You review the options and reply with 'Option 2'. If a personal note is needed, you dictate it via voice memo or quick text."
+          },
+          {
+            "label": "EA Fulfillment",
+            "details": "Your EA handles the purchase, gift wrapping, card writing, and tracking."
+          },
+          {
+            "label": "Delivery Confirmation",
+            "details": "Your EA notifies you once the gift has been delivered so you can follow up with a personal text if desired."
+          }
+        ]
+      },
+      "callout": {
+        "type": "example",
+        "content": "EA: 'Hi! Your co-founder’s birthday is in 2 weeks. Here are 3 options: 1) Ember Travel Mug (he loves coffee), 2) High-end leather notebook (he's a tactile planner), 3) Donation to [Local Charity] in his name. Which should I proceed with?'"
+      }
+    },
+    {
+      "id": "procurement-setup",
+      "title": "Delegation Handoff & Setup",
+      "content": {
+        "format": "checklist",
+        "items": [
+          {
+            "label": "Share Payment Access",
+            "details": "Provide a dedicated credit card or access via a secure vault like 1Password for purchases.",
+            "substeps": [
+              "Set a per-transaction limit",
+              "Define monthly gifting budget"
+            ]
+          },
+          {
+            "label": "Define 'Personal Touch' Rules",
+            "details": "Tell your EA when you want to hand-write a note vs. when they should use a high-quality handwriting service (e.g., Handwrytten)."
+          },
+          {
+            "label": "Establish 'Always-In-Stock' Items",
+            "details": "Keep a small inventory of generic high-quality items (e.g., branded Moleskines or luxury candles) for unexpected 'Thank You' moments."
+          }
+        ]
+      }
+    },
+    {
+      "id": "edge-cases",
+      "title": "Handling Special Scenarios",
+      "content": {
+        "format": "prose",
+        "text": "Your system should be robust enough to handle exceptions without your direct involvement. For **International Shipping**, instruct your EA to find local vendors in the recipient's country to avoid customs delays and high fees. For **Corporate Limits**, ensure your EA has a list of gift ceilings for specific clients or partners to remain compliant with their internal policies. In the case of **Last-Minute Needs**, define a 'Rush Protocol' where the EA defaults to high-end local delivery (like a premium florist or local courier) if the lead time is under 48 hours."
+      },
+      "callout": {
+        "type": "warning",
+        "content": "Always have your EA verify dietary restrictions before sending food-based gifts, especially for corporate recipients."
+      }
+    }
+  ],
+  "faq": [
+    {
+      "question": "How do I ensure the gifts don't feel 'automated'?",
+      "answer": "The automation is in the *logistics*, not the *thought*. Your EA uses the preferences you've provided to find items you would have picked yourself if you had the time. Adding a dictated personal note ensures the emotional connection remains authentic."
+    },
+    {
+      "question": "What if my EA picks something I don't like?",
+      "answer": "The 'Reply with a Number' paradigm gives you final veto power. If none of the 3 options work, simply say 'None of these, find something more [minimalist/practical/creative].' This calibrates your EA's taste for the next time."
+    },
+    {
+      "question": "How do we handle shipping to people whose addresses I don't have?",
+      "answer": "Your EA can use services like **Paperless Post** to send a 'gift notification' that allows the recipient to securely enter their own shipping address, or they can perform a 'soft reach out' to the recipient's assistant or office manager."
+    }
+  ]
+}

@@ -15,22 +15,31 @@ import { z } from 'zod';
 import { parseBrief, type Brief } from '../src/lib/brief_parser';
 import { createPipelineRun, createPhaseLogger } from '../src/lib/pipeline_logger';
 import {
-  playbookSchema,
   metaSchema,
   heroSchema,
-  sectionSchema,
   faqItemSchema,
   toolSchema,
   beforeAfterSchema,
+  sectionContentSchema,
+  calloutSchema,
 } from '../src/lib/playbook_schemas';
 
-// Re-export a generation-friendly subset of the schema (without Astro-specific parts)
+// Simplified section schema for generation (no embeds - they're added manually or in post-processing)
+const generationSectionSchema = z.object({
+  id: z.string().regex(/^[a-z0-9-]+$/).describe('URL-safe section identifier'),
+  title: z.string().describe('Section heading'),
+  icon: z.string().optional().describe('Icon name from icon set'),
+  content: sectionContentSchema.describe('Main section content'),
+  callout: calloutSchema.optional().describe('Highlighted tip/warning/tool'),
+});
+
+// Generation-friendly schema (excludes complex embed types Gemini can't handle)
 const generationSchema = z.object({
   meta: metaSchema,
   hero: heroSchema,
   tools: z.array(toolSchema).optional(),
   before_after: beforeAfterSchema.optional(),
-  sections: z.array(sectionSchema).min(1),
+  sections: z.array(generationSectionSchema).min(1),
   faq: z.array(faqItemSchema).min(3).max(8),
   related: z.array(z.string()).max(6).optional(),
 });
@@ -139,7 +148,7 @@ async function generatePlaybookContent(
   brief: Brief,
   options: GenerateOptions = {}
 ): Promise<GeneratedPlaybook> {
-  const model = options.model || 'gemini-3-flash';
+  const model = options.model || 'gemini-3-flash-preview';
 
   const { output, usage } = await generateText({
     model: google(model),
@@ -197,6 +206,9 @@ async function main() {
     phase1.start('generateContent', `Generating playbook for ${brief.slug}`);
     const playbook = await generatePlaybookContent(brief);
     phase1.success('generateContent');
+
+    // Enforce slug from brief (LLM may generate a different one)
+    playbook.meta.slug = brief.slug;
 
     // Write output
     const outputPath = `src/content/playbooks/${brief.slug}.json`;

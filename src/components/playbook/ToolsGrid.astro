@@ -1,14 +1,8 @@
 ---
 /**
- * ToolsGrid - Display tools used in a playbook as a grid of cards
+ * ToolsGrid - Display tools used in a playbook
  *
- * Usage:
- *   <ToolsGrid
- *     playbook_tools={[
- *       { name: "Airtable", required: true, category: "database", url: "https://airtable.com" },
- *       { name: "Zapier", required: false, category: "automation" }
- *     ]}
- *   />
+ * Clean card grid with proper icons
  */
 
 export interface PlaybookTool {
@@ -28,55 +22,41 @@ export interface Props {
   title?: string;
 }
 
-const { playbook_tools, title = 'Tools You Need' } = Astro.props;
+const { playbook_tools, title = 'Tools' } = Astro.props;
 
-// Get icon for tool category
-function getCategoryIcon(category: string): string {
-  const icons: Record<string, string> = {
-    database: '\u{1F4BE}',
-    automation: '\u26A1',
-    communication: '\u{1F4AC}',
-    calendar: '\u{1F4C5}',
-    email: '\u2709\uFE0F',
-    notes: '\u{1F4DD}',
-    crm: '\u{1F465}',
-    finance: '\u{1F4B0}',
-    design: '\u{1F3A8}',
-    analytics: '\u{1F4CA}',
-    default: '\u{1F527}',
-  };
-  return icons[category.toLowerCase()] || icons.default;
-}
-
-// Get the best link for the tool
 function getToolLink(tool: PlaybookTool): string | undefined {
   return tool.affiliate_url || tool.url;
 }
 ---
 
-<section class="tools-grid-section">
+<section class="tools-section">
   <h2 class="tools-title">{title}</h2>
 
   <div class="tools-grid">
     {playbook_tools.map((tool) => {
       const link = getToolLink(tool);
-      const icon = getCategoryIcon(tool.category);
 
       return (
-        <div class:list={['tool-card', { 'tool-required': tool.required }]}>
+        <div class="tool-card">
           <div class="tool-header">
-            {tool.logo ? (
-              <img src={tool.logo} alt={tool.name} class="tool-logo" />
-            ) : (
-              <span class="tool-icon">{icon}</span>
-            )}
-
+            <div class="tool-icon">
+              {tool.logo ? (
+                <img src={tool.logo} alt="" class="tool-logo" />
+              ) : (
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <rect x="2" y="2" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M6 10h8M10 6v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              )}
+            </div>
             <div class="tool-info">
               <h3 class="tool-name">
                 {link ? (
                   <a href={link} target="_blank" rel="noopener noreferrer">
                     {tool.name}
-                    <span class="tool-link-icon" aria-hidden="true">\u2197</span>
+                    <svg class="link-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path d="M4 10l6-6M5 4h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                   </a>
                 ) : (
                   tool.name
@@ -84,17 +64,16 @@ function getToolLink(tool: PlaybookTool): string | undefined {
               </h3>
               <span class="tool-category">{tool.category}</span>
             </div>
-
-            {tool.required && <span class="tool-badge required">Required</span>}
-            {!tool.required && <span class="tool-badge optional">Optional</span>}
+            <span class:list={['tool-badge', tool.required ? 'required' : 'optional']}>
+              {tool.required ? 'Required' : 'Optional'}
+            </span>
           </div>
 
           {tool.description && <p class="tool-description">{tool.description}</p>}
 
           {tool.alternatives && tool.alternatives.length > 0 && (
             <p class="tool-alternatives">
-              <span class="alternatives-label">Alternatives:</span>{' '}
-              {tool.alternatives.join(', ')}
+              <span class="alt-label">Alternatives:</span> {tool.alternatives.join(', ')}
             </p>
           )}
         </div>
@@ -104,22 +83,15 @@ function getToolLink(tool: PlaybookTool): string | undefined {
 </section>
 
 <style>
-  .tools-grid-section {
-    --tools-bg: #ffffff;
-    --tools-fg: #403422;
-    --tools-sage: #5A8669;
-    --tools-muted: #666;
-    --tools-border: #e5e5e5;
-    --tools-required-bg: rgba(90, 134, 105, 0.08);
-
+  .tools-section {
     margin-bottom: 2.5rem;
   }
 
   .tools-title {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 400;
-    color: var(--tools-fg);
+    color: #403422;
     margin: 0 0 1.25rem 0;
   }
 
@@ -130,38 +102,20 @@ function getToolLink(tool: PlaybookTool): string | undefined {
   }
 
   .tool-card {
-    background: var(--tools-bg);
-    border: 1px solid var(--tools-border);
+    background: #fff;
+    border: 1px solid #e5e5e5;
     border-radius: 0.75rem;
     padding: 1.25rem;
-    transition: box-shadow 0.2s ease;
-  }
-
-  .tool-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  }
-
-  .tool-card.tool-required {
-    background: var(--tools-required-bg);
-    border-color: var(--tools-sage);
   }
 
   .tool-header {
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .tool-logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 0.5rem;
-    object-fit: contain;
-    flex-shrink: 0;
   }
 
   .tool-icon {
+    flex-shrink: 0;
     width: 40px;
     height: 40px;
     display: flex;
@@ -169,8 +123,13 @@ function getToolLink(tool: PlaybookTool): string | undefined {
     justify-content: center;
     background: #f5f5f5;
     border-radius: 0.5rem;
-    font-size: 1.25rem;
-    flex-shrink: 0;
+    color: #5A8669;
+  }
+
+  .tool-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
   }
 
   .tool-info {
@@ -182,7 +141,7 @@ function getToolLink(tool: PlaybookTool): string | undefined {
     font-family: 'Figtree', system-ui, sans-serif;
     font-size: 1rem;
     font-weight: 600;
-    color: var(--tools-fg);
+    color: #1a1a1a;
     margin: 0;
     line-height: 1.3;
   }
@@ -196,75 +155,65 @@ function getToolLink(tool: PlaybookTool): string | undefined {
   }
 
   .tool-name a:hover {
-    color: var(--tools-sage);
+    color: #5A8669;
   }
 
-  .tool-link-icon {
-    font-size: 0.75rem;
-    opacity: 0.6;
+  .link-arrow {
+    opacity: 0.5;
   }
 
   .tool-category {
     font-family: 'Figtree', system-ui, sans-serif;
-    font-size: 0.75rem;
-    color: var(--tools-muted);
-    text-transform: capitalize;
+    font-size: 0.8125rem;
+    color: #666;
   }
 
   .tool-badge {
+    flex-shrink: 0;
     font-family: 'Figtree', system-ui, sans-serif;
     font-size: 0.6875rem;
     font-weight: 600;
-    padding: 0.25rem 0.5rem;
+    padding: 0.25rem 0.625rem;
     border-radius: 9999px;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
-    flex-shrink: 0;
+    letter-spacing: 0.02em;
   }
 
   .tool-badge.required {
-    background: var(--tools-sage);
+    background: #5A8669;
     color: #fff;
   }
 
   .tool-badge.optional {
-    background: #e5e5e5;
+    background: #f0f0f0;
     color: #666;
   }
 
   .tool-description {
     font-family: 'Figtree', system-ui, sans-serif;
-    font-size: 0.875rem;
-    color: var(--tools-muted);
+    font-size: 0.9375rem;
+    color: #525252;
     line-height: 1.5;
-    margin: 0;
+    margin: 0.75rem 0 0 0;
   }
 
   .tool-alternatives {
     font-family: 'Figtree', system-ui, sans-serif;
     font-size: 0.8125rem;
-    color: var(--tools-muted);
+    color: #666;
     margin: 0.75rem 0 0 0;
     padding-top: 0.75rem;
-    border-top: 1px solid var(--tools-border);
+    border-top: 1px solid #f0f0f0;
   }
 
-  .alternatives-label {
+  .alt-label {
     font-weight: 500;
-    color: var(--tools-fg);
+    color: #1a1a1a;
   }
 
   @media (max-width: 600px) {
     .tools-grid {
       grid-template-columns: 1fr;
-    }
-
-    .tool-header {
-      flex-wrap: wrap;
-    }
-
-    .tool-badge {
-      margin-left: auto;
     }
   }
 </style>

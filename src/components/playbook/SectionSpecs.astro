@@ -18,21 +18,19 @@ const { items } = Astro.props;
 ---
 
 <div class="specs-container">
-  <dl class="grid grid-cols-1 sm:grid-cols-[minmax(120px,30%)_1fr] gap-x-6">
+  <dl class="specs-grid">
     {items.map((item, index) => (
       <Fragment>
         <dt class:list={[
-          'text-sm font-medium text-zinc-500 py-3',
-          'sm:border-t sm:border-zinc-100',
-          index === 0 && 'border-t-0 sm:border-t-0'
+          'specs-label',
+          index === 0 && 'first-item'
         ]}>
           {item.label}
         </dt>
         <dd class:list={[
-          'text-base text-zinc-900 pb-3 sm:py-3',
-          'border-b border-zinc-100 sm:border-t sm:border-b-0',
-          index === 0 && 'sm:border-t-0',
-          index === items.length - 1 && 'border-b-0'
+          'specs-value',
+          index === 0 && 'first-item',
+          index === items.length - 1 && 'last-item'
         ]}>
           {item.value}
         </dd>
@@ -45,20 +43,61 @@ const { items } = Astro.props;
   .specs-container {
     font-family: 'Figtree', system-ui, -apple-system, sans-serif;
   }
-  
-  /* First row special styling on mobile */
+
+  .specs-grid {
+    display: grid;
+    grid-template-columns: minmax(140px, 30%) 1fr;
+    gap: 0;
+  }
+
+  .specs-label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #403422;
+    padding: 1rem 1rem 1rem 0;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .specs-label.first-item {
+    border-top: none;
+  }
+
+  .specs-value {
+    font-size: 0.9375rem;
+    color: #525252;
+    line-height: 1.5;
+    padding: 1rem 0;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .specs-value.first-item {
+    border-top: none;
+  }
+
   @media (max-width: 639px) {
-    .specs-container dt {
-      padding-top: 0.75rem;
-      padding-bottom: 0.25rem;
+    .specs-grid {
+      grid-template-columns: 1fr;
     }
-    
-    .specs-container dt:first-of-type {
-      padding-top: 0;
+
+    .specs-label {
+      padding: 1rem 0 0.25rem 0;
+      border-top: 1px solid #e5e5e5;
     }
-    
-    .specs-container dd {
+
+    .specs-label.first-item {
       padding-top: 0;
+      border-top: none;
+    }
+
+    .specs-value {
+      padding: 0 0 1rem 0;
+      border-top: none;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .specs-value.last-item {
+      border-bottom: none;
+      padding-bottom: 0;
     }
   }
 </style>

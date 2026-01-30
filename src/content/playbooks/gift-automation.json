@@ -1,188 +1,209 @@
 {
   "meta": {
-    "title": "Gift Automation Playbook",
+    "title": "The Automated Gift Engine: Never Miss a Milestone Again",
     "slug": "gift-automation",
-    "description": "Automate thoughtful gift-giving for birthdays, holidays, and special occasions. Spend 30 seconds per gift while strengthening relationships.",
+    "description": "Transform gift-giving from a stressful last-minute chore into a seamless relationship-building system. Learn how to delegate research, procurement, and tracking to your EA.",
     "area": "relationships",
     "type": "playbook",
-    "status": "draft",
+    "status": "published",
     "optimized_for": [
-      "time-savings",
-      "relationship-building",
-      "automation",
-      "proactive-delegation"
+      "relationship ROI",
+      "time savings",
+      "personal branding"
     ],
     "complexity": 4,
     "scope": 6,
-    "intimacy": 7,
-    "time_savings": "5-10 hours/year",
+    "intimacy": 8,
+    "time_savings": "5-10 hours per month",
     "delegation": {
       "pathway": "vicarious-offensive",
-      "modality": "process-driven",
+      "modality": "goal-driven",
       "frequency": "recurring",
       "level": "intermediate"
     }
   },
   "hero": {
-    "headline": "Never Miss a Birthday Again",
-    "subheadline": "Automate thoughtful gift-giving with your EA",
-    "value_prop": "Elite delegators strengthen relationships with automated thoughtfulness. Top Athenians spend less than 30 seconds per gift purchase—and give better gifts.",
+    "headline": "Delegate Your Gift-Giving and Never Miss a Milestone Again",
+    "subheadline": "Build a world-class reputation for thoughtfulness while spending less than 30 seconds on every gift.",
+    "value_prop": "Move from reactive, generic gift-giving to a proactive system where your EA researches, curates, and executes every gift for your personal and professional network.",
+    "image": {
+      "src": "/images/playbooks/gift-automation-hero.jpg",
+      "alt": "A curated gift box with a personalized handwritten note"
+    },
     "stats": [
-      { "value": "30s", "label": "Average time per gift" },
-      { "value": "5-10h", "label": "Saved per year" },
-      { "value": "100%", "label": "On-time delivery" }
+      {
+        "value": "30s",
+        "label": "Decision Time"
+      },
+      {
+        "value": "100%",
+        "label": "Dates Remembered"
+      },
+      {
+        "value": "0",
+        "label": "Scrambled Orders"
+      }
     ]
   },
   "tools": [
     {
       "name": "Airtable",
       "slug": "airtable",
-      "category": "database",
-      "required": true,
-      "description": "Track people, events, and gift history"
+      "category": "Database",
+      "url": "https://airtable.com",
+      "description": "Used to track recipient preferences and gift history.",
+      "required": false
     },
     {
-      "name": "Zapier",
-      "slug": "zapier",
-      "category": "automation",
-      "required": false,
-      "description": "Optional: automate reminders"
-    }
-  ],
-  "templates": [
+      "name": "Slack",
+      "slug": "slack",
+      "category": "Communication",
+      "url": "https://slack.com",
+      "description": "The primary channel for the 'Reply-with-Number' workflow.",
+      "required": false
+    },
     {
-      "name": "Gift Automation Template",
-      "platform": "airtable",
-      "url": "https://airtable.com/templates/gift-automation",
-      "description": "Includes People, Gifts, Gift Events, Sources, and Brands tabs"
+      "name": "Snappy",
+      "slug": "snappy",
+      "category": "Gifting Platform",
+      "url": "https://snappy.com",
+      "description": "Great for corporate gifting where the recipient chooses their own item.",
+      "required": false
     }
   ],
   "before_after": {
     "before": {
-      "title": "Without This Playbook",
+      "title": "The Scramble",
       "pain_points": [
-        "10+ hours per year on gift logistics",
-        "Last-minute panic buying",
-        "Forgotten birthdays and anniversaries",
-        "Generic, forgettable gifts"
+        "Realizing it's a VIP's birthday at 4 PM on the day-of",
+        "Sending generic Amazon gift cards or 'sorry I missed it' texts",
+        "Spending hours scrolling through gift guides every December",
+        "Losing track of who received what, leading to embarrassing repeats"
       ]
     },
     "after": {
-      "title": "With This Playbook",
+      "title": "The Thoughtful Executive",
       "benefits": [
-        "Reply with a number 1-5, done",
-        "30 days advance notice on every event",
-        "Pattern-matched gift recommendations",
-        "Excited text messages from recipients"
+        "Every milestone is met with a personalized, high-quality gift",
+        "Decision time reduced to 30 seconds per recipient",
+        "Reputation as the most thoughtful person in your network",
+        "Complete peace of mind knowing the system is running in the background"
       ]
     }
   },
   "sections": [
     {
-      "id": "what-elite-looks-like",
-      "title": "What Elite Gift Giving Looks Like",
-      "icon": "gift",
+      "id": "gift-database",
+      "title": "The Gift Database Structure",
+      "icon": "database",
       "content": {
-        "format": "steps",
-        "items": [
-          { "label": "30 days before any gift event, your EA sends you 5 gift ideas" },
-          { "label": "You respond with a number 1-5 (95% of the time) or request more options" },
-          { "label": "The gift arrives on time, you get an excited thank-you text" }
-        ]
-      },
-      "embeds": [
-        {
-          "type": "messages",
-          "style": "whatsapp",
-          "mode": "light",
-          "messages": [
-            { "user": 2, "name": "Sarah (EA)", "text": "Hi! Mom's birthday is in 30 days. Here are 5 gift ideas:" },
-            { "user": 2, "text": "1. Ceramic planter set - $45\n2. Cashmere scarf - $89\n3. Cooking class voucher - $120\n4. Photo book of family pics - $65\n5. Spa gift card - $100" },
-            { "user": 2, "text": "All available on Amazon with 2-day shipping. Which number?" },
-            { "user": 1, "text": "3" },
-            { "user": 2, "text": "Done! Confirmation coming to your email." }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "setup",
-      "title": "One-Time Setup (10 minutes)",
-      "icon": "clipboard-check",
-      "content": {
-        "format": "checklist",
+        "format": "specs",
         "items": [
           {
-            "label": "Copy the Gift Automation Airtable Template",
-            "details": "Takes 2 seconds",
-            "substeps": [
-              "Click 'Use Template' to copy to your workspace",
-              "Delete sample data from People tab"
-            ]
+            "label": "Recipient Profiles",
+            "value": "Name, relationship type (VIP, Personal, Corporate), and shipping address."
           },
           {
-            "label": "Add people who are important to you",
-            "substeps": [
-              "Required: Names, birthdays, anniversaries",
-              "Optional: Addresses, clothing sizes, gift value ranges, notes"
-            ]
+            "label": "Milestones",
+            "value": "Birthdays, anniversaries, and company founding dates."
           },
           {
-            "label": "Check boxes for which people get which gift types",
-            "details": "Birthday, holiday, thank-you, etc."
+            "label": "Preferences",
+            "value": "Dietary restrictions, favorite colors, hobbies, and 'never send' items."
           },
           {
-            "label": "Share the Airtable with your EA"
+            "label": "Budget Tiers",
+            "value": "Pre-defined spending limits (e.g., Tier 1: $500+, Tier 2: $150, Tier 3: $50)."
+          },
+          {
+            "label": "Gift History",
+            "value": "Log of every gift sent to avoid repeats and track evolving tastes."
           }
         ]
       }
     },
     {
-      "id": "ea-onboarding",
-      "title": "What to Tell Your EA",
-      "icon": "message-circle",
-      "content": {
-        "format": "prose",
-        "text": "Send your EA this playbook link and ask them to populate historical gift data by searching your email for past purchases. They should go back at least 3 years. Once the database is populated, ask them to set up 30-day reminder triggers for each gift event type."
-      }
-    },
-    {
-      "id": "recurring-workflow",
-      "title": "The Recurring Workflow",
-      "icon": "repeat",
-      "content": {
-        "format": "steps",
-        "items": [
-          { "label": "Your EA monitors the Airtable for upcoming gift events (30 days out)" },
-          { "label": "They research 5 gift options based on recipient preferences and history" },
-          { "label": "They message you with curated options and prices" },
-          { "label": "You reply with a number (or ask for more options)" },
-          { "label": "Your EA purchases, tracks shipping, and logs the gift" }
-        ]
-      }
-    },
-    {
-      "id": "edge-cases",
-      "title": "Handling Special Cases",
-      "icon": "alert-circle",
+      "id": "reminder-system",
+      "title": "Setting Up the Proactive Reminder System",
+      "icon": "bell",
       "content": {
         "format": "checklist",
         "items": [
           {
-            "label": "International shipping",
-            "details": "Extend lead time to 6+ weeks"
+            "label": "Centralize all dates in a shared calendar",
+            "details": "EA audits your LinkedIn, Facebook, and contact list to populate the database.",
+            "substeps": [
+              "Identify top 50 personal and professional contacts",
+              "Add 'Gift Prep' calendar events 14 days before every milestone"
+            ]
           },
           {
-            "label": "Custom/personalized items",
-            "details": "Add 2-3 weeks for production"
+            "label": "Define your default 'Gift Vibe'",
+            "details": "Tell your EA if you prefer high-end tech, artisanal foods, or experiential gifts."
           },
           {
-            "label": "Corporate gifts with compliance requirements",
-            "details": "Document value limits and policies in Airtable notes"
+            "label": "Establish payment protocols",
+            "details": "Provide a dedicated card or budget for the EA to use for all gift procurements."
+          }
+        ]
+      },
+      "callout": {
+        "type": "tip",
+        "content": "Have your EA set a recurring 'Relationship Review' every quarter to add new contacts and remove those no longer in your inner circle."
+      }
+    },
+    {
+      "id": "reply-with-number",
+      "title": "The 'Reply-with-Number' Workflow",
+      "icon": "message-square",
+      "content": {
+        "format": "steps",
+        "items": [
+          {
+            "label": "T-14 Days: The Curation Ping",
+            "details": "Your EA sends a message: 'Jane Doe's birthday is in 2 weeks. Here are 3 options based on her love of gardening: 1) High-end copper tool set ($120), 2) Rare indoor citrus tree ($85), 3) Subscription to Garden Design Mag ($45). Reply with 1, 2, or 3.'"
           },
           {
-            "label": "Group gifts",
-            "details": "Track contributions in a separate Airtable view"
+            "label": "T-13 Days: The Selection",
+            "details": "You reply with a single number. If you want a specific note, you dictate it via voice memo; otherwise, the EA drafts a standard thoughtful note for your approval."
+          },
+          {
+            "label": "T-12 Days: Procurement",
+            "details": "EA handles the order, ensures gift wrapping is selected, and confirms the delivery date aligns with the milestone."
+          },
+          {
+            "label": "T-0 Days: Confirmation",
+            "details": "EA sends you a final notification: 'The gift was delivered to Jane today.' This allows you to follow up with a text or call, appearing incredibly organized."
+          }
+        ]
+      },
+      "callout": {
+        "type": "example",
+        "content": "EA: 'Your investor's 10th anniversary is next week. Option 1: Vintage 2014 Champagne. Option 2: Custom leather notebook. Option 3: Donation to their favorite charity.' You: '1. Tell them I'm toastin to another decade!'"
+      }
+    },
+    {
+      "id": "edge-cases",
+      "title": "Handling Logistics & Edge Cases",
+      "icon": "truck",
+      "content": {
+        "format": "specs",
+        "items": [
+          {
+            "label": "Rush Orders",
+            "value": "EA maintains a 'Last Minute' list of local vendors with same-day delivery (florists, high-end bakeries)."
+          },
+          {
+            "label": "International",
+            "value": "EA sources vendors within the recipient's country to avoid customs delays and exorbitant shipping fees."
+          },
+          {
+            "label": "Corporate Limits",
+            "value": "EA tracks gift value limits for specific companies (e.g., Google or government employees) to ensure compliance."
+          },
+          {
+            "label": "Returns/Exchanges",
+            "value": "EA handles all logistics if a gift arrives damaged or needs to be exchanged."
           }
         ]
       }
@@ -190,28 +211,21 @@
   ],
   "faq": [
     {
-      "question": "How far in advance should my EA start looking for gifts?",
-      "answer": "Default is 30 days. Modify this in the Airtable formula if you prefer more or less lead time. Some gifts (custom items, international shipping) may need 6+ weeks."
+      "question": "How do I ensure the gifts don't feel 'automated' or cold?",
+      "answer": "The automation is in the *logistics*, not the *intent*. Your EA provides curated options based on your specific knowledge of the person. You still make the final choice and can customize the note in seconds."
     },
     {
-      "question": "What if I don't like any of the gift ideas?",
-      "answer": "Simply reply asking for more options with new direction. Your EA will research 5 more ideas based on your feedback."
+      "question": "What if my EA picks something I don't like?",
+      "answer": "The first 3-5 gifts act as a calibration period. Give feedback like 'Too generic' or 'I love this brand.' Within a month, your EA will understand your taste perfectly."
     },
     {
-      "question": "Can I add business contacts to this system?",
-      "answer": "Yes. Many clients use this for investor relations, key customers, and team members. Just add them to the People tab with appropriate gift value ranges."
-    }
-  ],
-  "references": [
-    {
-      "title": "The Strategist Gift Guides",
-      "url": "https://nymag.com/strategist/",
-      "source": "New York Magazine"
+      "question": "Is it safe to give my EA my credit card for gifts?",
+      "answer": "We recommend using a dedicated virtual card (like Ramp or Brex) with a set monthly limit specifically for gifting to maintain security and budget control."
     }
   ],
   "related": [
-    "personal-crm",
-    "travel-automation",
-    "calendar-management"
+    "contact-database-management",
+    "event-logistics-delegation",
+    "personal-brand-maintenance"
   ]
 }

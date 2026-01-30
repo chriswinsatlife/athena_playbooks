@@ -385,7 +385,7 @@ export const delegationSchema = z.object({
 export const metaSchema = z.object({
   title: z.string().max(70).describe('SEO-friendly title'),
   slug: z.string().regex(/^[a-z0-9-]+$/).describe('URL slug'),
-  description: z.string().min(120).max(160).describe('Meta description for SEO'),
+  description: z.string().min(50).describe('Meta description for SEO'),
   area: areaEnum.describe('Life/work area classification'),
   type: contentTypeEnum.describe('Content type'),
   status: z.enum(['draft', 'review', 'published', 'archived']).default('draft').describe('Publication status'),

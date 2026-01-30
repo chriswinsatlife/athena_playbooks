@@ -16,19 +16,22 @@ const POLL_INTERVAL_MS = 10_000; // 10 seconds, matching n8n Wait nodes
 const MAX_POLL_ATTEMPTS = 60; // 10 minutes max
 
 interface ExaCreateResponse {
-  id: string;
+  researchId: string;
+  model: string;
+  instructions: string;
   status: string;
 }
 
 interface ExaTaskResult {
-  id: string;
+  researchId: string;
+  model: string;
+  instructions: string;
   status: 'pending' | 'running' | 'completed' | 'failed';
   text?: string;
   citations?: Record<string, string>;
   operations?: unknown[];
   costDollars?: { total: number };
   timeMs?: number;
-  model?: string;
   error?: string;
 }
 
@@ -120,8 +123,8 @@ async function createResearchTask(instructions: string, apiKey: string): Promise
   return response.json();
 }
 
-async function pollTaskStatus(taskId: string, apiKey: string): Promise<ExaTaskResult> {
-  const response = await fetch(`${EXA_API_BASE}/${taskId}`, {
+async function pollTaskStatus(researchId: string, apiKey: string): Promise<ExaTaskResult> {
+  const response = await fetch(`${EXA_API_BASE}/${researchId}`, {
     method: 'GET',
     headers: {
       'x-api-key': apiKey,
@@ -189,11 +192,11 @@ async function main() {
 
   // 3. Create Exa research task
   log('Research', 'Submitting to Exa Research API...');
-  let taskId: string;
+  let researchId: string;
   try {
     const createResponse = await createResearchTask(instructions, apiKey);
-    taskId = createResponse.id;
-    log('Research', `Task created: ${taskId} (status: ${createResponse.status})`);
+    researchId = createResponse.researchId;
+    log('Research', `Task created: ${researchId} (status: ${createResponse.status})`);
   } catch (error) {
     logError('Research', `Failed to create research task: ${error}`);
     process.exit(1);
@@ -206,7 +209,7 @@ async function main() {
     await Bun.sleep(POLL_INTERVAL_MS);
 
     try {
-      const status = await pollTaskStatus(taskId, apiKey);
+      const status = await pollTaskStatus(researchId, apiKey);
       log('Poll', `Attempt ${attempt}: status = ${status.status}`);
 
       if (status.status === 'completed') {
@@ -246,7 +249,7 @@ async function main() {
     operations: result.operations || [],
     cost_usd: Math.round(costUsd * 100) / 100,
     time_ms: result.timeMs || 0,
-    model: result.model || 'exa-research-pro',
+    model: result.model,
     created_at: new Date().toISOString(),
   };
 
@@ -256,6 +259,8 @@ async function main() {
 
   log('Write', `Writing enriched output to ${outputPath}`);
   try {
+    // Ensure directory exists
+    await Bun.$`mkdir -p ${outputDir}`.quiet();
     await Bun.write(outputPath, JSON.stringify(enriched, null, 2));
     log('Write', 'Output written successfully');
   } catch (error) {
